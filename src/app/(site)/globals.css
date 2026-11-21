@@ -143,3 +143,16 @@
   & .align-center { text-align: center; }
   & .align-right { text-align: right; }
 }
+
+/* WCAG 2.2 target size (2.5.8): links stacked on their own lines in migrated
+   content (paragraphs split with <br>, bare links in Divi wrapper divs, or a link
+   alone in a list item) get a
+   24px-tall box. Links inside running sentences are exempt and stay inline. */
+@layer components {
+  .prose p:has(> br) > a,
+  .prose div > a,
+  .prose li > a:only-child {
+    display: inline-block;
+    padding-block: 2px;
+  }
+}

@@ -48,6 +48,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     find("city-projects", published),
   ]);
   const staticPaths = new Set(STATIC.map((s) => s.path));
+  // WordPress child pages: served under /restaurants-and-services/ (listed in STATIC); their bare slug redirects.
+  for (const child of ["all-restaurants", "all-shops-services"]) staticPaths.add(`/${child}/`);
   const entry = (path: string, d: Doc, priority = 0.5): MetadataRoute.Sitemap[number] => ({
     url: absolute(path),
     lastModified: d.updatedAt ? new Date(d.updatedAt) : undefined,

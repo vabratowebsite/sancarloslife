@@ -67,7 +67,7 @@ export default async function ParksPage() {
                         <RichText data={park.body} className="mt-3 text-small [&_p]:text-small" />
                         {park.facilities && park.facilities.length > 0 && <p className="mt-3 text-small text-ink-500">{park.facilities.join(" · ")}</p>}
                         {park.mapsUrl && (
-                          <a href={park.mapsUrl} target="_blank" rel="noopener noreferrer" className="eyebrow mt-4 inline-block text-xs">
+                          <a href={park.mapsUrl} target="_blank" rel="noopener noreferrer" className="eyebrow mt-3 inline-flex min-h-6 items-center py-1 text-xs">
                             Directions
                           </a>
                         )}

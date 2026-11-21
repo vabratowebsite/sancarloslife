@@ -55,7 +55,7 @@ export default async function HistoryPage() {
                   {img && <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes="260px" className="w-full rounded-card object-cover" />}
                 </div>
                 {e.sourceUrl && (
-                  <a href={e.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs">
+                  <a href={e.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-6 items-center text-xs">
                     Source
                   </a>
                 )}

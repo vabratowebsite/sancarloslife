@@ -46,3 +46,7 @@ next-env.d.ts
 
 # WordPress export (public data, but large and regenerated)
 /scripts/migrate/data/
+
+# Playwright
+/test-results/
+/playwright-report/

@@ -79,6 +79,8 @@ await run("redirects", async () => {
     (await p.find({ collection, limit: 5000, depth: 0, draft: false, pagination: false, ...extra })).docs as unknown as { slug: string; type?: string }[];
   add("/", await all("posts"));
   add("/", await all("pages"));
+  // WordPress child pages lived under their parent's path; their bare /<slug>/ never existed.
+  for (const child of ["all-restaurants", "all-shops-services"]) live.delete(`/${child}/`);
   add("/", await all("neighborhoods"));
   add("/event/", await all("events"));
   add("/city-projects/", await all("city-projects"));

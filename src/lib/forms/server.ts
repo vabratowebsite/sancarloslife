@@ -71,7 +71,8 @@ export async function guard(form: FormData, formKey: string): Promise<{ stop?: F
   const ip = await clientIp();
   // Bots fill the hidden "website" field; people never see it.
   if (String(form.get("website") ?? "")) return { stop: { ok: true, message: "Thanks!" }, ip, turnstileOk: false };
-  if (rateLimited(`${formKey}:${hashIp(ip)}`)) {
+  // Off in local development so repeated testing doesn't lock you out.
+  if (process.env.NODE_ENV === "production" && rateLimited(`${formKey}:${hashIp(ip)}`)) {
     return { stop: { ok: false, message: "Too many tries from your connection. Please wait a few minutes and try again." }, ip, turnstileOk: false };
   }
   const turnstileOk = await verifyTurnstile(form.get("cf-turnstile-response"), ip);
