@@ -44,11 +44,12 @@ About 300 files: the desk page, 45 blog drafts, 102 event drafts, 10 page drafts
 
 ## Build phases
 
-1. **Desk core in the admin.** Approval queue and drafts for blogs, events, restaurant profiles,
+1. **Desk core in the admin.** ✅ Built 2026-11-21. Approval queue and drafts for blogs, events, restaurant profiles,
    city projects and desk-made pages, each with status (draft → review → approved → published),
    versions and the on-page editor. Approving publishes. Desk-made pages are stored in the admin
    (not code) so they go live without a deploy.
-2. **AI prompts library + AI connections.** One prompt per format (blog, event, restaurant,
+2. **AI prompts library + AI connections.** ✅ Built 2026-11-21 (blog and guide page formats; events,
+   restaurant profiles, city projects and newsletters next). One prompt per format (blog, event, restaurant,
    neighborhood, newsletter, city project, page) with structure, SEO/AEO/GEO rules, brand voice and
    compliance notes, versioned. Connections to any provider (Anthropic, OpenAI, Gemini, OpenRouter,
    any OpenAI-compatible API); keys encrypted server-side. "Generate draft" in the admin.

@@ -19,6 +19,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum__desk_pages_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum_desk_runs_runner" AS ENUM('claude', 'website-ai', 'editor');
   CREATE TYPE "web"."enum_desk_runs_status" AS ENUM('ok', 'partial', 'failed');
+  CREATE TYPE "web"."enum_ai_prompts_format" AS ENUM('blog', 'desk-page');
+  CREATE TYPE "web"."enum__ai_prompts_v_version_format" AS ENUM('blog', 'desk-page');
+  CREATE TYPE "web"."enum_ai_connections_provider" AS ENUM('anthropic', 'openai', 'gemini', 'openrouter', 'openai-compatible', 'mock');
   CREATE TYPE "web"."enum_events_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
   CREATE TYPE "web"."enum_events_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum_events_status" AS ENUM('draft', 'pending', 'published', 'archived');
@@ -343,6 +346,52 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"checked" numeric,
   	"drafted" numeric,
   	"notes" jsonb,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "web"."ai_prompts" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar NOT NULL,
+  	"format" "web"."enum_ai_prompts_format" NOT NULL,
+  	"active" boolean DEFAULT true,
+  	"instructions" varchar NOT NULL,
+  	"rules" varchar,
+  	"example" varchar,
+  	"notes" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "web"."_ai_prompts_v" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"parent_id" integer,
+  	"version_name" varchar NOT NULL,
+  	"version_format" "web"."enum__ai_prompts_v_version_format" NOT NULL,
+  	"version_active" boolean DEFAULT true,
+  	"version_instructions" varchar NOT NULL,
+  	"version_rules" varchar,
+  	"version_example" varchar,
+  	"version_notes" varchar,
+  	"version_updated_at" timestamp(3) with time zone,
+  	"version_created_at" timestamp(3) with time zone,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "web"."ai_connections" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar NOT NULL,
+  	"provider" "web"."enum_ai_connections_provider" NOT NULL,
+  	"model" varchar NOT NULL,
+  	"base_url" varchar,
+  	"api_key" varchar,
+  	"key_hint" varchar,
+  	"enabled" boolean DEFAULT true,
+  	"is_default" boolean DEFAULT false,
+  	"use_for_backup" boolean DEFAULT false,
+  	"max_output_tokens" numeric DEFAULT 8000,
+  	"notes" varchar,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
@@ -1088,6 +1137,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"page_edits_id" integer,
   	"desk_pages_id" integer,
   	"desk_runs_id" integer,
+  	"ai_prompts_id" integer,
+  	"ai_connections_id" integer,
   	"events_id" integer,
   	"venues_id" integer,
   	"organizers_id" integer,
@@ -1204,6 +1255,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_hero_id_media_id_fk" FOREIGN KEY ("version_hero_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_ai_prompts_v" ADD CONSTRAINT "_ai_prompts_v_parent_id_ai_prompts_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."ai_prompts"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events_exdates" ADD CONSTRAINT "events_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_series_id_events_id_fk" FOREIGN KEY ("series_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
@@ -1279,6 +1331,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_page_edits_fk" FOREIGN KEY ("page_edits_id") REFERENCES "web"."page_edits"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_pages_fk" FOREIGN KEY ("desk_pages_id") REFERENCES "web"."desk_pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_runs_fk" FOREIGN KEY ("desk_runs_id") REFERENCES "web"."desk_runs"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_ai_prompts_fk" FOREIGN KEY ("ai_prompts_id") REFERENCES "web"."ai_prompts"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_ai_connections_fk" FOREIGN KEY ("ai_connections_id") REFERENCES "web"."ai_connections"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_events_fk" FOREIGN KEY ("events_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_venues_fk" FOREIGN KEY ("venues_id") REFERENCES "web"."venues"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_organizers_fk" FOREIGN KEY ("organizers_id") REFERENCES "web"."organizers"("id") ON DELETE cascade ON UPDATE no action;
@@ -1393,6 +1447,15 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "desk_runs_started_at_idx" ON "web"."desk_runs" USING btree ("started_at");
   CREATE INDEX "desk_runs_updated_at_idx" ON "web"."desk_runs" USING btree ("updated_at");
   CREATE INDEX "desk_runs_created_at_idx" ON "web"."desk_runs" USING btree ("created_at");
+  CREATE INDEX "ai_prompts_updated_at_idx" ON "web"."ai_prompts" USING btree ("updated_at");
+  CREATE INDEX "ai_prompts_created_at_idx" ON "web"."ai_prompts" USING btree ("created_at");
+  CREATE INDEX "_ai_prompts_v_parent_idx" ON "web"."_ai_prompts_v" USING btree ("parent_id");
+  CREATE INDEX "_ai_prompts_v_version_version_updated_at_idx" ON "web"."_ai_prompts_v" USING btree ("version_updated_at");
+  CREATE INDEX "_ai_prompts_v_version_version_created_at_idx" ON "web"."_ai_prompts_v" USING btree ("version_created_at");
+  CREATE INDEX "_ai_prompts_v_created_at_idx" ON "web"."_ai_prompts_v" USING btree ("created_at");
+  CREATE INDEX "_ai_prompts_v_updated_at_idx" ON "web"."_ai_prompts_v" USING btree ("updated_at");
+  CREATE INDEX "ai_connections_updated_at_idx" ON "web"."ai_connections" USING btree ("updated_at");
+  CREATE INDEX "ai_connections_created_at_idx" ON "web"."ai_connections" USING btree ("created_at");
   CREATE INDEX "events_exdates_order_idx" ON "web"."events_exdates" USING btree ("_order");
   CREATE INDEX "events_exdates_parent_id_idx" ON "web"."events_exdates" USING btree ("_parent_id");
   CREATE INDEX "events_review_review_state_idx" ON "web"."events" USING btree ("review_state");
@@ -1623,6 +1686,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_page_edits_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("page_edits_id");
   CREATE INDEX "payload_locked_documents_rels_desk_pages_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_pages_id");
   CREATE INDEX "payload_locked_documents_rels_desk_runs_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_runs_id");
+  CREATE INDEX "payload_locked_documents_rels_ai_prompts_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("ai_prompts_id");
+  CREATE INDEX "payload_locked_documents_rels_ai_connections_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("ai_connections_id");
   CREATE INDEX "payload_locked_documents_rels_events_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("events_id");
   CREATE INDEX "payload_locked_documents_rels_venues_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("venues_id");
   CREATE INDEX "payload_locked_documents_rels_organizers_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("organizers_id");
@@ -1678,6 +1743,9 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."_desk_pages_v_version_sources" CASCADE;
   DROP TABLE "web"."_desk_pages_v" CASCADE;
   DROP TABLE "web"."desk_runs" CASCADE;
+  DROP TABLE "web"."ai_prompts" CASCADE;
+  DROP TABLE "web"."_ai_prompts_v" CASCADE;
+  DROP TABLE "web"."ai_connections" CASCADE;
   DROP TABLE "web"."events_exdates" CASCADE;
   DROP TABLE "web"."events" CASCADE;
   DROP TABLE "web"."events_rels" CASCADE;
@@ -1747,6 +1815,9 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "web"."enum__desk_pages_v_version_status";
   DROP TYPE "web"."enum_desk_runs_runner";
   DROP TYPE "web"."enum_desk_runs_status";
+  DROP TYPE "web"."enum_ai_prompts_format";
+  DROP TYPE "web"."enum__ai_prompts_v_version_format";
+  DROP TYPE "web"."enum_ai_connections_provider";
   DROP TYPE "web"."enum_events_review_state";
   DROP TYPE "web"."enum_events_review_source";
   DROP TYPE "web"."enum_events_status";

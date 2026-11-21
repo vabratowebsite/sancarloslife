@@ -11,6 +11,8 @@ import { CityProjects, GalleryPhotos, Parks, TimelineEntries, Testimonials } fro
 import { EventCategories, Events, Organizers, Venues } from "./collections/Events";
 import { Media } from "./collections/Media";
 import { Neighborhoods } from "./collections/Neighborhoods";
+import { AiConnections } from "./collections/AiConnections";
+import { AiPrompts } from "./collections/AiPrompts";
 import { DeskPages } from "./collections/DeskPages";
 import { DeskRuns } from "./collections/DeskRuns";
 import { PageEdits } from "./collections/PageEdits";
@@ -63,7 +65,7 @@ export default buildConfig({
   collections: [
     Posts,
     Categories,
-    Pages, PageEdits, DeskPages, DeskRuns,
+    Pages, PageEdits, DeskPages, DeskRuns, AiPrompts, AiConnections,
     Events,
     Venues,
     Organizers,

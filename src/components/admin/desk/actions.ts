@@ -1,9 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
 import { isStaffUser } from "@/access/roles";
+import { generateDraft } from "@/lib/ai/generate";
 import { getPayloadClient } from "@/lib/payload";
 
 const COLLECTIONS = ["posts", "events", "places", "city-projects", "desk-pages"] as const;
@@ -58,4 +60,20 @@ export async function rejectItem(form: FormData) {
     overrideAccess: false,
   });
   revalidatePath("/admin/desk");
+}
+
+/** Generate draft: the AI writes a draft from a stored prompt and the editor's notes; it lands in the queue. */
+export async function generateAction(form: FormData) {
+  const { payload, user } = await staff();
+  const promptId = String(form.get("prompt") ?? "");
+  const connectionId = String(form.get("connection") ?? "") || null;
+  const notes = String(form.get("notes") ?? "");
+  const res = await generateDraft(payload, user, { promptId, connectionId, notes });
+  revalidatePath("/admin/desk");
+  const q = new URLSearchParams(
+    res.ok
+      ? { gen: "ok", title: res.title, problems: String(res.problems.length) }
+      : { gen: "error", message: res.message.slice(0, 300) },
+  );
+  redirect(`/admin/desk?${q}`);
 }

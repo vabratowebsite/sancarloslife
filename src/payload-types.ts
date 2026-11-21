@@ -73,6 +73,8 @@ export interface Config {
     'page-edits': PageEdit;
     'desk-pages': DeskPage;
     'desk-runs': DeskRun;
+    'ai-prompts': AiPrompt;
+    'ai-connections': AiConnection;
     events: Event;
     venues: Venue;
     organizers: Organizer;
@@ -102,6 +104,8 @@ export interface Config {
     'page-edits': PageEditsSelect<false> | PageEditsSelect<true>;
     'desk-pages': DeskPagesSelect<false> | DeskPagesSelect<true>;
     'desk-runs': DeskRunsSelect<false> | DeskRunsSelect<true>;
+    'ai-prompts': AiPromptsSelect<false> | AiPromptsSelect<true>;
+    'ai-connections': AiConnectionsSelect<false> | AiConnectionsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     venues: VenuesSelect<false> | VenuesSelect<true>;
     organizers: OrganizersSelect<false> | OrganizersSelect<true>;
@@ -623,6 +627,79 @@ export interface DeskRun {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * How the AI writes each kind of content. Every save is kept as a version.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ai-prompts".
+ */
+export interface AiPrompt {
+  id: number;
+  name: string;
+  /**
+   * Which template the result fills
+   */
+  format: 'blog' | 'desk-page';
+  /**
+   * Offered in Generate draft
+   */
+  active?: boolean | null;
+  /**
+   * What to write and how it's structured.
+   */
+  instructions: string;
+  /**
+   * Voice, accuracy, sources, SEO / AEO / GEO, compliance.
+   */
+  rules?: string | null;
+  /**
+   * A good example to follow (optional).
+   */
+  example?: string | null;
+  /**
+   * For editors; not sent to the AI.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Each call is billed by the provider to the account the key belongs to.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ai-connections".
+ */
+export interface AiConnection {
+  id: number;
+  /**
+   * e.g. Claude Sonnet (backup), OpenAI
+   */
+  name: string;
+  provider: 'anthropic' | 'openai' | 'gemini' | 'openrouter' | 'openai-compatible' | 'mock';
+  /**
+   * The provider's model id, exactly as they list it
+   */
+  model: string;
+  /**
+   * Only for 'Other OpenAI-compatible API' (https://…/v1). Leave empty for the others.
+   */
+  baseUrl?: string | null;
+  /**
+   * Paste the key. It's encrypted when saved and never shown again; leave empty to keep the saved key.
+   */
+  apiKey?: string | null;
+  /**
+   * Last 4 characters of the saved key
+   */
+  keyHint?: string | null;
+  enabled?: boolean | null;
+  isDefault?: boolean | null;
+  useForBackup?: boolean | null;
+  maxOutputTokens?: number | null;
+  notes?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1471,6 +1548,14 @@ export interface PayloadLockedDocument {
         value: number | DeskRun;
       } | null)
     | ({
+        relationTo: 'ai-prompts';
+        value: number | AiPrompt;
+      } | null)
+    | ({
+        relationTo: 'ai-connections';
+        value: number | AiConnection;
+      } | null)
+    | ({
         relationTo: 'events';
         value: number | Event;
       } | null)
@@ -1745,6 +1830,40 @@ export interface DeskRunsSelect<T extends boolean = true> {
   summary?: T;
   checked?: T;
   drafted?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ai-prompts_select".
+ */
+export interface AiPromptsSelect<T extends boolean = true> {
+  name?: T;
+  format?: T;
+  active?: T;
+  instructions?: T;
+  rules?: T;
+  example?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ai-connections_select".
+ */
+export interface AiConnectionsSelect<T extends boolean = true> {
+  name?: T;
+  provider?: T;
+  model?: T;
+  baseUrl?: T;
+  apiKey?: T;
+  keyHint?: T;
+  enabled?: T;
+  isDefault?: T;
+  useForBackup?: T;
+  maxOutputTokens?: T;
   notes?: T;
   updatedAt?: T;
   createdAt?: T;

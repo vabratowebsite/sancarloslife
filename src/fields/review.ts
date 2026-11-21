@@ -30,7 +30,7 @@ export const reviewField: Field = {
       options: [
         { label: "Editor", value: "editor" },
         { label: "Claude research run", value: "claude" },
-        { label: "Website AI (backup run)", value: "website-ai" },
+        { label: "Website AI", value: "website-ai" },
         { label: "Public submission", value: "public" },
       ],
     },

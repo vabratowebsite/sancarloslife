@@ -3,7 +3,7 @@ import { Gutter } from "@payloadcms/ui";
 import Link from "next/link";
 import type { AdminViewServerProps } from "payload";
 
-import { approveItem, rejectItem } from "./actions";
+import { approveItem, generateAction, rejectItem } from "./actions";
 
 const KINDS = [
   { collection: "posts", label: "Blog post", title: "title", drafts: true, path: (d: Doc) => `/${d.slug}/` },
@@ -20,7 +20,7 @@ type Doc = Record<string, unknown> & {
   review?: { state?: string; source?: string; note?: string; submittedAt?: string; check?: { ok?: boolean; problems?: string[] } };
 };
 
-const SOURCE: Record<string, string> = { editor: "Editor", claude: "Claude research run", "website-ai": "Website AI (backup run)", public: "Public submission" };
+const SOURCE: Record<string, string> = { editor: "Editor", claude: "Claude research run", "website-ai": "Website AI", public: "Public submission" };
 const when = (iso?: string) => (iso ? new Date(iso).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "");
 
 /** /admin/desk: everything waiting for approval, across every kind of item. */
@@ -43,6 +43,11 @@ export async function DeskQueue({ initPageResult, params, searchParams }: AdminV
     }),
   );
   const total = groups.reduce((n, g) => n + g.docs.length, 0);
+  const prompts = await payload.find({ collection: "ai-prompts", where: { active: { equals: true } }, sort: "name", limit: 50, depth: 0, user, overrideAccess: false });
+  // Names only: connections (and their keys) are admin-only.
+  const connections = await payload.find({ collection: "ai-connections", where: { enabled: { equals: true } }, sort: "-isDefault", limit: 20, depth: 0, overrideAccess: true });
+  const sp = (await searchParams) ?? {};
+  const one = (v: unknown) => (Array.isArray(v) ? String(v[0]) : v ? String(v) : "");
   const runs = await payload.find({ collection: "desk-runs", sort: "-startedAt", limit: 8, depth: 0, user, overrideAccess: false });
 
   const box: React.CSSProperties = { border: "1px solid var(--theme-elevation-150)", borderRadius: 8, padding: 16, marginBottom: 12 };
@@ -63,6 +68,67 @@ export async function DeskQueue({ initPageResult, params, searchParams }: AdminV
           Drafts from Claude&rsquo;s research runs, the website&rsquo;s backup AI and editors. Each one is checked against its format first;
           approving publishes it on the site. Send back adds your note and keeps it a draft.
         </p>
+        {one(sp.gen) === "ok" && (
+          <p style={{ ...box, borderColor: "var(--theme-success-500)" }} role="status">
+            Drafted &ldquo;{one(sp.title)}&rdquo;. It&rsquo;s in the queue below
+            {one(sp.problems) !== "0" ? `, with ${one(sp.problems)} things to fix before it can be approved.` : " and passes the format check."}
+          </p>
+        )}
+        {one(sp.gen) === "error" && (
+          <p style={{ ...box, borderColor: "var(--theme-error-500)" }} role="alert">
+            Couldn&rsquo;t generate the draft: {one(sp.message)}
+          </p>
+        )}
+
+        <details style={box}>
+          <summary style={{ cursor: "pointer", fontWeight: 600 }}>Generate a draft with AI</summary>
+          {prompts.docs.length && connections.docs.length ? (
+            <form action={generateAction} style={{ display: "grid", gap: 10, marginTop: 12, maxWidth: 720 }}>
+              <label>
+                Prompt
+                <select name="prompt" required style={{ display: "block", width: "100%", padding: 8 }}>
+                  {prompts.docs.map((p) => (
+                    <option key={p.id} value={String(p.id)}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                AI connection
+                <select name="connection" style={{ display: "block", width: "100%", padding: 8 }}>
+                  {connections.docs.map((c) => (
+                    <option key={c.id} value={String(c.id)}>
+                      {c.name}
+                      {c.isDefault ? " (default)" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Notes and sources for the AI
+                <textarea
+                  name="notes"
+                  required
+                  minLength={20}
+                  rows={6}
+                  placeholder="What to write about, key facts, and links to the sources it should use"
+                  style={{ display: "block", width: "100%", padding: 8 }}
+                />
+              </label>
+              <p style={{ margin: 0, opacity: 0.8 }}>The draft goes to this queue for your approval. Each run is billed by the AI provider.</p>
+              <button type="submit" className="btn btn--style-primary btn--size-small" style={{ margin: 0, justifySelf: "start" }}>
+                Generate draft
+              </button>
+            </form>
+          ) : (
+            <p style={{ marginTop: 12 }}>
+              {prompts.docs.length ? "" : "Add a prompt under Operations Desk → AI prompts. "}
+              {connections.docs.length ? "" : "An admin needs to add an AI connection under Operations Desk → AI connections."}
+            </p>
+          )}
+        </details>
+
         <p>
           <b>{total}</b> waiting for approval.
         </p>
