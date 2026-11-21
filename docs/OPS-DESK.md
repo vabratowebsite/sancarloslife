@@ -122,7 +122,7 @@ applied there (the script's localhost guard has to be lifted deliberately for th
 
 Questions for the owner before importing:
 1. ~~Which Soko Soko profile variant to keep~~: design B (2026-11-22).
-2. Whether to insert the 145 pending rows into the Civic Watch tables.
+2. ~~Whether to insert the 145 pending rows~~: yes; inserted 2026-11-22 (scripts/civic/pending-rows.py).
 3. Whether to add a newsletter archive page.
 4. Rights and credits for photos that aren't Vabrato's own.
 5. Real estate pages: the four without a code route are imported as guide pages; the other four stay code routes.
