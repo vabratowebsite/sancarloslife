@@ -32,34 +32,43 @@ function publicLookup(hostname: string, options: object, cb: (err: Error | null,
 }
 
 type Fetched = { url: string; status: number; contentType: string; body: string };
+type FetchedBytes = Omit<Fetched, "body"> & { bytes: Buffer };
+type GetOpts = { maxBytes: number; accept: string };
 
-function getOnce(u: URL): Promise<Fetched & { location?: string }> {
+const PAGE_ACCEPT = "application/rss+xml, application/atom+xml, text/html, text/xml;q=0.9, */*;q=0.5";
+
+function getOnce(u: URL, opts: GetOpts): Promise<FetchedBytes & { location?: string }> {
   return new Promise((resolve, reject) => {
     const req = https.get(
       u,
       {
         lookup: publicLookup as never,
-        headers: { "User-Agent": "SanCarlosLife-DeskRunner/1.0 (+https://sancarloslife.com)", Accept: "application/rss+xml, application/atom+xml, text/html, text/xml;q=0.9, */*;q=0.5", "Accept-Encoding": "gzip, deflate, br" },
+        headers: { "User-Agent": "SanCarlosLife-DeskRunner/1.0 (+https://sancarloslife.com)", Accept: opts.accept, "Accept-Encoding": "gzip, deflate, br" },
         timeout: LIMITS.timeoutMs,
       },
       (res) => {
         const status = res.statusCode ?? 0;
         if (status >= 300 && status < 400 && res.headers.location) {
           res.resume();
-          return resolve({ url: u.href, status, contentType: "", body: "", location: res.headers.location });
+          return resolve({ url: u.href, status, contentType: "", bytes: Buffer.alloc(0), location: res.headers.location });
         }
         const enc = String(res.headers["content-encoding"] ?? "").toLowerCase();
         const stream = enc === "gzip" ? res.pipe(zlib.createGunzip()) : enc === "deflate" ? res.pipe(zlib.createInflate()) : enc === "br" ? res.pipe(zlib.createBrotliDecompress()) : res;
+        const declared = Number(res.headers["content-length"] ?? 0);
+        if (declared > opts.maxBytes) {
+          req.destroy();
+          return reject(new Error(`The file is larger than ${Math.round(opts.maxBytes / 1e6)} MB`));
+        }
         const chunks: Buffer[] = [];
         let size = 0;
         stream.on("data", (c: Buffer) => {
           size += c.length;
-          if (size > LIMITS.maxBytes) {
+          if (size > opts.maxBytes) {
             req.destroy();
-            reject(new Error("The source is larger than 1.5 MB"));
+            reject(new Error(`The file is larger than ${Math.round(opts.maxBytes / 1e5) / 10} MB`));
           } else chunks.push(c);
         });
-        stream.on("end", () => resolve({ url: u.href, status, contentType: String(res.headers["content-type"] ?? ""), body: Buffer.concat(chunks).toString("utf8") }));
+        stream.on("end", () => resolve({ url: u.href, status, contentType: String(res.headers["content-type"] ?? ""), bytes: Buffer.concat(chunks) }));
         stream.on("error", reject);
       },
     );
@@ -68,10 +77,10 @@ function getOnce(u: URL): Promise<Fetched & { location?: string }> {
   });
 }
 
-export async function safeFetch(raw: string): Promise<Fetched> {
+async function fetchFollowing(raw: string, opts: GetOpts): Promise<FetchedBytes> {
   let u = checkUrl(raw);
   for (let hop = 0; hop <= LIMITS.maxRedirects; hop++) {
-    const r = await getOnce(u);
+    const r = await getOnce(u, opts);
     if (!r.location) {
       if (r.status >= 400) throw new Error(`The source answered ${r.status}`);
       return r;
@@ -79,6 +88,17 @@ export async function safeFetch(raw: string): Promise<Fetched> {
     u = checkUrl(new URL(r.location, u).href);
   }
   throw new Error("Too many redirects");
+}
+
+/** A page or feed as text (1.5 MB). */
+export async function safeFetch(raw: string): Promise<Fetched> {
+  const r = await fetchFollowing(raw, { maxBytes: LIMITS.maxBytes, accept: PAGE_ACCEPT });
+  return { url: r.url, status: r.status, contentType: r.contentType, body: r.bytes.toString("utf8") };
+}
+
+/** A binary file (e.g. a photo), same address rules, its own size limit. */
+export async function safeFetchBytes(raw: string, opts: { maxBytes: number; accept: string }): Promise<FetchedBytes> {
+  return fetchFollowing(raw, opts);
 }
 
 const clean = (s: string | null | undefined) => (s ?? "").replace(/\s+/g, " ").trim();

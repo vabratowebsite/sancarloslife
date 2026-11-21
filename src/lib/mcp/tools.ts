@@ -9,6 +9,7 @@ import { loadPageHtml } from "@/content/pages/load";
 import { buildDraft } from "@/lib/ai/draft";
 import { FORMATS, type FormatKey } from "@/lib/ai/formats";
 import { lexicalToText } from "@/lib/ai/lexical";
+import { importPhotoFromUrl, PhotoError } from "@/lib/media/fromUrl";
 import { siteSearch } from "@/lib/queries/search";
 
 /**
@@ -25,7 +26,7 @@ type Tool = {
   title: string;
   description: string;
   inputSchema: Record<string, unknown>;
-  annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean };
+  annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean; openWorldHint?: boolean };
   run: (args: Record<string, unknown>, ctx: ToolContext) => Promise<unknown>;
 };
 
@@ -204,6 +205,76 @@ export const TOOLS: Tool[] = [
         review?: { check?: { ok?: boolean; problems?: string[] } };
       };
       return { id: doc.id, collection: a.collection, passesFormatCheck: Boolean(doc.review?.check?.ok), problems: doc.review?.check?.problems ?? [] };
+    },
+  },
+  {
+    name: "attach_photo",
+    title: "Attach a photo to a draft",
+    description:
+      "Download a photo from a public https address into the media library and set it as an item's photo (posts, events, places and city projects: cover; desk-pages: hero; places can also add it to their gallery). Saved as a new DRAFT version in the Approval queue; the live item doesn't change until a person approves. Only use photos the site may publish: the business's or organizer's own press photos, City of San Carlos images, or the team's own photos. Give the photographer or owner as credit. Alt text describes what's in the photo. Published events can't be changed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        collection: collEnum,
+        id: { type: ["string", "number"] },
+        imageUrl: { type: "string", description: "https:// address of a JPEG, PNG, WebP, AVIF or GIF photo, at least 400 px on its short side, up to 15 MB" },
+        alt: { type: "string", description: "What the photo shows, for screen readers (5 to 200 characters)" },
+        credit: { type: "string", description: "Photographer or owner, e.g. 'Photo: City of San Carlos'" },
+        caption: { type: "string" },
+        role: { type: "string", enum: ["cover", "gallery"], description: "gallery is for places only; default cover" },
+        note: { type: "string", description: "Optional note for the reviewer (where the photo came from, permission)" },
+      },
+      required: ["collection", "id", "imageUrl", "alt", "credit"],
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
+    run: async (args, { payload, user }) => {
+      needStaff(user);
+      const a = parse(
+        z.object({
+          collection: z.enum(COLLECTIONS),
+          id: z.union([z.string(), z.number()]),
+          imageUrl: z.string().trim().url().max(1000),
+          alt: z.string().trim().min(5).max(200),
+          credit: z.string().trim().min(2).max(120),
+          caption: z.string().trim().max(300).optional(),
+          role: z.enum(["cover", "gallery"]).default("cover"),
+          note: z.string().max(1000).optional(),
+        }),
+        args,
+      );
+      if (a.role === "gallery" && a.collection !== "places") throw new ToolError("Only places have a photo gallery; use role cover.");
+      const existing = (await payload.findByID({ collection: a.collection, id: a.id, draft: DRAFTS[a.collection], depth: 0, user, overrideAccess: false }).catch(() => null)) as
+        | (Record<string, unknown> & { status?: string; review?: Record<string, unknown>; gallery?: unknown[] })
+        | null;
+      if (!existing) throw new ToolError("Not found, or this account can't edit it.");
+      if (a.collection === "events" && !["draft", "pending"].includes(String(existing.status))) {
+        throw new ToolError("This event is already on the calendar; an editor has to change its photo.");
+      }
+      let media;
+      try {
+        media = await importPhotoFromUrl(payload, user, { url: a.imageUrl, alt: a.alt, credit: a.credit, caption: a.caption });
+      } catch (e) {
+        if (e instanceof PhotoError) throw new ToolError(e.message);
+        throw e;
+      }
+      const field = a.collection === "desk-pages" ? "hero" : a.role === "gallery" ? "gallery" : "cover";
+      const value = field === "gallery" ? [...((existing.gallery ?? []) as unknown[]).map((g) => (g && typeof g === "object" ? (g as { id: unknown }).id : g)), media.id] : media.id;
+      const photoNote = `Photo added through the connector from ${a.imageUrl} (credit: ${a.credit}).${a.note ? ` ${a.note}` : ""}`;
+      const review = { ...existing.review, state: "in-review", note: [existing.review?.note, photoNote].filter(Boolean).join("\n\n") };
+      let data: Record<string, unknown> = { [field]: value, review };
+      if (DRAFTS[a.collection]) {
+        // A new draft version built from the latest draft, so nothing else in it changes.
+        const { id: _i, createdAt: _c, updatedAt: _u, ...content } = existing;
+        void _i;
+        void _c;
+        void _u;
+        data = { ...content, ...data, _status: "draft" };
+      }
+      const doc = (await payload.update({ collection: a.collection, id: a.id, data: data as never, draft: DRAFTS[a.collection], user, overrideAccess: false })) as unknown as {
+        id: number | string;
+        review?: { check?: { ok?: boolean; problems?: string[] } };
+      };
+      return { id: doc.id, collection: a.collection, field, media: { id: media.id, width: media.width, height: media.height }, passesFormatCheck: Boolean(doc.review?.check?.ok), problems: doc.review?.check?.problems ?? [] };
     },
   },
   {

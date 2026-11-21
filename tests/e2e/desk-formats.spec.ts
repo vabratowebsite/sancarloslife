@@ -62,3 +62,58 @@ test("Claude can submit every format through the connector", async ({ request })
     }
   }
 });
+
+// A test JPEG from sharp's public test fixtures (GitHub is reachable from CI and sandboxes); override with E2E_PHOTO_URL.
+const PHOTO_URL = process.env.E2E_PHOTO_URL ?? "https://raw.githubusercontent.com/lovell/sharp/main/test/fixtures/2569067123_aca715a2ee_o.jpg";
+
+test("Claude can attach a photo by URL; unsafe addresses are refused", async ({ request }) => {
+  test.skip(!apiKey, "Set E2E_API_KEY to a staff user's API key");
+  test.setTimeout(90_000);
+  const tag = Date.now().toString(36);
+  const headers = { Authorization: `users API-Key ${apiKey}` };
+  const media: (number | string)[] = [];
+  let placeId: number | string | undefined;
+  try {
+    const sub = await mcp(request, "submit_draft", { format: "place", data: JSON.parse(mockAnswer("place", `E2E photo ${tag}`)) });
+    expect(sub.isError, sub.text).toBe(false);
+    placeId = sub.data.id as number;
+    expect(sub.data.problems as string[]).toContain("Add a cover photo.");
+
+    const cover = await mcp(request, "attach_photo", { collection: "places", id: placeId, imageUrl: PHOTO_URL, alt: "Edgewood Park trail in spring", credit: "Photo: San Carlos Life" });
+    expect(cover.isError, cover.text).toBe(false);
+    media.push((cover.data.media as { id: number }).id);
+    expect(cover.data.field).toBe("cover");
+    expect(cover.data.problems as string[]).not.toContain("Add a cover photo.");
+    expect(cover.data.passesFormatCheck).toBe(true);
+
+    const gallery = await mcp(request, "attach_photo", { collection: "places", id: placeId, imageUrl: PHOTO_URL, alt: "Edgewood Park trail, second view", credit: "Photo: San Carlos Life", role: "gallery" });
+    expect(gallery.isError, gallery.text).toBe(false);
+    media.push((gallery.data.media as { id: number }).id);
+
+    // The draft kept its text and now has both photos; the stored file is a re-encoded JPEG with alt and credit.
+    const draft = await (await request.get(`/api/places/${placeId}?draft=true&depth=1`, { headers })).json();
+    expect(draft.name).toContain(`E2E photo ${tag}`);
+    expect(draft.cover.alt).toBe("Edgewood Park trail in spring");
+    expect(draft.cover.credit).toBe("Photo: San Carlos Life");
+    expect(draft.cover.mimeType).toBe("image/jpeg");
+    expect(draft.gallery).toHaveLength(1);
+    expect(draft.review.note).toContain(PHOTO_URL);
+
+    for (const [imageUrl, why] of [
+      ["http://sancarloslife.com/wp-content/uploads/2022/04/Edgewood1.jpg", "https"],
+      ["https://localhost/x.jpg", "Private"],
+      ["https://169.254.169.254/latest/meta-data", "Private"],
+      ["https://raw.githubusercontent.com/lovell/sharp/main/README.md", "not a JPEG"],
+      ["https://raw.githubusercontent.com/lovell/sharp/main/test/fixtures/check.svg", "not a JPEG"],
+    ]) {
+      const r = await mcp(request, "attach_photo", { collection: "places", id: placeId, imageUrl, alt: "Should not work", credit: "Test" });
+      expect(r.isError, imageUrl).toBe(true);
+      expect(r.text, imageUrl).toContain(why);
+    }
+    const wrongRole = await mcp(request, "attach_photo", { collection: "posts", id: placeId, imageUrl: PHOTO_URL, alt: "Should not work", credit: "Test", role: "gallery" });
+    expect(wrongRole.isError).toBe(true);
+  } finally {
+    if (placeId) await request.delete(`/api/places/${placeId}`, { headers });
+    for (const id of media) await request.delete(`/api/media/${id}`, { headers });
+  }
+});
