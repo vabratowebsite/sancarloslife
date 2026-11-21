@@ -9,6 +9,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { isGone } from "./gone";
 import { loadJson, payload, run, saveJson, SITE } from "./lib";
 
 type RankMath = { rows: { pattern: string; to: string; status: string; code: number }[] };
@@ -51,6 +52,9 @@ const MOVED: [RegExp, (m: RegExpMatchArray) => string][] = [
   [/^\/divi-login-designer\/$/, () => "/"],
   [/^\/all-restaurants\/$/, () => "/restaurants-and-services/all-restaurants/"],
   [/^\/all-shops-services\/$/, () => "/restaurants-and-services/all-shops-services/"],
+  // Old custom post type archives.
+  [/^\/restaurant\/$/, () => "/restaurants-and-services/all-restaurants/"],
+  [/^\/store\/$/, () => "/restaurants-and-services/all-shops-services/"],
   // Dated occurrences of single events (/event/<slug>/<yyyy-mm-dd>/) go to the event.
   [/^\/event\/([^/]+)\/\d{4}-\d{2}-\d{2}\/$/, (m) => `/event/${m[1]}/`],
   // Organizer and venue archive pages aren't rebuilt; their events are on the calendar.
@@ -103,6 +107,10 @@ await run("redirects", async () => {
   for (const { url } of sitemap) {
     const from = norm(url);
     if (live.has(from) || redirects.has(from)) continue;
+    if (isGone(from)) {
+      redirects.set(from, { to: "", code: "410", source: "rebuild" });
+      continue;
+    }
     const moved = MOVED.find(([re]) => re.test(from));
     if (moved) {
       redirects.set(from, { to: moved[1](from.match(moved[0])!), code: "301", source: "rebuild" });
@@ -136,6 +144,7 @@ await run("redirects", async () => {
     return undefined;
   };
   for (const [from, r] of redirects) {
+    if (r.code === "410") continue;
     const final = resolve(r.to);
     if (final) r.to = final;
     else unresolved.push({ from, to: r.to });
@@ -151,7 +160,7 @@ await run("redirects", async () => {
   let written = 0;
   for (const [fromPath, r] of redirects) {
     if (r.to === fromPath) continue;
-    const data = { fromPath, toPath: r.to, statusCode: r.code, source: r.source };
+    const data = { fromPath, toPath: r.to || null, statusCode: r.code, source: r.source };
     const found = await p.find({ collection: "redirects", where: { fromPath: { equals: fromPath } }, limit: 1 });
     if (found.docs[0]) await p.update({ collection: "redirects", id: found.docs[0].id, data });
     else await p.create({ collection: "redirects", data });

@@ -10,6 +10,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { isGone } from "./gone";
+
 const BASE = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, "");
 const DATA = path.resolve(import.meta.dirname, "data");
 const CONCURRENCY = Number(process.env.CONCURRENCY || 6);
@@ -28,7 +30,7 @@ async function check(pathname: string): Promise<Omit<Result, "url">> {
     }
     // A trailing-slash 308 doesn't count as a hop (old URLs all end in /).
     const realHops = hops;
-    return { path: pathname, status: res.status, hops: realHops, final: current.replace(BASE, ""), ok: res.status === 200 && realHops <= 1 };
+    return { path: pathname, status: res.status, hops: realHops, final: current.replace(BASE, ""), ok: (res.status === 200 && realHops <= 1) || (res.status === 410 && isGone(pathname)) };
   }
   return { path: pathname, status: 0, hops: 4, ok: false };
 }
