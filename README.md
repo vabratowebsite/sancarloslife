@@ -17,5 +17,13 @@ pnpm dev                     # http://localhost:3000
 
 ## Deploy
 
-Pull requests get a Vercel preview. Merging to `main` deploys production. See docs/PLAN.md
-section 10.
+Pull requests get a Vercel preview. Merging to `main` deploys production. Setup, first deploy,
+Buying Buddy and the domain cutover: [docs/DEPLOY.md](docs/DEPLOY.md).
+
+## Test
+
+```bash
+pnpm test                 # unit tests (Vitest)
+pnpm test:e2e             # end-to-end + accessibility against a running site (Playwright)
+pnpm migrate:verify       # every old WordPress URL still answers
+```
