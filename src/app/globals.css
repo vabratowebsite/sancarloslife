@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+/*
+  SanCarlosLife design tokens (blueprint section 3).
+  Raw values live here as CSS variables; @theme exposes them to Tailwind
+  as utilities like bg-teal-700, text-ink-500, font-heading, rounded-card.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --scl-teal-700: #1f7a7a;
+  --scl-teal-500: #2e9c9c;
+  --scl-teal-50: #e6f4f4;
+  --scl-sand-100: #f6f1e8;
+  --scl-ink-900: #1c2b2b;
+  --scl-ink-500: #5b6b6b;
+  --scl-white: #ffffff;
+  --scl-coral-500: #e0735a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-teal-700: var(--scl-teal-700);
+  --color-teal-500: var(--scl-teal-500);
+  --color-teal-50: var(--scl-teal-50);
+  --color-sand-100: var(--scl-sand-100);
+  --color-ink-900: var(--scl-ink-900);
+  --color-ink-500: var(--scl-ink-500);
+  --color-coral-500: var(--scl-coral-500);
+  --color-background: var(--scl-white);
+  --color-foreground: var(--scl-ink-900);
+
+  /* Type families (set by next/font in layout.tsx) */
+  --font-heading: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-lato), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-label: var(--font-oswald), "Arial Narrow", sans-serif;
+
+  /* Heading scale 48/36/28/22; body 18/1.6; small 16 */
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.15;
+  --text-h2: 2.25rem;
+  --text-h2--line-height: 1.2;
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 1.25;
+  --text-h4: 1.375rem;
+  --text-h4--line-height: 1.3;
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+  --text-small: 1rem;
+  --text-small--line-height: 1.5;
+
+  /* Radius and shadow */
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --shadow-card: 0 4px 16px rgba(28, 43, 43, 0.08);
+
+  /* Layout: 1200px max, 24px gutter */
+  --container-site: 1200px;
+  --spacing-gutter: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-ink-900);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-teal-500);
+  outline-offset: 2px;
+}
+
+/* Reusable pieces used before real components exist (milestone 4). */
+@utility container-site {
+  width: 100%;
+  max-width: var(--container-site);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility eyebrow {
+  font-family: var(--font-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.875rem;
 }
