@@ -76,6 +76,8 @@ export interface Config {
     'desk-runs': DeskRun;
     'ai-prompts': AiPrompt;
     'ai-connections': AiConnection;
+    'oauth-clients': OauthClient;
+    'oauth-tokens': OauthToken;
     events: Event;
     venues: Venue;
     organizers: Organizer;
@@ -108,6 +110,8 @@ export interface Config {
     'desk-runs': DeskRunsSelect<false> | DeskRunsSelect<true>;
     'ai-prompts': AiPromptsSelect<false> | AiPromptsSelect<true>;
     'ai-connections': AiConnectionsSelect<false> | AiConnectionsSelect<true>;
+    'oauth-clients': OauthClientsSelect<false> | OauthClientsSelect<true>;
+    'oauth-tokens': OauthTokensSelect<false> | OauthTokensSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     venues: VenuesSelect<false> | VenuesSelect<true>;
     organizers: OrganizersSelect<false> | OrganizersSelect<true>;
@@ -754,6 +758,57 @@ export interface DeskRun {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Apps registered to sign in to the website connector (e.g. Claude, ChatGPT). Deleting one signs it out everywhere.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "oauth-clients".
+ */
+export interface OauthClient {
+  id: number;
+  clientId: string;
+  name: string;
+  redirectUris:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  authMethod: 'none' | 'client_secret_post' | 'client_secret_basic';
+  secretHash?: string | null;
+  clientUri?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Codes and tokens issued to connected apps (only their hashes are stored). Delete a row to revoke it.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "oauth-tokens".
+ */
+export interface OauthToken {
+  id: number;
+  kind: 'code' | 'access' | 'refresh';
+  hash: string;
+  client: number | OauthClient;
+  user: number | User;
+  /**
+   * Every token from one sign-in shares a family; reuse of a spent code or refresh token revokes it.
+   */
+  family: string;
+  scope?: string | null;
+  resource?: string | null;
+  redirectUri?: string | null;
+  codeChallenge?: string | null;
+  expiresAt: string;
+  usedAt?: string | null;
+  revokedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1614,6 +1669,14 @@ export interface PayloadLockedDocument {
         value: number | AiConnection;
       } | null)
     | ({
+        relationTo: 'oauth-clients';
+        value: number | OauthClient;
+      } | null)
+    | ({
+        relationTo: 'oauth-tokens';
+        value: number | OauthToken;
+      } | null)
+    | ({
         relationTo: 'events';
         value: number | Event;
       } | null)
@@ -1948,6 +2011,40 @@ export interface AiConnectionsSelect<T extends boolean = true> {
   useForBackup?: T;
   maxOutputTokens?: T;
   notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "oauth-clients_select".
+ */
+export interface OauthClientsSelect<T extends boolean = true> {
+  clientId?: T;
+  name?: T;
+  redirectUris?: T;
+  authMethod?: T;
+  secretHash?: T;
+  clientUri?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "oauth-tokens_select".
+ */
+export interface OauthTokensSelect<T extends boolean = true> {
+  kind?: T;
+  hash?: T;
+  client?: T;
+  user?: T;
+  family?: T;
+  scope?: T;
+  resource?: T;
+  redirectUri?: T;
+  codeChallenge?: T;
+  expiresAt?: T;
+  usedAt?: T;
+  revokedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

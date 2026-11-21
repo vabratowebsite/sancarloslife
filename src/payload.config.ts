@@ -16,6 +16,7 @@ import { AiPrompts } from "./collections/AiPrompts";
 import { DeskPages } from "./collections/DeskPages";
 import { DeskJobs } from "./collections/DeskJobs";
 import { DeskRuns } from "./collections/DeskRuns";
+import { OAuthClients, OAuthTokens } from "./collections/OAuth";
 import { PageEdits } from "./collections/PageEdits";
 import { Pages } from "./collections/Pages";
 import { Places } from "./collections/Places";
@@ -66,7 +67,7 @@ export default buildConfig({
   collections: [
     Posts,
     Categories,
-    Pages, PageEdits, DeskPages, DeskJobs, DeskRuns, AiPrompts, AiConnections,
+    Pages, PageEdits, DeskPages, DeskJobs, DeskRuns, AiPrompts, AiConnections, OAuthClients, OAuthTokens,
     Events,
     Venues,
     Organizers,

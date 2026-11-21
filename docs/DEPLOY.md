@@ -119,6 +119,14 @@ Nothing here costs money until step 1.
 5. Once Buying Buddy confirms how outside forms send leads, set `BUYINGBUDDY_LEAD_EMAIL`.
 6. Import iHomefinder leads into the Buying Buddy CRM; cancel iHomefinder only after cutover.
 
+## 6b. Connecting Claude or ChatGPT to the website
+
+The website is an MCP connector at `https://sancarloslife.com/mcp` (use the preview URL to test).
+In claude.ai or ChatGPT, add a custom connector with that URL. The app registers itself, opens the
+website's sign-in, and an editor or admin approves it once. Connected apps and their sign-ins are
+listed in the admin under Operations Desk; delete a Connected app to sign it out. Claude Code and
+scripts can instead send a staff user's API key as `Authorization: Bearer <key>`.
+
 ## 7. Launch checklist
 
 All of these pass before the DNS switch:

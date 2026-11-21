@@ -1,16 +1,20 @@
 import { isStaffUser } from "@/access/roles";
 import { getPayloadClient } from "@/lib/payload";
 import { ToolError, TOOLS } from "@/lib/mcp/tools";
+import { issuerFor, isOAuthAccessToken, userForAccessToken } from "@/lib/oauth/server";
 
 /**
  * The San Carlos Life website connector: a Model Context Protocol server
  * (Streamable HTTP transport, stateless, JSON responses) at /mcp, for Claude,
  * ChatGPT and other MCP clients.
  *
- * Sign-in: `Authorization: Bearer <API key>`, where the key is a staff user's
- * API key (admin → Users → the user → Enable API key). Each call acts as that
- * user with that user's permissions. Browser requests from other sites are
- * refused (Origin check).
+ * Sign-in, either way acting as that staff user with their permissions:
+ *  - OAuth 2.1 (claude.ai, ChatGPT and other connector apps): the app finds the
+ *    sign-in through /.well-known/oauth-protected-resource and an editor approves
+ *    it once (src/lib/oauth); the app then sends `Bearer scl_at_…` tokens.
+ *  - A staff user's API key (admin → Users → Enable API key) as `Bearer <key>`,
+ *    for Claude Code, scripts and API clients.
+ * Browser requests from other sites are refused (Origin check).
  */
 
 const SUPPORTED = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
@@ -35,15 +39,25 @@ async function authenticate(request: Request) {
   const m = auth.match(/^Bearer\s+(\S{10,200})$/i);
   if (!m) return null;
   const payload = await getPayloadClient();
+  if (isOAuthAccessToken(m[1])) {
+    const user = await userForAccessToken(payload, m[1], issuerFor(request));
+    return user ? { payload, user } : null;
+  }
   // Payload's API-key strategy reads "users API-Key <key>".
   const { user } = await payload.auth({ headers: new Headers({ Authorization: `users API-Key ${m[1]}` }) });
   return user && isStaffUser(user) ? { payload, user } : null;
 }
 
-const unauthorized = () =>
-  json({ jsonrpc: "2.0", id: null, error: { code: -32001, message: "Sign in with a staff user's API key: Authorization: Bearer <key>" } }, 401, {
-    "WWW-Authenticate": 'Bearer realm="sancarloslife"',
-  });
+/** 401 with the pointer MCP clients follow to start OAuth (RFC 9728 §5.1). */
+const unauthorized = (request: Request) => {
+  const tried = /^Bearer\s+\S/i.test(request.headers.get("authorization") ?? "");
+  const meta = `${issuerFor(request)}/.well-known/oauth-protected-resource/mcp`;
+  return json(
+    { jsonrpc: "2.0", id: null, error: { code: -32001, message: "Sign in: connect this app through the website's OAuth sign-in, or send a staff API key as Authorization: Bearer <key>." } },
+    401,
+    { "WWW-Authenticate": `Bearer resource_metadata="${meta}", scope="mcp"${tried ? ', error="invalid_token"' : ""}` },
+  );
+};
 
 export async function POST(request: Request) {
   if (!allowedOrigin(request.headers.get("origin"))) return json({ error: "Origin not allowed" }, 403);
@@ -67,7 +81,7 @@ export async function POST(request: Request) {
   const id = req.id as RpcId;
 
   const session = await authenticate(request);
-  if (!session) return unauthorized();
+  if (!session) return unauthorized(request);
 
   switch (req.method) {
     case "initialize": {

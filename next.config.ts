@@ -22,8 +22,9 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: baseHeaders },
-      // The Payload admin manages its own scripts; the CSP covers the public site.
-      { source: "/((?!admin|api).*)", headers: [{ key: "Content-Security-Policy", value: contentSecurityPolicy() }] },
+      // The Payload admin manages its own scripts; the CSP covers the public site. The OAuth
+      // sign-in pages set their own (their form must be allowed to return to the app).
+      { source: "/((?!admin|api|oauth/).*)", headers: [{ key: "Content-Security-Policy", value: contentSecurityPolicy() }] },
       // Buying Buddy pages: same policy plus 'unsafe-eval' (later rules override earlier ones).
       ...IDX_PATHS.map((p) => ({
         source: `${p}{/}?`,

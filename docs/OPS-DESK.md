@@ -58,7 +58,7 @@ About 300 files: the desk page, 45 blog drafts, 102 event drafts, 10 page drafts
    in the desk. Email-based scans need the website's own Google sign-in (Claude's Gmail connector
    won't be there).
 4. **Move the existing desk content** (drafts, images, saved edits, leads, run history) into it.
-5. **Website connector** (MCP, see Connections): ✅ first part built 2026-11-21 (bearer API keys; OAuth sign-in for claude.ai/ChatGPT next). Claude's research runs switch from writing into the
+5. **Website connector** (MCP, see Connections): ✅ built 2026-11-21/22 (bearer API keys, and OAuth sign-in so claude.ai and ChatGPT can add it as a custom connector). Claude's research runs switch from writing into the
    artifact to writing into the website; the artifact desk is retired once the website desk is in use.
 
 ## Backups

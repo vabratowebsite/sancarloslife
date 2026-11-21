@@ -24,6 +24,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum_ai_prompts_format" AS ENUM('blog', 'desk-page');
   CREATE TYPE "web"."enum__ai_prompts_v_version_format" AS ENUM('blog', 'desk-page');
   CREATE TYPE "web"."enum_ai_connections_provider" AS ENUM('anthropic', 'openai', 'gemini', 'openrouter', 'openai-compatible', 'mock');
+  CREATE TYPE "web"."enum_oauth_clients_auth_method" AS ENUM('none', 'client_secret_post', 'client_secret_basic');
+  CREATE TYPE "web"."enum_oauth_tokens_kind" AS ENUM('code', 'access', 'refresh');
   CREATE TYPE "web"."enum_events_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
   CREATE TYPE "web"."enum_events_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum_events_status" AS ENUM('draft', 'pending', 'published', 'archived');
@@ -418,6 +420,36 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"use_for_backup" boolean DEFAULT false,
   	"max_output_tokens" numeric DEFAULT 8000,
   	"notes" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "web"."oauth_clients" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"client_id" varchar NOT NULL,
+  	"name" varchar NOT NULL,
+  	"redirect_uris" jsonb NOT NULL,
+  	"auth_method" "web"."enum_oauth_clients_auth_method" DEFAULT 'none' NOT NULL,
+  	"secret_hash" varchar,
+  	"client_uri" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "web"."oauth_tokens" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"kind" "web"."enum_oauth_tokens_kind" NOT NULL,
+  	"hash" varchar NOT NULL,
+  	"client_id" integer NOT NULL,
+  	"user_id" integer NOT NULL,
+  	"family" varchar NOT NULL,
+  	"scope" varchar,
+  	"resource" varchar,
+  	"redirect_uri" varchar,
+  	"code_challenge" varchar,
+  	"expires_at" timestamp(3) with time zone NOT NULL,
+  	"used_at" timestamp(3) with time zone,
+  	"revoked_at" timestamp(3) with time zone,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
@@ -1166,6 +1198,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"desk_runs_id" integer,
   	"ai_prompts_id" integer,
   	"ai_connections_id" integer,
+  	"oauth_clients_id" integer,
+  	"oauth_tokens_id" integer,
   	"events_id" integer,
   	"venues_id" integer,
   	"organizers_id" integer,
@@ -1286,6 +1320,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."desk_jobs" ADD CONSTRAINT "desk_jobs_prompt_id_ai_prompts_id_fk" FOREIGN KEY ("prompt_id") REFERENCES "web"."ai_prompts"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."desk_jobs" ADD CONSTRAINT "desk_jobs_connection_id_ai_connections_id_fk" FOREIGN KEY ("connection_id") REFERENCES "web"."ai_connections"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_ai_prompts_v" ADD CONSTRAINT "_ai_prompts_v_parent_id_ai_prompts_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."ai_prompts"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."oauth_tokens" ADD CONSTRAINT "oauth_tokens_client_id_oauth_clients_id_fk" FOREIGN KEY ("client_id") REFERENCES "web"."oauth_clients"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."oauth_tokens" ADD CONSTRAINT "oauth_tokens_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events_exdates" ADD CONSTRAINT "events_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_series_id_events_id_fk" FOREIGN KEY ("series_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
@@ -1364,6 +1400,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_runs_fk" FOREIGN KEY ("desk_runs_id") REFERENCES "web"."desk_runs"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_ai_prompts_fk" FOREIGN KEY ("ai_prompts_id") REFERENCES "web"."ai_prompts"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_ai_connections_fk" FOREIGN KEY ("ai_connections_id") REFERENCES "web"."ai_connections"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_oauth_clients_fk" FOREIGN KEY ("oauth_clients_id") REFERENCES "web"."oauth_clients"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_oauth_tokens_fk" FOREIGN KEY ("oauth_tokens_id") REFERENCES "web"."oauth_tokens"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_events_fk" FOREIGN KEY ("events_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_venues_fk" FOREIGN KEY ("venues_id") REFERENCES "web"."venues"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_organizers_fk" FOREIGN KEY ("organizers_id") REFERENCES "web"."organizers"("id") ON DELETE cascade ON UPDATE no action;
@@ -1494,6 +1532,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_ai_prompts_v_updated_at_idx" ON "web"."_ai_prompts_v" USING btree ("updated_at");
   CREATE INDEX "ai_connections_updated_at_idx" ON "web"."ai_connections" USING btree ("updated_at");
   CREATE INDEX "ai_connections_created_at_idx" ON "web"."ai_connections" USING btree ("created_at");
+  CREATE UNIQUE INDEX "oauth_clients_client_id_idx" ON "web"."oauth_clients" USING btree ("client_id");
+  CREATE INDEX "oauth_clients_updated_at_idx" ON "web"."oauth_clients" USING btree ("updated_at");
+  CREATE INDEX "oauth_clients_created_at_idx" ON "web"."oauth_clients" USING btree ("created_at");
+  CREATE UNIQUE INDEX "oauth_tokens_hash_idx" ON "web"."oauth_tokens" USING btree ("hash");
+  CREATE INDEX "oauth_tokens_client_idx" ON "web"."oauth_tokens" USING btree ("client_id");
+  CREATE INDEX "oauth_tokens_user_idx" ON "web"."oauth_tokens" USING btree ("user_id");
+  CREATE INDEX "oauth_tokens_family_idx" ON "web"."oauth_tokens" USING btree ("family");
+  CREATE INDEX "oauth_tokens_expires_at_idx" ON "web"."oauth_tokens" USING btree ("expires_at");
+  CREATE INDEX "oauth_tokens_updated_at_idx" ON "web"."oauth_tokens" USING btree ("updated_at");
+  CREATE INDEX "oauth_tokens_created_at_idx" ON "web"."oauth_tokens" USING btree ("created_at");
   CREATE INDEX "events_exdates_order_idx" ON "web"."events_exdates" USING btree ("_order");
   CREATE INDEX "events_exdates_parent_id_idx" ON "web"."events_exdates" USING btree ("_parent_id");
   CREATE INDEX "events_review_review_state_idx" ON "web"."events" USING btree ("review_state");
@@ -1727,6 +1775,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_desk_runs_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_runs_id");
   CREATE INDEX "payload_locked_documents_rels_ai_prompts_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("ai_prompts_id");
   CREATE INDEX "payload_locked_documents_rels_ai_connections_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("ai_connections_id");
+  CREATE INDEX "payload_locked_documents_rels_oauth_clients_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("oauth_clients_id");
+  CREATE INDEX "payload_locked_documents_rels_oauth_tokens_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("oauth_tokens_id");
   CREATE INDEX "payload_locked_documents_rels_events_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("events_id");
   CREATE INDEX "payload_locked_documents_rels_venues_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("venues_id");
   CREATE INDEX "payload_locked_documents_rels_organizers_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("organizers_id");
@@ -1787,6 +1837,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."ai_prompts" CASCADE;
   DROP TABLE "web"."_ai_prompts_v" CASCADE;
   DROP TABLE "web"."ai_connections" CASCADE;
+  DROP TABLE "web"."oauth_clients" CASCADE;
+  DROP TABLE "web"."oauth_tokens" CASCADE;
   DROP TABLE "web"."events_exdates" CASCADE;
   DROP TABLE "web"."events" CASCADE;
   DROP TABLE "web"."events_rels" CASCADE;
@@ -1861,6 +1913,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "web"."enum_ai_prompts_format";
   DROP TYPE "web"."enum__ai_prompts_v_version_format";
   DROP TYPE "web"."enum_ai_connections_provider";
+  DROP TYPE "web"."enum_oauth_clients_auth_method";
+  DROP TYPE "web"."enum_oauth_tokens_kind";
   DROP TYPE "web"."enum_events_review_state";
   DROP TYPE "web"."enum_events_review_source";
   DROP TYPE "web"."enum_events_status";
