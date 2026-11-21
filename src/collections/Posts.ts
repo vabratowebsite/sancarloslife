@@ -3,7 +3,9 @@ import { slugField, type CollectionConfig } from "payload";
 import { publishedOrStaff, staffOnly } from "../access/roles";
 import { bodyField } from "../fields/richText";
 import { jsonLdField, seoFields, wpIdField } from "../fields/seo";
+import { reviewField } from "../fields/review";
 import { revalidateHooks } from "../hooks/revalidate";
+import { reviewCheck } from "../hooks/review";
 
 export const Posts: CollectionConfig = {
   slug: "posts",
@@ -24,8 +26,9 @@ export const Posts: CollectionConfig = {
     maxPerDoc: 25,
   },
   defaultSort: "-publishedAt",
-  hooks: revalidateHooks("posts"),
+  hooks: { ...revalidateHooks("posts"), beforeChange: [reviewCheck("posts")] },
   fields: [
+    reviewField,
     { name: "title", type: "text", required: true },
     slugField(),
     {

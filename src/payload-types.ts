@@ -71,6 +71,8 @@ export interface Config {
     categories: Category;
     pages: Page;
     'page-edits': PageEdit;
+    'desk-pages': DeskPage;
+    'desk-runs': DeskRun;
     events: Event;
     venues: Venue;
     organizers: Organizer;
@@ -98,6 +100,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'page-edits': PageEditsSelect<false> | PageEditsSelect<true>;
+    'desk-pages': DeskPagesSelect<false> | DeskPagesSelect<true>;
+    'desk-runs': DeskRunsSelect<false> | DeskRunsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     venues: VenuesSelect<false> | VenuesSelect<true>;
     organizers: OrganizersSelect<false> | OrganizersSelect<true>;
@@ -171,6 +175,29 @@ export interface UserAuthOperations {
  */
 export interface Post {
   id: number;
+  review?: {
+    state?: ('none' | 'in-review' | 'approved' | 'rejected') | null;
+    source?: ('editor' | 'claude' | 'website-ai' | 'public') | null;
+    /**
+     * Why it was sent back, or notes for the reviewer.
+     */
+    note?: string | null;
+    /**
+     * Format check result
+     */
+    check?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    submittedAt?: string | null;
+    reviewedAt?: string | null;
+    reviewedBy?: (number | null) | User;
+  };
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -437,11 +464,197 @@ export interface PageEdit {
   createdAt: string;
 }
 /**
+ * Pages made through the Operations Desk. They live at sancarloslife.com/<slug>/ and use the site's page templates.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "desk-pages".
+ */
+export interface DeskPage {
+  id: number;
+  review?: {
+    state?: ('none' | 'in-review' | 'approved' | 'rejected') | null;
+    source?: ('editor' | 'claude' | 'website-ai' | 'public') | null;
+    /**
+     * Why it was sent back, or notes for the reviewer.
+     */
+    note?: string | null;
+    /**
+     * Format check result
+     */
+    check?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    submittedAt?: string | null;
+    reviewedAt?: string | null;
+    reviewedBy?: (number | null) | User;
+  };
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  template: 'guide';
+  /**
+   * Small label above the title, e.g. Holiday guide
+   */
+  eyebrow?: string | null;
+  /**
+   * The quick answer at the top (40–320 characters). Search engines and AI answers quote this.
+   */
+  summary: string;
+  hero?: (number | null) | Media;
+  sections?:
+    | {
+        heading: string;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  sources?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    heading?: string | null;
+    text?: string | null;
+    buttonLabel?: string | null;
+    buttonHref?: string | null;
+  };
+  /**
+   * "Last updated" date shown on the page
+   */
+  updated?: string | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * Extra schema.org data. The site adds Article/Event/Place schema automatically.
+   */
+  jsonLd?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "desk-runs".
+ */
+export interface DeskRun {
+  id: number;
+  /**
+   * e.g. local-news-scan, events-scan, newsletter-draft
+   */
+  job: string;
+  runner: 'claude' | 'website-ai' | 'editor';
+  status: 'ok' | 'partial' | 'failed';
+  startedAt: string;
+  finishedAt?: string | null;
+  summary?: string | null;
+  /**
+   * Sources checked
+   */
+  checked?: number | null;
+  /**
+   * Drafts sent for review
+   */
+  drafted?: number | null;
+  /**
+   * [["ok"|"bad", text], …]
+   */
+  notes?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events".
  */
 export interface Event {
   id: number;
+  review?: {
+    state?: ('none' | 'in-review' | 'approved' | 'rejected') | null;
+    source?: ('editor' | 'claude' | 'website-ai' | 'public') | null;
+    /**
+     * Why it was sent back, or notes for the reviewer.
+     */
+    note?: string | null;
+    /**
+     * Format check result
+     */
+    check?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    submittedAt?: string | null;
+    reviewedAt?: string | null;
+    reviewedBy?: (number | null) | User;
+  };
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -596,6 +809,29 @@ export interface EventCategory {
  */
 export interface Place {
   id: number;
+  review?: {
+    state?: ('none' | 'in-review' | 'approved' | 'rejected') | null;
+    source?: ('editor' | 'claude' | 'website-ai' | 'public') | null;
+    /**
+     * Why it was sent back, or notes for the reviewer.
+     */
+    note?: string | null;
+    /**
+     * Format check result
+     */
+    check?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    submittedAt?: string | null;
+    reviewedAt?: string | null;
+    reviewedBy?: (number | null) | User;
+  };
   /**
    * Short name for cards, e.g. Pho Vinh
    */
@@ -960,6 +1196,29 @@ export interface GalleryPhoto {
  */
 export interface CityProject {
   id: number;
+  review?: {
+    state?: ('none' | 'in-review' | 'approved' | 'rejected') | null;
+    source?: ('editor' | 'claude' | 'website-ai' | 'public') | null;
+    /**
+     * Why it was sent back, or notes for the reviewer.
+     */
+    note?: string | null;
+    /**
+     * Format check result
+     */
+    check?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    submittedAt?: string | null;
+    reviewedAt?: string | null;
+    reviewedBy?: (number | null) | User;
+  };
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -1204,6 +1463,14 @@ export interface PayloadLockedDocument {
         value: number | PageEdit;
       } | null)
     | ({
+        relationTo: 'desk-pages';
+        value: number | DeskPage;
+      } | null)
+    | ({
+        relationTo: 'desk-runs';
+        value: number | DeskRun;
+      } | null)
+    | ({
         relationTo: 'events';
         value: number | Event;
       } | null)
@@ -1310,6 +1577,17 @@ export interface PayloadMigration {
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  review?:
+    | T
+    | {
+        state?: T;
+        source?: T;
+        note?: T;
+        check?: T;
+        submittedAt?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
   title?: T;
   generateSlug?: T;
   slug?: T;
@@ -1388,9 +1666,105 @@ export interface PageEditsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "desk-pages_select".
+ */
+export interface DeskPagesSelect<T extends boolean = true> {
+  review?:
+    | T
+    | {
+        state?: T;
+        source?: T;
+        note?: T;
+        check?: T;
+        submittedAt?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  template?: T;
+  eyebrow?: T;
+  summary?: T;
+  hero?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        id?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  sources?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        buttonLabel?: T;
+        buttonHref?: T;
+      };
+  updated?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  jsonLd?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "desk-runs_select".
+ */
+export interface DeskRunsSelect<T extends boolean = true> {
+  job?: T;
+  runner?: T;
+  status?: T;
+  startedAt?: T;
+  finishedAt?: T;
+  summary?: T;
+  checked?: T;
+  drafted?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events_select".
  */
 export interface EventsSelect<T extends boolean = true> {
+  review?:
+    | T
+    | {
+        state?: T;
+        source?: T;
+        note?: T;
+        check?: T;
+        submittedAt?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
   title?: T;
   generateSlug?: T;
   slug?: T;
@@ -1489,6 +1863,17 @@ export interface EventCategoriesSelect<T extends boolean = true> {
  * via the `definition` "places_select".
  */
 export interface PlacesSelect<T extends boolean = true> {
+  review?:
+    | T
+    | {
+        state?: T;
+        source?: T;
+        note?: T;
+        check?: T;
+        submittedAt?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
   name?: T;
   headline?: T;
   generateSlug?: T;
@@ -1678,6 +2063,17 @@ export interface GalleryPhotosSelect<T extends boolean = true> {
  * via the `definition` "city-projects_select".
  */
 export interface CityProjectsSelect<T extends boolean = true> {
+  review?:
+    | T
+    | {
+        state?: T;
+        source?: T;
+        note?: T;
+        check?: T;
+        submittedAt?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
   title?: T;
   generateSlug?: T;
   slug?: T;

@@ -12,6 +12,51 @@
           "primaryKey": true,
           "notNull": true
         },
+        "review_state": {
+          "name": "review_state",
+          "type": "enum_posts_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "review_source": {
+          "name": "review_source",
+          "type": "enum_posts_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_note": {
+          "name": "review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_check": {
+          "name": "review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_submitted_at": {
+          "name": "review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_at": {
+          "name": "review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_by_id": {
+          "name": "review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "title": {
           "name": "title",
           "type": "varchar",
@@ -134,6 +179,36 @@
         }
       },
       "indexes": {
+        "posts_review_review_state_idx": {
+          "name": "posts_review_review_state_idx",
+          "columns": [
+            {
+              "expression": "review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "posts_review_review_reviewed_by_idx": {
+          "name": "posts_review_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "posts_slug_idx": {
           "name": "posts_slug_idx",
           "columns": [
@@ -271,6 +346,20 @@
         }
       },
       "foreignKeys": {
+        "posts_review_reviewed_by_id_users_id_fk": {
+          "name": "posts_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "posts",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "review_reviewed_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "posts_author_id_users_id_fk": {
           "name": "posts_author_id_users_id_fk",
           "tableFrom": "posts",
@@ -549,6 +638,51 @@
           "primaryKey": false,
           "notNull": false
         },
+        "version_review_state": {
+          "name": "version_review_state",
+          "type": "enum__posts_v_version_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "version_review_source": {
+          "name": "version_review_source",
+          "type": "enum__posts_v_version_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_note": {
+          "name": "version_review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_check": {
+          "name": "version_review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_submitted_at": {
+          "name": "version_review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_at": {
+          "name": "version_review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_by_id": {
+          "name": "version_review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "version_title": {
           "name": "version_title",
           "type": "varchar",
@@ -694,6 +828,36 @@
           "columns": [
             {
               "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_posts_v_version_review_version_review_state_idx": {
+          "name": "_posts_v_version_review_version_review_state_idx",
+          "columns": [
+            {
+              "expression": "version_review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_posts_v_version_review_version_review_reviewed_by_idx": {
+          "name": "_posts_v_version_review_version_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "version_review_reviewed_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -893,6 +1057,20 @@
           "schemaTo": "web",
           "columnsFrom": [
             "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_posts_v_version_review_reviewed_by_id_users_id_fk": {
+          "name": "_posts_v_version_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "_posts_v",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_review_reviewed_by_id"
           ],
           "columnsTo": [
             "id"
@@ -1846,6 +2024,1543 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "web.desk_pages_sections": {
+      "name": "desk_pages_sections",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "heading": {
+          "name": "heading",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "body": {
+          "name": "body",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "desk_pages_sections_order_idx": {
+          "name": "desk_pages_sections_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_sections_parent_id_idx": {
+          "name": "desk_pages_sections_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "desk_pages_sections_parent_id_fk": {
+          "name": "desk_pages_sections_parent_id_fk",
+          "tableFrom": "desk_pages_sections",
+          "tableTo": "desk_pages",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web.desk_pages_faq": {
+      "name": "desk_pages_faq",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "question": {
+          "name": "question",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "answer": {
+          "name": "answer",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "desk_pages_faq_order_idx": {
+          "name": "desk_pages_faq_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_faq_parent_id_idx": {
+          "name": "desk_pages_faq_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "desk_pages_faq_parent_id_fk": {
+          "name": "desk_pages_faq_parent_id_fk",
+          "tableFrom": "desk_pages_faq",
+          "tableTo": "desk_pages",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web.desk_pages_sources": {
+      "name": "desk_pages_sources",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "desk_pages_sources_order_idx": {
+          "name": "desk_pages_sources_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_sources_parent_id_idx": {
+          "name": "desk_pages_sources_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "desk_pages_sources_parent_id_fk": {
+          "name": "desk_pages_sources_parent_id_fk",
+          "tableFrom": "desk_pages_sources",
+          "tableTo": "desk_pages",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web.desk_pages": {
+      "name": "desk_pages",
+      "schema": "web",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "review_state": {
+          "name": "review_state",
+          "type": "enum_desk_pages_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "review_source": {
+          "name": "review_source",
+          "type": "enum_desk_pages_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_note": {
+          "name": "review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_check": {
+          "name": "review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_submitted_at": {
+          "name": "review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_at": {
+          "name": "review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_by_id": {
+          "name": "review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "generate_slug": {
+          "name": "generate_slug",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "template": {
+          "name": "template",
+          "type": "enum_desk_pages_template",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'guide'"
+        },
+        "eyebrow": {
+          "name": "eyebrow",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "summary": {
+          "name": "summary",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hero_id": {
+          "name": "hero_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cta_heading": {
+          "name": "cta_heading",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cta_text": {
+          "name": "cta_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cta_button_label": {
+          "name": "cta_button_label",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cta_button_href": {
+          "name": "cta_button_href",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated": {
+          "name": "updated",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seo_title": {
+          "name": "seo_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seo_description": {
+          "name": "seo_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seo_focus_keyword": {
+          "name": "seo_focus_keyword",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seo_image_id": {
+          "name": "seo_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seo_canonical": {
+          "name": "seo_canonical",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seo_noindex": {
+          "name": "seo_noindex",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "json_ld": {
+          "name": "json_ld",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "_status": {
+          "name": "_status",
+          "type": "enum_desk_pages_status",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'draft'"
+        }
+      },
+      "indexes": {
+        "desk_pages_review_review_state_idx": {
+          "name": "desk_pages_review_review_state_idx",
+          "columns": [
+            {
+              "expression": "review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_review_review_reviewed_by_idx": {
+          "name": "desk_pages_review_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_slug_idx": {
+          "name": "desk_pages_slug_idx",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_hero_idx": {
+          "name": "desk_pages_hero_idx",
+          "columns": [
+            {
+              "expression": "hero_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_seo_seo_image_idx": {
+          "name": "desk_pages_seo_seo_image_idx",
+          "columns": [
+            {
+              "expression": "seo_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_updated_at_idx": {
+          "name": "desk_pages_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages_created_at_idx": {
+          "name": "desk_pages_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_pages__status_idx": {
+          "name": "desk_pages__status_idx",
+          "columns": [
+            {
+              "expression": "_status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "desk_pages_review_reviewed_by_id_users_id_fk": {
+          "name": "desk_pages_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "desk_pages",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "review_reviewed_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "desk_pages_hero_id_media_id_fk": {
+          "name": "desk_pages_hero_id_media_id_fk",
+          "tableFrom": "desk_pages",
+          "tableTo": "media",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "hero_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "desk_pages_seo_image_id_media_id_fk": {
+          "name": "desk_pages_seo_image_id_media_id_fk",
+          "tableFrom": "desk_pages",
+          "tableTo": "media",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "seo_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web._desk_pages_v_version_sections": {
+      "name": "_desk_pages_v_version_sections",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "heading": {
+          "name": "heading",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "body": {
+          "name": "body",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_desk_pages_v_version_sections_order_idx": {
+          "name": "_desk_pages_v_version_sections_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_sections_parent_id_idx": {
+          "name": "_desk_pages_v_version_sections_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_desk_pages_v_version_sections_parent_id_fk": {
+          "name": "_desk_pages_v_version_sections_parent_id_fk",
+          "tableFrom": "_desk_pages_v_version_sections",
+          "tableTo": "_desk_pages_v",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web._desk_pages_v_version_faq": {
+      "name": "_desk_pages_v_version_faq",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "question": {
+          "name": "question",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "answer": {
+          "name": "answer",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_desk_pages_v_version_faq_order_idx": {
+          "name": "_desk_pages_v_version_faq_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_faq_parent_id_idx": {
+          "name": "_desk_pages_v_version_faq_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_desk_pages_v_version_faq_parent_id_fk": {
+          "name": "_desk_pages_v_version_faq_parent_id_fk",
+          "tableFrom": "_desk_pages_v_version_faq",
+          "tableTo": "_desk_pages_v",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web._desk_pages_v_version_sources": {
+      "name": "_desk_pages_v_version_sources",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_desk_pages_v_version_sources_order_idx": {
+          "name": "_desk_pages_v_version_sources_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_sources_parent_id_idx": {
+          "name": "_desk_pages_v_version_sources_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_desk_pages_v_version_sources_parent_id_fk": {
+          "name": "_desk_pages_v_version_sources_parent_id_fk",
+          "tableFrom": "_desk_pages_v_version_sources",
+          "tableTo": "_desk_pages_v",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web._desk_pages_v": {
+      "name": "_desk_pages_v",
+      "schema": "web",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_state": {
+          "name": "version_review_state",
+          "type": "enum__desk_pages_v_version_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "version_review_source": {
+          "name": "version_review_source",
+          "type": "enum__desk_pages_v_version_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_note": {
+          "name": "version_review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_check": {
+          "name": "version_review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_submitted_at": {
+          "name": "version_review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_at": {
+          "name": "version_review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_by_id": {
+          "name": "version_review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_title": {
+          "name": "version_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_generate_slug": {
+          "name": "version_generate_slug",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "version_slug": {
+          "name": "version_slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_template": {
+          "name": "version_template",
+          "type": "enum__desk_pages_v_version_template",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'guide'"
+        },
+        "version_eyebrow": {
+          "name": "version_eyebrow",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_summary": {
+          "name": "version_summary",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_hero_id": {
+          "name": "version_hero_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_cta_heading": {
+          "name": "version_cta_heading",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_cta_text": {
+          "name": "version_cta_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_cta_button_label": {
+          "name": "version_cta_button_label",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_cta_button_href": {
+          "name": "version_cta_button_href",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_updated": {
+          "name": "version_updated",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_seo_title": {
+          "name": "version_seo_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_seo_description": {
+          "name": "version_seo_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_seo_focus_keyword": {
+          "name": "version_seo_focus_keyword",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_seo_image_id": {
+          "name": "version_seo_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_seo_canonical": {
+          "name": "version_seo_canonical",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_seo_noindex": {
+          "name": "version_seo_noindex",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "version_json_ld": {
+          "name": "version_json_ld",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_updated_at": {
+          "name": "version_updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_created_at": {
+          "name": "version_created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version__status": {
+          "name": "version__status",
+          "type": "enum__desk_pages_v_version_status",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'draft'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "latest": {
+          "name": "latest",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_desk_pages_v_parent_idx": {
+          "name": "_desk_pages_v_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_review_version_review_state_idx": {
+          "name": "_desk_pages_v_version_review_version_review_state_idx",
+          "columns": [
+            {
+              "expression": "version_review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_review_version_review_reviewed_by_idx": {
+          "name": "_desk_pages_v_version_review_version_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "version_review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_version_slug_idx": {
+          "name": "_desk_pages_v_version_version_slug_idx",
+          "columns": [
+            {
+              "expression": "version_slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_version_hero_idx": {
+          "name": "_desk_pages_v_version_version_hero_idx",
+          "columns": [
+            {
+              "expression": "version_hero_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_seo_version_seo_image_idx": {
+          "name": "_desk_pages_v_version_seo_version_seo_image_idx",
+          "columns": [
+            {
+              "expression": "version_seo_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_version_updated_at_idx": {
+          "name": "_desk_pages_v_version_version_updated_at_idx",
+          "columns": [
+            {
+              "expression": "version_updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_version_created_at_idx": {
+          "name": "_desk_pages_v_version_version_created_at_idx",
+          "columns": [
+            {
+              "expression": "version_created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_version_version__status_idx": {
+          "name": "_desk_pages_v_version_version__status_idx",
+          "columns": [
+            {
+              "expression": "version__status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_created_at_idx": {
+          "name": "_desk_pages_v_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_updated_at_idx": {
+          "name": "_desk_pages_v_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_desk_pages_v_latest_idx": {
+          "name": "_desk_pages_v_latest_idx",
+          "columns": [
+            {
+              "expression": "latest",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_desk_pages_v_parent_id_desk_pages_id_fk": {
+          "name": "_desk_pages_v_parent_id_desk_pages_id_fk",
+          "tableFrom": "_desk_pages_v",
+          "tableTo": "desk_pages",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_desk_pages_v_version_review_reviewed_by_id_users_id_fk": {
+          "name": "_desk_pages_v_version_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "_desk_pages_v",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_review_reviewed_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_desk_pages_v_version_hero_id_media_id_fk": {
+          "name": "_desk_pages_v_version_hero_id_media_id_fk",
+          "tableFrom": "_desk_pages_v",
+          "tableTo": "media",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_hero_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_desk_pages_v_version_seo_image_id_media_id_fk": {
+          "name": "_desk_pages_v_version_seo_image_id_media_id_fk",
+          "tableFrom": "_desk_pages_v",
+          "tableTo": "media",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_seo_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web.desk_runs": {
+      "name": "desk_runs",
+      "schema": "web",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "job": {
+          "name": "job",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "runner": {
+          "name": "runner",
+          "type": "enum_desk_runs_runner",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "enum_desk_runs_status",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'ok'"
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "finished_at": {
+          "name": "finished_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "summary": {
+          "name": "summary",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "checked": {
+          "name": "checked",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "drafted": {
+          "name": "drafted",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notes": {
+          "name": "notes",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "desk_runs_job_idx": {
+          "name": "desk_runs_job_idx",
+          "columns": [
+            {
+              "expression": "job",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_runs_started_at_idx": {
+          "name": "desk_runs_started_at_idx",
+          "columns": [
+            {
+              "expression": "started_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_runs_updated_at_idx": {
+          "name": "desk_runs_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_runs_created_at_idx": {
+          "name": "desk_runs_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "web.events_exdates": {
       "name": "events_exdates",
       "schema": "web",
@@ -1938,6 +3653,51 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "review_state": {
+          "name": "review_state",
+          "type": "enum_events_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "review_source": {
+          "name": "review_source",
+          "type": "enum_events_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_note": {
+          "name": "review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_check": {
+          "name": "review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_submitted_at": {
+          "name": "review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_at": {
+          "name": "review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_by_id": {
+          "name": "review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         },
         "title": {
           "name": "title",
@@ -2124,6 +3884,36 @@
         }
       },
       "indexes": {
+        "events_review_review_state_idx": {
+          "name": "events_review_review_state_idx",
+          "columns": [
+            {
+              "expression": "review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "events_review_review_reviewed_by_idx": {
+          "name": "events_review_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "events_slug_idx": {
           "name": "events_slug_idx",
           "columns": [
@@ -2291,6 +4081,20 @@
         }
       },
       "foreignKeys": {
+        "events_review_reviewed_by_id_users_id_fk": {
+          "name": "events_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "events",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "review_reviewed_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "events_series_id_events_id_fk": {
           "name": "events_series_id_events_id_fk",
           "tableFrom": "events",
@@ -2606,6 +4410,51 @@
           "primaryKey": false,
           "notNull": false
         },
+        "version_review_state": {
+          "name": "version_review_state",
+          "type": "enum__events_v_version_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "version_review_source": {
+          "name": "version_review_source",
+          "type": "enum__events_v_version_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_note": {
+          "name": "version_review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_check": {
+          "name": "version_review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_submitted_at": {
+          "name": "version_review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_at": {
+          "name": "version_review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_by_id": {
+          "name": "version_review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "version_title": {
           "name": "version_title",
           "type": "varchar",
@@ -2808,6 +4657,36 @@
           "columns": [
             {
               "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_events_v_version_review_version_review_state_idx": {
+          "name": "_events_v_version_review_version_review_state_idx",
+          "columns": [
+            {
+              "expression": "version_review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_events_v_version_review_version_review_reviewed_by_idx": {
+          "name": "_events_v_version_review_version_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "version_review_reviewed_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -3022,6 +4901,20 @@
           "schemaTo": "web",
           "columnsFrom": [
             "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_events_v_version_review_reviewed_by_id_users_id_fk": {
+          "name": "_events_v_version_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "_events_v",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_review_reviewed_by_id"
           ],
           "columnsTo": [
             "id"
@@ -3777,6 +5670,51 @@
           "primaryKey": true,
           "notNull": true
         },
+        "review_state": {
+          "name": "review_state",
+          "type": "enum_places_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "review_source": {
+          "name": "review_source",
+          "type": "enum_places_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_note": {
+          "name": "review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_check": {
+          "name": "review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_submitted_at": {
+          "name": "review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_at": {
+          "name": "review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_by_id": {
+          "name": "review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "name": {
           "name": "name",
           "type": "varchar",
@@ -3977,6 +5915,36 @@
         }
       },
       "indexes": {
+        "places_review_review_state_idx": {
+          "name": "places_review_review_state_idx",
+          "columns": [
+            {
+              "expression": "review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "places_review_review_reviewed_by_idx": {
+          "name": "places_review_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "places_slug_idx": {
           "name": "places_slug_idx",
           "columns": [
@@ -4129,6 +6097,20 @@
         }
       },
       "foreignKeys": {
+        "places_review_reviewed_by_id_users_id_fk": {
+          "name": "places_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "places",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "review_reviewed_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "places_cover_id_media_id_fk": {
           "name": "places_cover_id_media_id_fk",
           "tableFrom": "places",
@@ -4510,6 +6492,51 @@
           "primaryKey": false,
           "notNull": false
         },
+        "version_review_state": {
+          "name": "version_review_state",
+          "type": "enum__places_v_version_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "version_review_source": {
+          "name": "version_review_source",
+          "type": "enum__places_v_version_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_note": {
+          "name": "version_review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_check": {
+          "name": "version_review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_submitted_at": {
+          "name": "version_review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_at": {
+          "name": "version_review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_by_id": {
+          "name": "version_review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "version_name": {
           "name": "version_name",
           "type": "varchar",
@@ -4743,6 +6770,36 @@
           "method": "btree",
           "with": {}
         },
+        "_places_v_version_review_version_review_state_idx": {
+          "name": "_places_v_version_review_version_review_state_idx",
+          "columns": [
+            {
+              "expression": "version_review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_places_v_version_review_version_review_reviewed_by_idx": {
+          "name": "_places_v_version_review_version_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "version_review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "_places_v_version_version_slug_idx": {
           "name": "_places_v_version_version_slug_idx",
           "columns": [
@@ -4947,6 +7004,20 @@
           "schemaTo": "web",
           "columnsFrom": [
             "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_places_v_version_review_reviewed_by_id_users_id_fk": {
+          "name": "_places_v_version_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "_places_v",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_review_reviewed_by_id"
           ],
           "columnsTo": [
             "id"
@@ -7835,6 +9906,51 @@
           "primaryKey": true,
           "notNull": true
         },
+        "review_state": {
+          "name": "review_state",
+          "type": "enum_city_projects_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "review_source": {
+          "name": "review_source",
+          "type": "enum_city_projects_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_note": {
+          "name": "review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_check": {
+          "name": "review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_submitted_at": {
+          "name": "review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_at": {
+          "name": "review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_reviewed_by_id": {
+          "name": "review_reviewed_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "title": {
           "name": "title",
           "type": "varchar",
@@ -7964,6 +10080,36 @@
         }
       },
       "indexes": {
+        "city_projects_review_review_state_idx": {
+          "name": "city_projects_review_review_state_idx",
+          "columns": [
+            {
+              "expression": "review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "city_projects_review_review_reviewed_by_idx": {
+          "name": "city_projects_review_review_reviewed_by_idx",
+          "columns": [
+            {
+              "expression": "review_reviewed_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "city_projects_slug_idx": {
           "name": "city_projects_slug_idx",
           "columns": [
@@ -8101,6 +10247,20 @@
         }
       },
       "foreignKeys": {
+        "city_projects_review_reviewed_by_id_users_id_fk": {
+          "name": "city_projects_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "city_projects",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "review_reviewed_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "city_projects_cover_id_media_id_fk": {
           "name": "city_projects_cover_id_media_id_fk",
           "tableFrom": "city_projects",
@@ -8249,6 +10409,51 @@
         },
         "parent_id": {
           "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_state": {
+          "name": "version_review_state",
+          "type": "enum__city_projects_v_version_review_state",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'none'"
+        },
+        "version_review_source": {
+          "name": "version_review_source",
+          "type": "enum__city_projects_v_version_review_source",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_note": {
+          "name": "version_review_note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_check": {
+          "name": "version_review_check",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_submitted_at": {
+          "name": "version_review_submitted_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_at": {
+          "name": "version_review_reviewed_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_review_reviewed_by_id": {
+          "name": "version_review_reviewed_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -8405,6 +10610,36 @@
           "columns": [
             {
               "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_city_projects_v_version_review_version_review_state_idx": {
+          "name": "_city_projects_v_version_review_version_review_state_idx",
+          "columns": [
+            {
+              "expression": "version_review_state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_city_projects_v_version_review_version_review_reviewed__idx": {
+          "name": "_city_projects_v_version_review_version_review_reviewed__idx",
+          "columns": [
+            {
+              "expression": "version_review_reviewed_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -8604,6 +10839,20 @@
           "schemaTo": "web",
           "columnsFrom": [
             "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_city_projects_v_version_review_reviewed_by_id_users_id_fk": {
+          "name": "_city_projects_v_version_review_reviewed_by_id_users_id_fk",
+          "tableFrom": "_city_projects_v",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_review_reviewed_by_id"
           ],
           "columnsTo": [
             "id"
@@ -10043,6 +12292,18 @@
           "primaryKey": false,
           "notNull": false
         },
+        "desk_pages_id": {
+          "name": "desk_pages_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "desk_runs_id": {
+          "name": "desk_runs_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "events_id": {
           "name": "events_id",
           "type": "integer",
@@ -10230,6 +12491,36 @@
           "columns": [
             {
               "expression": "page_edits_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_desk_pages_id_idx": {
+          "name": "payload_locked_documents_rels_desk_pages_id_idx",
+          "columns": [
+            {
+              "expression": "desk_pages_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_desk_runs_id_idx": {
+          "name": "payload_locked_documents_rels_desk_runs_id_idx",
+          "columns": [
+            {
+              "expression": "desk_runs_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -10530,6 +12821,34 @@
           "schemaTo": "web",
           "columnsFrom": [
             "page_edits_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_desk_pages_fk": {
+          "name": "payload_locked_documents_rels_desk_pages_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "desk_pages",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "desk_pages_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_desk_runs_fk": {
+          "name": "payload_locked_documents_rels_desk_runs_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "desk_runs",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "desk_runs_id"
           ],
           "columnsTo": [
             "id"
@@ -11498,12 +13817,52 @@
     }
   },
   "enums": {
+    "web.enum_posts_review_state": {
+      "name": "enum_posts_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum_posts_review_source": {
+      "name": "enum_posts_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
+      ]
+    },
     "web.enum_posts_status": {
       "name": "enum_posts_status",
       "schema": "web",
       "values": [
         "draft",
         "published"
+      ]
+    },
+    "web.enum__posts_v_version_review_state": {
+      "name": "enum__posts_v_version_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum__posts_v_version_review_source": {
+      "name": "enum__posts_v_version_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
       ]
     },
     "web.enum__posts_v_version_status": {
@@ -11514,6 +13873,114 @@
         "published"
       ]
     },
+    "web.enum_desk_pages_review_state": {
+      "name": "enum_desk_pages_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum_desk_pages_review_source": {
+      "name": "enum_desk_pages_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
+      ]
+    },
+    "web.enum_desk_pages_template": {
+      "name": "enum_desk_pages_template",
+      "schema": "web",
+      "values": [
+        "guide"
+      ]
+    },
+    "web.enum_desk_pages_status": {
+      "name": "enum_desk_pages_status",
+      "schema": "web",
+      "values": [
+        "draft",
+        "published"
+      ]
+    },
+    "web.enum__desk_pages_v_version_review_state": {
+      "name": "enum__desk_pages_v_version_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum__desk_pages_v_version_review_source": {
+      "name": "enum__desk_pages_v_version_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
+      ]
+    },
+    "web.enum__desk_pages_v_version_template": {
+      "name": "enum__desk_pages_v_version_template",
+      "schema": "web",
+      "values": [
+        "guide"
+      ]
+    },
+    "web.enum__desk_pages_v_version_status": {
+      "name": "enum__desk_pages_v_version_status",
+      "schema": "web",
+      "values": [
+        "draft",
+        "published"
+      ]
+    },
+    "web.enum_desk_runs_runner": {
+      "name": "enum_desk_runs_runner",
+      "schema": "web",
+      "values": [
+        "claude",
+        "website-ai",
+        "editor"
+      ]
+    },
+    "web.enum_desk_runs_status": {
+      "name": "enum_desk_runs_status",
+      "schema": "web",
+      "values": [
+        "ok",
+        "partial",
+        "failed"
+      ]
+    },
+    "web.enum_events_review_state": {
+      "name": "enum_events_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum_events_review_source": {
+      "name": "enum_events_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
+      ]
+    },
     "web.enum_events_status": {
       "name": "enum_events_status",
       "schema": "web",
@@ -11522,6 +13989,26 @@
         "pending",
         "published",
         "archived"
+      ]
+    },
+    "web.enum__events_v_version_review_state": {
+      "name": "enum__events_v_version_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum__events_v_version_review_source": {
+      "name": "enum__events_v_version_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
       ]
     },
     "web.enum__events_v_version_status": {
@@ -11542,6 +14029,26 @@
         "order",
         "reserve",
         "reviews"
+      ]
+    },
+    "web.enum_places_review_state": {
+      "name": "enum_places_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum_places_review_source": {
+      "name": "enum_places_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
       ]
     },
     "web.enum_places_type": {
@@ -11600,6 +14107,26 @@
         "order",
         "reserve",
         "reviews"
+      ]
+    },
+    "web.enum__places_v_version_review_state": {
+      "name": "enum__places_v_version_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum__places_v_version_review_source": {
+      "name": "enum__places_v_version_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
       ]
     },
     "web.enum__places_v_version_type": {
@@ -11709,12 +14236,52 @@
         "rejected"
       ]
     },
+    "web.enum_city_projects_review_state": {
+      "name": "enum_city_projects_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum_city_projects_review_source": {
+      "name": "enum_city_projects_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
+      ]
+    },
     "web.enum_city_projects_status": {
       "name": "enum_city_projects_status",
       "schema": "web",
       "values": [
         "draft",
         "published"
+      ]
+    },
+    "web.enum__city_projects_v_version_review_state": {
+      "name": "enum__city_projects_v_version_review_state",
+      "schema": "web",
+      "values": [
+        "none",
+        "in-review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "web.enum__city_projects_v_version_review_source": {
+      "name": "enum__city_projects_v_version_review_source",
+      "schema": "web",
+      "values": [
+        "editor",
+        "claude",
+        "website-ai",
+        "public"
       ]
     },
     "web.enum__city_projects_v_version_status": {
@@ -11792,6 +14359,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "72620763-adb5-4e5c-8192-6c9b037f3e29",
+  "id": "d858d8a8-bc70-4e5c-b813-ef6740517ace",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

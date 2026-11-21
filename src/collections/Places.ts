@@ -3,7 +3,9 @@ import { slugField, type CollectionConfig } from "payload";
 import { publishedOrStaff, staffOnly } from "../access/roles";
 import { bodyField } from "../fields/richText";
 import { jsonLdField, seoFields, wpIdField } from "../fields/seo";
+import { reviewField } from "../fields/review";
 import { revalidateHooks } from "../hooks/revalidate";
+import { reviewCheck } from "../hooks/review";
 
 /** Restaurants, shops, services and bars (replaces the Themify restaurant + store types). */
 export const Places: CollectionConfig = {
@@ -16,8 +18,9 @@ export const Places: CollectionConfig = {
   },
   access: { read: publishedOrStaff, create: staffOnly, update: staffOnly, delete: staffOnly },
   versions: { drafts: true, maxPerDoc: 10 },
-  hooks: revalidateHooks("places"),
+  hooks: { ...revalidateHooks("places"), beforeChange: [reviewCheck("places")] },
   fields: [
+    reviewField,
     { name: "name", type: "text", required: true, admin: { description: "Short name for cards, e.g. Pho Vinh" } },
     {
       name: "headline",

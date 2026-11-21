@@ -3,7 +3,9 @@ import { slugField, type Access, type CollectionConfig } from "payload";
 import { anyone, isStaffUser, staffOnly } from "../access/roles";
 import { bodyField } from "../fields/richText";
 import { seoFields, wpIdField } from "../fields/seo";
+import { reviewField } from "../fields/review";
 import { revalidateHooks } from "../hooks/revalidate";
+import { reviewCheck } from "../hooks/review";
 
 /**
  * Public visitors see published events; archived (past) events keep their URL.
@@ -25,8 +27,9 @@ export const Events: CollectionConfig = {
   access: { read: eventsRead, create: staffOnly, update: staffOnly, delete: staffOnly },
   versions: { maxPerDoc: 10 },
   defaultSort: "startsAt",
-  hooks: revalidateHooks("events"),
+  hooks: { ...revalidateHooks("events"), beforeChange: [reviewCheck("events")] },
   fields: [
+    reviewField,
     { name: "title", type: "text", required: true },
     slugField(),
     {

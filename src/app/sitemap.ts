@@ -33,7 +33,7 @@ type Doc = { slug?: string | null; updatedAt?: string; seo?: { noindex?: boolean
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayloadClient();
-  const find = async (collection: "posts" | "pages" | "neighborhoods" | "places" | "events" | "categories" | "city-projects", where: object = {}) =>
+  const find = async (collection: "posts" | "pages" | "neighborhoods" | "places" | "events" | "categories" | "city-projects" | "desk-pages", where: object = {}) =>
     (
       await payload.find({
         collection,
@@ -46,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ).docs as unknown as Doc[];
 
   const published = { _status: { equals: "published" } };
-  const [posts, pages, hoods, places, events, categories, projects] = await Promise.all([
+  const [posts, pages, hoods, places, events, categories, projects, deskPages] = await Promise.all([
     find("posts", published),
     find("pages"),
     find("neighborhoods", published),
@@ -54,6 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     find("events", { status: { in: ["published", "archived"] } }),
     find("categories"),
     find("city-projects", published),
+    find("desk-pages", published),
   ]);
   const staticPaths = new Set(STATIC.map((s) => s.path));
   // WordPress child pages: served under /restaurants-and-services/ (listed in STATIC); their bare slug redirects.
@@ -79,6 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...events.filter(keep).map((d) => entry(`/event/${d.slug}/`, d, 0.4)),
     ...categories.filter((d) => d.slug && d.slug !== "uncategorized").map((d) => entry(`/category/${d.slug}/`, d, 0.3)),
     ...projects.filter(keep).map((d) => entry(`/city-projects/${d.slug}/`, d, 0.5)),
+    ...deskPages.filter(keep).map((d) => entry(`/${d.slug}/`, d, 0.6)),
   ];
 }
 

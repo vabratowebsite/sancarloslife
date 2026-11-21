@@ -3,17 +3,39 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
    CREATE SCHEMA IF NOT EXISTS "web";
-   CREATE TYPE "web"."enum_posts_status" AS ENUM('draft', 'published');
+   CREATE TYPE "web"."enum_posts_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum_posts_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
+  CREATE TYPE "web"."enum_posts_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum__posts_v_version_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum__posts_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum__posts_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum_desk_pages_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum_desk_pages_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
+  CREATE TYPE "web"."enum_desk_pages_template" AS ENUM('guide');
+  CREATE TYPE "web"."enum_desk_pages_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum__desk_pages_v_version_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum__desk_pages_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
+  CREATE TYPE "web"."enum__desk_pages_v_version_template" AS ENUM('guide');
+  CREATE TYPE "web"."enum__desk_pages_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum_desk_runs_runner" AS ENUM('claude', 'website-ai', 'editor');
+  CREATE TYPE "web"."enum_desk_runs_status" AS ENUM('ok', 'partial', 'failed');
+  CREATE TYPE "web"."enum_events_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum_events_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum_events_status" AS ENUM('draft', 'pending', 'published', 'archived');
+  CREATE TYPE "web"."enum__events_v_version_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum__events_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum__events_v_version_status" AS ENUM('draft', 'pending', 'published', 'archived');
   CREATE TYPE "web"."enum_places_links_kind" AS ENUM('web', 'order', 'reserve', 'reviews');
+  CREATE TYPE "web"."enum_places_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum_places_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum_places_type" AS ENUM('restaurant', 'shop', 'service', 'bar');
   CREATE TYPE "web"."enum_places_business_status" AS ENUM('open', 'temporarily_closed', 'closed');
   CREATE TYPE "web"."enum_places_street" AS ENUM('laurel', 'san-carlos-ave', 'el-camino', 'industrial', 'other');
   CREATE TYPE "web"."enum_places_price_range" AS ENUM('$', '$$', '$$$', '$$$$');
   CREATE TYPE "web"."enum_places_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum__places_v_version_links_kind" AS ENUM('web', 'order', 'reserve', 'reviews');
+  CREATE TYPE "web"."enum__places_v_version_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum__places_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum__places_v_version_type" AS ENUM('restaurant', 'shop', 'service', 'bar');
   CREATE TYPE "web"."enum__places_v_version_business_status" AS ENUM('open', 'temporarily_closed', 'closed');
   CREATE TYPE "web"."enum__places_v_version_street" AS ENUM('laurel', 'san-carlos-ave', 'el-camino', 'industrial', 'other');
@@ -26,7 +48,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum_neighborhoods_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum__neighborhoods_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum_gallery_photos_status" AS ENUM('pending', 'approved', 'rejected');
+  CREATE TYPE "web"."enum_city_projects_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum_city_projects_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum_city_projects_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum__city_projects_v_version_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
+  CREATE TYPE "web"."enum__city_projects_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum__city_projects_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum_redirects_status_code" AS ENUM('301', '302', '410');
   CREATE TYPE "web"."enum_users_role" AS ENUM('admin', 'editor');
@@ -36,6 +62,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum_settings_social_platform" AS ENUM('facebook', 'instagram', 'youtube', 'linkedin', 'x', 'tiktok', 'nextdoor');
   CREATE TABLE "web"."posts" (
   	"id" serial PRIMARY KEY NOT NULL,
+  	"review_state" "web"."enum_posts_review_state" DEFAULT 'none',
+  	"review_source" "web"."enum_posts_review_source",
+  	"review_note" varchar,
+  	"review_check" jsonb,
+  	"review_submitted_at" timestamp(3) with time zone,
+  	"review_reviewed_at" timestamp(3) with time zone,
+  	"review_reviewed_by_id" integer,
   	"title" varchar,
   	"generate_slug" boolean DEFAULT true,
   	"slug" varchar,
@@ -76,6 +109,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE "web"."_posts_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
+  	"version_review_state" "web"."enum__posts_v_version_review_state" DEFAULT 'none',
+  	"version_review_source" "web"."enum__posts_v_version_review_source",
+  	"version_review_note" varchar,
+  	"version_review_check" jsonb,
+  	"version_review_submitted_at" timestamp(3) with time zone,
+  	"version_review_reviewed_at" timestamp(3) with time zone,
+  	"version_review_reviewed_by_id" integer,
   	"version_title" varchar,
   	"version_generate_slug" boolean DEFAULT true,
   	"version_slug" varchar,
@@ -171,6 +211,142 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  CREATE TABLE "web"."desk_pages_sections" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"heading" varchar,
+  	"body" jsonb
+  );
+  
+  CREATE TABLE "web"."desk_pages_faq" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"question" varchar,
+  	"answer" varchar
+  );
+  
+  CREATE TABLE "web"."desk_pages_sources" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"label" varchar,
+  	"url" varchar
+  );
+  
+  CREATE TABLE "web"."desk_pages" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"review_state" "web"."enum_desk_pages_review_state" DEFAULT 'none',
+  	"review_source" "web"."enum_desk_pages_review_source",
+  	"review_note" varchar,
+  	"review_check" jsonb,
+  	"review_submitted_at" timestamp(3) with time zone,
+  	"review_reviewed_at" timestamp(3) with time zone,
+  	"review_reviewed_by_id" integer,
+  	"title" varchar,
+  	"generate_slug" boolean DEFAULT true,
+  	"slug" varchar,
+  	"template" "web"."enum_desk_pages_template" DEFAULT 'guide',
+  	"eyebrow" varchar,
+  	"summary" varchar,
+  	"hero_id" integer,
+  	"cta_heading" varchar,
+  	"cta_text" varchar,
+  	"cta_button_label" varchar,
+  	"cta_button_href" varchar,
+  	"updated" timestamp(3) with time zone,
+  	"seo_title" varchar,
+  	"seo_description" varchar,
+  	"seo_focus_keyword" varchar,
+  	"seo_image_id" integer,
+  	"seo_canonical" varchar,
+  	"seo_noindex" boolean DEFAULT false,
+  	"json_ld" jsonb,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"_status" "web"."enum_desk_pages_status" DEFAULT 'draft'
+  );
+  
+  CREATE TABLE "web"."_desk_pages_v_version_sections" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"heading" varchar,
+  	"body" jsonb,
+  	"_uuid" varchar
+  );
+  
+  CREATE TABLE "web"."_desk_pages_v_version_faq" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"question" varchar,
+  	"answer" varchar,
+  	"_uuid" varchar
+  );
+  
+  CREATE TABLE "web"."_desk_pages_v_version_sources" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"label" varchar,
+  	"url" varchar,
+  	"_uuid" varchar
+  );
+  
+  CREATE TABLE "web"."_desk_pages_v" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"parent_id" integer,
+  	"version_review_state" "web"."enum__desk_pages_v_version_review_state" DEFAULT 'none',
+  	"version_review_source" "web"."enum__desk_pages_v_version_review_source",
+  	"version_review_note" varchar,
+  	"version_review_check" jsonb,
+  	"version_review_submitted_at" timestamp(3) with time zone,
+  	"version_review_reviewed_at" timestamp(3) with time zone,
+  	"version_review_reviewed_by_id" integer,
+  	"version_title" varchar,
+  	"version_generate_slug" boolean DEFAULT true,
+  	"version_slug" varchar,
+  	"version_template" "web"."enum__desk_pages_v_version_template" DEFAULT 'guide',
+  	"version_eyebrow" varchar,
+  	"version_summary" varchar,
+  	"version_hero_id" integer,
+  	"version_cta_heading" varchar,
+  	"version_cta_text" varchar,
+  	"version_cta_button_label" varchar,
+  	"version_cta_button_href" varchar,
+  	"version_updated" timestamp(3) with time zone,
+  	"version_seo_title" varchar,
+  	"version_seo_description" varchar,
+  	"version_seo_focus_keyword" varchar,
+  	"version_seo_image_id" integer,
+  	"version_seo_canonical" varchar,
+  	"version_seo_noindex" boolean DEFAULT false,
+  	"version_json_ld" jsonb,
+  	"version_updated_at" timestamp(3) with time zone,
+  	"version_created_at" timestamp(3) with time zone,
+  	"version__status" "web"."enum__desk_pages_v_version_status" DEFAULT 'draft',
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"latest" boolean
+  );
+  
+  CREATE TABLE "web"."desk_runs" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"job" varchar NOT NULL,
+  	"runner" "web"."enum_desk_runs_runner" NOT NULL,
+  	"status" "web"."enum_desk_runs_status" DEFAULT 'ok' NOT NULL,
+  	"started_at" timestamp(3) with time zone NOT NULL,
+  	"finished_at" timestamp(3) with time zone,
+  	"summary" varchar,
+  	"checked" numeric,
+  	"drafted" numeric,
+  	"notes" jsonb,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
   CREATE TABLE "web"."events_exdates" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -180,6 +356,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE "web"."events" (
   	"id" serial PRIMARY KEY NOT NULL,
+  	"review_state" "web"."enum_events_review_state" DEFAULT 'none',
+  	"review_source" "web"."enum_events_review_source",
+  	"review_note" varchar,
+  	"review_check" jsonb,
+  	"review_submitted_at" timestamp(3) with time zone,
+  	"review_reviewed_at" timestamp(3) with time zone,
+  	"review_reviewed_by_id" integer,
   	"title" varchar NOT NULL,
   	"generate_slug" boolean DEFAULT true,
   	"slug" varchar NOT NULL,
@@ -230,6 +413,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE "web"."_events_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
+  	"version_review_state" "web"."enum__events_v_version_review_state" DEFAULT 'none',
+  	"version_review_source" "web"."enum__events_v_version_review_source",
+  	"version_review_note" varchar,
+  	"version_review_check" jsonb,
+  	"version_review_submitted_at" timestamp(3) with time zone,
+  	"version_review_reviewed_at" timestamp(3) with time zone,
+  	"version_review_reviewed_by_id" integer,
   	"version_title" varchar NOT NULL,
   	"version_generate_slug" boolean DEFAULT true,
   	"version_slug" varchar NOT NULL,
@@ -324,6 +514,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE "web"."places" (
   	"id" serial PRIMARY KEY NOT NULL,
+  	"review_state" "web"."enum_places_review_state" DEFAULT 'none',
+  	"review_source" "web"."enum_places_review_source",
+  	"review_note" varchar,
+  	"review_check" jsonb,
+  	"review_submitted_at" timestamp(3) with time zone,
+  	"review_reviewed_at" timestamp(3) with time zone,
+  	"review_reviewed_by_id" integer,
   	"name" varchar,
   	"headline" varchar,
   	"generate_slug" boolean DEFAULT true,
@@ -386,6 +583,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE "web"."_places_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
+  	"version_review_state" "web"."enum__places_v_version_review_state" DEFAULT 'none',
+  	"version_review_source" "web"."enum__places_v_version_review_source",
+  	"version_review_note" varchar,
+  	"version_review_check" jsonb,
+  	"version_review_submitted_at" timestamp(3) with time zone,
+  	"version_review_reviewed_at" timestamp(3) with time zone,
+  	"version_review_reviewed_by_id" integer,
   	"version_name" varchar,
   	"version_headline" varchar,
   	"version_generate_slug" boolean DEFAULT true,
@@ -668,6 +872,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE "web"."city_projects" (
   	"id" serial PRIMARY KEY NOT NULL,
+  	"review_state" "web"."enum_city_projects_review_state" DEFAULT 'none',
+  	"review_source" "web"."enum_city_projects_review_source",
+  	"review_note" varchar,
+  	"review_check" jsonb,
+  	"review_submitted_at" timestamp(3) with time zone,
+  	"review_reviewed_at" timestamp(3) with time zone,
+  	"review_reviewed_by_id" integer,
   	"title" varchar,
   	"generate_slug" boolean DEFAULT true,
   	"slug" varchar,
@@ -703,6 +914,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE "web"."_city_projects_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
+  	"version_review_state" "web"."enum__city_projects_v_version_review_state" DEFAULT 'none',
+  	"version_review_source" "web"."enum__city_projects_v_version_review_source",
+  	"version_review_note" varchar,
+  	"version_review_check" jsonb,
+  	"version_review_submitted_at" timestamp(3) with time zone,
+  	"version_review_reviewed_at" timestamp(3) with time zone,
+  	"version_review_reviewed_by_id" integer,
   	"version_title" varchar,
   	"version_generate_slug" boolean DEFAULT true,
   	"version_slug" varchar,
@@ -868,6 +1086,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"categories_id" integer,
   	"pages_id" integer,
   	"page_edits_id" integer,
+  	"desk_pages_id" integer,
+  	"desk_runs_id" integer,
   	"events_id" integer,
   	"venues_id" integer,
   	"organizers_id" integer,
@@ -952,6 +1172,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone
   );
   
+  ALTER TABLE "web"."posts" ADD CONSTRAINT "posts_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."posts" ADD CONSTRAINT "posts_author_id_users_id_fk" FOREIGN KEY ("author_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."posts" ADD CONSTRAINT "posts_cover_id_media_id_fk" FOREIGN KEY ("cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."posts" ADD CONSTRAINT "posts_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
@@ -959,6 +1180,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."posts_rels" ADD CONSTRAINT "posts_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."posts"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."posts_rels" ADD CONSTRAINT "posts_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "web"."categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_posts_v" ADD CONSTRAINT "_posts_v_parent_id_posts_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."posts"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_posts_v" ADD CONSTRAINT "_posts_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_posts_v" ADD CONSTRAINT "_posts_v_version_author_id_users_id_fk" FOREIGN KEY ("version_author_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_posts_v" ADD CONSTRAINT "_posts_v_version_cover_id_media_id_fk" FOREIGN KEY ("version_cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_posts_v" ADD CONSTRAINT "_posts_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
@@ -969,7 +1191,21 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."page_edits" ADD CONSTRAINT "page_edits_updated_by_id_users_id_fk" FOREIGN KEY ("updated_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_page_edits_v" ADD CONSTRAINT "_page_edits_v_parent_id_page_edits_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."page_edits"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_page_edits_v" ADD CONSTRAINT "_page_edits_v_version_updated_by_id_users_id_fk" FOREIGN KEY ("version_updated_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."desk_pages_sections" ADD CONSTRAINT "desk_pages_sections_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."desk_pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."desk_pages_faq" ADD CONSTRAINT "desk_pages_faq_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."desk_pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."desk_pages_sources" ADD CONSTRAINT "desk_pages_sources_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."desk_pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."desk_pages" ADD CONSTRAINT "desk_pages_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."desk_pages" ADD CONSTRAINT "desk_pages_hero_id_media_id_fk" FOREIGN KEY ("hero_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."desk_pages" ADD CONSTRAINT "desk_pages_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v_version_sections" ADD CONSTRAINT "_desk_pages_v_version_sections_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_desk_pages_v"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v_version_faq" ADD CONSTRAINT "_desk_pages_v_version_faq_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_desk_pages_v"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v_version_sources" ADD CONSTRAINT "_desk_pages_v_version_sources_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_desk_pages_v"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_parent_id_desk_pages_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."desk_pages"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_hero_id_media_id_fk" FOREIGN KEY ("version_hero_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events_exdates" ADD CONSTRAINT "events_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."events" ADD CONSTRAINT "events_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_series_id_events_id_fk" FOREIGN KEY ("series_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_venue_id_venues_id_fk" FOREIGN KEY ("venue_id") REFERENCES "web"."venues"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_organizer_id_organizers_id_fk" FOREIGN KEY ("organizer_id") REFERENCES "web"."organizers"("id") ON DELETE set null ON UPDATE no action;
@@ -979,6 +1215,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."events_rels" ADD CONSTRAINT "events_rels_event_categories_fk" FOREIGN KEY ("event_categories_id") REFERENCES "web"."event_categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_events_v_version_exdates" ADD CONSTRAINT "_events_v_version_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_events_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_events_v" ADD CONSTRAINT "_events_v_parent_id_events_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_events_v" ADD CONSTRAINT "_events_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_events_v" ADD CONSTRAINT "_events_v_version_series_id_events_id_fk" FOREIGN KEY ("version_series_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_events_v" ADD CONSTRAINT "_events_v_version_venue_id_venues_id_fk" FOREIGN KEY ("version_venue_id") REFERENCES "web"."venues"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_events_v" ADD CONSTRAINT "_events_v_version_organizer_id_organizers_id_fk" FOREIGN KEY ("version_organizer_id") REFERENCES "web"."organizers"("id") ON DELETE set null ON UPDATE no action;
@@ -987,6 +1224,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."_events_v_rels" ADD CONSTRAINT "_events_v_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_events_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_events_v_rels" ADD CONSTRAINT "_events_v_rels_event_categories_fk" FOREIGN KEY ("event_categories_id") REFERENCES "web"."event_categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."places_links" ADD CONSTRAINT "places_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."places"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."places" ADD CONSTRAINT "places_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."places" ADD CONSTRAINT "places_cover_id_media_id_fk" FOREIGN KEY ("cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."places" ADD CONSTRAINT "places_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."places" ADD CONSTRAINT "places_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
@@ -995,6 +1233,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."places_rels" ADD CONSTRAINT "places_rels_media_fk" FOREIGN KEY ("media_id") REFERENCES "web"."media"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_places_v_version_links" ADD CONSTRAINT "_places_v_version_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_places_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_parent_id_places_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."places"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_cover_id_media_id_fk" FOREIGN KEY ("version_cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_logo_id_media_id_fk" FOREIGN KEY ("version_logo_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
@@ -1022,10 +1261,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."timeline_entries" ADD CONSTRAINT "timeline_entries_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."gallery_photos" ADD CONSTRAINT "gallery_photos_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."city_projects_sources" ADD CONSTRAINT "city_projects_sources_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."city_projects"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."city_projects" ADD CONSTRAINT "city_projects_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."city_projects" ADD CONSTRAINT "city_projects_cover_id_media_id_fk" FOREIGN KEY ("cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."city_projects" ADD CONSTRAINT "city_projects_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_city_projects_v_version_sources" ADD CONSTRAINT "_city_projects_v_version_sources_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_city_projects_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_city_projects_v" ADD CONSTRAINT "_city_projects_v_parent_id_city_projects_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."city_projects"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_city_projects_v" ADD CONSTRAINT "_city_projects_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_city_projects_v" ADD CONSTRAINT "_city_projects_v_version_cover_id_media_id_fk" FOREIGN KEY ("version_cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_city_projects_v" ADD CONSTRAINT "_city_projects_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."form_submissions" ADD CONSTRAINT "form_submissions_handled_by_id_users_id_fk" FOREIGN KEY ("handled_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
@@ -1036,6 +1277,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "web"."categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "web"."pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_page_edits_fk" FOREIGN KEY ("page_edits_id") REFERENCES "web"."page_edits"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_pages_fk" FOREIGN KEY ("desk_pages_id") REFERENCES "web"."desk_pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_runs_fk" FOREIGN KEY ("desk_runs_id") REFERENCES "web"."desk_runs"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_events_fk" FOREIGN KEY ("events_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_venues_fk" FOREIGN KEY ("venues_id") REFERENCES "web"."venues"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_organizers_fk" FOREIGN KEY ("organizers_id") REFERENCES "web"."organizers"("id") ON DELETE cascade ON UPDATE no action;
@@ -1058,6 +1301,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."settings_footer_columns" ADD CONSTRAINT "settings_footer_columns_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."settings"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."settings" ADD CONSTRAINT "settings_default_og_image_id_media_id_fk" FOREIGN KEY ("default_og_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."settings" ADD CONSTRAINT "settings_sidebar_cta_photo_id_media_id_fk" FOREIGN KEY ("sidebar_cta_photo_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  CREATE INDEX "posts_review_review_state_idx" ON "web"."posts" USING btree ("review_state");
+  CREATE INDEX "posts_review_review_reviewed_by_idx" ON "web"."posts" USING btree ("review_reviewed_by_id");
   CREATE UNIQUE INDEX "posts_slug_idx" ON "web"."posts" USING btree ("slug");
   CREATE INDEX "posts_published_at_idx" ON "web"."posts" USING btree ("published_at");
   CREATE INDEX "posts_author_idx" ON "web"."posts" USING btree ("author_id");
@@ -1073,6 +1318,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "posts_rels_path_idx" ON "web"."posts_rels" USING btree ("path");
   CREATE INDEX "posts_rels_categories_id_idx" ON "web"."posts_rels" USING btree ("categories_id");
   CREATE INDEX "_posts_v_parent_idx" ON "web"."_posts_v" USING btree ("parent_id");
+  CREATE INDEX "_posts_v_version_review_version_review_state_idx" ON "web"."_posts_v" USING btree ("version_review_state");
+  CREATE INDEX "_posts_v_version_review_version_review_reviewed_by_idx" ON "web"."_posts_v" USING btree ("version_review_reviewed_by_id");
   CREATE INDEX "_posts_v_version_version_slug_idx" ON "web"."_posts_v" USING btree ("version_slug");
   CREATE INDEX "_posts_v_version_version_published_at_idx" ON "web"."_posts_v" USING btree ("version_published_at");
   CREATE INDEX "_posts_v_version_version_author_idx" ON "web"."_posts_v" USING btree ("version_author_id");
@@ -1110,8 +1357,46 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_page_edits_v_version_version_created_at_idx" ON "web"."_page_edits_v" USING btree ("version_created_at");
   CREATE INDEX "_page_edits_v_created_at_idx" ON "web"."_page_edits_v" USING btree ("created_at");
   CREATE INDEX "_page_edits_v_updated_at_idx" ON "web"."_page_edits_v" USING btree ("updated_at");
+  CREATE INDEX "desk_pages_sections_order_idx" ON "web"."desk_pages_sections" USING btree ("_order");
+  CREATE INDEX "desk_pages_sections_parent_id_idx" ON "web"."desk_pages_sections" USING btree ("_parent_id");
+  CREATE INDEX "desk_pages_faq_order_idx" ON "web"."desk_pages_faq" USING btree ("_order");
+  CREATE INDEX "desk_pages_faq_parent_id_idx" ON "web"."desk_pages_faq" USING btree ("_parent_id");
+  CREATE INDEX "desk_pages_sources_order_idx" ON "web"."desk_pages_sources" USING btree ("_order");
+  CREATE INDEX "desk_pages_sources_parent_id_idx" ON "web"."desk_pages_sources" USING btree ("_parent_id");
+  CREATE INDEX "desk_pages_review_review_state_idx" ON "web"."desk_pages" USING btree ("review_state");
+  CREATE INDEX "desk_pages_review_review_reviewed_by_idx" ON "web"."desk_pages" USING btree ("review_reviewed_by_id");
+  CREATE UNIQUE INDEX "desk_pages_slug_idx" ON "web"."desk_pages" USING btree ("slug");
+  CREATE INDEX "desk_pages_hero_idx" ON "web"."desk_pages" USING btree ("hero_id");
+  CREATE INDEX "desk_pages_seo_seo_image_idx" ON "web"."desk_pages" USING btree ("seo_image_id");
+  CREATE INDEX "desk_pages_updated_at_idx" ON "web"."desk_pages" USING btree ("updated_at");
+  CREATE INDEX "desk_pages_created_at_idx" ON "web"."desk_pages" USING btree ("created_at");
+  CREATE INDEX "desk_pages__status_idx" ON "web"."desk_pages" USING btree ("_status");
+  CREATE INDEX "_desk_pages_v_version_sections_order_idx" ON "web"."_desk_pages_v_version_sections" USING btree ("_order");
+  CREATE INDEX "_desk_pages_v_version_sections_parent_id_idx" ON "web"."_desk_pages_v_version_sections" USING btree ("_parent_id");
+  CREATE INDEX "_desk_pages_v_version_faq_order_idx" ON "web"."_desk_pages_v_version_faq" USING btree ("_order");
+  CREATE INDEX "_desk_pages_v_version_faq_parent_id_idx" ON "web"."_desk_pages_v_version_faq" USING btree ("_parent_id");
+  CREATE INDEX "_desk_pages_v_version_sources_order_idx" ON "web"."_desk_pages_v_version_sources" USING btree ("_order");
+  CREATE INDEX "_desk_pages_v_version_sources_parent_id_idx" ON "web"."_desk_pages_v_version_sources" USING btree ("_parent_id");
+  CREATE INDEX "_desk_pages_v_parent_idx" ON "web"."_desk_pages_v" USING btree ("parent_id");
+  CREATE INDEX "_desk_pages_v_version_review_version_review_state_idx" ON "web"."_desk_pages_v" USING btree ("version_review_state");
+  CREATE INDEX "_desk_pages_v_version_review_version_review_reviewed_by_idx" ON "web"."_desk_pages_v" USING btree ("version_review_reviewed_by_id");
+  CREATE INDEX "_desk_pages_v_version_version_slug_idx" ON "web"."_desk_pages_v" USING btree ("version_slug");
+  CREATE INDEX "_desk_pages_v_version_version_hero_idx" ON "web"."_desk_pages_v" USING btree ("version_hero_id");
+  CREATE INDEX "_desk_pages_v_version_seo_version_seo_image_idx" ON "web"."_desk_pages_v" USING btree ("version_seo_image_id");
+  CREATE INDEX "_desk_pages_v_version_version_updated_at_idx" ON "web"."_desk_pages_v" USING btree ("version_updated_at");
+  CREATE INDEX "_desk_pages_v_version_version_created_at_idx" ON "web"."_desk_pages_v" USING btree ("version_created_at");
+  CREATE INDEX "_desk_pages_v_version_version__status_idx" ON "web"."_desk_pages_v" USING btree ("version__status");
+  CREATE INDEX "_desk_pages_v_created_at_idx" ON "web"."_desk_pages_v" USING btree ("created_at");
+  CREATE INDEX "_desk_pages_v_updated_at_idx" ON "web"."_desk_pages_v" USING btree ("updated_at");
+  CREATE INDEX "_desk_pages_v_latest_idx" ON "web"."_desk_pages_v" USING btree ("latest");
+  CREATE INDEX "desk_runs_job_idx" ON "web"."desk_runs" USING btree ("job");
+  CREATE INDEX "desk_runs_started_at_idx" ON "web"."desk_runs" USING btree ("started_at");
+  CREATE INDEX "desk_runs_updated_at_idx" ON "web"."desk_runs" USING btree ("updated_at");
+  CREATE INDEX "desk_runs_created_at_idx" ON "web"."desk_runs" USING btree ("created_at");
   CREATE INDEX "events_exdates_order_idx" ON "web"."events_exdates" USING btree ("_order");
   CREATE INDEX "events_exdates_parent_id_idx" ON "web"."events_exdates" USING btree ("_parent_id");
+  CREATE INDEX "events_review_review_state_idx" ON "web"."events" USING btree ("review_state");
+  CREATE INDEX "events_review_review_reviewed_by_idx" ON "web"."events" USING btree ("review_reviewed_by_id");
   CREATE UNIQUE INDEX "events_slug_idx" ON "web"."events" USING btree ("slug");
   CREATE INDEX "events_status_idx" ON "web"."events" USING btree ("status");
   CREATE INDEX "events_starts_at_idx" ON "web"."events" USING btree ("starts_at");
@@ -1130,6 +1415,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_events_v_version_exdates_order_idx" ON "web"."_events_v_version_exdates" USING btree ("_order");
   CREATE INDEX "_events_v_version_exdates_parent_id_idx" ON "web"."_events_v_version_exdates" USING btree ("_parent_id");
   CREATE INDEX "_events_v_parent_idx" ON "web"."_events_v" USING btree ("parent_id");
+  CREATE INDEX "_events_v_version_review_version_review_state_idx" ON "web"."_events_v" USING btree ("version_review_state");
+  CREATE INDEX "_events_v_version_review_version_review_reviewed_by_idx" ON "web"."_events_v" USING btree ("version_review_reviewed_by_id");
   CREATE INDEX "_events_v_version_version_slug_idx" ON "web"."_events_v" USING btree ("version_slug");
   CREATE INDEX "_events_v_version_version_status_idx" ON "web"."_events_v" USING btree ("version_status");
   CREATE INDEX "_events_v_version_version_starts_at_idx" ON "web"."_events_v" USING btree ("version_starts_at");
@@ -1161,6 +1448,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "event_categories_created_at_idx" ON "web"."event_categories" USING btree ("created_at");
   CREATE INDEX "places_links_order_idx" ON "web"."places_links" USING btree ("_order");
   CREATE INDEX "places_links_parent_id_idx" ON "web"."places_links" USING btree ("_parent_id");
+  CREATE INDEX "places_review_review_state_idx" ON "web"."places" USING btree ("review_state");
+  CREATE INDEX "places_review_review_reviewed_by_idx" ON "web"."places" USING btree ("review_reviewed_by_id");
   CREATE UNIQUE INDEX "places_slug_idx" ON "web"."places" USING btree ("slug");
   CREATE INDEX "places_type_idx" ON "web"."places" USING btree ("type");
   CREATE INDEX "places_featured_idx" ON "web"."places" USING btree ("featured");
@@ -1179,6 +1468,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_places_v_version_links_order_idx" ON "web"."_places_v_version_links" USING btree ("_order");
   CREATE INDEX "_places_v_version_links_parent_id_idx" ON "web"."_places_v_version_links" USING btree ("_parent_id");
   CREATE INDEX "_places_v_parent_idx" ON "web"."_places_v" USING btree ("parent_id");
+  CREATE INDEX "_places_v_version_review_version_review_state_idx" ON "web"."_places_v" USING btree ("version_review_state");
+  CREATE INDEX "_places_v_version_review_version_review_reviewed_by_idx" ON "web"."_places_v" USING btree ("version_review_reviewed_by_id");
   CREATE INDEX "_places_v_version_version_slug_idx" ON "web"."_places_v" USING btree ("version_slug");
   CREATE INDEX "_places_v_version_version_type_idx" ON "web"."_places_v" USING btree ("version_type");
   CREATE INDEX "_places_v_version_version_featured_idx" ON "web"."_places_v" USING btree ("version_featured");
@@ -1260,6 +1551,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "gallery_photos_created_at_idx" ON "web"."gallery_photos" USING btree ("created_at");
   CREATE INDEX "city_projects_sources_order_idx" ON "web"."city_projects_sources" USING btree ("_order");
   CREATE INDEX "city_projects_sources_parent_id_idx" ON "web"."city_projects_sources" USING btree ("_parent_id");
+  CREATE INDEX "city_projects_review_review_state_idx" ON "web"."city_projects" USING btree ("review_state");
+  CREATE INDEX "city_projects_review_review_reviewed_by_idx" ON "web"."city_projects" USING btree ("review_reviewed_by_id");
   CREATE UNIQUE INDEX "city_projects_slug_idx" ON "web"."city_projects" USING btree ("slug");
   CREATE INDEX "city_projects_latest_update_at_idx" ON "web"."city_projects" USING btree ("latest_update_at");
   CREATE INDEX "city_projects_cover_idx" ON "web"."city_projects" USING btree ("cover_id");
@@ -1272,6 +1565,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_city_projects_v_version_sources_order_idx" ON "web"."_city_projects_v_version_sources" USING btree ("_order");
   CREATE INDEX "_city_projects_v_version_sources_parent_id_idx" ON "web"."_city_projects_v_version_sources" USING btree ("_parent_id");
   CREATE INDEX "_city_projects_v_parent_idx" ON "web"."_city_projects_v" USING btree ("parent_id");
+  CREATE INDEX "_city_projects_v_version_review_version_review_state_idx" ON "web"."_city_projects_v" USING btree ("version_review_state");
+  CREATE INDEX "_city_projects_v_version_review_version_review_reviewed__idx" ON "web"."_city_projects_v" USING btree ("version_review_reviewed_by_id");
   CREATE INDEX "_city_projects_v_version_version_slug_idx" ON "web"."_city_projects_v" USING btree ("version_slug");
   CREATE INDEX "_city_projects_v_version_version_latest_update_at_idx" ON "web"."_city_projects_v" USING btree ("version_latest_update_at");
   CREATE INDEX "_city_projects_v_version_version_cover_idx" ON "web"."_city_projects_v" USING btree ("version_cover_id");
@@ -1326,6 +1621,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_categories_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("categories_id");
   CREATE INDEX "payload_locked_documents_rels_pages_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("pages_id");
   CREATE INDEX "payload_locked_documents_rels_page_edits_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("page_edits_id");
+  CREATE INDEX "payload_locked_documents_rels_desk_pages_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_pages_id");
+  CREATE INDEX "payload_locked_documents_rels_desk_runs_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_runs_id");
   CREATE INDEX "payload_locked_documents_rels_events_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("events_id");
   CREATE INDEX "payload_locked_documents_rels_venues_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("venues_id");
   CREATE INDEX "payload_locked_documents_rels_organizers_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("organizers_id");
@@ -1372,6 +1669,15 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."pages" CASCADE;
   DROP TABLE "web"."page_edits" CASCADE;
   DROP TABLE "web"."_page_edits_v" CASCADE;
+  DROP TABLE "web"."desk_pages_sections" CASCADE;
+  DROP TABLE "web"."desk_pages_faq" CASCADE;
+  DROP TABLE "web"."desk_pages_sources" CASCADE;
+  DROP TABLE "web"."desk_pages" CASCADE;
+  DROP TABLE "web"."_desk_pages_v_version_sections" CASCADE;
+  DROP TABLE "web"."_desk_pages_v_version_faq" CASCADE;
+  DROP TABLE "web"."_desk_pages_v_version_sources" CASCADE;
+  DROP TABLE "web"."_desk_pages_v" CASCADE;
+  DROP TABLE "web"."desk_runs" CASCADE;
   DROP TABLE "web"."events_exdates" CASCADE;
   DROP TABLE "web"."events" CASCADE;
   DROP TABLE "web"."events_rels" CASCADE;
@@ -1425,17 +1731,39 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."settings_footer_columns_links" CASCADE;
   DROP TABLE "web"."settings_footer_columns" CASCADE;
   DROP TABLE "web"."settings" CASCADE;
+  DROP TYPE "web"."enum_posts_review_state";
+  DROP TYPE "web"."enum_posts_review_source";
   DROP TYPE "web"."enum_posts_status";
+  DROP TYPE "web"."enum__posts_v_version_review_state";
+  DROP TYPE "web"."enum__posts_v_version_review_source";
   DROP TYPE "web"."enum__posts_v_version_status";
+  DROP TYPE "web"."enum_desk_pages_review_state";
+  DROP TYPE "web"."enum_desk_pages_review_source";
+  DROP TYPE "web"."enum_desk_pages_template";
+  DROP TYPE "web"."enum_desk_pages_status";
+  DROP TYPE "web"."enum__desk_pages_v_version_review_state";
+  DROP TYPE "web"."enum__desk_pages_v_version_review_source";
+  DROP TYPE "web"."enum__desk_pages_v_version_template";
+  DROP TYPE "web"."enum__desk_pages_v_version_status";
+  DROP TYPE "web"."enum_desk_runs_runner";
+  DROP TYPE "web"."enum_desk_runs_status";
+  DROP TYPE "web"."enum_events_review_state";
+  DROP TYPE "web"."enum_events_review_source";
   DROP TYPE "web"."enum_events_status";
+  DROP TYPE "web"."enum__events_v_version_review_state";
+  DROP TYPE "web"."enum__events_v_version_review_source";
   DROP TYPE "web"."enum__events_v_version_status";
   DROP TYPE "web"."enum_places_links_kind";
+  DROP TYPE "web"."enum_places_review_state";
+  DROP TYPE "web"."enum_places_review_source";
   DROP TYPE "web"."enum_places_type";
   DROP TYPE "web"."enum_places_business_status";
   DROP TYPE "web"."enum_places_street";
   DROP TYPE "web"."enum_places_price_range";
   DROP TYPE "web"."enum_places_status";
   DROP TYPE "web"."enum__places_v_version_links_kind";
+  DROP TYPE "web"."enum__places_v_version_review_state";
+  DROP TYPE "web"."enum__places_v_version_review_source";
   DROP TYPE "web"."enum__places_v_version_type";
   DROP TYPE "web"."enum__places_v_version_business_status";
   DROP TYPE "web"."enum__places_v_version_street";
@@ -1448,7 +1776,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "web"."enum_neighborhoods_status";
   DROP TYPE "web"."enum__neighborhoods_v_version_status";
   DROP TYPE "web"."enum_gallery_photos_status";
+  DROP TYPE "web"."enum_city_projects_review_state";
+  DROP TYPE "web"."enum_city_projects_review_source";
   DROP TYPE "web"."enum_city_projects_status";
+  DROP TYPE "web"."enum__city_projects_v_version_review_state";
+  DROP TYPE "web"."enum__city_projects_v_version_review_source";
   DROP TYPE "web"."enum__city_projects_v_version_status";
   DROP TYPE "web"."enum_redirects_status_code";
   DROP TYPE "web"."enum_users_role";

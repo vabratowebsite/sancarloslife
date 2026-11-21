@@ -30,14 +30,15 @@ test("edit, save, see it public, restore original", async ({ page, browser }) =>
   await expect(bar.getByRole("status")).toContainText("Saved");
 
   const visitor = await browser.newPage();
-  await visitor.goto("/privacy-policy/");
-  await expect(visitor.getByText(marker)).toBeVisible();
+  // Pages are cached; the save refreshes them, which can take a moment under load.
+  await expect
+    .poll(async () => (await visitor.goto("/privacy-policy/"), visitor.getByText(marker).count()), { timeout: 20_000 })
+    .toBe(1);
 
   page.on("dialog", (d) => d.accept());
   await bar.getByRole("button", { name: "Versions" }).click();
   await bar.getByRole("button", { name: "Restore original" }).click();
-  await expect(page.getByText(marker)).toHaveCount(0);
-  await visitor.reload();
-  await expect(visitor.getByText(marker)).toHaveCount(0);
+  await expect(page.getByText(marker)).toHaveCount(0, { timeout: 20_000 });
+  await expect.poll(async () => (await visitor.reload(), visitor.getByText(marker).count()), { timeout: 20_000 }).toBe(0);
   await page.goto("/edit/?exit=1&path=/");
 });

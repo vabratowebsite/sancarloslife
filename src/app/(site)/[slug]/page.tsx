@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { DeskPageView } from "@/components/content/DeskPageView";
 import { PostView } from "@/components/content/PostView";
 import { StaticPageView } from "@/components/content/StaticPageView";
 import { NeighborhoodView } from "@/components/realestate/NeighborhoodView";
@@ -10,14 +11,15 @@ import { SiteMapList } from "@/components/content/SiteMapList";
 import { applyHtmlEdits, editablePage } from "@/lib/pageEdits";
 import { metadataFromPage } from "@/lib/pageMeta";
 import { getNeighborhoodBySlug, getPageSeo } from "@/lib/queries/pages";
+import { getDeskPage } from "@/lib/queries/desk";
 import { getPostBySlug } from "@/lib/queries/posts";
 import { buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * Root-level URLs, exactly as on WordPress: blog posts (/<post-slug>/), code
- * pages (src/content/pages) and the six neighborhood pages share one
- * namespace. Lookup order: post, page, neighborhood.
+ * pages (src/content/pages), desk pages and the six neighborhood pages share
+ * one namespace. Lookup order: post, code page, desk page, neighborhood.
  */
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,6 +28,8 @@ async function resolve(slug: string) {
   if (post) return { kind: "post" as const, post };
   const page = staticPage(slug);
   if (page) return { kind: "page" as const, page };
+  const desk = await getDeskPage(slug);
+  if (desk) return { kind: "desk" as const, desk };
   const hood = await getNeighborhoodBySlug(slug);
   if (hood) return { kind: "neighborhood" as const, hood };
   return null;
@@ -46,6 +50,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: hit.post.publishedAt,
     });
+  if (hit.kind === "desk")
+    return buildMetadata({ path, title: hit.desk.title, description: hit.desk.summary, seo: hit.desk.seo, image: hit.desk.hero, type: "article" });
   if (hit.kind === "page")
     return metadataFromPage(slug, {
       title: hit.page.title,
@@ -66,6 +72,7 @@ export default async function RootSlugPage({ params }: Props) {
   const hit = await resolve(slug);
   if (!hit) notFound();
   if (hit.kind === "post") return <PostView post={hit.post} />;
+  if (hit.kind === "desk") return <DeskPageView page={hit.desk} />;
   if (hit.kind === "page") {
     const s = await editablePage(slug, `/${slug}/`);
     const [raw, seo] = await Promise.all([

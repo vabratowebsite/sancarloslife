@@ -3,7 +3,9 @@ import { slugField, type Access, type CollectionConfig } from "payload";
 import { anyone, isStaffUser, publishedOrStaff, staffOnly } from "../access/roles";
 import { bodyField } from "../fields/richText";
 import { seoFields, wpIdField } from "../fields/seo";
+import { reviewField } from "../fields/review";
 import { revalidateHooks } from "../hooks/revalidate";
+import { reviewCheck } from "../hooks/review";
 
 export const Parks: CollectionConfig = {
   slug: "parks",
@@ -131,8 +133,9 @@ export const CityProjects: CollectionConfig = {
   access: { read: publishedOrStaff, create: staffOnly, update: staffOnly, delete: staffOnly },
   versions: { drafts: true, maxPerDoc: 25 },
   defaultSort: "-latestUpdateAt",
-  hooks: revalidateHooks("city-projects"),
+  hooks: { ...revalidateHooks("city-projects"), beforeChange: [reviewCheck("city-projects")] },
   fields: [
+    reviewField,
     { name: "title", type: "text", required: true },
     slugField(),
     {

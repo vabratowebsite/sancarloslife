@@ -3,7 +3,7 @@ import { unstable_cache } from "next/cache";
 import { getPayloadClient } from "@/lib/payload";
 import { placeIdsByCuisine, placePath } from "@/lib/queries/places";
 import { STATIC_PAGES } from "@/content/pages";
-import type { Event, Neighborhood, Park, Place, Post } from "@/payload-types";
+import type { DeskPage, Event, Neighborhood, Park, Place, Post } from "@/payload-types";
 
 export type SearchHit = { kind: string; title: string; href: string; text?: string | null; date?: string | null };
 export type SearchResults = { q: string; groups: { label: string; hits: SearchHit[] }[]; total: number };
@@ -49,7 +49,7 @@ export const siteSearch = (raw: string) => {
       const published = { _status: { equals: "published" } };
       const now = new Date().toISOString();
       const cuisineIds = await placeIdsByCuisine(q);
-      const [posts, events, places, hoods, parks] = await Promise.all([
+      const [posts, events, places, hoods, parks, deskPages] = await Promise.all([
         payload.find({
           collection: "posts",
           where: { and: [published, { or: [{ title: { like: q } }, { excerpt: { like: q } }] }] },
@@ -100,6 +100,13 @@ export const siteSearch = (raw: string) => {
           depth: 0,
           select: { name: true, slug: true, summary: true },
         }),
+        payload.find({
+          collection: "desk-pages",
+          where: { and: [published, { or: [{ title: { like: q } }, { summary: { like: q } }] }] },
+          limit: PER_GROUP,
+          depth: 0,
+          select: { title: true, slug: true, summary: true },
+        }),
       ]);
       // Pages are code: match every word of the query against their titles.
       const words = q.split(" ");
@@ -126,11 +133,17 @@ export const siteSearch = (raw: string) => {
           label: "Blog posts",
           hits: (posts.docs as Post[]).map((p) => ({ kind: "Post", title: p.title, href: `/${p.slug}/`, text: p.excerpt, date: p.publishedAt })),
         },
-        { label: "Pages", hits: pages.map((p) => ({ kind: "Page", title: p.title, href: p.href })) },
+        {
+          label: "Pages",
+          hits: [
+            ...(deskPages.docs as DeskPage[]).map((p) => ({ kind: "Page", title: p.title, href: `/${p.slug}/`, text: p.summary })),
+            ...pages.map((p) => ({ kind: "Page", title: p.title, href: p.href })),
+          ].slice(0, PER_GROUP),
+        },
       ].filter((g) => g.hits.length);
       return { q, groups, total: groups.reduce((n, g) => n + g.hits.length, 0) };
     },
-    ["search-v3", q],
-    { tags: ["posts", "events", "places", "neighborhoods", "parks"], revalidate: 600 },
+    ["search-v4", q],
+    { tags: ["posts", "events", "places", "neighborhoods", "parks", "desk-pages"], revalidate: 600 },
   )();
 };
