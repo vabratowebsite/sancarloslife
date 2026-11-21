@@ -14,7 +14,7 @@ new project.
 |---|---|---|
 | Website + admin (`/admin`) | Vercel project (new, in team VabratoRealEstate) | Next.js 16, Node 22, pnpm 9 |
 | Database | Supabase project "San Carlos Civic Watch" (ref `nhgpjfekrlxtgjjoglzh`) | Website tables live only in the `web` schema; the ops desk's tables are never touched |
-| Media files | Supabase Storage bucket `media` (S3 API) | Set the `S3_*` variables; without them uploads go to local disk |
+| Media files | Cloudflare R2 bucket `sancarloslife-web` (S3 API) | Set the `S3_*` variables; without them uploads go to local disk. Never use the older `sancarloslife` bucket (the WordPress site's) |
 | Email | Resend | Form notifications and guide emails |
 | Newsletter | MailerLite | Sign-ups only; we don't store addresses |
 | Bot check | Cloudflare Turnstile | Forms refuse submissions in production without the secret key |
@@ -56,7 +56,7 @@ All names are in `.env.example`. Production vs Preview:
 | `NEXT_PUBLIC_SITE_URL` | `https://sancarloslife.com` | The preview URL, or leave the production value |
 | `ALLOW_INDEXING` | `true` **only at cutover** | Never |
 | `PAYLOAD_DB_PUSH` | Never set | Never set |
-| `S3_*` | Bucket `media` | Same bucket |
+| `S3_*` | `S3_BUCKET=sancarloslife-web`, `S3_ENDPOINT=https://<account id>.r2.cloudflarestorage.com`, `S3_REGION=auto`, keys from an R2 API token limited to this bucket (Object Read & Write) | Same bucket |
 | `RESEND_API_KEY`, `FORMS_NOTIFY_TO`, `EMAIL_FROM` | Real values | Same, or leave the key empty so previews only log |
 | `TURNSTILE_SECRET_KEY`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Real keys | Real keys (the widget covers `*.vercel.app`) |
 | `MAILERLITE_*` | Real values | Leave empty |
