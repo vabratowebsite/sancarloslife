@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@buyingbuddy/react':
+        specifier: 0.3.4
+        version: 0.3.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@payloadcms/db-postgres':
         specifier: 3.94.1
         version: 3.94.1(payload@3.94.1(graphql@16.15.0)(typescript@5.9.3))
@@ -280,6 +283,12 @@ packages:
 
   '@borewit/text-codec@0.2.3':
     resolution: {integrity: sha512-49CycTz1aAZmvFcwkeFyhud1HUmRIB5Tabf7ALV+VA4Iu85MTfz2cUwzPagMFAdVBvrWdkCxG67I30tUwwpKsw==}
+
+  '@buyingbuddy/react@0.3.4':
+    resolution: {integrity: sha512-2ESfwrFZgUAPEuZ2drMB+fnhCkmYxck+Kl4CeQFZ0EdcHazmUen4TRqpOpfLIe+ERY+A3gFivQNZxe9RERUg7g==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   '@csstools/color-helpers@5.1.0':
     resolution: {integrity: sha512-S11EXWJyy0Mz5SYvRmY8nJYTFFd1LCNV+7cXyAgQtOOuzb4EsgfqDufL+9esx72/eLhsRdGZwaldu/h+E4t4BA==}
@@ -4903,6 +4912,11 @@ snapshots:
       '@babel/helper-validator-identifier': 7.29.7
 
   '@borewit/text-codec@0.2.3': {}
+
+  '@buyingbuddy/react@0.3.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+    dependencies:
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
 
   '@csstools/color-helpers@5.1.0': {}
 

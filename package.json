@@ -25,6 +25,7 @@
     "migrate:prompts": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/80-ai-prompts.ts"
   },
   "dependencies": {
+    "@buyingbuddy/react": "0.3.4",
     "@payloadcms/db-postgres": "3.94.1",
     "@payloadcms/next": "3.94.1",
     "@payloadcms/richtext-lexical": "3.94.1",

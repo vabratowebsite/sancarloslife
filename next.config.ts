@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { baseHeaders, contentSecurityPolicy } from "./security-headers.mjs";
+import { baseHeaders, contentSecurityPolicy, IDX_PATHS } from "./security-headers.mjs";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
       { source: "/:path*", headers: baseHeaders },
       // The Payload admin manages its own scripts; the CSP covers the public site.
       { source: "/((?!admin|api).*)", headers: [{ key: "Content-Security-Policy", value: contentSecurityPolicy() }] },
+      // Buying Buddy pages: same policy plus 'unsafe-eval' (later rules override earlier ones).
+      ...IDX_PATHS.map((p) => ({
+        source: `${p}{/}?`,
+        headers: [{ key: "Content-Security-Policy", value: contentSecurityPolicy({ idx: true }) }],
+      })),
     ];
   },
   images: {

@@ -48,8 +48,12 @@ export const Neighborhoods: CollectionConfig = {
     {
       name: "bbFilterId",
       type: "text",
-      label: "Buying Buddy hotsheet filter id",
-      admin: { position: "sidebar", description: "Polygon filter created in the Buying Buddy dashboard." },
+      label: "Buying Buddy filter",
+      admin: {
+        position: "sidebar",
+        description:
+          "Filter for this neighborhood's listings, copied from Buying Buddy's Widget Wizard (the data-filter value, e.g. a saved polygon/hotsheet). Empty shows all San Carlos listings.",
+      },
     },
     {
       name: "ihfMarketId",

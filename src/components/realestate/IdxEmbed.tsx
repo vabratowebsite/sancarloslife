@@ -1,19 +1,53 @@
 import Link from "next/link";
 
+import { BbWidget } from "@/components/realestate/BbWidget";
+import { IDX_SLOTS, idxKey, type IdxWidget } from "@/content/idx";
 import { getSettings, telHref } from "@/lib/queries/settings";
 
-export type IdxWidget = "search" | "results" | "details" | "map" | "open-houses" | "market-report" | "communities";
+export type { IdxWidget };
 
 /**
- * Where Buying Buddy's IDX widgets go (milestone 18). The @buyingbuddy/react
- * package isn't installed yet (it needs the owner's go-ahead and the $49/mo
- * Agent plan activation key), so every slot renders the same fallback: a short
- * explanation and two ways to get listings from Viv & Mark. When the package is
- * added, this component is the only place that changes; pages already pass the
- * widget type and the neighborhood's hotsheet filter id.
+ * Every IDX slot on the site. With NEXT_PUBLIC_BUYINGBUDDY_KEY set it renders
+ * the Buying Buddy widget (types and filters in src/content/idx.ts) followed by
+ * the MLS disclaimer; without a key, or if Buying Buddy's script can't load,
+ * it renders the contact fallback below.
+ *
+ * `filterId` is a neighborhood's Buying Buddy filter from the admin; it
+ * replaces the slot's default filter. Pages with two slots pass
+ * `disclaimer={false}` on all but the last so the disclaimer shows once.
  */
-export async function IdxEmbed({ widget, filterId, label }: { widget: IdxWidget; filterId?: string | null; label?: string }) {
+export async function IdxEmbed({
+  widget,
+  filterId,
+  label,
+  disclaimer = true,
+}: {
+  widget: IdxWidget;
+  filterId?: string | null;
+  label?: string;
+  disclaimer?: boolean;
+}) {
   const { phone } = await getSettings();
+  const fallback = <IdxFallback widget={widget} filterId={filterId} label={label} phone={phone} />;
+  const key = idxKey();
+  if (!key) return fallback;
+
+  const slot = IDX_SLOTS[widget];
+  return (
+    <section aria-label={label ?? "MLS listings"} data-idx-widget={widget}>
+      <BbWidget
+        activationKey={key}
+        type={slot.type}
+        filter={filterId?.trim() || slot.filter}
+        height={slot.height}
+        disclaimer={disclaimer}
+        fallback={fallback}
+      />
+    </section>
+  );
+}
+
+function IdxFallback({ widget, filterId, label, phone }: { widget: IdxWidget; filterId?: string | null; label?: string; phone: string }) {
   return (
     <div
       className="rounded-card border-2 border-dashed border-teal-500/50 bg-teal-50 p-6 md:p-8"

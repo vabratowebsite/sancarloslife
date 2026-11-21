@@ -18,7 +18,7 @@ new project.
 | Email | Resend | Form notifications and guide emails |
 | Newsletter | MailerLite | Sign-ups only; we don't store addresses |
 | Bot check | Cloudflare Turnstile | Forms refuse submissions in production without the secret key |
-| Listings | Buying Buddy (not installed yet) | See section 6 |
+| Listings | Buying Buddy (package installed; needs the activation key) | See section 6 |
 
 ## 2. One-time setup
 
@@ -105,13 +105,15 @@ Nothing here costs money until step 1.
 
 1. **(owner)** Sign up for the Buying Buddy Agent plan ($49/mo), file the MLSListings IDX request
    (broker signature from Vabrato), and authorize `sancarloslife.com` and the Vercel preview domain.
-2. **(owner)** Approve adding the `@buyingbuddy/react` package to the project.
-3. Install it and replace the fallback in `src/components/realestate/IdxEmbed.tsx` with the real
-   widget. Every IDX slot already passes its widget type and, on neighborhood pages, the
-   neighborhood's hotsheet filter id (`bbFilterId`, set per neighborhood in the admin).
-4. Add Buying Buddy's script, frame and API hosts to `CSP_SOURCES` in `security-headers.mjs`.
-5. Set `NEXT_PUBLIC_BUYINGBUDDY_KEY` and, once Buying Buddy confirms how outside forms send leads,
-   `BUYINGBUDDY_LEAD_EMAIL`.
+2. ✅ `@buyingbuddy/react` installed; widgets, disclaimer and CSP are wired (2026-11-22).
+3. In Buying Buddy's Widget Wizard, build the San Carlos results, open-house and map widgets and paste
+   each `data-filter` value into `src/content/idx.ts`; paste each neighborhood's filter into
+   Neighborhoods → "Buying Buddy filter" in the admin.
+4. Set `NEXT_PUBLIC_BUYINGBUDDY_KEY` (Widgets → Plugin Installation and Setup) in Vercel and
+   redeploy (it's read at build time). Without it every slot shows the contact fallback.
+   Then open a listings page and check the browser console for "Invalid account" (domain not
+   authorized) or Content Security Policy errors.
+5. Once Buying Buddy confirms how outside forms send leads, set `BUYINGBUDDY_LEAD_EMAIL`.
 6. Import iHomefinder leads into the Buying Buddy CRM; cancel iHomefinder only after cutover.
 
 ## 7. Launch checklist

@@ -35,7 +35,7 @@ export default async function HomesForSalePage() {
         </div>
       </section>
       <div className="container-site grid gap-6 py-10">
-        <IdxEmbed widget="search" label="Search homes for sale" />
+        <IdxEmbed widget="search" label="Search homes for sale" disclaimer={false} />
         <IdxEmbed widget="results" label="Newest listings in San Carlos" />
       </div>
       <section className="bg-sand-100 py-12" aria-labelledby="by-hood">

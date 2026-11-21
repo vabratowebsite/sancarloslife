@@ -1134,7 +1134,7 @@ export interface Neighborhood {
       }[]
     | null;
   /**
-   * Polygon filter created in the Buying Buddy dashboard.
+   * Filter for this neighborhood's listings, copied from Buying Buddy's Widget Wizard (the data-filter value, e.g. a saved polygon/hotsheet). Empty shows all San Carlos listings.
    */
   bbFilterId?: string | null;
   ihfMarketId?: number | null;
