@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
     globalNotFound: true,
   },
   poweredByHeader: false,
+  // Page bodies are read from disk at request time; ship them with the server functions.
+  outputFileTracingIncludes: { "/**": ["./src/content/pages/*.html"] },
   async headers() {
     return [
       { source: "/:path*", headers: baseHeaders },

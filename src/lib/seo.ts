@@ -25,6 +25,8 @@ export function buildMetadata(args: {
   description?: string | null;
   seo?: SeoGroup;
   image?: number | Media | null;
+  /** A plain image path (code pages), used when there's no SEO or document image. */
+  imageSrc?: { src: string; width: number; height: number };
   type?: "website" | "article";
   publishedTime?: string | null;
 }): Metadata {
@@ -34,7 +36,9 @@ export function buildMetadata(args: {
   const img = mediaSrc(seo?.image ?? args.image, "hero");
   const ogImage = img
     ? { url: absolute(img.src), width: img.width, height: img.height, alt: img.alt }
-    : { url: absolute(`/og/?title=${encodeURIComponent(args.title)}`), width: 1200, height: 630 };
+    : args.imageSrc
+      ? { url: absolute(args.imageSrc.src), width: args.imageSrc.width, height: args.imageSrc.height }
+      : { url: absolute(`/og/?title=${encodeURIComponent(args.title)}`), width: 1200, height: 630 };
   return {
     // Migrated titles already carry their own branding; don't add the template suffix twice.
     title: /san carlos life/i.test(title) ? { absolute: title } : title,

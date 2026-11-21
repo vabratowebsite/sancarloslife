@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { STATIC_PAGES } from "@/content/pages";
 import { getPayloadClient } from "@/lib/payload";
 import { placePath } from "@/lib/queries/places";
 import { absolute } from "@/lib/seo";
@@ -18,6 +19,13 @@ const STATIC: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/buyers-and-sellers-guides/", priority: 0.6, changeFrequency: "monthly" },
   { path: "/contact-us/", priority: 0.4, changeFrequency: "yearly" },
   { path: "/subscribe/", priority: 0.5, changeFrequency: "yearly" },
+  { path: "/about-san-carlos/", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/explore-the-city/", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/one-of-the-best-realtor-teams-in-san-carlos-ca/", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/homes-for-sale-in-san-carlos-ca/", priority: 0.8, changeFrequency: "daily" },
+  { path: "/open-houses-in-san-carlos-ca/", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/sell-my-house/", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/how-much-house-can-i-afford-mortgage-calculator/", priority: 0.6, changeFrequency: "yearly" },
   { path: "/events/submit/", priority: 0.4, changeFrequency: "yearly" },
 ];
 
@@ -40,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const published = { _status: { equals: "published" } };
   const [posts, pages, hoods, places, events, categories, projects] = await Promise.all([
     find("posts", published),
-    find("pages", published),
+    find("pages"),
     find("neighborhoods", published),
     find("places", published),
     find("events", { status: { in: ["published", "archived"] } }),
@@ -56,12 +64,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority,
   });
   const keep = (d: Doc) => d.slug && !d.seo?.noindex;
+  const noindex = new Set(pages.filter((d) => d.seo?.noindex).map((d) => d.slug!));
 
   return [
     ...STATIC.map((s) => ({ url: absolute(s.path), changeFrequency: s.changeFrequency, priority: s.priority })),
     ...posts.filter(keep).map((d) => entry(`/${d.slug}/`, d, 0.6)),
     // Pages whose URL is served by a template are listed once, above.
-    ...pages.filter(keep).filter((d) => !staticPaths.has(`/${d.slug}/`)).map((d) => entry(`/${d.slug}/`, d, 0.5)),
+    // Code pages; an admin SEO record can mark one noindex. Thank-you pages are never listed.
+    ...Object.keys(STATIC_PAGES)
+      .filter((slug) => !slug.startsWith("thank-you") && !staticPaths.has(`/${slug}/`) && !noindex.has(slug))
+      .map((slug) => ({ url: absolute(`/${slug}/`), priority: 0.5 })),
     ...hoods.filter(keep).map((d) => entry(`/${d.slug}/`, d, 0.8)),
     ...places.filter(keep).map((d) => entry(placePath({ slug: d.slug!, type: d.type as never }), d, 0.6)),
     ...events.filter(keep).map((d) => entry(`/event/${d.slug}/`, d, 0.4)),

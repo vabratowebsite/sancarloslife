@@ -1,42 +1,34 @@
 import { slugField, type CollectionConfig } from "payload";
 
-import { publishedOrStaff, staffOnly } from "../access/roles";
-import { layoutField } from "../blocks";
-import { bodyField } from "../fields/richText";
+import { adminsOnly, anyone, staffOnly } from "../access/roles";
 import { jsonLdField, seoFields, wpIdField } from "../fields/seo";
 import { revalidateHooks } from "../hooks/revalidate";
 
+/**
+ * Search settings for the site's pages. Page content is code (src/content/pages
+ * and the route folders; owner's decision 2026-11-21), so this collection only
+ * holds what's worth tuning without a deploy: the Google title, description,
+ * share image, canonical URL, noindex and structured data, per page slug.
+ */
 export const Pages: CollectionConfig = {
   slug: "pages",
+  labels: { singular: "Page SEO", plural: "Page SEO" },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "slug", "_status", "updatedAt"],
-    group: "Content",
-    description: "Hub, guide and legal pages: a hero, optional body text, then layout sections.",
+    defaultColumns: ["title", "slug", "updatedAt"],
+    group: "Settings",
+    description: "Google title, description and share image for each page. Page text itself is edited in code.",
   },
   access: {
-    read: publishedOrStaff,
+    read: anyone,
     create: staffOnly,
     update: staffOnly,
-    delete: staffOnly,
+    delete: adminsOnly,
   },
-  versions: { drafts: true, maxPerDoc: 25 },
   hooks: revalidateHooks("pages"),
   fields: [
-    { name: "title", type: "text", required: true },
+    { name: "title", type: "text", required: true, admin: { description: "The page's name, used when no SEO title is set." } },
     slugField(),
-    {
-      name: "hero",
-      type: "group",
-      fields: [
-        { name: "heading", type: "text", admin: { description: "Defaults to the page title." } },
-        { name: "subheading", type: "textarea" },
-        { name: "image", type: "upload", relationTo: "media" },
-        { name: "videoUrl", type: "text", admin: { description: "Optional background video (mp4)." } },
-      ],
-    },
-    bodyField(),
-    layoutField(),
     seoFields,
     jsonLdField,
     wpIdField,

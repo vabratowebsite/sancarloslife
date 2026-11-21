@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { unstable_cache } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,29 +9,33 @@ import { NeighborhoodGrid } from "@/components/realestate/NeighborhoodGrid";
 import { PostCard } from "@/components/content/PostCard";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { fromLA, laParts } from "@/lib/events/recurrence";
-import { mediaSrc } from "@/lib/media";
-import { getPayloadClient } from "@/lib/payload";
 import { listOccurrences } from "@/lib/queries/events";
 import { listNeighborhoods } from "@/lib/queries/pages";
 import { listPosts } from "@/lib/queries/posts";
 import { getSettings, telHref } from "@/lib/queries/settings";
-import { absolute, buildMetadata } from "@/lib/seo";
-import type { HomePage, Post } from "@/payload-types";
+import { metadataFromPage } from "@/lib/pageMeta";
+import { absolute } from "@/lib/seo";
+import { IMAGES } from "@/content/images";
+import type { Post } from "@/payload-types";
 
-const getHome = unstable_cache(
-  async () => (await getPayloadClient()).findGlobal({ slug: "home-page", depth: 1 }) as Promise<HomePage>,
-  ["home-page"],
-  { tags: ["home-page"], revalidate: 3600 },
-);
+/** Home page copy (code; owner's decision 2026-11-21). The hero loop is the live site's Vimeo video. */
+const home = {
+  heroEyebrow: "Your guide to the City of Good Living",
+  heroTitle: "This is San Carlos Life",
+  heroIntro: "Events, restaurants, neighborhoods and homes for sale in San Carlos, California 94070. Don't miss the latest news in town.",
+  heroVimeoId: "882272881",
+  agentHeading: "Thinking of buying or selling a home?",
+  agentText: "Viv and Mark have 30+ years of combined experience and 95% of their clients come from referrals.",
+  subscribeHeading: "Don't miss out",
+  subscribeText: "One email a week with events, new restaurants, and what sold in San Carlos.",
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
+export const generateMetadata = (): Promise<Metadata> =>
+  metadataFromPage("home", {
     title: "Your Guide to San Carlos CA | San Carlos Life",
     description:
       'Live in California\'s "City of Good Living". Find the latest news, best restaurants, things to do, events calendar, real estate in San Carlos CA 94070',
-    path: "/",
   });
-}
 
 /** Today 00:00 to 8 days out, Los Angeles time, rounded so the cache key changes once a day. */
 function thisWeek() {
@@ -46,8 +49,7 @@ const btn = "eyebrow inline-flex items-center rounded-button border-2 px-6 py-3 
 
 export default async function Home() {
   const week = thisWeek();
-  const [home, settings, occ, posts, hoods] = await Promise.all([
-    getHome(),
+  const [settings, occ, posts, hoods] = await Promise.all([
     getSettings(),
     listOccurrences(week),
     listPosts({ page: 1 }),
@@ -58,8 +60,8 @@ export default async function Home() {
     occ.length >= 4
       ? occ.slice(0, 4)
       : (await listOccurrences({ from: week.from, to: new Date(new Date(week.from).getTime() + 60 * 86400000).toISOString() })).slice(0, 4);
-  const poster = mediaSrc(home.heroPoster, "hero");
-  const agent = mediaSrc(home.agentPhoto, "card");
+  const poster = IMAGES.homeHero;
+  const agent = IMAGES.homeAgents;
   const latest = (posts.docs as Post[]).slice(0, 3);
 
   return (

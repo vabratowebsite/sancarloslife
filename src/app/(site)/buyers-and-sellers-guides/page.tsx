@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 import { Breadcrumbs } from "@/components/content/Breadcrumbs";
-import { RichText } from "@/components/content/RichText";
 import { GuideRequestForm } from "@/components/forms/SiteForms";
-import { getPageBySlug } from "@/lib/queries/pages";
+import { loadPageHtml } from "@/content/pages/load";
+import { getPageSeo } from "@/lib/queries/pages";
 import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageBySlug("buyers-and-sellers-guides");
+  const page = await getPageSeo("buyers-and-sellers-guides");
   return buildMetadata({
     path: "/buyers-and-sellers-guides/",
     title: "Free San Carlos Home Buyer's and Seller's Guides",
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function GuidesPage() {
-  const page = await getPageBySlug("buyers-and-sellers-guides");
+  const html = await loadPageHtml("buyers-and-sellers-guides");
   return (
     <div className="container-site py-10">
       <Breadcrumbs items={[{ name: "Buyer and Seller Guides", path: "/buyers-and-sellers-guides/" }]} />
@@ -41,7 +41,7 @@ export default async function GuidesPage() {
           </div>
         </section>
       </div>
-      {page && <RichText data={page.body} className="mt-12" />}
+      {html && <div className="prose mt-12 max-w-3xl" dangerouslySetInnerHTML={{ __html: html }} />}
     </div>
   );
 }

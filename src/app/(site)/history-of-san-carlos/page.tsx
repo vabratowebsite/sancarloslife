@@ -5,11 +5,11 @@ import { Breadcrumbs } from "@/components/content/Breadcrumbs";
 import { RichText } from "@/components/content/RichText";
 import { mediaSrc } from "@/lib/media";
 import { listTimeline } from "@/lib/queries/community";
-import { getPageBySlug } from "@/lib/queries/pages";
+import { getPageSeo } from "@/lib/queries/pages";
 import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageBySlug("history-of-san-carlos");
+  const page = await getPageSeo("history-of-san-carlos");
   return buildMetadata({
     path: "/history-of-san-carlos/",
     title: "History of San Carlos, CA: A Timeline from 1700 to Today",

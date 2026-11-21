@@ -149,10 +149,16 @@
    alone in a list item) get a
    24px-tall box. Links inside running sentences are exempt and stay inline. */
 @layer components {
+  /* Long bare URLs in migrated content wrap instead of widening the page. */
+  .prose a {
+    overflow-wrap: anywhere;
+  }
+
   .prose p:has(> br) > a,
-  .prose div > a,
+  .prose div > a:not(:has(img, div, figure, h2, h3, h4)),
   .prose li > a:only-child {
     display: inline-block;
+    max-width: 100%;
     padding-block: 2px;
   }
 }

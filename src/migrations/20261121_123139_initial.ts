@@ -3,17 +3,17 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
    CREATE SCHEMA IF NOT EXISTS "web";
-  CREATE TYPE "web"."enum_posts_status" AS ENUM('draft', 'published');
+   CREATE TYPE "web"."enum_posts_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum__posts_v_version_status" AS ENUM('draft', 'published');
-  CREATE TYPE "web"."enum_pages_status" AS ENUM('draft', 'published');
-  CREATE TYPE "web"."enum__pages_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum_events_status" AS ENUM('draft', 'pending', 'published', 'archived');
   CREATE TYPE "web"."enum__events_v_version_status" AS ENUM('draft', 'pending', 'published', 'archived');
+  CREATE TYPE "web"."enum_places_links_kind" AS ENUM('web', 'order', 'reserve', 'reviews');
   CREATE TYPE "web"."enum_places_type" AS ENUM('restaurant', 'shop', 'service', 'bar');
   CREATE TYPE "web"."enum_places_business_status" AS ENUM('open', 'temporarily_closed', 'closed');
   CREATE TYPE "web"."enum_places_street" AS ENUM('laurel', 'san-carlos-ave', 'el-camino', 'industrial', 'other');
   CREATE TYPE "web"."enum_places_price_range" AS ENUM('$', '$$', '$$$', '$$$$');
   CREATE TYPE "web"."enum_places_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum__places_v_version_links_kind" AS ENUM('web', 'order', 'reserve', 'reviews');
   CREATE TYPE "web"."enum__places_v_version_type" AS ENUM('restaurant', 'shop', 'service', 'bar');
   CREATE TYPE "web"."enum__places_v_version_business_status" AS ENUM('open', 'temporarily_closed', 'closed');
   CREATE TYPE "web"."enum__places_v_version_street" AS ENUM('laurel', 'san-carlos-ave', 'el-camino', 'industrial', 'other');
@@ -129,14 +129,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE "web"."pages" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"title" varchar,
+  	"title" varchar NOT NULL,
   	"generate_slug" boolean DEFAULT true,
-  	"slug" varchar,
-  	"hero_heading" varchar,
-  	"hero_subheading" varchar,
-  	"hero_image_id" integer,
-  	"hero_video_url" varchar,
-  	"body" jsonb,
+  	"slug" varchar NOT NULL,
   	"seo_title" varchar,
   	"seo_description" varchar,
   	"seo_focus_keyword" varchar,
@@ -146,35 +141,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"json_ld" jsonb,
   	"wp_id" numeric,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"_status" "web"."enum_pages_status" DEFAULT 'draft'
-  );
-  
-  CREATE TABLE "web"."_pages_v" (
-  	"id" serial PRIMARY KEY NOT NULL,
-  	"parent_id" integer,
-  	"version_title" varchar,
-  	"version_generate_slug" boolean DEFAULT true,
-  	"version_slug" varchar,
-  	"version_hero_heading" varchar,
-  	"version_hero_subheading" varchar,
-  	"version_hero_image_id" integer,
-  	"version_hero_video_url" varchar,
-  	"version_body" jsonb,
-  	"version_seo_title" varchar,
-  	"version_seo_description" varchar,
-  	"version_seo_focus_keyword" varchar,
-  	"version_seo_image_id" integer,
-  	"version_seo_canonical" varchar,
-  	"version_seo_noindex" boolean DEFAULT false,
-  	"version_json_ld" jsonb,
-  	"version_wp_id" numeric,
-  	"version_updated_at" timestamp(3) with time zone,
-  	"version_created_at" timestamp(3) with time zone,
-  	"version__status" "web"."enum__pages_v_version_status" DEFAULT 'draft',
-  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"latest" boolean
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
   CREATE TABLE "web"."events_exdates" (
@@ -319,9 +286,19 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  CREATE TABLE "web"."places_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"label" varchar,
+  	"url" varchar,
+  	"kind" "web"."enum_places_links_kind" DEFAULT 'web'
+  );
+  
   CREATE TABLE "web"."places" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"name" varchar,
+  	"headline" varchar,
   	"generate_slug" boolean DEFAULT true,
   	"slug" varchar,
   	"type" "web"."enum_places_type",
@@ -334,8 +311,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"phone" varchar,
   	"website" varchar,
   	"price_range" "web"."enum_places_price_range",
+  	"email" varchar,
+  	"maps_url" varchar,
   	"hours" varchar,
   	"cover_id" integer,
+  	"logo_id" integer,
   	"body" jsonb,
   	"seo_title" varchar,
   	"seo_description" varchar,
@@ -366,10 +346,21 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"media_id" integer
   );
   
+  CREATE TABLE "web"."_places_v_version_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"label" varchar,
+  	"url" varchar,
+  	"kind" "web"."enum__places_v_version_links_kind" DEFAULT 'web',
+  	"_uuid" varchar
+  );
+  
   CREATE TABLE "web"."_places_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
   	"version_name" varchar,
+  	"version_headline" varchar,
   	"version_generate_slug" boolean DEFAULT true,
   	"version_slug" varchar,
   	"version_type" "web"."enum__places_v_version_type",
@@ -382,8 +373,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_phone" varchar,
   	"version_website" varchar,
   	"version_price_range" "web"."enum__places_v_version_price_range",
+  	"version_email" varchar,
+  	"version_maps_url" varchar,
   	"version_hours" varchar,
   	"version_cover_id" integer,
+  	"version_logo_id" integer,
   	"version_body" jsonb,
   	"version_seo_title" varchar,
   	"version_seo_description" varchar,
@@ -424,9 +418,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"slug" varchar,
   	"type" "web"."enum_parks_type" DEFAULT 'park',
   	"address" varchar,
+  	"maps_url" varchar,
   	"lat" numeric,
   	"lng" numeric,
   	"acres" numeric,
+  	"summary" varchar,
   	"cover_id" integer,
   	"body" jsonb,
   	"seo_title" varchar,
@@ -456,9 +452,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_slug" varchar,
   	"version_type" "web"."enum__parks_v_version_type" DEFAULT 'park',
   	"version_address" varchar,
+  	"version_maps_url" varchar,
   	"version_lat" numeric,
   	"version_lng" numeric,
   	"version_acres" numeric,
+  	"version_summary" varchar,
   	"version_cover_id" integer,
   	"version_body" jsonb,
   	"version_seo_title" varchar,
@@ -939,11 +937,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."_posts_v_texts" ADD CONSTRAINT "_posts_v_texts_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_posts_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_posts_v_rels" ADD CONSTRAINT "_posts_v_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_posts_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_posts_v_rels" ADD CONSTRAINT "_posts_v_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "web"."categories"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "web"."pages" ADD CONSTRAINT "pages_hero_image_id_media_id_fk" FOREIGN KEY ("hero_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."pages" ADD CONSTRAINT "pages_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "web"."_pages_v" ADD CONSTRAINT "_pages_v_parent_id_pages_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."pages"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "web"."_pages_v" ADD CONSTRAINT "_pages_v_version_hero_image_id_media_id_fk" FOREIGN KEY ("version_hero_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "web"."_pages_v" ADD CONSTRAINT "_pages_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events_exdates" ADD CONSTRAINT "events_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_series_id_events_id_fk" FOREIGN KEY ("series_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_venue_id_venues_id_fk" FOREIGN KEY ("venue_id") REFERENCES "web"."venues"("id") ON DELETE set null ON UPDATE no action;
@@ -961,13 +955,17 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."_events_v" ADD CONSTRAINT "_events_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_events_v_rels" ADD CONSTRAINT "_events_v_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_events_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_events_v_rels" ADD CONSTRAINT "_events_v_rels_event_categories_fk" FOREIGN KEY ("event_categories_id") REFERENCES "web"."event_categories"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."places_links" ADD CONSTRAINT "places_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."places"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."places" ADD CONSTRAINT "places_cover_id_media_id_fk" FOREIGN KEY ("cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."places" ADD CONSTRAINT "places_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."places" ADD CONSTRAINT "places_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."places_texts" ADD CONSTRAINT "places_texts_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."places"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."places_rels" ADD CONSTRAINT "places_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."places"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."places_rels" ADD CONSTRAINT "places_rels_media_fk" FOREIGN KEY ("media_id") REFERENCES "web"."media"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."_places_v_version_links" ADD CONSTRAINT "_places_v_version_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."_places_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_parent_id_places_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."places"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_cover_id_media_id_fk" FOREIGN KEY ("version_cover_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_logo_id_media_id_fk" FOREIGN KEY ("version_logo_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_places_v" ADD CONSTRAINT "_places_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_places_v_texts" ADD CONSTRAINT "_places_v_texts_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_places_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_places_v_rels" ADD CONSTRAINT "_places_v_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_places_v"("id") ON DELETE cascade ON UPDATE no action;
@@ -1065,23 +1063,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "categories_updated_at_idx" ON "web"."categories" USING btree ("updated_at");
   CREATE INDEX "categories_created_at_idx" ON "web"."categories" USING btree ("created_at");
   CREATE UNIQUE INDEX "pages_slug_idx" ON "web"."pages" USING btree ("slug");
-  CREATE INDEX "pages_hero_hero_image_idx" ON "web"."pages" USING btree ("hero_image_id");
   CREATE INDEX "pages_seo_seo_image_idx" ON "web"."pages" USING btree ("seo_image_id");
   CREATE INDEX "pages_wp_id_idx" ON "web"."pages" USING btree ("wp_id");
   CREATE INDEX "pages_updated_at_idx" ON "web"."pages" USING btree ("updated_at");
   CREATE INDEX "pages_created_at_idx" ON "web"."pages" USING btree ("created_at");
-  CREATE INDEX "pages__status_idx" ON "web"."pages" USING btree ("_status");
-  CREATE INDEX "_pages_v_parent_idx" ON "web"."_pages_v" USING btree ("parent_id");
-  CREATE INDEX "_pages_v_version_version_slug_idx" ON "web"."_pages_v" USING btree ("version_slug");
-  CREATE INDEX "_pages_v_version_hero_version_hero_image_idx" ON "web"."_pages_v" USING btree ("version_hero_image_id");
-  CREATE INDEX "_pages_v_version_seo_version_seo_image_idx" ON "web"."_pages_v" USING btree ("version_seo_image_id");
-  CREATE INDEX "_pages_v_version_version_wp_id_idx" ON "web"."_pages_v" USING btree ("version_wp_id");
-  CREATE INDEX "_pages_v_version_version_updated_at_idx" ON "web"."_pages_v" USING btree ("version_updated_at");
-  CREATE INDEX "_pages_v_version_version_created_at_idx" ON "web"."_pages_v" USING btree ("version_created_at");
-  CREATE INDEX "_pages_v_version_version__status_idx" ON "web"."_pages_v" USING btree ("version__status");
-  CREATE INDEX "_pages_v_created_at_idx" ON "web"."_pages_v" USING btree ("created_at");
-  CREATE INDEX "_pages_v_updated_at_idx" ON "web"."_pages_v" USING btree ("updated_at");
-  CREATE INDEX "_pages_v_latest_idx" ON "web"."_pages_v" USING btree ("latest");
   CREATE INDEX "events_exdates_order_idx" ON "web"."events_exdates" USING btree ("_order");
   CREATE INDEX "events_exdates_parent_id_idx" ON "web"."events_exdates" USING btree ("_parent_id");
   CREATE UNIQUE INDEX "events_slug_idx" ON "web"."events" USING btree ("slug");
@@ -1131,10 +1116,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "event_categories_wp_id_idx" ON "web"."event_categories" USING btree ("wp_id");
   CREATE INDEX "event_categories_updated_at_idx" ON "web"."event_categories" USING btree ("updated_at");
   CREATE INDEX "event_categories_created_at_idx" ON "web"."event_categories" USING btree ("created_at");
+  CREATE INDEX "places_links_order_idx" ON "web"."places_links" USING btree ("_order");
+  CREATE INDEX "places_links_parent_id_idx" ON "web"."places_links" USING btree ("_parent_id");
   CREATE UNIQUE INDEX "places_slug_idx" ON "web"."places" USING btree ("slug");
   CREATE INDEX "places_type_idx" ON "web"."places" USING btree ("type");
   CREATE INDEX "places_featured_idx" ON "web"."places" USING btree ("featured");
   CREATE INDEX "places_cover_idx" ON "web"."places" USING btree ("cover_id");
+  CREATE INDEX "places_logo_idx" ON "web"."places" USING btree ("logo_id");
   CREATE INDEX "places_seo_seo_image_idx" ON "web"."places" USING btree ("seo_image_id");
   CREATE INDEX "places_wp_id_idx" ON "web"."places" USING btree ("wp_id");
   CREATE INDEX "places_updated_at_idx" ON "web"."places" USING btree ("updated_at");
@@ -1145,11 +1133,14 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "places_rels_parent_idx" ON "web"."places_rels" USING btree ("parent_id");
   CREATE INDEX "places_rels_path_idx" ON "web"."places_rels" USING btree ("path");
   CREATE INDEX "places_rels_media_id_idx" ON "web"."places_rels" USING btree ("media_id");
+  CREATE INDEX "_places_v_version_links_order_idx" ON "web"."_places_v_version_links" USING btree ("_order");
+  CREATE INDEX "_places_v_version_links_parent_id_idx" ON "web"."_places_v_version_links" USING btree ("_parent_id");
   CREATE INDEX "_places_v_parent_idx" ON "web"."_places_v" USING btree ("parent_id");
   CREATE INDEX "_places_v_version_version_slug_idx" ON "web"."_places_v" USING btree ("version_slug");
   CREATE INDEX "_places_v_version_version_type_idx" ON "web"."_places_v" USING btree ("version_type");
   CREATE INDEX "_places_v_version_version_featured_idx" ON "web"."_places_v" USING btree ("version_featured");
   CREATE INDEX "_places_v_version_version_cover_idx" ON "web"."_places_v" USING btree ("version_cover_id");
+  CREATE INDEX "_places_v_version_version_logo_idx" ON "web"."_places_v" USING btree ("version_logo_id");
   CREATE INDEX "_places_v_version_seo_version_seo_image_idx" ON "web"."_places_v" USING btree ("version_seo_image_id");
   CREATE INDEX "_places_v_version_version_wp_id_idx" ON "web"."_places_v" USING btree ("version_wp_id");
   CREATE INDEX "_places_v_version_version_updated_at_idx" ON "web"."_places_v" USING btree ("version_updated_at");
@@ -1335,7 +1326,6 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."_posts_v_rels" CASCADE;
   DROP TABLE "web"."categories" CASCADE;
   DROP TABLE "web"."pages" CASCADE;
-  DROP TABLE "web"."_pages_v" CASCADE;
   DROP TABLE "web"."events_exdates" CASCADE;
   DROP TABLE "web"."events" CASCADE;
   DROP TABLE "web"."events_rels" CASCADE;
@@ -1345,9 +1335,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."venues" CASCADE;
   DROP TABLE "web"."organizers" CASCADE;
   DROP TABLE "web"."event_categories" CASCADE;
+  DROP TABLE "web"."places_links" CASCADE;
   DROP TABLE "web"."places" CASCADE;
   DROP TABLE "web"."places_texts" CASCADE;
   DROP TABLE "web"."places_rels" CASCADE;
+  DROP TABLE "web"."_places_v_version_links" CASCADE;
   DROP TABLE "web"."_places_v" CASCADE;
   DROP TABLE "web"."_places_v_texts" CASCADE;
   DROP TABLE "web"."_places_v_rels" CASCADE;
@@ -1389,15 +1381,15 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."settings" CASCADE;
   DROP TYPE "web"."enum_posts_status";
   DROP TYPE "web"."enum__posts_v_version_status";
-  DROP TYPE "web"."enum_pages_status";
-  DROP TYPE "web"."enum__pages_v_version_status";
   DROP TYPE "web"."enum_events_status";
   DROP TYPE "web"."enum__events_v_version_status";
+  DROP TYPE "web"."enum_places_links_kind";
   DROP TYPE "web"."enum_places_type";
   DROP TYPE "web"."enum_places_business_status";
   DROP TYPE "web"."enum_places_street";
   DROP TYPE "web"."enum_places_price_range";
   DROP TYPE "web"."enum_places_status";
+  DROP TYPE "web"."enum__places_v_version_links_kind";
   DROP TYPE "web"."enum__places_v_version_type";
   DROP TYPE "web"."enum__places_v_version_business_status";
   DROP TYPE "web"."enum__places_v_version_street";

@@ -1,23 +1,29 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { PageView } from "@/components/content/PageView";
 import { PostView } from "@/components/content/PostView";
+import { StaticPageView } from "@/components/content/StaticPageView";
 import { NeighborhoodView } from "@/components/realestate/NeighborhoodView";
-import { getNeighborhoodBySlug, getPageBySlug } from "@/lib/queries/pages";
+import { staticPage } from "@/content/pages";
+import { loadPageHtml } from "@/content/pages/load";
+import { SiteMapList } from "@/components/content/SiteMapList";
+import { metadataFromPage } from "@/lib/pageMeta";
+import { getNeighborhoodBySlug, getPageSeo } from "@/lib/queries/pages";
 import { getPostBySlug } from "@/lib/queries/posts";
 import { buildMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
- * Root-level URLs, exactly as on WordPress: blog posts (/<post-slug>/), pages and
- * the six neighborhood pages share one namespace. Lookup order: post, page, neighborhood.
+ * Root-level URLs, exactly as on WordPress: blog posts (/<post-slug>/), code
+ * pages (src/content/pages) and the six neighborhood pages share one
+ * namespace. Lookup order: post, page, neighborhood.
  */
 type Props = { params: Promise<{ slug: string }> };
 
 async function resolve(slug: string) {
   const post = await getPostBySlug(slug);
   if (post) return { kind: "post" as const, post };
-  const page = await getPageBySlug(slug);
+  const page = staticPage(slug);
   if (page) return { kind: "page" as const, page };
   const hood = await getNeighborhoodBySlug(slug);
   if (hood) return { kind: "neighborhood" as const, hood };
@@ -39,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: hit.post.publishedAt,
     });
-  if (hit.kind === "page") return buildMetadata({ path, title: hit.page.title, seo: hit.page.seo, image: hit.page.hero?.image });
+  if (hit.kind === "page") return metadataFromPage(slug, { title: hit.page.title, description: hit.page.subheading, image: hit.page.image });
   return buildMetadata({ path, title: hit.hood.name, description: hit.hood.tagline, seo: hit.hood.seo, image: hit.hood.hero });
 }
 
@@ -48,9 +54,19 @@ export default async function RootSlugPage({ params }: Props) {
   const hit = await resolve(slug);
   if (!hit) notFound();
   if (hit.kind === "post") return <PostView post={hit.post} />;
-  if (hit.kind === "page") return <PageView page={hit.page} />;
+  if (hit.kind === "page") {
+    const [html, seo] = await Promise.all([hit.page.body === false ? null : loadPageHtml(slug), getPageSeo(slug)]);
+    return (
+      <>
+        <StaticPageView slug={slug} page={hit.page} html={html}>
+          {slug === "site-map" && <SiteMapList />}
+        </StaticPageView>
+        {seo?.jsonLd ? <JsonLd data={seo.jsonLd} /> : null}
+      </>
+    );
+  }
   return <NeighborhoodView hood={hit.hood} />;
 }
 
-// Pages render on first request and are then cached; publishing revalidates them.
+// Rendered on first request and cached; publishing revalidates posts and neighborhoods.
 export const revalidate = 3600;

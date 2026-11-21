@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
-import { unstable_cache } from "next/cache";
 
 import { Breadcrumbs } from "@/components/content/Breadcrumbs";
 import { YouTubeGrid } from "@/components/media/YouTubeGrid";
-import { getPayloadClient } from "@/lib/payload";
-import { getPageBySlug } from "@/lib/queries/pages";
+import { VIDEO_SECTIONS, VIDEOS_INTRO } from "@/content/videos";
+import { getPageSeo } from "@/lib/queries/pages";
 import { getSettings } from "@/lib/queries/settings";
 import { buildMetadata } from "@/lib/seo";
 
-const getVideosPage = unstable_cache(
-  async () => (await getPayloadClient()).findGlobal({ slug: "videos-page" }),
-  ["videos-page"],
-  { tags: ["videos-page"], revalidate: 3600 },
-);
-
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageBySlug("videos-of-san-carlos-ca");
+  const page = await getPageSeo("videos-of-san-carlos-ca");
   return buildMetadata({
     path: "/videos-of-san-carlos-ca/",
     title: "Videos of San Carlos, CA: Restaurants, Events and Neighborhoods",
@@ -25,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function VideosPage() {
-  const [data, settings] = await Promise.all([getVideosPage(), getSettings()]);
+  const settings = await getSettings();
   const youtube = settings.social.find((s) => s.platform === "youtube")?.url;
   return (
     <>
@@ -33,11 +26,11 @@ export default async function VideosPage() {
         <div className="container-site py-12">
           <Breadcrumbs items={[{ name: "Videos", path: "/videos-of-san-carlos-ca/" }]} />
           <h1 className="mt-3 text-h2 md:text-h1">Videos of San Carlos</h1>
-          {data.intro && <p className="mt-3 max-w-2xl text-ink-500">{data.intro}</p>}
+          <p className="mt-3 max-w-2xl text-ink-500">{VIDEOS_INTRO}</p>
         </div>
       </section>
       <div className="container-site py-10">
-        {(data.sections ?? []).map((s) => (
+        {VIDEO_SECTIONS.map((s) => (
           <section key={s.id} aria-labelledby={`v-${s.id}`} className="mb-14">
             <h2 id={`v-${s.id}`} className="text-h3">
               {s.title}
@@ -54,9 +47,9 @@ export default async function VideosPage() {
                 />
               </div>
             )}
-            {(s.videos ?? []).length > 0 && (
+            {s.videos.length > 0 && (
               <div className="mt-6">
-                <YouTubeGrid videos={(s.videos ?? []).map((v) => ({ youtubeId: v.youtubeId, title: v.title }))} />
+                <YouTubeGrid videos={s.videos} />
               </div>
             )}
           </section>

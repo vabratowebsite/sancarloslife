@@ -9,6 +9,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { STATIC_PAGES } from "../../src/content/pages";
 import { isGone } from "./gone";
 import { loadJson, payload, run, saveJson, SITE } from "./lib";
 
@@ -34,6 +35,7 @@ const STATIC_ROUTES = [
   "/san-carlos-ca-real-estate-market-trends/", "/how-much-house-can-i-afford-mortgage-calculator/",
   "/sell-my-house/", "/one-of-the-best-realtor-teams-in-san-carlos-ca/", "/buyers-and-sellers-guides/",
   "/listing-results/", "/listing-details/", "/market-area-report/", "/featured-communities/",
+  "/about-san-carlos/", "/explore-the-city/",
 ];
 
 /** Content that moved or was dropped in the rebuild. */
@@ -78,7 +80,8 @@ await run("redirects", async () => {
   const all = async (collection: "posts" | "pages" | "neighborhoods" | "places" | "events" | "city-projects", extra = {}) =>
     (await p.find({ collection, limit: 5000, depth: 0, draft: false, pagination: false, ...extra })).docs as unknown as { slug: string; type?: string }[];
   add("/", await all("posts"));
-  add("/", await all("pages"));
+  add("/", await all("pages")); // Page SEO records
+  for (const slug of Object.keys(STATIC_PAGES)) live.add(`/${slug}/`); // code pages
   // WordPress child pages lived under their parent's path; their bare /<slug>/ never existed.
   for (const child of ["all-restaurants", "all-shops-services"]) live.delete(`/${child}/`);
   add("/", await all("neighborhoods"));

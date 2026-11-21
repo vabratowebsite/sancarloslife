@@ -17,8 +17,6 @@ import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
 import { richTextEditor } from "./fields/richText";
 import { Settings } from "./globals/Settings";
-import { HomePage } from "./globals/HomePage";
-import { VideosPage } from "./globals/VideosPage";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -71,7 +69,7 @@ export default buildConfig({
     Redirects,
     Users,
   ],
-  globals: [Settings, HomePage, VideosPage],
+  globals: [Settings],
   editor: richTextEditor,
   secret: process.env.PAYLOAD_SECRET || "",
   // Cookie-authenticated requests to the admin API are only accepted from our own origin.

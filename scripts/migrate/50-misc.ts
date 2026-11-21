@@ -1,5 +1,5 @@
 /**
- * Milestone 9b: history timeline, testimonials, neighborhoods and pages.
+ * Milestone 9b: history timeline, testimonials, neighborhoods and page SEO records.
  * Timeline stories and testimonials are only public on rendered pages (their own
  * URLs redirect to the home page), so they are read from those pages.
  *   pnpm payload run scripts/migrate/50-misc.ts
@@ -164,40 +164,16 @@ await run("misc", async () => {
       else await p.create({ collection: "neighborhoods", data });
       continue;
     }
-    const data = {
-      title,
-      slug: wp.slug,
-      generateSlug: false,
-      hero: { image: await media.ensure(wp.featured_media) },
-      body: htmlToLexical(body),
-      seo: seoGroup,
-      jsonLd,
-      wpId: wp.id,
-      _status: (wp.status === "publish" ? "published" : "draft") as "published" | "draft",
-    };
-    const found = await p.find({ collection: "pages", where: { slug: { equals: wp.slug } }, limit: 1, draft: true });
+    // Page content is code (src/content/pages); only the SEO record is imported.
+    if (wp.status !== "publish") continue;
+    const data = { title, slug: wp.slug, generateSlug: false, seo: seoGroup, jsonLd, wpId: wp.id };
+    const found = await p.find({ collection: "pages", where: { slug: { equals: wp.slug } }, limit: 1 });
     if (found.docs[0]) await p.update({ collection: "pages", id: found.docs[0].id, data });
     else await p.create({ collection: "pages", data });
     pCount++;
   }
-  // ---- Videos page: the YouTube gallery plugin's first page of each gallery
-  const videosHtml = pages.find((x) => x.slug === "videos-of-san-carlos-ca")?.content.rendered ?? "";
-  const sections: { title: string; playlistId?: string; videos: { youtubeId: string; title: string }[] }[] = [];
-  for (const part of videosHtml.split(/<h[23][^>]*>/).slice(1)) {
-    const title = text(part.split(/<\/h[23]>/)[0]);
-    if (!/videos/i.test(title) || /of\s+san carlos/i.test(title)) continue;
-    const videos = [...part.matchAll(/data-videoid="([\w-]{11})"[\s\S]*?epyt-gallery-title">([\s\S]*?)<\/div>/g)].map((m) => ({ youtubeId: m[1], title: text(m[2]) }));
-    const playlistId = part.match(/data-playlist[^=]*="([^"]+)"/)?.[1];
-    sections.push({ title, playlistId, videos });
-  }
-  await p.updateGlobal({
-    slug: "videos-page",
-    data: {
-      intro: "Video shorts from San Carlos restaurants and shops, highlights from Hometown Days and the Art and Wine Faire, and a guide to each of the six neighborhoods.",
-      sections: sections.filter((s) => s.videos.length || s.playlistId),
-    },
-  });
-  console.log(`videos page: ${sections.map((s) => `${s.title} (${s.videos.length})`).join(", ")}`);
+  // The videos page is code too (src/content/videos.ts).
+
 
   await media.save();
   console.log(`pages: ${pCount}, neighborhoods: ${Object.keys(NEIGHBORHOODS).length}`);

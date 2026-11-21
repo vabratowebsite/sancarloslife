@@ -2,7 +2,8 @@ import { unstable_cache } from "next/cache";
 
 import { getPayloadClient } from "@/lib/payload";
 import { placeIdsByCuisine, placePath } from "@/lib/queries/places";
-import type { Event, Neighborhood, Page, Park, Place, Post } from "@/payload-types";
+import { STATIC_PAGES } from "@/content/pages";
+import type { Event, Neighborhood, Park, Place, Post } from "@/payload-types";
 
 export type SearchHit = { kind: string; title: string; href: string; text?: string | null; date?: string | null };
 export type SearchResults = { q: string; groups: { label: string; hits: SearchHit[] }[]; total: number };
@@ -12,6 +13,27 @@ export const normalizeQuery = (q: string | string[] | undefined) =>
   (Array.isArray(q) ? q[0] : q ?? "").replace(/\s+/g, " ").trim().toLowerCase().slice(0, 80);
 
 const PER_GROUP = 8;
+
+/** Searchable pages: the content registry plus pages that have their own route folder. */
+const CODE_PAGES: { title: string; href: string }[] = [
+  ...Object.entries(STATIC_PAGES)
+    .filter(([slug]) => !slug.startsWith("thank-you"))
+    .map(([slug, p]) => ({ title: p.title, href: `/${slug}/` })),
+  { title: "About San Carlos", href: "/about-san-carlos/" },
+  { title: "Explore the City", href: "/explore-the-city/" },
+  { title: "Viv and Mark, Realtors in San Carlos", href: "/one-of-the-best-realtor-teams-in-san-carlos-ca/" },
+  { title: "Parks of San Carlos", href: "/parks-of-san-carlos/" },
+  { title: "History of San Carlos", href: "/history-of-san-carlos/" },
+  { title: "Videos of San Carlos", href: "/videos-of-san-carlos-ca/" },
+  { title: "Restaurants and Services", href: "/restaurants-and-services/" },
+  { title: "Homes for Sale in San Carlos", href: "/homes-for-sale-in-san-carlos-ca/" },
+  { title: "Open Houses in San Carlos", href: "/open-houses-in-san-carlos-ca/" },
+  { title: "Sell My House: home valuation", href: "/sell-my-house/" },
+  { title: "Mortgage Calculator", href: "/how-much-house-can-i-afford-mortgage-calculator/" },
+  { title: "Buyers and Sellers Guides", href: "/buyers-and-sellers-guides/" },
+  { title: "Contact Us", href: "/contact-us/" },
+  { title: "Subscribe to the newsletter", href: "/subscribe/" },
+];
 
 /**
  * Site search across posts, upcoming events, places, neighborhoods, parks and
@@ -27,7 +49,7 @@ export const siteSearch = (raw: string) => {
       const published = { _status: { equals: "published" } };
       const now = new Date().toISOString();
       const cuisineIds = await placeIdsByCuisine(q);
-      const [posts, events, places, hoods, parks, pages] = await Promise.all([
+      const [posts, events, places, hoods, parks] = await Promise.all([
         payload.find({
           collection: "posts",
           where: { and: [published, { or: [{ title: { like: q } }, { excerpt: { like: q } }] }] },
@@ -78,14 +100,10 @@ export const siteSearch = (raw: string) => {
           depth: 0,
           select: { name: true, slug: true, summary: true },
         }),
-        payload.find({
-          collection: "pages",
-          where: { and: [published, { title: { like: q } }] },
-          limit: PER_GROUP,
-          depth: 0,
-          select: { title: true, slug: true },
-        }),
       ]);
+      // Pages are code: match every word of the query against their titles.
+      const words = q.split(" ");
+      const pages = CODE_PAGES.filter((pg) => words.every((w) => pg.title.toLowerCase().includes(w))).slice(0, PER_GROUP);
       const groups = [
         {
           label: "Events",
@@ -108,11 +126,11 @@ export const siteSearch = (raw: string) => {
           label: "Blog posts",
           hits: (posts.docs as Post[]).map((p) => ({ kind: "Post", title: p.title, href: `/${p.slug}/`, text: p.excerpt, date: p.publishedAt })),
         },
-        { label: "Pages", hits: (pages.docs as Page[]).map((p) => ({ kind: "Page", title: p.title, href: `/${p.slug}/` })) },
+        { label: "Pages", hits: pages.map((p) => ({ kind: "Page", title: p.title, href: p.href })) },
       ].filter((g) => g.hits.length);
       return { q, groups, total: groups.reduce((n, g) => n + g.hits.length, 0) };
     },
-    ["search-v2", q],
-    { tags: ["posts", "events", "places", "neighborhoods", "parks", "pages"], revalidate: 600 },
+    ["search-v3", q],
+    { tags: ["posts", "events", "places", "neighborhoods", "parks"], revalidate: 600 },
   )();
 };

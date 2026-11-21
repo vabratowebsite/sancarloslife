@@ -3,19 +3,15 @@ import { unstable_cache } from "next/cache";
 import { getPayloadClient } from "@/lib/payload";
 import type { Neighborhood, Page } from "@/payload-types";
 
-export const getPageBySlug = (slug: string) =>
+/** The admin's SEO record for a page slug (title, description, share image…), if any. */
+export const getPageSeo = (slug: string) =>
   unstable_cache(
     async (): Promise<Page | null> => {
       const payload = await getPayloadClient();
-      const res = await payload.find({
-        collection: "pages",
-        where: { slug: { equals: slug }, _status: { equals: "published" } },
-        limit: 1,
-        depth: 1,
-      });
+      const res = await payload.find({ collection: "pages", where: { slug: { equals: slug } }, limit: 1, depth: 1 });
       return res.docs[0] ?? null;
     },
-    ["page", slug],
+    ["page-seo", slug],
     { tags: ["pages", `pages:${slug}`], revalidate: 3600 },
   )();
 

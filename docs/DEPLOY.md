@@ -71,12 +71,13 @@ From a laptop with the production `DATABASE_URL` in `.env.local` (never commit i
 ```bash
 pnpm install
 pnpm payload migrate            # creates the web schema and tables; asks nothing, changes only "web"
-pnpm migrate:all                # imports posts, events, places, pages, media, redirects from WordPress
-pnpm migrate:home && pnpm migrate:hubs
+pnpm migrate:all                # imports posts, events, places, page SEO records, media, redirects from WordPress
 ```
 
 Schema changes against the production database are asked about first (AGENTS.md rule), so
-migrations are run by hand like this, not in the Vercel build. `migrate:all` reads from the live
+migrations are run by hand like this, not in the Vercel build. There is one migration,
+`src/migrations/*_initial.ts` (the earlier ones were squashed before anything was deployed).
+`migrate:all` reads from the live
 WordPress site and the WP REST API (set `WP_APP_USER` and `WP_APP_PASSWORD`); with the `S3_*`
 variables set, media is uploaded to the Supabase bucket as it imports.
 
@@ -84,7 +85,8 @@ Then:
 
 1. Open `https://<project>.vercel.app/admin`, create the first user (it becomes the admin), then
    invite editors from Users.
-2. Fill in Settings (phone, email, social links) and the Home page global if anything changed.
+2. Fill in Settings (phone, email, social links) if anything changed. Page text is code
+   (`src/content/pages/` and the route folders), so it ships with the deploy.
 3. Check the preview against the launch checklist (section 7).
 
 ## 5. Every change after that

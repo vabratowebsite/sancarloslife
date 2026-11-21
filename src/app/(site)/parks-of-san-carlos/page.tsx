@@ -5,12 +5,13 @@ import { Breadcrumbs } from "@/components/content/Breadcrumbs";
 import { RichText } from "@/components/content/RichText";
 import { mediaSrc } from "@/lib/media";
 import { listParks } from "@/lib/queries/community";
-import { getPageBySlug } from "@/lib/queries/pages";
+import { loadPageHtml } from "@/content/pages/load";
+import { getPageSeo } from "@/lib/queries/pages";
 import { buildMetadata } from "@/lib/seo";
 import type { Park } from "@/payload-types";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageBySlug("parks-of-san-carlos");
+  const page = await getPageSeo("parks-of-san-carlos");
   return buildMetadata({
     path: "/parks-of-san-carlos/",
     title: "Parks and Hiking Trails in San Carlos, CA",
@@ -22,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const TYPE_LABEL: Record<Park["type"], string> = { park: "Park", trail: "Trails & nature preserve", garden: "Garden" };
 
 export default async function ParksPage() {
-  const [parks, page] = await Promise.all([listParks(), getPageBySlug("parks-of-san-carlos")]);
+  const [parks, html] = await Promise.all([listParks(), loadPageHtml("parks-of-san-carlos")]);
   const groups: Park["type"][] = ["park", "trail", "garden"];
   return (
     <>
@@ -79,12 +80,12 @@ export default async function ParksPage() {
             </section>
           );
         })}
-        {page && (
+        {html && (
           <section aria-labelledby="guide" className="mt-6 border-t border-teal-50 pt-10">
             <h2 id="guide" className="text-h3">
               The full parks guide
             </h2>
-            <RichText data={page.body} className="mt-4" />
+            <div className="prose mt-4" dangerouslySetInnerHTML={{ __html: html }} />
           </section>
         )}
       </div>
