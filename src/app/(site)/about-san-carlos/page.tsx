@@ -1,14 +1,32 @@
 import { Breadcrumbs } from "@/components/content/Breadcrumbs";
-import { CardGrid, Cta, Faq, FeatureList, Figure, PageHero, Prose, Section, Stats, Video } from "@/components/sections";
+import {
+  CardGrid,
+  Cta,
+  Faq,
+  FeatureList,
+  Figure,
+  PageHero,
+  Prose,
+  Section,
+  Stats,
+  Video,
+} from "@/components/sections";
 import { EXPLORE_CARDS } from "@/content/explore";
 import { IMAGES } from "@/content/images";
 import { metadataFromPage } from "@/lib/pageMeta";
+import { editablePage, EditMarker, T } from "@/lib/pageEdits";
 
 const SLUG = "about-san-carlos";
 const TITLE = "What’s Great about San Carlos?";
-const INTRO = "Top schools, beautiful homes, a downtown of its own, parks and trails, and a history that goes back to the 1700s.";
+const INTRO =
+  "Top schools, beautiful homes, a downtown of its own, parks and trails, and a history that goes back to the 1700s.";
 
-export const generateMetadata = () => metadataFromPage(SLUG, { title: TITLE, description: INTRO, image: IMAGES.aboutHero });
+export const generateMetadata = () =>
+  metadataFromPage(SLUG, {
+    title: TITLE,
+    description: INTRO,
+    image: IMAGES.aboutHero,
+  });
 
 const FAQ = [
   {
@@ -48,17 +66,35 @@ const FAQ = [
   },
 ];
 
-export default function AboutSanCarlosPage() {
+export default async function AboutSanCarlosPage() {
+  await editablePage(SLUG, `/${SLUG}/`);
   return (
     <>
-      <PageHero title={TITLE} subheading={INTRO} image={IMAGES.aboutHero} crumbs={<Breadcrumbs items={[{ name: TITLE, path: `/${SLUG}/` }]} />} />
+      <EditMarker />
+      <PageHero
+        ek="hero"
+        title={TITLE}
+        subheading={INTRO}
+        image={IMAGES.aboutHero}
+        crumbs={<Breadcrumbs items={[{ name: TITLE, path: `/${SLUG}/` }]} />}
+      />
 
-      <Section>
-        <Video youtubeId="_vUY1Bv4g5Y" title="San Carlos Life, with Viv Kelvin and Mark Martinho" />
+      <Section id="video">
+        <Video
+          youtubeId="_vUY1Bv4g5Y"
+          title="San Carlos Life, with Viv Kelvin and Mark Martinho"
+        />
       </Section>
 
-      <Section id="quick-facts" eyebrow="Quick facts" heading="San Carlos at a glance" band>
+      <Section
+        ek="facts"
+        id="quick-facts"
+        eyebrow="Quick facts"
+        heading="San Carlos at a glance"
+        band
+      >
         <Stats
+          ek="facts.items"
           items={[
             { value: "30,722", label: "Population" },
             { value: "$189,739", label: "Median household income" },
@@ -69,55 +105,108 @@ export default function AboutSanCarlosPage() {
         />
       </Section>
 
-      <Section id="schools" eyebrow="Schools in San Carlos" heading="Top schools in California">
+      <Section
+        ek="schools"
+        id="schools"
+        eyebrow="Schools in San Carlos"
+        heading="Top schools in California"
+      >
         <Prose>
           <p>
-            Public schools overseen by the San Carlos School District rank among the highest in the United States. Elementary and middle
-            schools in San Carlos place within the top 5% in the state of California.
+            <T k="schools.p1">
+              Public schools overseen by the San Carlos School District rank
+              among the highest in the United States. Elementary and middle
+              schools in San Carlos place within the top 5% in the state of
+              California.
+            </T>
           </p>
           <p>
-            In January 2023 the California Department of Education (CDE) published its list of Distinguished Elementary Schools, and every
-            elementary school in San Carlos made the list. Of the 5,872 elementary schools in California, only 356 were selected (roughly
-            6%). Leading the group is White Oaks Elementary School, which ranks at about #5 of all California elementary schools, while
-            Central Middle School ranks #100 of all California middle schools.
+            <T k="schools.p2">
+              In January 2023 the California Department of Education (CDE)
+              published its list of Distinguished Elementary Schools, and every
+              elementary school in San Carlos made the list. Of the 5,872
+              elementary schools in California, only 356 were selected (roughly
+              6%). Leading the group is White Oaks Elementary School, which
+              ranks at about #5 of all California elementary schools, while
+              Central Middle School ranks #100 of all California middle schools.
+            </T>
           </p>
           <p>
-            The city&rsquo;s public school system serves students from kindergarten through eighth grade across nine schools. Older students
-            go on to Carlmont High School in Belmont or Sequoia High School in Redwood City, both part of the Sequoia Union High School
-            District.
+            <T k="schools.p3">
+              The city’s public school system serves students from kindergarten
+              through eighth grade across nine schools. Older students go on to
+              Carlmont High School in Belmont or Sequoia High School in Redwood
+              City, both part of the Sequoia Union High School District.
+            </T>
           </p>
-          <h3>Which schools will my children go to?</h3>
+          <h3>
+            <T k="schools.h-which">Which schools will my children go to?</T>
+          </h3>
           <p>
-            Look up any address with the <a href="https://locator.decisioninsite.com/?studyId=199008">San Carlos School Locator</a>, or read
-            the district&rsquo;s <a href="https://www.scsdk8.org/apps/pages/School-Boundaries">school boundaries guide</a>.
+            <T k="schools.which.1">Look up any address with the</T>{" "}
+            <a href="https://locator.decisioninsite.com/?studyId=199008">
+              <T k="schools.which.link1">San Carlos School Locator</T>
+            </a>
+            <T k="schools.which.2">, or read the district’s</T>{" "}
+            <a href="https://www.scsdk8.org/apps/pages/School-Boundaries">
+              <T k="schools.which.link2">school boundaries guide</T>
+            </a>
+            .
           </p>
-          <h3>Who can I contact for more information?</h3>
+          <h3>
+            <T k="schools.h-contact">Who can I contact for more information?</T>
+          </h3>
           <p>
-            <a href="https://www.scsdk8.org/">San Carlos School District</a>
+            <a href="https://www.scsdk8.org/">
+              <T k="schools.contact.name">San Carlos School District</T>
+            </a>
             <br />
-            1200 Industrial Road, Unit 9, San Carlos, CA 94070
+            <T k="schools.contact.address">
+              1200 Industrial Road, Unit 9, San Carlos, CA 94070
+            </T>
             <br />
-            Phone (650) 508-7333 · Fax (650) 508-7340
+            <T k="schools.contact.phone">
+              Phone (650) 508-7333 · Fax (650) 508-7340
+            </T>
           </p>
           <p>
-            For individual departments, see the district&rsquo;s{" "}
-            <a href="https://www.scsdk8.org/apps/pages/index.jsp?uREC_ID=1136262&type=d&pREC_ID=1394035">staff directory</a>.
+            <T k="schools.staff.1">
+              For individual departments, see the district’s
+            </T>{" "}
+            <a href="https://www.scsdk8.org/apps/pages/index.jsp?uREC_ID=1136262&type=d&pREC_ID=1394035">
+              <T k="schools.staff.link">staff directory</T>
+            </a>
+            .
           </p>
         </Prose>
         <div className="mt-8">
-          <Figure image={IMAGES.centralMiddleSchool} caption="Central Middle School, a California Distinguished School" />
+          <Figure
+            ek="schools.photo"
+            image={IMAGES.centralMiddleSchool}
+            caption="Central Middle School, a California Distinguished School"
+          />
         </div>
       </Section>
 
-      <Section id="living" eyebrow="Living in San Carlos" heading="The City of Good Living" band>
+      <Section
+        ek="living"
+        id="living"
+        eyebrow="Living in San Carlos"
+        heading="The City of Good Living"
+        band
+      >
         <FeatureList
+          ek="living.items"
           intro="A few reasons people choose to live in San Carlos."
           items={[
             {
               title: "Beautiful homes",
               text: "Many hillside homes look out over the bay. A mix of modern and historic architecture, they are among the most sought-after on the Peninsula.",
             },
-            { title: "Strategic location", text: "Midway between San Francisco and Silicon Valley, with an easy commute in either direction by car or Caltrain." },
+            {
+              title: "Strategic location",
+              text: "Midway between San Francisco and Silicon Valley, with an easy commute in either direction by car or Caltrain.",
+            },
             {
               title: "Downtown",
               text: "A walkable downtown on Laurel Street with cafes, restaurants and boutique shops. Everyday services are close by, and within walking distance in some neighborhoods.",
@@ -126,27 +215,52 @@ export default function AboutSanCarlosPage() {
               title: "Parks & hiking trails",
               text: "Parks spread across every neighborhood, with playgrounds, sports fields and tennis courts, plus hiking in the nearby canyons and hills.",
             },
-            { title: "Safe streets", text: "San Carlos is known as a safe, family-friendly city, with policing provided by the San Mateo County Sheriff's Office." },
-            { title: "Good weather", text: "A mild Mediterranean climate: sunny most of the year, with winter rain and no snow." },
+            {
+              title: "Safe streets",
+              text: "San Carlos is known as a safe, family-friendly city, with policing provided by the San Mateo County Sheriff's Office.",
+            },
+            {
+              title: "Good weather",
+              text: "A mild Mediterranean climate: sunny most of the year, with winter rain and no snow.",
+            },
           ]}
         />
       </Section>
 
-      <Section id="explore" eyebrow="Things to do in San Carlos" heading="Explore the city">
-        <p className="mb-6 max-w-3xl text-ink-500">Browse the restaurants, shops, attractions, events, parks and trails in San Carlos.</p>
-        <CardGrid cards={EXPLORE_CARDS} />
+      <Section
+        ek="explore"
+        id="explore"
+        eyebrow="Things to do in San Carlos"
+        heading="Explore the city"
+      >
+        <p className="mb-6 max-w-3xl text-ink-500">
+          <T k="explore.intro">
+            Browse the restaurants, shops, attractions, events, parks and trails
+            in San Carlos.
+          </T>
+        </p>
+        <CardGrid ek="explore.cards" cards={EXPLORE_CARDS} />
       </Section>
 
-      <Section id="faq" heading="About San Carlos: common questions" band>
-        <Faq items={FAQ} />
+      <Section
+        ek="faq"
+        id="faq"
+        heading="About San Carlos: common questions"
+        band
+      >
+        <Faq ek="faq.items" items={FAQ} />
       </Section>
 
       <Cta
+        ek="cta"
         heading="Thinking of moving to San Carlos?"
         text="Viv and Mark know every neighborhood. Ask them anything, or start browsing homes for sale."
         buttons={[
           { label: "Contact Viv & Mark", href: "/contact-us/" },
-          { label: "Homes for sale", href: "/homes-for-sale-in-san-carlos-ca/" },
+          {
+            label: "Homes for sale",
+            href: "/homes-for-sale-in-san-carlos-ca/",
+          },
         ]}
       />
     </>

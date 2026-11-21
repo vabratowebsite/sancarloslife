@@ -162,3 +162,22 @@
     padding-block: 2px;
   }
 }
+
+/* On-page editor (edit mode only). */
+@layer components {
+  .scl-editing [data-edit-key] {
+    outline: 1px dashed color-mix(in srgb, var(--color-teal-500) 70%, transparent);
+    outline-offset: 2px;
+    cursor: text;
+  }
+  .scl-editing [data-edit-key]:hover,
+  .scl-editing [data-edit-key]:focus {
+    outline: 2px solid var(--color-teal-700);
+    background: color-mix(in srgb, var(--color-teal-50) 60%, transparent);
+  }
+  .scl-editing .scl-edit-img {
+    outline: 3px dashed var(--color-coral-700);
+    outline-offset: -3px;
+    cursor: pointer;
+  }
+}

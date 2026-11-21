@@ -11,6 +11,7 @@ import { CityProjects, GalleryPhotos, Parks, TimelineEntries, Testimonials } fro
 import { EventCategories, Events, Organizers, Venues } from "./collections/Events";
 import { Media } from "./collections/Media";
 import { Neighborhoods } from "./collections/Neighborhoods";
+import { PageEdits } from "./collections/PageEdits";
 import { Pages } from "./collections/Pages";
 import { Places } from "./collections/Places";
 import { Posts } from "./collections/Posts";
@@ -45,6 +46,11 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      // Page text and photos are edited on the page itself (see src/lib/pageEdits.tsx).
+      afterNavLinks: ["/components/admin/EditSiteLink#EditSiteLink"],
+      beforeDashboard: ["/components/admin/EditSiteBanner#EditSiteBanner"],
+    },
     meta: {
       titleSuffix: " | San Carlos Life admin",
     },
@@ -52,7 +58,7 @@ export default buildConfig({
   collections: [
     Posts,
     Categories,
-    Pages,
+    Pages, PageEdits,
     Events,
     Venues,
     Organizers,

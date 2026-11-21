@@ -1479,6 +1479,373 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "web.page_edits": {
+      "name": "page_edits",
+      "schema": "web",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "page": {
+          "name": "page",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "texts": {
+          "name": "texts",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "images": {
+          "name": "images",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "changes": {
+          "name": "changes",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_by_id": {
+          "name": "updated_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "page_edits_page_idx": {
+          "name": "page_edits_page_idx",
+          "columns": [
+            {
+              "expression": "page",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "page_edits_updated_by_idx": {
+          "name": "page_edits_updated_by_idx",
+          "columns": [
+            {
+              "expression": "updated_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "page_edits_updated_at_idx": {
+          "name": "page_edits_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "page_edits_created_at_idx": {
+          "name": "page_edits_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "page_edits_updated_by_id_users_id_fk": {
+          "name": "page_edits_updated_by_id_users_id_fk",
+          "tableFrom": "page_edits",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "updated_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web._page_edits_v": {
+      "name": "_page_edits_v",
+      "schema": "web",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_page": {
+          "name": "version_page",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version_path": {
+          "name": "version_path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_texts": {
+          "name": "version_texts",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_images": {
+          "name": "version_images",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_changes": {
+          "name": "version_changes",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_updated_by_id": {
+          "name": "version_updated_by_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_updated_at": {
+          "name": "version_updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_created_at": {
+          "name": "version_created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "_page_edits_v_parent_idx": {
+          "name": "_page_edits_v_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_page_edits_v_version_version_page_idx": {
+          "name": "_page_edits_v_version_version_page_idx",
+          "columns": [
+            {
+              "expression": "version_page",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_page_edits_v_version_version_updated_by_idx": {
+          "name": "_page_edits_v_version_version_updated_by_idx",
+          "columns": [
+            {
+              "expression": "version_updated_by_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_page_edits_v_version_version_updated_at_idx": {
+          "name": "_page_edits_v_version_version_updated_at_idx",
+          "columns": [
+            {
+              "expression": "version_updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_page_edits_v_version_version_created_at_idx": {
+          "name": "_page_edits_v_version_version_created_at_idx",
+          "columns": [
+            {
+              "expression": "version_created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_page_edits_v_created_at_idx": {
+          "name": "_page_edits_v_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_page_edits_v_updated_at_idx": {
+          "name": "_page_edits_v_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_page_edits_v_parent_id_page_edits_id_fk": {
+          "name": "_page_edits_v_parent_id_page_edits_id_fk",
+          "tableFrom": "_page_edits_v",
+          "tableTo": "page_edits",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_page_edits_v_version_updated_by_id_users_id_fk": {
+          "name": "_page_edits_v_version_updated_by_id_users_id_fk",
+          "tableFrom": "_page_edits_v",
+          "tableTo": "users",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "version_updated_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "web.events_exdates": {
       "name": "events_exdates",
       "schema": "web",
@@ -9670,6 +10037,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "page_edits_id": {
+          "name": "page_edits_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "events_id": {
           "name": "events_id",
           "type": "integer",
@@ -9842,6 +10215,21 @@
           "columns": [
             {
               "expression": "pages_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_page_edits_id_idx": {
+          "name": "payload_locked_documents_rels_page_edits_id_idx",
+          "columns": [
+            {
+              "expression": "page_edits_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -10128,6 +10516,20 @@
           "schemaTo": "web",
           "columnsFrom": [
             "pages_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_page_edits_fk": {
+          "name": "payload_locked_documents_rels_page_edits_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "page_edits",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "page_edits_id"
           ],
           "columnsTo": [
             "id"
@@ -11390,6 +11792,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "04b6f586-5dd6-440c-9d6e-d03ae70bcad2",
+  "id": "72620763-adb5-4e5c-8192-6c9b037f3e29",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

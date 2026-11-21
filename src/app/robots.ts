@@ -11,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Admin, API, on-site search and filtered listings add nothing for search engines.
-        disallow: ["/admin", "/api/", "/search/", "/*?q=", "/*?*sort="],
+        disallow: ["/admin", "/api/", "/edit/", "/search/", "/*?q=", "/*?*sort="],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

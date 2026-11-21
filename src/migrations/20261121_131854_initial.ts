@@ -144,6 +144,33 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  CREATE TABLE "web"."page_edits" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"page" varchar NOT NULL,
+  	"path" varchar,
+  	"texts" jsonb,
+  	"images" jsonb,
+  	"changes" numeric,
+  	"updated_by_id" integer,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "web"."_page_edits_v" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"parent_id" integer,
+  	"version_page" varchar NOT NULL,
+  	"version_path" varchar,
+  	"version_texts" jsonb,
+  	"version_images" jsonb,
+  	"version_changes" numeric,
+  	"version_updated_by_id" integer,
+  	"version_updated_at" timestamp(3) with time zone,
+  	"version_created_at" timestamp(3) with time zone,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
   CREATE TABLE "web"."events_exdates" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -840,6 +867,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"posts_id" integer,
   	"categories_id" integer,
   	"pages_id" integer,
+  	"page_edits_id" integer,
   	"events_id" integer,
   	"venues_id" integer,
   	"organizers_id" integer,
@@ -938,6 +966,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."_posts_v_rels" ADD CONSTRAINT "_posts_v_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."_posts_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."_posts_v_rels" ADD CONSTRAINT "_posts_v_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "web"."categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."pages" ADD CONSTRAINT "pages_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."page_edits" ADD CONSTRAINT "page_edits_updated_by_id_users_id_fk" FOREIGN KEY ("updated_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_page_edits_v" ADD CONSTRAINT "_page_edits_v_parent_id_page_edits_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."page_edits"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."_page_edits_v" ADD CONSTRAINT "_page_edits_v_version_updated_by_id_users_id_fk" FOREIGN KEY ("version_updated_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events_exdates" ADD CONSTRAINT "events_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_series_id_events_id_fk" FOREIGN KEY ("series_id") REFERENCES "web"."events"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_venue_id_venues_id_fk" FOREIGN KEY ("venue_id") REFERENCES "web"."venues"("id") ON DELETE set null ON UPDATE no action;
@@ -1004,6 +1035,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "web"."posts"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "web"."categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "web"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_page_edits_fk" FOREIGN KEY ("page_edits_id") REFERENCES "web"."page_edits"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_events_fk" FOREIGN KEY ("events_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_venues_fk" FOREIGN KEY ("venues_id") REFERENCES "web"."venues"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_organizers_fk" FOREIGN KEY ("organizers_id") REFERENCES "web"."organizers"("id") ON DELETE cascade ON UPDATE no action;
@@ -1067,6 +1099,17 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "pages_wp_id_idx" ON "web"."pages" USING btree ("wp_id");
   CREATE INDEX "pages_updated_at_idx" ON "web"."pages" USING btree ("updated_at");
   CREATE INDEX "pages_created_at_idx" ON "web"."pages" USING btree ("created_at");
+  CREATE UNIQUE INDEX "page_edits_page_idx" ON "web"."page_edits" USING btree ("page");
+  CREATE INDEX "page_edits_updated_by_idx" ON "web"."page_edits" USING btree ("updated_by_id");
+  CREATE INDEX "page_edits_updated_at_idx" ON "web"."page_edits" USING btree ("updated_at");
+  CREATE INDEX "page_edits_created_at_idx" ON "web"."page_edits" USING btree ("created_at");
+  CREATE INDEX "_page_edits_v_parent_idx" ON "web"."_page_edits_v" USING btree ("parent_id");
+  CREATE INDEX "_page_edits_v_version_version_page_idx" ON "web"."_page_edits_v" USING btree ("version_page");
+  CREATE INDEX "_page_edits_v_version_version_updated_by_idx" ON "web"."_page_edits_v" USING btree ("version_updated_by_id");
+  CREATE INDEX "_page_edits_v_version_version_updated_at_idx" ON "web"."_page_edits_v" USING btree ("version_updated_at");
+  CREATE INDEX "_page_edits_v_version_version_created_at_idx" ON "web"."_page_edits_v" USING btree ("version_created_at");
+  CREATE INDEX "_page_edits_v_created_at_idx" ON "web"."_page_edits_v" USING btree ("created_at");
+  CREATE INDEX "_page_edits_v_updated_at_idx" ON "web"."_page_edits_v" USING btree ("updated_at");
   CREATE INDEX "events_exdates_order_idx" ON "web"."events_exdates" USING btree ("_order");
   CREATE INDEX "events_exdates_parent_id_idx" ON "web"."events_exdates" USING btree ("_parent_id");
   CREATE UNIQUE INDEX "events_slug_idx" ON "web"."events" USING btree ("slug");
@@ -1282,6 +1325,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_posts_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("posts_id");
   CREATE INDEX "payload_locked_documents_rels_categories_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("categories_id");
   CREATE INDEX "payload_locked_documents_rels_pages_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("pages_id");
+  CREATE INDEX "payload_locked_documents_rels_page_edits_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("page_edits_id");
   CREATE INDEX "payload_locked_documents_rels_events_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("events_id");
   CREATE INDEX "payload_locked_documents_rels_venues_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("venues_id");
   CREATE INDEX "payload_locked_documents_rels_organizers_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("organizers_id");
@@ -1326,6 +1370,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."_posts_v_rels" CASCADE;
   DROP TABLE "web"."categories" CASCADE;
   DROP TABLE "web"."pages" CASCADE;
+  DROP TABLE "web"."page_edits" CASCADE;
+  DROP TABLE "web"."_page_edits_v" CASCADE;
   DROP TABLE "web"."events_exdates" CASCADE;
   DROP TABLE "web"."events" CASCADE;
   DROP TABLE "web"."events_rels" CASCADE;

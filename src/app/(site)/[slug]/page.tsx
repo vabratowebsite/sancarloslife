@@ -7,6 +7,7 @@ import { NeighborhoodView } from "@/components/realestate/NeighborhoodView";
 import { staticPage } from "@/content/pages";
 import { loadPageHtml } from "@/content/pages/load";
 import { SiteMapList } from "@/components/content/SiteMapList";
+import { applyHtmlEdits, editablePage } from "@/lib/pageEdits";
 import { metadataFromPage } from "@/lib/pageMeta";
 import { getNeighborhoodBySlug, getPageSeo } from "@/lib/queries/pages";
 import { getPostBySlug } from "@/lib/queries/posts";
@@ -45,8 +46,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: hit.post.publishedAt,
     });
-  if (hit.kind === "page") return metadataFromPage(slug, { title: hit.page.title, description: hit.page.subheading, image: hit.page.image });
-  return buildMetadata({ path, title: hit.hood.name, description: hit.hood.tagline, seo: hit.hood.seo, image: hit.hood.hero });
+  if (hit.kind === "page")
+    return metadataFromPage(slug, {
+      title: hit.page.title,
+      description: hit.page.subheading,
+      image: hit.page.image,
+    });
+  return buildMetadata({
+    path,
+    title: hit.hood.name,
+    description: hit.hood.tagline,
+    seo: hit.hood.seo,
+    image: hit.hood.hero,
+  });
 }
 
 export default async function RootSlugPage({ params }: Props) {
@@ -55,7 +67,12 @@ export default async function RootSlugPage({ params }: Props) {
   if (!hit) notFound();
   if (hit.kind === "post") return <PostView post={hit.post} />;
   if (hit.kind === "page") {
-    const [html, seo] = await Promise.all([hit.page.body === false ? null : loadPageHtml(slug), getPageSeo(slug)]);
+    const s = await editablePage(slug, `/${slug}/`);
+    const [raw, seo] = await Promise.all([
+      hit.page.body === false ? null : loadPageHtml(slug),
+      getPageSeo(slug),
+    ]);
+    const html = raw && applyHtmlEdits(raw, s.edits, s.editing);
     return (
       <>
         <StaticPageView slug={slug} page={hit.page} html={html}>

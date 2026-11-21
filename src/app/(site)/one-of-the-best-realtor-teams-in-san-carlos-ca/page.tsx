@@ -1,54 +1,114 @@
 import { Breadcrumbs } from "@/components/content/Breadcrumbs";
-import { Cta, FeatureList, PageHero, Prose, Section, Team, Testimonials, Video } from "@/components/sections";
+import {
+  Cta,
+  FeatureList,
+  PageHero,
+  Prose,
+  Section,
+  Team,
+  Testimonials,
+  Video,
+} from "@/components/sections";
 import { IMAGES } from "@/content/images";
 import { metadataFromPage } from "@/lib/pageMeta";
+import { editablePage, EditMarker, T } from "@/lib/pageEdits";
 
 const SLUG = "one-of-the-best-realtor-teams-in-san-carlos-ca";
 const TITLE = "Viv and Mark, one of the Best Realtor Teams in San Carlos CA";
-const INTRO = "Co-owners of Vabrato Real Estate, with over 30 years of combined experience helping people buy and sell in San Carlos.";
+const INTRO =
+  "Co-owners of Vabrato Real Estate, with over 30 years of combined experience helping people buy and sell in San Carlos.";
 
-export const generateMetadata = () => metadataFromPage(SLUG, { title: TITLE, description: INTRO, image: IMAGES.vivMarkHero });
+export const generateMetadata = () =>
+  metadataFromPage(SLUG, {
+    title: TITLE,
+    description: INTRO,
+    image: IMAGES.vivMarkHero,
+  });
 
-export default function VivAndMarkPage() {
+export default async function VivAndMarkPage() {
+  await editablePage(SLUG, `/${SLUG}/`);
   return (
     <>
+      <EditMarker />
       <PageHero
+        ek="hero"
         title={TITLE}
         subheading={INTRO}
         image={IMAGES.vivMarkHero}
-        crumbs={<Breadcrumbs items={[{ name: "Viv & Mark", path: `/${SLUG}/` }]} />}
+        crumbs={
+          <Breadcrumbs items={[{ name: "Viv & Mark", path: `/${SLUG}/` }]} />
+        }
       />
 
-      <Section id="meet-vabrato" eyebrow="Meet Vabrato" heading="Your local San Carlos real estate experts">
+      <Section
+        ek="meet"
+        id="meet-vabrato"
+        eyebrow="Meet Vabrato"
+        heading="Your local San Carlos real estate experts"
+      >
         <Prose>
-          <p>Mark Martinho and Vivienne Kelvin are the co-owners of Vabrato, a real estate brokerage serving San Carlos and Silicon Valley.</p>
           <p>
-            With over 30 years of combined experience and 95% of their clients coming from referrals, Mark and Viv take great pride in
-            exceeding your expectations. They listen carefully to your needs and build a plan around your goals, for clients across San Mateo
-            and Santa Clara Counties.
+            <T k="meet.p1">
+              Mark Martinho and Vivienne Kelvin are the co-owners of Vabrato, a
+              real estate brokerage serving San Carlos and Silicon Valley.
+            </T>
+          </p>
+          <p>
+            <T k="meet.p2">
+              With over 30 years of combined experience and 95% of their clients
+              coming from referrals, Mark and Viv take great pride in exceeding
+              your expectations. They listen carefully to your needs and build a
+              plan around your goals, for clients across San Mateo and Santa
+              Clara Counties.
+            </T>
           </p>
         </Prose>
         <div className="mt-8">
-          <Video youtubeId="IYLONiahfYs" title="Viv and Mark, your local San Carlos real estate experts" />
+          <Video
+            youtubeId="IYLONiahfYs"
+            title="Viv and Mark, your local San Carlos real estate experts"
+          />
         </div>
       </Section>
 
-      <Section id="skills" eyebrow="Our skills at work for you" heading="What Viv and Mark bring to your sale or purchase" band>
+      <Section
+        ek="skills"
+        id="skills"
+        eyebrow="Our skills at work for you"
+        heading="What Viv and Mark bring to your sale or purchase"
+        band
+      >
         <FeatureList
+          ek="skills.items"
           items={[
-            { title: "Over 30 years of combined experience", text: "An award-winning team with decades in the industry." },
+            {
+              title: "Over 30 years of combined experience",
+              text: "An award-winning team with decades in the industry.",
+            },
             {
               title: "Local market knowledge",
               text: "Years of experience in the Silicon Valley and Bay Area market. Homes sold by Vabrato often sell above list price, and quickly.",
             },
-            { title: "Design and staging", text: "A team of professional designers and stagers to make your home look its best when it goes on the market." },
+            {
+              title: "Design and staging",
+              text: "A team of professional designers and stagers to make your home look its best when it goes on the market.",
+            },
             {
               title: "Connected in the community",
               text: "Viv leads local business networking groups in San Carlos, from the Chamber of Commerce to adult care programs.",
             },
-            { title: "Professional marketing", text: "Staging, photography, drone video, and web and social media marketing so your home stands out online." },
-            { title: "Legal and financing expertise", text: "Mark holds a law degree and knows the legal requirements of real estate agreements." },
-            { title: "Interior design", text: "Viv is formally trained in interior design and specializes in design to sell." },
+            {
+              title: "Professional marketing",
+              text: "Staging, photography, drone video, and web and social media marketing so your home stands out online.",
+            },
+            {
+              title: "Legal and financing expertise",
+              text: "Mark holds a law degree and knows the legal requirements of real estate agreements.",
+            },
+            {
+              title: "Interior design",
+              text: "Viv is formally trained in interior design and specializes in design to sell.",
+            },
             {
               title: "Engineering and construction",
               text: "Mark is a mechanical engineer and a licensed general contractor, with experience from foundations to roofs.",
@@ -57,8 +117,9 @@ export default function VivAndMarkPage() {
         />
       </Section>
 
-      <Section id="team" eyebrow="The team" heading="Viv and Mark">
+      <Section ek="team" id="team" eyebrow="The team" heading="Viv and Mark">
         <Team
+          ek="team.people"
           people={[
             {
               name: "Viv Kelvin",
@@ -82,11 +143,18 @@ export default function VivAndMarkPage() {
         />
       </Section>
 
-      <Section id="testimonials" eyebrow="Testimonials" heading="What clients say" band>
+      <Section
+        ek="testimonials"
+        id="testimonials"
+        eyebrow="Testimonials"
+        heading="What clients say"
+        band
+      >
         <Testimonials limit={6} />
       </Section>
 
       <Cta
+        ek="cta"
         id="contact"
         heading="Thinking of buying or selling in San Carlos?"
         text="Tell Viv and Mark what you're planning, or start with a free home valuation."

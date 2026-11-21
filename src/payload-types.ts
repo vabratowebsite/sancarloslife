@@ -70,6 +70,7 @@ export interface Config {
     posts: Post;
     categories: Category;
     pages: Page;
+    'page-edits': PageEdit;
     events: Event;
     venues: Venue;
     organizers: Organizer;
@@ -96,6 +97,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'page-edits': PageEditsSelect<false> | PageEditsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     venues: VenuesSelect<false> | VenuesSelect<true>;
     organizers: OrganizersSelect<false> | OrganizersSelect<true>;
@@ -389,6 +391,48 @@ export interface Page {
    * WordPress id (migration).
    */
   wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Changes made with the on-page editor. To edit a page, open it on the site and press Edit this page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-edits".
+ */
+export interface PageEdit {
+  id: number;
+  /**
+   * Page key, e.g. about-san-carlos or home
+   */
+  page: string;
+  path?: string | null;
+  /**
+   * Changed words: { key: { from, to } }
+   */
+  texts?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Swapped photos: { key: { src, width, height, alt } }
+   */
+  images?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  changes?: number | null;
+  updatedBy?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
 }
@@ -1156,6 +1200,10 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
+        relationTo: 'page-edits';
+        value: number | PageEdit;
+      } | null)
+    | ({
         relationTo: 'events';
         value: number | Event;
       } | null)
@@ -1321,6 +1369,20 @@ export interface PagesSelect<T extends boolean = true> {
       };
   jsonLd?: T;
   wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-edits_select".
+ */
+export interface PageEditsSelect<T extends boolean = true> {
+  page?: T;
+  path?: T;
+  texts?: T;
+  images?: T;
+  changes?: T;
+  updatedBy?: T;
   updatedAt?: T;
   createdAt?: T;
 }

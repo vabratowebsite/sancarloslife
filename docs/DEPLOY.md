@@ -85,8 +85,9 @@ Then:
 
 1. Open `https://<project>.vercel.app/admin`, create the first user (it becomes the admin), then
    invite editors from Users.
-2. Fill in Settings (phone, email, social links) if anything changed. Page text is code
-   (`src/content/pages/` and the route folders), so it ships with the deploy.
+2. Fill in Settings (phone, email, social links) if anything changed. Page text ships with the
+   code; to change words or photos on a page, use **Edit site pages** on the admin dashboard
+   (or **Edit this page** on the site).
 3. Check the preview against the launch checklist (section 7).
 
 ## 5. Every change after that
@@ -150,6 +151,9 @@ All of these pass before the DNS switch:
 
 - **Site down, database errors:** check the Supabase project isn't paused (free plan) and that
   `DATABASE_URL` is the pooled URL.
+- **Page editor says "sign-in has expired" on Save:** the site must be opened on `NEXT_PUBLIC_SITE_URL`
+  or its Vercel URL; saves from any other address are refused (CSRF protection). `NEXT_PUBLIC_SITE_URL`
+  is fixed at build time, so redeploy after changing it.
 - **Admin login fails on a preview:** the preview URL must be in Payload's allowed origins; it is
   added automatically from `VERCEL_URL` and `VERCEL_BRANCH_URL`.
 - **New third-party embed blank:** its host is missing from `CSP_SOURCES` in

@@ -16,18 +16,22 @@ import { getSettings, telHref } from "@/lib/queries/settings";
 import { metadataFromPage } from "@/lib/pageMeta";
 import { absolute } from "@/lib/seo";
 import { IMAGES } from "@/content/images";
+import { editablePage, editImgAttrs, ei, EditMarker, T } from "@/lib/pageEdits";
 import type { Post } from "@/payload-types";
 
 /** Home page copy (code; owner's decision 2026-11-21). The hero loop is the live site's Vimeo video. */
 const home = {
   heroEyebrow: "Your guide to the City of Good Living",
   heroTitle: "This is San Carlos Life",
-  heroIntro: "Events, restaurants, neighborhoods and homes for sale in San Carlos, California 94070. Don't miss the latest news in town.",
+  heroIntro:
+    "Events, restaurants, neighborhoods and homes for sale in San Carlos, California 94070. Don't miss the latest news in town.",
   heroVimeoId: "882272881",
   agentHeading: "Thinking of buying or selling a home?",
-  agentText: "Viv and Mark have 30+ years of combined experience and 95% of their clients come from referrals.",
+  agentText:
+    "Viv and Mark have 30+ years of combined experience and 95% of their clients come from referrals.",
   subscribeHeading: "Don't miss out",
-  subscribeText: "One email a week with events, new restaurants, and what sold in San Carlos.",
+  subscribeText:
+    "One email a week with events, new restaurants, and what sold in San Carlos.",
 };
 
 export const generateMetadata = (): Promise<Metadata> =>
@@ -45,9 +49,11 @@ function thisWeek() {
   return { from: from.toISOString(), to: to.toISOString() };
 }
 
-const btn = "eyebrow inline-flex items-center rounded-button border-2 px-6 py-3 transition-colors";
+const btn =
+  "eyebrow inline-flex items-center rounded-button border-2 px-6 py-3 transition-colors";
 
 export default async function Home() {
+  await editablePage("home", "/");
   const week = thisWeek();
   const [settings, occ, posts, hoods] = await Promise.all([
     getSettings(),
@@ -59,40 +65,79 @@ export default async function Home() {
   const events =
     occ.length >= 4
       ? occ.slice(0, 4)
-      : (await listOccurrences({ from: week.from, to: new Date(new Date(week.from).getTime() + 60 * 86400000).toISOString() })).slice(0, 4);
-  const poster = IMAGES.homeHero;
-  const agent = IMAGES.homeAgents;
+      : (
+          await listOccurrences({
+            from: week.from,
+            to: new Date(
+              new Date(week.from).getTime() + 60 * 86400000,
+            ).toISOString(),
+          })
+        ).slice(0, 4);
+  const poster = ei("hero.image", IMAGES.homeHero);
+  const agent = ei("agent.photo", IMAGES.homeAgents);
   const latest = (posts.docs as Post[]).slice(0, 3);
 
   return (
     <>
+      <EditMarker />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "San Carlos Life",
           url: absolute("/"),
-          potentialAction: { "@type": "SearchAction", target: `${absolute("/search/")}?q={search_term_string}`, "query-input": "required name=search_term_string" },
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${absolute("/search/")}?q={search_term_string}`,
+            "query-input": "required name=search_term_string",
+          },
         }}
       />
 
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-ink-900 text-white">
         {poster && (
-          <Image src={poster.src} alt="" fill priority sizes="100vw" className="-z-20 object-cover" />
+          <Image
+            {...editImgAttrs(poster)}
+            src={poster.src}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="-z-20 object-cover"
+          />
         )}
         {home.heroVimeoId && <HeroVideo vimeoId={home.heroVimeoId} />}
-        <div className="absolute inset-0 -z-[5] bg-gradient-to-r from-ink-900/85 via-ink-900/60 to-ink-900/20" aria-hidden="true" />
+        <div
+          className="absolute inset-0 -z-[5] bg-gradient-to-r from-ink-900/85 via-ink-900/60 to-ink-900/20"
+          aria-hidden="true"
+        />
         <div className="container-site relative py-24 md:py-32">
-          {home.heroEyebrow && <p className="eyebrow text-teal-50">{home.heroEyebrow}</p>}
-          <h1 className="mt-3 max-w-3xl text-h1 text-white">{home.heroTitle}</h1>
-          {home.heroIntro && <p className="mt-5 max-w-2xl text-lg text-white/90">{home.heroIntro}</p>}
+          {home.heroEyebrow && (
+            <p className="eyebrow text-teal-50">
+              <T k="hero.eyebrow">{home.heroEyebrow}</T>
+            </p>
+          )}
+          <h1 className="mt-3 max-w-3xl text-h1 text-white">
+            <T k="hero.title">{home.heroTitle}</T>
+          </h1>
+          {home.heroIntro && (
+            <p className="mt-5 max-w-2xl text-lg text-white/90">
+              <T k="hero.intro">{home.heroIntro}</T>
+            </p>
+          )}
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/events/" className={`${btn} border-teal-700 bg-teal-700 text-white hover:border-teal-500 hover:bg-teal-500`}>
-              What&rsquo;s on this week
+            <Link
+              href="/events/"
+              className={`${btn} border-teal-700 bg-teal-700 text-white hover:border-teal-500 hover:bg-teal-500`}
+            >
+              <T k="hero.button1">What’s on this week</T>
             </Link>
-            <Link href="/homes-for-sale-in-san-carlos-ca/" className={`${btn} border-white text-white hover:bg-white hover:text-ink-900`}>
-              Homes for sale
+            <Link
+              href="/homes-for-sale-in-san-carlos-ca/"
+              className={`${btn} border-white text-white hover:bg-white hover:text-ink-900`}
+            >
+              <T k="hero.button2">Homes for sale</T>
             </Link>
           </div>
         </div>
@@ -103,9 +148,15 @@ export default async function Home() {
         <div className="container-site">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow text-teal-700">Events</p>
+              <p className="eyebrow text-teal-700">
+                <T k="events.eyebrow">Events</T>
+              </p>
               <h2 id="week-heading" className="mt-1 text-h2">
-                {occ.length >= 4 ? "This week in San Carlos" : "Coming up in San Carlos"}
+                {occ.length >= 4 ? (
+                  <T k="events.heading-week">This week in San Carlos</T>
+                ) : (
+                  <T k="events.heading-later">Coming up in San Carlos</T>
+                )}
               </h2>
             </div>
             <Link href="/events/" className="font-bold">
@@ -122,7 +173,8 @@ export default async function Home() {
             </ul>
           ) : (
             <p className="mt-8 text-ink-500">
-              Nothing on the calendar yet. Know of something? <Link href="/events/submit/">Submit an event</Link>.
+              Nothing on the calendar yet. Know of something?{" "}
+              <Link href="/events/submit/">Submit an event</Link>.
             </p>
           )}
         </div>
@@ -132,33 +184,55 @@ export default async function Home() {
       <section className="bg-teal-50 py-16" aria-labelledby="homes-heading">
         <div className="container-site grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
           <div>
-            <p className="eyebrow text-teal-700">Real estate</p>
+            <p className="eyebrow text-teal-700">
+              <T k="homes.eyebrow">Real estate</T>
+            </p>
             <h2 id="homes-heading" className="mt-1 text-h2">
-              Homes for sale in San Carlos
+              <T k="homes.heading">Homes for sale in San Carlos</T>
             </h2>
             <p className="mt-4 text-ink-500">
-              Search live MLS listings, browse by neighborhood, or see this weekend&rsquo;s open houses. Save a search and get new listings by
-              email.
+              <T k="homes.text">
+                Search live MLS listings, browse by neighborhood, or see this
+                weekend’s open houses. Save a search and get new listings by
+                email.
+              </T>
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
-              <Link href="/homes-for-sale-in-san-carlos-ca/" className={`${btn} border-teal-700 bg-teal-700 text-white hover:border-teal-500 hover:bg-teal-500`}>
-                Search homes
+              <Link
+                href="/homes-for-sale-in-san-carlos-ca/"
+                className={`${btn} border-teal-700 bg-teal-700 text-white hover:border-teal-500 hover:bg-teal-500`}
+              >
+                <T k="homes.button1">Search homes</T>
               </Link>
-              <Link href="/open-houses-in-san-carlos-ca/" className={`${btn} border-teal-700 text-teal-700 hover:bg-white`}>
-                Open houses this weekend
+              <Link
+                href="/open-houses-in-san-carlos-ca/"
+                className={`${btn} border-teal-700 text-teal-700 hover:bg-white`}
+              >
+                <T k="homes.button2">Open houses this weekend</T>
               </Link>
             </div>
           </div>
           <div className="rounded-card bg-white p-6 shadow-card">
-            <h3 className="font-heading text-[22px]">What&rsquo;s my home worth?</h3>
+            <h3 className="font-heading text-[22px]">
+              <T k="value.heading">What’s my home worth?</T>
+            </h3>
             <p className="mt-2 text-ink-500">
-              Get a free, no-obligation valuation from Viv and Mark, based on recent San Carlos sales.
+              <T k="value.text">
+                Get a free, no-obligation valuation from Viv and Mark, based on
+                recent San Carlos sales.
+              </T>
             </p>
             <div className="mt-5 flex flex-wrap gap-4">
-              <Link href="/sell-my-house/" className={`${btn} border-coral-700 bg-coral-700 text-white hover:border-ink-900 hover:bg-ink-900`}>
-                Get my valuation
+              <Link
+                href="/sell-my-house/"
+                className={`${btn} border-coral-700 bg-coral-700 text-white hover:border-ink-900 hover:bg-ink-900`}
+              >
+                <T k="value.button">Get my valuation</T>
               </Link>
-              <Link href="/san-carlos-ca-real-estate-market-trends/" className="self-center font-bold">
+              <Link
+                href="/san-carlos-ca-real-estate-market-trends/"
+                className="self-center font-bold"
+              >
                 Market trends <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -170,9 +244,11 @@ export default async function Home() {
       {hoods.length > 0 && (
         <section className="py-16" aria-labelledby="hoods-heading">
           <div className="container-site">
-            <p className="eyebrow text-teal-700">Neighborhoods</p>
+            <p className="eyebrow text-teal-700">
+              <T k="hoods.eyebrow">Neighborhoods</T>
+            </p>
             <h2 id="hoods-heading" className="mt-1 text-h2">
-              Find your corner of San Carlos
+              <T k="hoods.heading">Find your corner of San Carlos</T>
             </h2>
             <div className="mt-8">
               <NeighborhoodGrid hoods={hoods} />
@@ -186,9 +262,11 @@ export default async function Home() {
         <div className="container-site">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow text-teal-700">Blog</p>
+              <p className="eyebrow text-teal-700">
+                <T k="blog.eyebrow">Blog</T>
+              </p>
               <h2 id="blog-heading" className="mt-1 text-h2">
-                Latest from San Carlos Life
+                <T k="blog.heading">Latest from San Carlos Life</T>
               </h2>
             </div>
             <Link href="/san-carlos-life-blog/" className="font-bold">
@@ -210,6 +288,7 @@ export default async function Home() {
         <div className="container-site grid items-center gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
           {agent && (
             <Image
+              {...editImgAttrs(agent)}
               src={agent.src}
               alt="Viv Kelvin and Mark Martinho of Vabrato Real Estate"
               width={agent.width}
@@ -220,17 +299,30 @@ export default async function Home() {
           )}
           <div>
             <h2 id="agent-heading" className="text-h2">
-              {home.agentHeading}
+              <T k="agent.heading">{home.agentHeading}</T>
             </h2>
-            {home.agentText && <p className="mt-4 text-ink-500">{home.agentText}</p>}
+            {home.agentText && (
+              <p className="mt-4 text-ink-500">
+                <T k="agent.text">{home.agentText}</T>
+              </p>
+            )}
             <div className="mt-6 flex flex-wrap gap-4">
-              <a href={telHref(settings.phone)} className={`${btn} border-teal-700 bg-teal-700 text-white hover:border-teal-500 hover:bg-teal-500`}>
-                Call us
+              <a
+                href={telHref(settings.phone)}
+                className={`${btn} border-teal-700 bg-teal-700 text-white hover:border-teal-500 hover:bg-teal-500`}
+              >
+                <T k="agent.call">Call us</T>
               </a>
-              <a href={`mailto:${settings.email}`} className={`${btn} border-teal-700 text-teal-700 hover:bg-teal-50`}>
-                Send us an email
+              <a
+                href={`mailto:${settings.email}`}
+                className={`${btn} border-teal-700 text-teal-700 hover:bg-teal-50`}
+              >
+                <T k="agent.email">Send us an email</T>
               </a>
-              <Link href="/one-of-the-best-realtor-teams-in-san-carlos-ca/" className="self-center font-bold">
+              <Link
+                href="/one-of-the-best-realtor-teams-in-san-carlos-ca/"
+                className="self-center font-bold"
+              >
                 Meet Viv &amp; Mark <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -239,13 +331,20 @@ export default async function Home() {
       </section>
 
       {/* Subscribe */}
-      <section className="bg-teal-700 py-16 text-white" aria-labelledby="subscribe-heading">
+      <section
+        className="bg-teal-700 py-16 text-white"
+        aria-labelledby="subscribe-heading"
+      >
         <div className="container-site grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
           <div>
             <h2 id="subscribe-heading" className="text-h2 text-white">
-              {home.subscribeHeading}
+              <T k="subscribe.heading">{home.subscribeHeading}</T>
             </h2>
-            {home.subscribeText && <p className="mt-3 text-white">{home.subscribeText}</p>}
+            {home.subscribeText && (
+              <p className="mt-3 text-white">
+                <T k="subscribe.text">{home.subscribeText}</T>
+              </p>
+            )}
           </div>
           <div className="rounded-card bg-white p-6 text-ink-900">
             <SubscribeForm compact />

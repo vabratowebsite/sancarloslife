@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 
+import { EditLauncher } from "@/components/editor/EditLauncher";
+import { PageEditor } from "@/components/editor/PageEditor";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { Footer } from "@/components/layout/Footer";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default async function SiteLayout({ children }: LayoutProps<"/">) {
-  const settings = await getSettings();
+  const [settings, { isEnabled: editMode }] = await Promise.all([getSettings(), draftMode()]);
   return (
     <html lang="en" className={`${fontVariables} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
@@ -33,6 +36,7 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer settings={settings} />
         <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID || undefined} />
+        {editMode ? <PageEditor /> : <EditLauncher />}
       </body>
     </html>
   );
