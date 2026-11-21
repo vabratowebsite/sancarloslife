@@ -81,6 +81,15 @@ changes go only through migrations in src/migrations.
 - 2026-11-21 React 19.3.1: Payload 3.94 excludes React 19.3.0.
 - 2026-11-21 Roles: the first account becomes admin; only admins change roles or manage users.
   API keys are enabled on users so editors (and Claude) can publish through the REST API.
+- 2026-11-21 All collections from PLAN.md section 6 were created in milestone 3 (not only Posts,
+  Categories, Pages, Settings) so the migration scripts and templates share one schema. Payload
+  slugs are kebab-case (event-categories); tables are snake_case in the `web` schema.
+- 2026-11-21 Posts keep WordPress HTML in a "rawHtml" block inside the rich text body; it is
+  always rendered through the sanitizer. Posts can have several categories (WordPress does).
+- 2026-11-21 Events use their own status (draft, pending, published, archived) instead of Payload
+  drafts, so public submissions can wait as "pending". Archived events stay readable (old URLs).
+- 2026-11-21 The `web` schema is not exposed through Supabase's public REST API; the app reaches it
+  only through Payload's own connection. Migrations start with CREATE SCHEMA IF NOT EXISTS "web".
 - 2026-11-21 Supabase Pro and Vercel Pro must be active before launch (the free Supabase plan
   pauses idle projects; Vercel Hobby is for non-commercial use).
 

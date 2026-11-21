@@ -8,6 +8,8 @@ export const Users: CollectionConfig = {
     useAsTitle: "email",
     defaultColumns: ["name", "email", "role"],
     group: "Admin",
+    // Editors manage content only; the Users screen is for admins.
+    hidden: ({ user }) => !isAdminUser(user),
   },
   auth: {
     // Editors and Claude publish through API keys with the editor role.

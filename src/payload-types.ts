@@ -67,18 +67,52 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    posts: Post;
+    categories: Category;
+    pages: Page;
+    events: Event;
+    venues: Venue;
+    organizers: Organizer;
+    'event-categories': EventCategory;
+    places: Place;
+    parks: Park;
+    neighborhoods: Neighborhood;
+    testimonials: Testimonial;
+    'timeline-entries': TimelineEntry;
+    'gallery-photos': GalleryPhoto;
+    'city-projects': CityProject;
     media: Media;
+    'form-submissions': FormSubmission;
+    redirects: Redirect;
+    users: User;
     'payload-kv': PayloadKv;
+    'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    venues: VenuesSelect<false> | VenuesSelect<true>;
+    organizers: OrganizersSelect<false> | OrganizersSelect<true>;
+    'event-categories': EventCategoriesSelect<false> | EventCategoriesSelect<true>;
+    places: PlacesSelect<false> | PlacesSelect<true>;
+    parks: ParksSelect<false> | ParksSelect<true>;
+    neighborhoods: NeighborhoodsSelect<false> | NeighborhoodsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'timeline-entries': TimelineEntriesSelect<false> | TimelineEntriesSelect<true>;
+    'gallery-photos': GalleryPhotosSelect<false> | GalleryPhotosSelect<true>;
+    'city-projects': CityProjectsSelect<false> | CityProjectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -87,15 +121,25 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    settings: Setting;
+  };
+  globalsSelect: {
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
   };
   user: User;
   jobs: {
-    tasks: unknown;
+    tasks: {
+      schedulePublish: TaskSchedulePublish;
+      inline: {
+        input: unknown;
+        output: unknown;
+      };
+    };
     workflows: unknown;
   };
 }
@@ -116,6 +160,78 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * Blog posts. Their URLs stay at the site root (sancarloslife.com/<slug>).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  publishedAt?: string | null;
+  author?: (number | null) | User;
+  categories?: (number | Category)[] | null;
+  tags?: string[] | null;
+  cover?: (number | null) | Media;
+  excerpt?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * Extra schema.org data. The site adds Article/Event/Place schema automatically.
+   */
+  jsonLd?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -148,6 +264,26 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  description?: string | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -204,6 +340,687 @@ export interface Media {
   };
 }
 /**
+ * Hub, guide and legal pages. Layout blocks arrive in milestone 12.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  hero?: {
+    /**
+     * Defaults to the page title.
+     */
+    heading?: string | null;
+    subheading?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Optional background video (mp4).
+     */
+    videoUrl?: string | null;
+  };
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * Extra schema.org data. The site adds Article/Event/Place schema automatically.
+   */
+  jsonLd?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  status: 'draft' | 'pending' | 'published' | 'archived';
+  startsAt: string;
+  endsAt?: string | null;
+  allDay?: boolean | null;
+  timezone?: string | null;
+  /**
+   * Recurrence rule, e.g. FREQ=WEEKLY;BYDAY=FR. Occurrences are expanded at query time, 24 months at most.
+   */
+  rrule?: string | null;
+  exdates?:
+    | {
+        date: string;
+        id?: string | null;
+      }[]
+    | null;
+  series?: (number | null) | Event;
+  venue?: (number | null) | Venue;
+  organizer?: (number | null) | Organizer;
+  categories?: (number | EventCategory)[] | null;
+  /**
+   * e.g. "Free" or "$15–$25"
+   */
+  cost?: string | null;
+  url?: string | null;
+  cover?: (number | null) | Media;
+  featured?: boolean | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  submittedBy?: {
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+  };
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "venues".
+ */
+export interface Venue {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  address?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  url?: string | null;
+  phone?: string | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "organizers".
+ */
+export interface Organizer {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  url?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-categories".
+ */
+export interface EventCategory {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  /**
+   * Hex color for calendar chips, e.g. #2E9C9C
+   */
+  color?: string | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "places".
+ */
+export interface Place {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  type: 'restaurant' | 'shop' | 'service' | 'bar';
+  businessStatus?: ('open' | 'temporarily_closed' | 'closed') | null;
+  featured?: boolean | null;
+  street?: ('laurel' | 'san-carlos-ave' | 'el-camino' | 'industrial' | 'other') | null;
+  address?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  phone?: string | null;
+  website?: string | null;
+  priceRange?: ('$' | '$$' | '$$$' | '$$$$') | null;
+  /**
+   * One line per day, e.g. Mon–Fri 11am–9pm
+   */
+  hours?: string | null;
+  cuisines?: string[] | null;
+  meals?: string[] | null;
+  features?: string[] | null;
+  specialDiets?: string[] | null;
+  cover?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * Extra schema.org data. The site adds Article/Event/Place schema automatically.
+   */
+  jsonLd?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "parks".
+ */
+export interface Park {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  type: 'park' | 'trail' | 'garden';
+  address?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  acres?: number | null;
+  facilities?: string[] | null;
+  cover?: (number | null) | Media;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "neighborhoods".
+ */
+export interface Neighborhood {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  tagline?: string | null;
+  hero?: (number | null) | Media;
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  highlights?:
+    | {
+        /**
+         * Icon name, e.g. park, school, coffee
+         */
+        icon?: string | null;
+        title: string;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Assigned schools. Facts only, no rankings (Fair Housing).
+   */
+  schools?:
+    | {
+        name: string;
+        grades?: string | null;
+        district?: string | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Polygon filter created in the Buying Buddy dashboard.
+   */
+  bbFilterId?: string | null;
+  ihfMarketId?: number | null;
+  /**
+   * GeoJSON boundary for maps.
+   */
+  polygon?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * Extra schema.org data. The site adds Article/Event/Place schema automatically.
+   */
+  jsonLd?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  quote: string;
+  author: string;
+  /**
+   * e.g. "Sold in Howard Park, 2025"
+   */
+  context?: string | null;
+  date?: string | null;
+  featured?: boolean | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline-entries".
+ */
+export interface TimelineEntry {
+  id: number;
+  year: number;
+  /**
+   * Optional, e.g. "Spring 1925"
+   */
+  dateLabel?: string | null;
+  sort?: number | null;
+  title: string;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (number | null) | Media;
+  sourceUrl?: string | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-photos".
+ */
+export interface GalleryPhoto {
+  id: number;
+  image: number | Media;
+  caption?: string | null;
+  photographer?: string | null;
+  photographerEmail?: string | null;
+  status: 'pending' | 'approved' | 'rejected';
+  featured?: boolean | null;
+  submittedAt?: string | null;
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Civic project pages. Facts come from the San Carlos Civic Watch ops desk.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "city-projects".
+ */
+export interface CityProject {
+  id: number;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  area?: string | null;
+  status?: ('proposed' | 'planning' | 'approved' | 'construction' | 'completed' | 'on_hold') | null;
+  latestUpdateAt?: string | null;
+  summary?: string | null;
+  cover?: (number | null) | Media;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  sources?:
+    | {
+        title: string;
+        url: string;
+        publishedAt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Project id in the ops desk database.
+   */
+  opsDeskId?: string | null;
+  seo?: {
+    /**
+     * Under 60 characters. Leave empty to use the page title.
+     */
+    title?: string | null;
+    /**
+     * Under 155 characters.
+     */
+    description?: string | null;
+    focusKeyword?: string | null;
+    image?: (number | null) | Media;
+    /**
+     * Only if this page copies another URL.
+     */
+    canonical?: string | null;
+    noindex?: boolean | null;
+  };
+  /**
+   * WordPress id (migration).
+   */
+  wpId?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  formKey: string;
+  email?: string | null;
+  payload:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  ipHash?: string | null;
+  turnstileOk?: boolean | null;
+  handledAt?: string | null;
+  handledBy?: (number | null) | User;
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number;
+  /**
+   * Path only, starting with /, e.g. /old-page/
+   */
+  fromPath: string;
+  /**
+   * Path or full URL. Leave empty for 410 Gone.
+   */
+  toPath?: string | null;
+  statusCode: '301' | '302' | '410';
+  hits?: number | null;
+  /**
+   * rankmath, crawl, manual
+   */
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -222,18 +1039,174 @@ export interface PayloadKv {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs".
+ */
+export interface PayloadJob {
+  id: number;
+  /**
+   * Input data provided to the job
+   */
+  input?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  taskStatus?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  completedAt?: string | null;
+  totalTried?: number | null;
+  /**
+   * If hasError is true this job will not be retried
+   */
+  hasError?: boolean | null;
+  /**
+   * If hasError is true, this is the error that caused it
+   */
+  error?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Task execution log
+   */
+  log?:
+    | {
+        executedAt: string;
+        completedAt: string;
+        taskSlug: 'inline' | 'schedulePublish';
+        taskID: string;
+        input?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        output?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        state: 'failed' | 'succeeded';
+        error?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  taskSlug?: ('inline' | 'schedulePublish') | null;
+  queue?: string | null;
+  waitUntil?: string | null;
+  processing?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'venues';
+        value: number | Venue;
+      } | null)
+    | ({
+        relationTo: 'organizers';
+        value: number | Organizer;
+      } | null)
+    | ({
+        relationTo: 'event-categories';
+        value: number | EventCategory;
+      } | null)
+    | ({
+        relationTo: 'places';
+        value: number | Place;
+      } | null)
+    | ({
+        relationTo: 'parks';
+        value: number | Park;
+      } | null)
+    | ({
+        relationTo: 'neighborhoods';
+        value: number | Neighborhood;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'timeline-entries';
+        value: number | TimelineEntry;
+      } | null)
+    | ({
+        relationTo: 'gallery-photos';
+        value: number | GalleryPhoto;
+      } | null)
+    | ({
+        relationTo: 'city-projects';
+        value: number | CityProject;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: number | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'redirects';
+        value: number | Redirect;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -279,32 +1252,388 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "posts_select".
  */
-export interface UsersSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  enableAPIKey?: T;
-  apiKey?: T;
-  apiKeyIndex?: T;
-  hasAPIKey?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  publishedAt?: T;
+  author?: T;
+  categories?: T;
+  tags?: T;
+  cover?: T;
+  excerpt?: T;
+  body?: T;
+  seo?:
     | T
     | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
       };
+  jsonLd?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  description?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  hero?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        image?: T;
+        videoUrl?: T;
+      };
+  body?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  jsonLd?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  status?: T;
+  startsAt?: T;
+  endsAt?: T;
+  allDay?: T;
+  timezone?: T;
+  rrule?: T;
+  exdates?:
+    | T
+    | {
+        date?: T;
+        id?: T;
+      };
+  series?: T;
+  venue?: T;
+  organizer?: T;
+  categories?: T;
+  cost?: T;
+  url?: T;
+  cover?: T;
+  featured?: T;
+  body?: T;
+  submittedBy?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+        phone?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "venues_select".
+ */
+export interface VenuesSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  address?: T;
+  city?: T;
+  state?: T;
+  zip?: T;
+  lat?: T;
+  lng?: T;
+  url?: T;
+  phone?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "organizers_select".
+ */
+export interface OrganizersSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  url?: T;
+  email?: T;
+  phone?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-categories_select".
+ */
+export interface EventCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  color?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "places_select".
+ */
+export interface PlacesSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  type?: T;
+  businessStatus?: T;
+  featured?: T;
+  street?: T;
+  address?: T;
+  lat?: T;
+  lng?: T;
+  phone?: T;
+  website?: T;
+  priceRange?: T;
+  hours?: T;
+  cuisines?: T;
+  meals?: T;
+  features?: T;
+  specialDiets?: T;
+  cover?: T;
+  gallery?: T;
+  body?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  jsonLd?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "parks_select".
+ */
+export interface ParksSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  type?: T;
+  address?: T;
+  lat?: T;
+  lng?: T;
+  acres?: T;
+  facilities?: T;
+  cover?: T;
+  body?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "neighborhoods_select".
+ */
+export interface NeighborhoodsSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  tagline?: T;
+  hero?: T;
+  intro?: T;
+  highlights?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  schools?:
+    | T
+    | {
+        name?: T;
+        grades?: T;
+        district?: T;
+        url?: T;
+        id?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  bbFilterId?: T;
+  ihfMarketId?: T;
+  polygon?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  jsonLd?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  quote?: T;
+  author?: T;
+  context?: T;
+  date?: T;
+  featured?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline-entries_select".
+ */
+export interface TimelineEntriesSelect<T extends boolean = true> {
+  year?: T;
+  dateLabel?: T;
+  sort?: T;
+  title?: T;
+  body?: T;
+  image?: T;
+  sourceUrl?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-photos_select".
+ */
+export interface GalleryPhotosSelect<T extends boolean = true> {
+  image?: T;
+  caption?: T;
+  photographer?: T;
+  photographerEmail?: T;
+  status?: T;
+  featured?: T;
+  submittedAt?: T;
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "city-projects_select".
+ */
+export interface CityProjectsSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  area?: T;
+  status?: T;
+  latestUpdateAt?: T;
+  summary?: T;
+  cover?: T;
+  body?: T;
+  sources?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        publishedAt?: T;
+        id?: T;
+      };
+  opsDeskId?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        focusKeyword?: T;
+        image?: T;
+        canonical?: T;
+        noindex?: T;
+      };
+  wpId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -363,11 +1692,100 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  formKey?: T;
+  email?: T;
+  payload?: T;
+  ipHash?: T;
+  turnstileOk?: T;
+  handledAt?: T;
+  handledBy?: T;
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects_select".
+ */
+export interface RedirectsSelect<T extends boolean = true> {
+  fromPath?: T;
+  toPath?: T;
+  statusCode?: T;
+  hits?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
+  hasAPIKey?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  resetPasswordRequestedAt?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
   key?: T;
   data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs_select".
+ */
+export interface PayloadJobsSelect<T extends boolean = true> {
+  input?: T;
+  taskStatus?: T;
+  completedAt?: T;
+  totalTried?: T;
+  hasError?: T;
+  error?: T;
+  log?:
+    | T
+    | {
+        executedAt?: T;
+        completedAt?: T;
+        taskSlug?: T;
+        taskID?: T;
+        input?: T;
+        output?: T;
+        state?: T;
+        error?: T;
+        id?: T;
+      };
+  taskSlug?: T;
+  queue?: T;
+  waitUntil?: T;
+  processing?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -403,6 +1821,101 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  siteTitle: string;
+  tagline?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  address?: string | null;
+  social?:
+    | {
+        platform: 'facebook' | 'instagram' | 'youtube' | 'linkedin' | 'x' | 'tiktok' | 'nextdoor';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  defaultOgImage?: (number | null) | Media;
+  sidebarCta?: {
+    heading?: string | null;
+    text?: string | null;
+    photo?: (number | null) | Media;
+    phone?: string | null;
+    email?: string | null;
+    valuationLabel?: string | null;
+    valuationUrl?: string | null;
+  };
+  footerColumns?:
+    | {
+        heading: string;
+        links?:
+          | {
+              label: string;
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Copyright line, brokerage disclosure.
+   */
+  footerNote?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  siteTitle?: T;
+  tagline?: T;
+  phone?: T;
+  email?: T;
+  address?: T;
+  social?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  defaultOgImage?: T;
+  sidebarCta?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        photo?: T;
+        phone?: T;
+        email?: T;
+        valuationLabel?: T;
+        valuationUrl?: T;
+      };
+  footerColumns?:
+    | T
+    | {
+        heading?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  footerNote?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "collections_widget".
  */
 export interface CollectionsWidget {
@@ -410,6 +1923,26 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskSchedulePublish".
+ */
+export interface TaskSchedulePublish {
+  input: {
+    type?: ('publish' | 'unpublish') | null;
+    locale?: string | null;
+    doc?: {
+      relationTo: 'posts';
+      value: number | Post;
+    } | null;
+    global?: string | null;
+    user?: {
+      relationTo: 'users';
+      value: number | User;
+    } | null;
+  };
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
