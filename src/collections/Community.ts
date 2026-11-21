@@ -26,6 +26,7 @@ export const Parks: CollectionConfig = {
       ],
     },
     { name: "address", type: "text" },
+    { name: "mapsUrl", type: "text", label: "Directions link" },
     {
       type: "row",
       fields: [
@@ -35,6 +36,7 @@ export const Parks: CollectionConfig = {
       ],
     },
     { name: "facilities", type: "text", hasMany: true },
+    { name: "summary", type: "textarea", admin: { description: "One or two sentences for the parks list." } },
     { name: "cover", type: "upload", relationTo: "media" },
     bodyField(),
     seoFields,

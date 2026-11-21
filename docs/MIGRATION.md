@@ -16,7 +16,8 @@ pnpm migrate:verify     # BASE_URL=<site> — every old sitemap URL must reach a
 | Posts | 20-posts.ts | 16 categories, 244 posts (all published), Divi markup removed, images copied, internal links made relative |
 | Events | 30-events.ts | 100 categories, 144 venues, 130 organizers, 808 events (past ones archived, URLs /event/<slug>/ unchanged) |
 | Places | 40-places.ts | 69 places (restaurants keep /restaurant/<slug>/, stores /store/<slug>/), hours, links, galleries, map points |
-| Misc | 50-misc.ts | 48 history timeline stories, 6 testimonials, 6 neighborhoods (highlights + FAQ), 36 pages |
+| Misc | 50-misc.ts | 48 history timeline stories, 6 testimonials, 6 neighborhoods (highlights + FAQ), 36 pages, Videos page (15 restaurant videos + playlist) |
+| Parks | 55-parks.ts | 12 parks from the parks page (name, description, acres, directions). The live page repeats other parks' addresses for Frank D. Harrington, Highlands and Vista Park; those addresses are left empty for an editor to fill in |
 | Redirects | 60-redirects.ts | 139 rules: 36 from Rank Math, 100 for moved/dropped content, 3 already redirecting live |
 
 ## What the export can't see without a WordPress login

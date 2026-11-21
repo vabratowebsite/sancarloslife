@@ -123,9 +123,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     settings: Setting;
+    'videos-page': VideosPage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    'videos-page': VideosPageSelect<false> | VideosPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -696,10 +698,15 @@ export interface Park {
   slug: string;
   type: 'park' | 'trail' | 'garden';
   address?: string | null;
+  mapsUrl?: string | null;
   lat?: number | null;
   lng?: number | null;
   acres?: number | null;
   facilities?: string[] | null;
+  /**
+   * One or two sentences for the parks list.
+   */
+  summary?: string | null;
   cover?: (number | null) | Media;
   body?: {
     root: {
@@ -1519,10 +1526,12 @@ export interface ParksSelect<T extends boolean = true> {
   slug?: T;
   type?: T;
   address?: T;
+  mapsUrl?: T;
   lat?: T;
   lng?: T;
   acres?: T;
   facilities?: T;
+  summary?: T;
   cover?: T;
   body?: T;
   seo?:
@@ -1911,6 +1920,36 @@ export interface Setting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos-page".
+ */
+export interface VideosPage {
+  id: number;
+  intro?: string | null;
+  sections?:
+    | {
+        title: string;
+        /**
+         * Optional YouTube playlist id (starts with PL). Shown as a player above the videos.
+         */
+        playlistId?: string | null;
+        videos?:
+          | {
+              /**
+               * The 11-character id from the YouTube link
+               */
+              youtubeId: string;
+              title: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -1952,6 +1991,30 @@ export interface SettingsSelect<T extends boolean = true> {
         id?: T;
       };
   footerNote?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos-page_select".
+ */
+export interface VideosPageSelect<T extends boolean = true> {
+  intro?: T;
+  sections?:
+    | T
+    | {
+        title?: T;
+        playlistId?: T;
+        videos?:
+          | T
+          | {
+              youtubeId?: T;
+              title?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

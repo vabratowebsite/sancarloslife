@@ -180,6 +180,25 @@ await run("misc", async () => {
     else await p.create({ collection: "pages", data });
     pCount++;
   }
+  // ---- Videos page: the YouTube gallery plugin's first page of each gallery
+  const videosHtml = pages.find((x) => x.slug === "videos-of-san-carlos-ca")?.content.rendered ?? "";
+  const sections: { title: string; playlistId?: string; videos: { youtubeId: string; title: string }[] }[] = [];
+  for (const part of videosHtml.split(/<h[23][^>]*>/).slice(1)) {
+    const title = text(part.split(/<\/h[23]>/)[0]);
+    if (!/videos/i.test(title) || /of\s+san carlos/i.test(title)) continue;
+    const videos = [...part.matchAll(/data-videoid="([\w-]{11})"[\s\S]*?epyt-gallery-title">([\s\S]*?)<\/div>/g)].map((m) => ({ youtubeId: m[1], title: text(m[2]) }));
+    const playlistId = part.match(/data-playlist[^=]*="([^"]+)"/)?.[1];
+    sections.push({ title, playlistId, videos });
+  }
+  await p.updateGlobal({
+    slug: "videos-page",
+    data: {
+      intro: "Video shorts from San Carlos restaurants and shops, highlights from Hometown Days and the Art and Wine Faire, and a guide to each of the six neighborhoods.",
+      sections: sections.filter((s) => s.videos.length || s.playlistId),
+    },
+  });
+  console.log(`videos page: ${sections.map((s) => `${s.title} (${s.videos.length})`).join(", ")}`);
+
   await media.save();
   console.log(`pages: ${pCount}, neighborhoods: ${Object.keys(NEIGHBORHOODS).length}`);
 });
