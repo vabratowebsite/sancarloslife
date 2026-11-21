@@ -40,9 +40,14 @@ export const listOccurrences = (opts: { from: string; to: string; categoryId?: n
         limit: 1000,
         depth: 1,
         pagination: false,
+        // List fields only (no body), so cached results stay small.
+        select: {
+          title: true, slug: true, startsAt: true, endsAt: true, allDay: true, rrule: true, exdates: true,
+          venue: true, categories: true, cost: true, cover: true, status: true,
+        },
       });
       const out: EventOccurrence[] = [];
-      for (const event of res.docs) {
+      for (const event of res.docs as Event[]) {
         for (const o of occurrences(event, from, to)) {
           out.push({ event, start: o.start.toISOString(), end: o.end?.toISOString() ?? null });
         }

@@ -10,7 +10,7 @@ export function PostCard({ post, priority = false }: { post: Post; priority?: bo
   const category = (post.categories ?? []).find((c): c is Category => typeof c === "object");
   return (
     <article className="flex flex-col overflow-hidden rounded-card bg-white shadow-card">
-      <Link href={`/${post.slug}/`} className="block aspect-[3/2] bg-teal-50" tabIndex={-1} aria-hidden="true">
+      <Link href={`/${post.slug}/`} className="block aspect-[3/2] overflow-hidden bg-teal-50" tabIndex={-1} aria-hidden="true">
         {img && (
           <Image
             src={img.src}

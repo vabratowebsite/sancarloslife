@@ -18,7 +18,12 @@ export const Places: CollectionConfig = {
   versions: { drafts: true, maxPerDoc: 10 },
   hooks: revalidateHooks("places"),
   fields: [
-    { name: "name", type: "text", required: true },
+    { name: "name", type: "text", required: true, admin: { description: "Short name for cards, e.g. Pho Vinh" } },
+    {
+      name: "headline",
+      type: "text",
+      admin: { description: "Page heading, e.g. Pho Vinh San Carlos, Vibrant Authentic Vietnamese Pho. Defaults to the name." },
+    },
     slugField({ useAsSlug: "name" }),
     {
       type: "row",

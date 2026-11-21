@@ -76,7 +76,7 @@ const SERVICE_TYPES = /^(barbershop|laundry-or-dry-cleaning|shoe-repair-and-alte
 
 const linkKind = (label: string): "order" | "reserve" | "reviews" | "web" => {
   const l = label.toLowerCase();
-  if (/doordash|postmates|uber|grubhub|order|menu|delivery|caviar|toast/.test(l)) return "order";
+  if (/doordash|postmates|uber|grubhub|seamless|order|menu|delivery|caviar|toast/.test(l)) return "order";
   if (/opentable|resy|reserv|tock/.test(l)) return "reserve";
   if (/yelp|tripadvisor|google review/.test(l)) return "reviews";
   return "web";
@@ -133,8 +133,10 @@ await run("places", async () => {
       const priceSlug = termName("price_range", wp.price_range)[0]?.slug;
       const { seo: seoGroup, jsonLd } = seoFrom(seo[wp.link], name);
       const typeTerms = termName("restaurant_type", wp.restaurant_type).map((t) => t.slug);
+      const short = text(k("grid_title", "grid_title") ?? m["ptb_services_and_shops_grid_title"] as string);
       const data = {
-        name,
+        name: short || name,
+        headline: short && short !== name ? name : undefined,
         slug: wp.slug,
         generateSlug: false,
         type: isRestaurant

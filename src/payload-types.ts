@@ -577,7 +577,14 @@ export interface EventCategory {
  */
 export interface Place {
   id: number;
+  /**
+   * Short name for cards, e.g. Pho Vinh
+   */
   name: string;
+  /**
+   * Page heading, e.g. Pho Vinh San Carlos, Vibrant Authentic Vietnamese Pho. Defaults to the name.
+   */
+  headline?: string | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -1451,6 +1458,7 @@ export interface EventCategoriesSelect<T extends boolean = true> {
  */
 export interface PlacesSelect<T extends boolean = true> {
   name?: T;
+  headline?: T;
   generateSlug?: T;
   slug?: T;
   type?: T;
