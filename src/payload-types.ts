@@ -344,7 +344,7 @@ export interface Media {
   };
 }
 /**
- * Hub, guide and legal pages. Layout blocks arrive in milestone 12.
+ * Hub, guide and legal pages: a hero, optional body text, then layout sections.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
@@ -384,6 +384,198 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Sections shown after the body text, in order. Leave the body empty to build the page from sections only.
+   */
+  layout?:
+    | (
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            /**
+             * Small label above the heading (optional).
+             */
+            eyebrow?: string | null;
+            heading?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'prose';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            /**
+             * Small label above the heading (optional).
+             */
+            eyebrow?: string | null;
+            heading?: string | null;
+            items?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Source and date of the figures, shown in small print.
+             */
+            note?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            /**
+             * Small label above the heading (optional).
+             */
+            eyebrow?: string | null;
+            heading?: string | null;
+            intro?: string | null;
+            items?:
+              | {
+                  title: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureList';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            /**
+             * Small label above the heading (optional).
+             */
+            eyebrow?: string | null;
+            heading?: string | null;
+            intro?: string | null;
+            source?: ('manual' | 'restaurants' | 'shops' | 'events' | 'parks' | 'posts') | null;
+            limit?: number | null;
+            more?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            cards?:
+              | {
+                  title: string;
+                  text?: string | null;
+                  image?: (number | null) | Media;
+                  label: string;
+                  /**
+                   * /path/ on this site, or a full https:// link
+                   */
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cardGrid';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            heading: string;
+            text?: string | null;
+            tone?: ('teal' | 'sand') | null;
+            buttons?:
+              | {
+                  label: string;
+                  /**
+                   * /path/ on this site, or a full https:// link
+                   */
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            heading?: string | null;
+            items?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            heading?: string | null;
+            /**
+             * The 11-character id from the YouTube link
+             */
+            youtubeId: string;
+            /**
+             * Used for screen readers
+             */
+            title: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'video';
+          }
+        | {
+            image: number | Media;
+            caption?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'image';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            heading?: string | null;
+            photos?: (number | Media)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+      )[]
+    | null;
   seo?: {
     /**
      * Under 60 characters. Leave empty to use the page title.
@@ -1347,6 +1539,141 @@ export interface PagesSelect<T extends boolean = true> {
         videoUrl?: T;
       };
   body?: T;
+  layout?:
+    | T
+    | {
+        prose?:
+          | T
+          | {
+              anchor?: T;
+              eyebrow?: T;
+              heading?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              anchor?: T;
+              eyebrow?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              note?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureList?:
+          | T
+          | {
+              anchor?: T;
+              eyebrow?: T;
+              heading?: T;
+              intro?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardGrid?:
+          | T
+          | {
+              anchor?: T;
+              eyebrow?: T;
+              heading?: T;
+              intro?: T;
+              source?: T;
+              limit?: T;
+              more?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    image?: T;
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              anchor?: T;
+              heading?: T;
+              text?: T;
+              tone?: T;
+              buttons?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              anchor?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        video?:
+          | T
+          | {
+              anchor?: T;
+              heading?: T;
+              youtubeId?: T;
+              title?: T;
+              id?: T;
+              blockName?: T;
+            };
+        image?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              anchor?: T;
+              heading?: T;
+              photos?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   seo?:
     | T
     | {

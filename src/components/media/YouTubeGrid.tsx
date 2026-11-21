@@ -8,10 +8,10 @@ type Video = { youtubeId: string; title: string };
  * Thumbnails that turn into a player when chosen. Nothing loads from YouTube
  * until a visitor clicks (privacy and page speed).
  */
-export function YouTubeGrid({ videos }: { videos: Video[] }) {
+export function YouTubeGrid({ videos, single = false }: { videos: Video[]; single?: boolean }) {
   const [playing, setPlaying] = useState<string | null>(null);
   return (
-    <ul className="grid gap-gutter sm:grid-cols-2 lg:grid-cols-3">
+    <ul className={single ? "grid max-w-3xl" : "grid gap-gutter sm:grid-cols-2 lg:grid-cols-3"}>
       {videos.map((v) => (
         <li key={v.youtubeId} className="overflow-hidden rounded-card bg-white shadow-card">
           {playing === v.youtubeId ? (

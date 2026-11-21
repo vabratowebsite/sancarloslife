@@ -1,6 +1,7 @@
 import { slugField, type CollectionConfig } from "payload";
 
 import { publishedOrStaff, staffOnly } from "../access/roles";
+import { layoutField } from "../blocks";
 import { bodyField } from "../fields/richText";
 import { jsonLdField, seoFields, wpIdField } from "../fields/seo";
 import { revalidateHooks } from "../hooks/revalidate";
@@ -11,7 +12,7 @@ export const Pages: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "_status", "updatedAt"],
     group: "Content",
-    description: "Hub, guide and legal pages. Layout blocks arrive in milestone 12.",
+    description: "Hub, guide and legal pages: a hero, optional body text, then layout sections.",
   },
   access: {
     read: publishedOrStaff,
@@ -35,6 +36,7 @@ export const Pages: CollectionConfig = {
       ],
     },
     bodyField(),
+    layoutField(),
     seoFields,
     jsonLdField,
     wpIdField,
