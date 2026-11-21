@@ -25,7 +25,9 @@ export function summaryEmail(intro: string, rows: [string, string | undefined | 
 export async function sendEmail(mail: Mail): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
-    console.info(`[email not sent: no RESEND_API_KEY] to=${mail.to} subject="${mail.subject}"\n${mail.text}`);
+    // Never write recipients or form contents (personal data) to production logs.
+    if (process.env.NODE_ENV === "production") console.warn("[email not sent: no RESEND_API_KEY]");
+    else console.info(`[email not sent: no RESEND_API_KEY] to=${mail.to} subject="${mail.subject}"\n${mail.text}`);
     return false;
   }
   const res = await fetch("https://api.resend.com/emails", {

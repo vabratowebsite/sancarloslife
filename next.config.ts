@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { baseHeaders, contentSecurityPolicy } from "./security-headers.mjs";
+
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
@@ -13,6 +15,14 @@ const nextConfig: NextConfig = {
   experimental: {
     // One 404 page for URLs that match no route (the site and admin have separate layouts).
     globalNotFound: true,
+  },
+  poweredByHeader: false,
+  async headers() {
+    return [
+      { source: "/:path*", headers: baseHeaders },
+      // The Payload admin manages its own scripts; the CSP covers the public site.
+      { source: "/((?!admin|api).*)", headers: [{ key: "Content-Security-Policy", value: contentSecurityPolicy() }] },
+    ];
   },
   images: {
     localPatterns: [{ pathname: "/api/media/file/**" }],

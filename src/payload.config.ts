@@ -29,6 +29,18 @@ const useS3 = Boolean(
   process.env.S3_BUCKET && process.env.S3_ENDPOINT && process.env.S3_ACCESS_KEY_ID,
 );
 
+// Origins allowed to make cookie-authenticated admin/API requests: the site, plus
+// the Vercel deployment and branch URLs so the admin works on previews.
+const origins = [
+  (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, ""),
+  process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`,
+  process.env.VERCEL_BRANCH_URL && `https://${process.env.VERCEL_BRANCH_URL}`,
+].filter((o): o is string => Boolean(o));
+
+if (process.env.NODE_ENV === "production" && (process.env.PAYLOAD_SECRET ?? "").length < 32) {
+  throw new Error("PAYLOAD_SECRET must be set to at least 32 random characters in production");
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -62,6 +74,9 @@ export default buildConfig({
   globals: [Settings, HomePage, VideosPage],
   editor: richTextEditor,
   secret: process.env.PAYLOAD_SECRET || "",
+  // Cookie-authenticated requests to the admin API are only accepted from our own origin.
+  cors: origins,
+  csrf: origins,
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
