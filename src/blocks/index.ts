@@ -212,7 +212,53 @@ export const GalleryBlock: Block = {
   fields: [anchor, heading, { name: "photos", type: "upload", relationTo: "media", hasMany: true, minRows: 1 }],
 };
 
-export const layoutBlocks = [ProseBlock, StatsBlock, FeatureListBlock, CardGridBlock, CtaBlock, FaqBlock, VideoBlock, ImageBlock, GalleryBlock];
+export const TeamBlock: Block = {
+  slug: "team",
+  labels: { singular: "Team profiles", plural: "Team profiles" },
+  fields: [
+    anchor,
+    eyebrow,
+    heading,
+    {
+      name: "people",
+      type: "array",
+      minRows: 1,
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "name", type: "text", required: true },
+            { name: "role", type: "text", admin: { description: "e.g. Broker / Partner / J.D." } },
+          ],
+        },
+        { name: "photo", type: "upload", relationTo: "media" },
+        { name: "bio", type: "textarea" },
+        { name: "license", type: "text", admin: { description: "Shown as written, e.g. CA DRE Lic. # 01372898" } },
+        {
+          type: "row",
+          fields: [
+            { name: "phone", type: "text" },
+            { name: "email", type: "email" },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+export const TestimonialsBlock: Block = {
+  slug: "testimonials",
+  labels: { singular: "Testimonials", plural: "Testimonials" },
+  fields: [
+    anchor,
+    eyebrow,
+    { ...heading, defaultValue: "What clients say" },
+    { name: "featuredOnly", type: "checkbox", defaultValue: false, admin: { description: "Only testimonials marked Featured" } },
+    { name: "limit", type: "number", defaultValue: 6, min: 1, max: 24 },
+  ],
+};
+
+export const layoutBlocks = [ProseBlock, StatsBlock, FeatureListBlock, CardGridBlock, CtaBlock, FaqBlock, VideoBlock, ImageBlock, GalleryBlock, TeamBlock, TestimonialsBlock];
 
 export const layoutField = (): Field => ({
   name: "layout",

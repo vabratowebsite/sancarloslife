@@ -574,6 +574,57 @@ export interface Page {
             blockName?: string | null;
             blockType: 'gallery';
           }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            /**
+             * Small label above the heading (optional).
+             */
+            eyebrow?: string | null;
+            heading?: string | null;
+            people?:
+              | {
+                  name: string;
+                  /**
+                   * e.g. Broker / Partner / J.D.
+                   */
+                  role?: string | null;
+                  photo?: (number | null) | Media;
+                  bio?: string | null;
+                  /**
+                   * Shown as written, e.g. CA DRE Lic. # 01372898
+                   */
+                  license?: string | null;
+                  phone?: string | null;
+                  email?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'team';
+          }
+        | {
+            /**
+             * Optional id for links to this section, e.g. schools → /about-san-carlos/#schools
+             */
+            anchor?: string | null;
+            /**
+             * Small label above the heading (optional).
+             */
+            eyebrow?: string | null;
+            heading?: string | null;
+            /**
+             * Only testimonials marked Featured
+             */
+            featuredOnly?: boolean | null;
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
+          }
       )[]
     | null;
   seo?: {
@@ -1670,6 +1721,38 @@ export interface PagesSelect<T extends boolean = true> {
               anchor?: T;
               heading?: T;
               photos?: T;
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              anchor?: T;
+              eyebrow?: T;
+              heading?: T;
+              people?:
+                | T
+                | {
+                    name?: T;
+                    role?: T;
+                    photo?: T;
+                    bio?: T;
+                    license?: T;
+                    phone?: T;
+                    email?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              anchor?: T;
+              eyebrow?: T;
+              heading?: T;
+              featuredOnly?: T;
+              limit?: T;
               id?: T;
               blockName?: T;
             };

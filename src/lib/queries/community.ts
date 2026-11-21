@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 
 import { getPayloadClient } from "@/lib/payload";
-import type { CityProject, Park, TimelineEntry } from "@/payload-types";
+import type { CityProject, Park, Testimonial, TimelineEntry } from "@/payload-types";
 
 export const listParks = unstable_cache(
   async (): Promise<Park[]> => {
@@ -31,4 +31,22 @@ export const getCityProject = (slug: string) =>
     },
     ["city-project", slug],
     { tags: ["city-projects", `city-projects:${slug}`], revalidate: 3600 },
+  )();
+
+export const listTestimonials = (featuredOnly: boolean, limit: number) =>
+  unstable_cache(
+    async (): Promise<Testimonial[]> => {
+      const payload = await getPayloadClient();
+      return (
+        await payload.find({
+          collection: "testimonials",
+          where: featuredOnly ? { featured: { equals: true } } : {},
+          sort: ["-featured", "-date", "id"],
+          limit,
+          depth: 0,
+        })
+      ).docs;
+    },
+    ["testimonials", String(featuredOnly), String(limit)],
+    { tags: ["testimonials"], revalidate: 3600 },
   )();

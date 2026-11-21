@@ -10,6 +10,7 @@ const PAGES = [
   "/san-carlos-life-blog/",
   "/about-san-carlos/",
   "/explore-the-city/",
+  "/one-of-the-best-realtor-teams-in-san-carlos-ca/",
   "/howard-park/",
   "/restaurants-and-services/all-restaurants/",
   "/parks-of-san-carlos/",

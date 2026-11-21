@@ -10,7 +10,8 @@ import { PlaceCard } from "@/components/places/PlaceCard";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { fromLA, laParts } from "@/lib/events/recurrence";
 import { mediaSrc } from "@/lib/media";
-import { listParks } from "@/lib/queries/community";
+import { telHref } from "@/lib/queries/settings";
+import { listParks, listTestimonials } from "@/lib/queries/community";
 import { listOccurrences } from "@/lib/queries/events";
 import { listPlaces } from "@/lib/queries/places";
 import { listPosts } from "@/lib/queries/posts";
@@ -296,6 +297,87 @@ function Gallery({ block, band }: { block: B<"gallery">; band: boolean }) {
   );
 }
 
+function Team({ block, band }: { block: B<"team">; band: boolean }) {
+  return (
+    <Section block={block} band={band}>
+      <ul className="grid gap-gutter md:grid-cols-2">
+        {(block.people ?? []).map((person) => {
+          const img = mediaSrc(person.photo, "card");
+          return (
+            <li key={person.id ?? person.name} className="flex min-w-0 flex-col overflow-hidden rounded-card bg-white shadow-card sm:flex-row md:flex-col lg:flex-row">
+              {img && (
+                <Image
+                  src={img.src}
+                  alt={person.name}
+                  width={img.width}
+                  height={img.height}
+                  sizes="(min-width: 1024px) 220px, 100vw"
+                  className="aspect-[4/5] w-full object-cover sm:w-56 md:w-full lg:w-56"
+                />
+              )}
+              <div className="flex min-w-0 flex-1 flex-col p-6">
+                <h3 className="font-heading text-[26px] leading-tight">{person.name}</h3>
+                {person.role && <p className="eyebrow mt-1 text-xs text-teal-700">{person.role}</p>}
+                {person.bio && <p className="mt-3 whitespace-pre-line text-ink-500">{person.bio}</p>}
+                <dl className="mt-4 grid gap-1 text-small">
+                  {person.license && (
+                    <div>
+                      <dt className="sr-only">License</dt>
+                      <dd className="text-ink-500">{person.license}</dd>
+                    </div>
+                  )}
+                  {person.phone && (
+                    <div>
+                      <dt className="sr-only">Phone</dt>
+                      <dd>
+                        <a href={telHref(person.phone)}>{person.phone}</a>
+                      </dd>
+                    </div>
+                  )}
+                  {person.email && (
+                    <div>
+                      <dt className="sr-only">Email</dt>
+                      <dd>
+                        <a href={`mailto:${person.email}`}>{person.email}</a>
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </Section>
+  );
+}
+
+async function Testimonials({ block, band }: { block: B<"testimonials">; band: boolean }) {
+  const items = await listTestimonials(Boolean(block.featuredOnly), block.limit ?? 6);
+  if (!items.length) return null;
+  return (
+    <Section block={block} band={band}>
+      <ul className="columns-1 gap-gutter md:columns-2 lg:columns-3">
+        {items.map((t) => {
+          const [headline, place] = (t.context ?? "").split(" · ");
+          return (
+            <li key={t.id} className="mb-gutter break-inside-avoid">
+              <figure className="rounded-card bg-white p-6 shadow-card">
+                {headline && <p className="font-heading text-[20px] leading-snug text-teal-700">{headline}</p>}
+                <blockquote className="mt-3 whitespace-pre-line text-ink-900">{t.quote}</blockquote>
+                <figcaption className="eyebrow mt-4 text-xs text-ink-500">
+                  {t.author}
+                  {place && <> · {place}</>}
+                </figcaption>
+              </figure>
+            </li>
+          );
+        })}
+      </ul>
+    </Section>
+  );
+}
+
 /**
  * Renders a page's layout sections in order. Sections without their own
  * background alternate white and sand so long pages keep a rhythm.
@@ -353,6 +435,12 @@ export async function BlockRenderer({ blocks }: { blocks: Page["layout"] }) {
       }
       case "gallery":
         out.push(<Gallery key={key} block={block} band={band} />);
+        break;
+      case "team":
+        out.push(<Team key={key} block={block} band={band} />);
+        break;
+      case "testimonials":
+        out.push(<Testimonials key={key} block={block} band={band} />);
         break;
     }
   }
