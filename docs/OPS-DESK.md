@@ -72,3 +72,37 @@ the GitHub repo.
 - Supabase Civic Watch database reachable (it times out), Supabase Pro before launch
 - An AI provider API key for phase 2–3 (each run is billed by that provider)
 - Google sign-in setup if email scans move to the website
+
+## Phase 4 plan: moving the artifact desk's content in (survey only, nothing imported yet)
+
+Read-only survey on 2026-11-22 of the "San Carlos Life Operations Desk" artifact (version
+`1795226294-9e51`, 469 files). The artifact also ships `src/bundle.json`: the desk's own
+structured data and build scripts. Import from that data where it exists, not from the rendered
+HTML previews (those were built for Divi code modules).
+
+| Desk content | Count | Best source | Goes to | Notes |
+|---|---|---|---|---|
+| Blog drafts | 45 | `pages/blogs.py`, `pages/blogs_index.json` (slug, title, SEO, focus, words, verify list); `blogs/*.html` for the body | `posts` as drafts in review (source claude) | Body as a sanitized raw-HTML block (like migrated WordPress posts) or rebuilt into sections; the SEO META comment gives title, description, focus keyword, category. "Verify" items go to the review note. |
+| News briefs | 22 (+16 in `news_index.json`) | `pages/news_index.json`, `news/*.html` | `posts` (Community News category), drafts in review | `news/feed.json` (123 found items) is desk research, not site content: it belongs in Civic Watch `public.news_items` (see pending rows). |
+| Event drafts | 102 pages; 49 structured drafts + 44 source calendars | `events/events.json` (`drafts`: dates, times, recurrence, venue, organizer, cost, description, sources, confidence) | `events` (status draft), venues/organizers matched by WordPress id or name | Recurrence maps to `rrule` + `exdates`; skip past dates; `image_note` means a photo is still needed; sources and confidence go to the review note. The 44 calendars become the event job's sources. |
+| City project pages | 10 (`drafts/*.html`) | `pages/index.json` (slug, title, SEO, FAQ, verify), `pages/content.py` | `city-projects` drafts (9) + the hub text for /city-projects/ | Centennial Plaza, Downtown Specific Plan, Streetscape Master Plan, Harrington Park, Measure G, Northeast Area Specific Plan, Aquatic Center, Parks Master Plan, US-101/Holly. |
+| Real estate pages | 8 (`re/*.html`) | `pages/re_index.json`, `pages/re_pages.py` | ADU/SB 9 guide, buying, selling and market report as `desk-pages` (guide template); home value, calculators, kit and the neighborhood template are covered by existing code routes | For the covered ones, bring wording changes in through the on-page editor rather than importing. |
+| Restaurant and shop profiles | 19 pages (Soko Soko in 3 variants + 16 shops) | `rest/data/shops/*.json`, `rest/data/soko-soko-…json` (address, geo, hours, story, items, FAQ, photos, sources, verify) | existing `places` records (matched by slug), as new draft versions in review | Owner picks the Soko Soko variant (a, b or c). |
+| Photos | 251 (210 JPEG, 23 PNG, 1 WebP) + 17 `photos.json` + `pages/image_plan.json` (238 planned slots) | `img/**` with the JSON alt text and slot (logo, hero, grid) | `media` (re-encoded with sharp like `attach_photo`), linked as place cover/logo/gallery and post covers | Credit "Vabrato Real Estate Services" where the file is theirs; anything else needs the owner's confirmation of rights. |
+| Newsletters | 9 issues + logo | `newsletter/*.html` | Not site content | Optional later: a newsletter archive page. |
+| Meeting transcripts | 3 transcripts, 1 extract, 144-meeting index | `tx/*` | Civic Watch tables (meetings, agenda items, decisions…) | Ops desk data, not the website. |
+| Pending Civic Watch rows | 145 rows in 18 batches (Nov 3–20) | `pending/supabase_*.json` | Civic Watch `public.*` tables | Written by the desk but never inserted: the database refused or timed out at the time. It is reachable now. Inserting them changes ops desk data, so it waits for the owner. |
+| Desk code and runbook | `RUNBOOK.md`, `*_patch.py`, build scripts, `news/source_directory.txt` | | Reference | The runbook's jobs, schedules and source lists become `desk-jobs` entries. |
+| Saved text edits, leads, run history | in the artifact's own storage, not its files | | | Needs an export from the artifact page itself (owner); leads hold personal data. |
+
+How the import will run: one script (`scripts/migrate/90-desk-import.ts`) reads a local copy of the
+artifact files, runs a dry run first (a report of what would be created or updated and what is
+skipped), then writes everything as drafts in review, never published, matched by slug so it can be
+re-run safely.
+
+Questions for the owner before importing:
+1. Which Soko Soko profile variant (a, b or c) to keep.
+2. Whether to insert the 145 pending rows into the Civic Watch tables.
+3. Whether to add a newsletter archive page.
+4. Rights and credits for photos that aren't Vabrato's own.
+5. Real estate pages: import as guide pages, or fold the wording into the existing code routes.
