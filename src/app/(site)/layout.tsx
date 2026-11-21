@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { fontVariables } from "@/lib/fonts";
+import { indexingAllowed } from "@/lib/indexing";
 import { getSettings } from "@/lib/queries/settings";
 
 import "./globals.css";
@@ -15,8 +16,9 @@ export const metadata: Metadata = {
   },
   description:
     "Your guide to San Carlos, California: events this weekend, restaurants and shops, parks, neighborhoods and homes for sale.",
-  // The preview build must not be indexed until cutover (milestone 26).
-  robots: { index: false, follow: false },
+  // No indexing until cutover (ALLOW_INDEXING=true on production; see src/lib/indexing.ts).
+  robots: indexingAllowed() ? undefined : { index: false, follow: false },
+  alternates: { types: { "application/rss+xml": "/feed/" } },
 };
 
 export default async function SiteLayout({ children }: LayoutProps<"/">) {

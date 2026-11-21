@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { indexingAllowed } from "@/lib/indexing";
 import { mediaSrc } from "@/lib/media";
 import type { Media } from "@/payload-types";
 
@@ -33,13 +34,13 @@ export function buildMetadata(args: {
   const img = mediaSrc(seo?.image ?? args.image, "hero");
   const ogImage = img
     ? { url: absolute(img.src), width: img.width, height: img.height, alt: img.alt }
-    : { url: absolute(`/api/og/?title=${encodeURIComponent(args.title)}`), width: 1200, height: 630 };
+    : { url: absolute(`/og/?title=${encodeURIComponent(args.title)}`), width: 1200, height: 630 };
   return {
     // Migrated titles already carry their own branding; don't add the template suffix twice.
     title: /san carlos life/i.test(title) ? { absolute: title } : title,
     description,
     alternates: { canonical: seo?.canonical || absolute(path) },
-    robots: seo?.noindex ? { index: false, follow: true } : undefined,
+    robots: !indexingAllowed() ? { index: false, follow: false } : seo?.noindex ? { index: false, follow: true } : undefined,
     openGraph: {
       type: args.type ?? "website",
       url: absolute(path),
