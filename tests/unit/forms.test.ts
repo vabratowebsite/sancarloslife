@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { contactSchema, eventSubmissionSchema, guideRequestSchema, photoSubmissionSchema, subscribeSchema } from "@/lib/forms/schemas";
+import {
+  contactSchema,
+  eventSubmissionSchema,
+  guideRequestSchema,
+  photoSubmissionSchema,
+  subscribeSchema,
+  valuationSchema,
+} from "@/lib/forms/schemas";
 
 const future = new Date(Date.now() + 7 * 86_400_000).toISOString().slice(0, 10);
 
@@ -40,5 +47,19 @@ describe("form schemas", () => {
   it("guide: only buyer or seller", () => {
     expect(guideRequestSchema.safeParse({ name: "Ana", email: "a@b.co", guide: "investor" }).success).toBe(false);
     expect(guideRequestSchema.safeParse({ name: "Ana", email: "a@b.co", guide: "seller" }).success).toBe(true);
+  });
+});
+
+describe("valuationSchema", () => {
+  const base = { name: "Pat Lee", email: "pat@example.com", phone: "", address: "123 Elm Street", unit: "", propertyType: "condo", timeline: "0-3", notes: "" };
+  it("treats empty number inputs as not given", () => {
+    const r = valuationSchema.safeParse({ ...base, beds: "", baths: "", sqft: "" });
+    expect(r.success).toBe(true);
+    expect(r.success && r.data.sqft).toBeUndefined();
+  });
+  it("coerces numbers and rejects nonsense", () => {
+    expect(valuationSchema.safeParse({ ...base, beds: "3", baths: "2.5", sqft: "1450" }).success).toBe(true);
+    expect(valuationSchema.safeParse({ ...base, sqft: "12" }).success).toBe(false);
+    expect(valuationSchema.safeParse({ ...base, beds: "2.5" }).success).toBe(false);
   });
 });

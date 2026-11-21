@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Breadcrumbs } from "@/components/content/Breadcrumbs";
+import { IdxEmbed } from "@/components/realestate/IdxEmbed";
 import { RichText } from "@/components/content/RichText";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { mediaSrc } from "@/lib/media";
@@ -42,6 +43,14 @@ export function NeighborhoodView({ hood }: { hood: Neighborhood }) {
             </ul>
           </section>
         )}
+        <section aria-labelledby="market" className="mt-12">
+          <h2 id="market" className="text-h3">
+            Homes for sale in {hood.name}
+          </h2>
+          <div className="mt-6">
+            <IdxEmbed widget="results" filterId={hood.bbFilterId} label={`${hood.name} listings`} />
+          </div>
+        </section>
         {faq.length > 0 && (
           <section aria-labelledby="faq" className="mt-12 max-w-3xl">
             <h2 id="faq" className="text-h3">

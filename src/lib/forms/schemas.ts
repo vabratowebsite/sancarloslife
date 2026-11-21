@@ -71,7 +71,24 @@ export const guideRequestSchema = z.object({
   timeline: z.enum(["0-3", "3-6", "6-12", "12+", "just-looking"]).default("just-looking"),
 });
 
-export type FormKey = "contact" | "subscribe" | "event" | "photo" | "guide";
+/** An optional number field: an empty input means "not given", not zero. */
+const optionalNumber = <T extends z.ZodType>(schema: T) => z.preprocess((v) => (v === "" || v == null ? undefined : v), schema.optional());
+
+export const valuationSchema = z.object({
+  name,
+  email,
+  phone,
+  address: z.string().trim().min(5, "Enter the street address").max(200),
+  unit: z.string().trim().max(20).optional().or(z.literal("")),
+  propertyType: z.enum(["single-family", "condo", "townhouse", "multi-family", "land"]).default("single-family"),
+  beds: optionalNumber(z.coerce.number().int("Whole number").min(0).max(20)),
+  baths: optionalNumber(z.coerce.number().min(0).max(20)),
+  sqft: optionalNumber(z.coerce.number().int("Whole number").min(100, "Check the square footage").max(50000)),
+  timeline: z.enum(["0-3", "3-6", "6-12", "12+", "just-curious"]).default("just-curious"),
+  notes: z.string().trim().max(3000).optional().or(z.literal("")),
+});
+
+export type FormKey = "contact" | "subscribe" | "event" | "photo" | "guide" | "valuation";
 
 /** Images only, up to 10 MB (checked again on the server after re-encoding). */
 export const PHOTO_MAX_BYTES = 10 * 1024 * 1024;

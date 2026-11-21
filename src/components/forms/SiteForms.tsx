@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { requestGuide, submitContact, submitEvent, submitPhoto, submitSubscribe } from "@/app/(site)/_actions/forms";
+import { requestGuide, submitContact, submitEvent, submitPhoto, submitSubscribe, submitValuation } from "@/app/(site)/_actions/forms";
 
 import { Checkbox, Field, FileField, Form, Select, TextArea } from "./Form";
 
@@ -112,6 +112,59 @@ export function GuideRequestForm({ guide }: { guide: "buyer" | "seller" }) {
           ["12+", "More than a year"],
         ]}
       />
+    </Form>
+  );
+}
+
+export function SellMyHouseForm() {
+  return (
+    <Form action={submitValuation} submitLabel="Get my home's value">
+      <fieldset className="grid gap-4">
+        <legend className="eyebrow mb-2 text-teal-700">Your home</legend>
+        <div className="grid gap-4 sm:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
+          <Field name="address" label="Street address in San Carlos" required autoComplete="street-address" placeholder="123 Elm Street" />
+          <Field name="unit" label="Unit" />
+        </div>
+        <Select
+          name="propertyType"
+          label="Type of home"
+          options={[
+            ["single-family", "Single-family house"],
+            ["condo", "Condo"],
+            ["townhouse", "Townhouse"],
+            ["multi-family", "Duplex or multi-unit"],
+            ["land", "Lot or land"],
+          ]}
+        />
+        <div className="grid grid-cols-3 gap-4">
+          <Field name="beds" label="Beds" type="number" inputMode="numeric" min={0} max={20} />
+          <Field name="baths" label="Baths" type="number" inputMode="decimal" min={0} max={20} step={0.5} />
+          <Field name="sqft" label="Sq ft" type="number" inputMode="numeric" min={100} max={50000} />
+        </div>
+        <Select
+          name="timeline"
+          label="When are you thinking of selling?"
+          options={[
+            ["just-curious", "Just curious"],
+            ["0-3", "Within 3 months"],
+            ["3-6", "3 to 6 months"],
+            ["6-12", "6 to 12 months"],
+            ["12+", "More than a year"],
+          ]}
+        />
+        <TextArea name="notes" label="Anything we should know? (updates, remodels, views)" rows={3} />
+      </fieldset>
+      <fieldset className="grid gap-4">
+        <legend className="eyebrow mb-2 text-teal-700">Where to send it</legend>
+        <Field name="name" label="Name" required autoComplete="name" />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field name="email" label="Email" type="email" required autoComplete="email" />
+          <Field name="phone" label="Phone" type="tel" autoComplete="tel" />
+        </div>
+      </fieldset>
+      <p className="text-xs text-ink-500">
+        Viv and Mark use your details only to prepare your valuation and follow up about it. See our <Link href="/privacy-policy/">privacy policy</Link>.
+      </p>
     </Form>
   );
 }

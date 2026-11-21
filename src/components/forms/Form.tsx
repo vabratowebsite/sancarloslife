@@ -74,9 +74,13 @@ type FieldProps = {
   label: string;
   required?: boolean;
   hint?: string;
-  type?: "text" | "email" | "tel" | "url" | "date" | "time";
+  type?: "text" | "email" | "tel" | "url" | "date" | "time" | "number";
   autoComplete?: string;
   placeholder?: string;
+  inputMode?: "numeric" | "decimal";
+  min?: number;
+  max?: number;
+  step?: number;
 };
 
 function useField(name: string) {
@@ -112,7 +116,7 @@ function ErrorText({ id, error }: { id: string; error?: string }) {
 const describedBy = (id: string, hint?: string, error?: string) =>
   [hint ? `${id}-hint` : "", error ? `${id}-error` : ""].filter(Boolean).join(" ") || undefined;
 
-export function Field({ name, label, required, hint, type = "text", autoComplete, placeholder }: FieldProps) {
+export function Field({ name, label, required, hint, type = "text", autoComplete, placeholder, inputMode, min, max, step }: FieldProps) {
   const { error, value, id } = useField(name);
   return (
     <div>
@@ -125,6 +129,10 @@ export function Field({ name, label, required, hint, type = "text", autoComplete
         defaultValue={value}
         autoComplete={autoComplete}
         placeholder={placeholder}
+        inputMode={inputMode}
+        min={min}
+        max={max}
+        step={step}
         aria-invalid={Boolean(error)}
         aria-describedby={describedBy(id, hint, error)}
         className={inputClass}

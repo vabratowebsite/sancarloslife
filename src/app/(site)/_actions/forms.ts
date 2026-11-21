@@ -2,6 +2,7 @@
 
 import sharp from "sharp";
 
+import { pushLead } from "@/lib/crm";
 import { EDITORS, sendEmail, summaryEmail } from "@/lib/email";
 import {
   contactSchema,
@@ -11,6 +12,7 @@ import {
   PHOTO_TYPES,
   photoSubmissionSchema,
   subscribeSchema,
+  valuationSchema,
 } from "@/lib/forms/schemas";
 import { guard, parseForm, storeSubmission, type FormState } from "@/lib/forms/server";
 import { fromLA } from "@/lib/events/recurrence";
@@ -180,6 +182,51 @@ export async function requestGuide(_prev: FormState, form: FormData): Promise<Fo
     return { ok: true, message: `Thanks! The ${guideName} is on its way to ${data.email}.` };
   } catch (e) {
     console.error("requestGuide", e);
+    return GENERIC_ERROR;
+  }
+}
+
+const TIMELINES: Record<string, string> = {
+  "0-3": "Within 3 months",
+  "3-6": "3 to 6 months",
+  "6-12": "6 to 12 months",
+  "12+": "More than a year",
+  "just-curious": "Just curious",
+};
+
+/** Sell My House: stored, emailed to Viv & Mark, forwarded to the CRM when configured. */
+export async function submitValuation(_prev: FormState, form: FormData): Promise<FormState> {
+  const g = await guard(form, "valuation");
+  if (g.stop) return g.stop;
+  const { data, state } = parseForm(valuationSchema, form);
+  if (!data) return state!;
+  try {
+    await storeSubmission("valuation", data, g.ip, g.turnstileOk);
+    const address = [data.address, data.unit && `Unit ${data.unit}`, "San Carlos, CA"].filter(Boolean).join(", ");
+    const details = [data.propertyType, data.beds != null && `${data.beds} bd`, data.baths != null && `${data.baths} ba`, data.sqft && `${data.sqft} sq ft`]
+      .filter(Boolean)
+      .join(" · ");
+    await sendEmail({
+      to: EDITORS,
+      subject: `Home valuation request: ${address}`,
+      replyTo: data.email,
+      ...summaryEmail("New Sell My House valuation request.", [
+        ["Name", data.name],
+        ["Email", data.email],
+        ["Phone", data.phone],
+        ["Address", address],
+        ["Home", details],
+        ["Timeline", TIMELINES[data.timeline]],
+        ["Notes", data.notes],
+      ]),
+    });
+    await pushLead({ source: "valuation", name: data.name, email: data.email, phone: data.phone || undefined, address, notes: [details, TIMELINES[data.timeline], data.notes].filter(Boolean).join(" | ") });
+    return {
+      ok: true,
+      message: `Thanks, ${data.name.split(" ")[0]}. Viv or Mark will look at recent sales near ${data.address} and get back to you within one business day.`,
+    };
+  } catch (e) {
+    console.error("submitValuation", e);
     return GENERIC_ERROR;
   }
 }
