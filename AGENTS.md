@@ -37,7 +37,8 @@ changes go only through migrations in src/migrations.
 ## Where things are
 - Design tokens: src/app/globals.css (`@theme` block). Use the token utilities
   (bg-teal-700, text-ink-500, font-heading, text-h2, rounded-card, shadow-card, container-site,
-  eyebrow), never raw hex values in components.
+  eyebrow), never raw hex values in components. Teal 500 is for accents, icons and hover only:
+  text on white uses Teal 700 or Ink (Teal 500 text fails WCAG AA contrast).
 - Fonts: next/font/google in src/app/layout.tsx (Playfair Display, Lato, Oswald 500).
 - Folder layout to grow into: docs/PLAN.md section 7. Differences from that sketch:
   globals.css lives at src/app/globals.css; Tailwind v4 needs no tailwind.config.ts.

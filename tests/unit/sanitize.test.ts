@@ -30,6 +30,10 @@ describe("cleanWordPressHtml", () => {
     expect(cleanWordPressHtml(html)).toBe("<p>Hello world</p>");
   });
 
+  it("drops icon-font glyphs", () => {
+    expect(cleanWordPressHtml("<p><span>\ue019</span>5 Beds</p>")).toBe("<p>5 Beds</p>");
+  });
+
   it("turns centered inline styles into a class", () => {
     expect(cleanWordPressHtml(`<h3 style="text-align: center;">Sold</h3>`)).toBe('<h3 class="align-center">Sold</h3>');
   });

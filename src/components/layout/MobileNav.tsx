@@ -85,12 +85,12 @@ export function MobileNav({ settings }: { settings: SiteSettings }) {
             ))}
           </ul>
           <div className="mt-6 grid gap-3">
-            <a
+            <Link
               href="/subscribe/"
               className="eyebrow rounded-button bg-teal-700 px-4 py-3 text-center text-white"
             >
               Subscribe
-            </a>
+            </Link>
             <a href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`} className="text-center text-teal-700">
               Call {settings.phone}
             </a>

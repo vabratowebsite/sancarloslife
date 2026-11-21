@@ -1,3 +1,4 @@
+import Link from "next/link";
 // Milestone 1 placeholder. Shows the design tokens in use; replaced by the
 // real home page in milestone 22.
 
@@ -26,18 +27,18 @@ export default function Home() {
             keeps its address.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <a
+            <Link
               href="/events/"
               className="eyebrow rounded-button border-2 border-teal-700 bg-teal-700 px-6 py-3 text-white transition-colors hover:border-teal-500 hover:bg-teal-500"
             >
               See this week&rsquo;s events
-            </a>
-            <a
+            </Link>
+            <Link
               href="/subscribe/"
               className="eyebrow rounded-button border-2 border-teal-700 px-6 py-3 text-teal-700 transition-colors hover:bg-white"
             >
               Subscribe
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -29,6 +29,7 @@ const options: sanitizeHtml.IOptions = {
     iframe: ["src", "title", "width", "height", "allow", "allowfullscreen", "loading", "frameborder"],
     video: ["src", "controls", "poster", "width", "height", "preload"],
     audio: ["src", "controls", "preload"],
+    table: ["tabindex"],
     th: ["colspan", "rowspan", "scope"],
     td: ["colspan", "rowspan"],
     "*": ["id", "class"],
@@ -50,6 +51,8 @@ const options: sanitizeHtml.IOptions = {
     },
     img: (tagName, attribs) => ({ tagName, attribs: { ...attribs, loading: attribs.loading ?? "lazy" } }),
     iframe: (tagName, attribs) => ({ tagName, attribs: { ...attribs, loading: "lazy" } }),
+    // Wide tables scroll sideways; tabindex lets keyboard users scroll them too.
+    table: (tagName, attribs) => ({ tagName, attribs: { ...attribs, tabindex: "0" } }),
   },
 };
 
@@ -75,6 +78,9 @@ export function sanitize(html: string): string {
  */
 export function cleanWordPressHtml(html: string): string {
   let out = html
+    // Icon-font glyphs (Divi/Font Awesome use Unicode private-use characters).
+    .replace(/[\uE000-\uF8FF]/g, "")
+    .replace(/&#x(?:e|f)[0-9a-f]{3};/gi, "")
     // Leftover shortcodes like [et_pb_text] or [caption id="..."] (keep the caption text).
     .replace(/\[caption[^\]]*\]([\s\S]*?)\[\/caption\]/g, "$1")
     .replace(/\[\/?[a-z_][\w-]*(?:\s[^\]]*)?\]/gi, "")

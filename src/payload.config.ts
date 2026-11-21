@@ -28,7 +28,6 @@ const useS3 = Boolean(
 );
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SITE_URL || "",
   admin: {
     user: Users.slug,
     importMap: {

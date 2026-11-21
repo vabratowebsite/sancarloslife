@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { telHref, type SiteSettings } from "@/lib/queries/settings";
 
 const socialLabel: Record<string, string> = {
@@ -26,9 +27,9 @@ export function TopBar({ settings }: { settings: SiteSettings }) {
             </a>
           </li>
           <li>
-            <a className="text-white hover:underline" href="/subscribe/">
+            <Link className="text-white hover:underline" href="/subscribe/">
               Subscribe
-            </a>
+            </Link>
           </li>
         </ul>
         <ul className="hidden gap-4 md:flex" aria-label="Social media">

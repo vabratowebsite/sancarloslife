@@ -94,6 +94,7 @@ export class MediaImporter {
       for (const size of Object.values(item.media_details?.sizes ?? {})) m.byUrl.set(stripHost(size.source_url), item.id);
     }
     m.map = await loadJsonOr("media-map", {});
+    for (const v of Object.values(m.map)) v.url = cleanMediaUrl(v.url);
     return m;
   }
 
@@ -144,7 +145,7 @@ export class MediaImporter {
       data: { alt },
       file: { data, mimetype: res.headers.get("content-type") || "application/octet-stream", name, size: data.length },
     });
-    this.map[key] = { id: doc.id as number, url: doc.url ?? "" };
+    this.map[key] = { id: doc.id as number, url: cleanMediaUrl(doc.url ?? "") };
     if (++this.dirty >= 10) await this.save();
     return this.map[key];
   }
@@ -170,7 +171,7 @@ export class MediaImporter {
         },
         file: { data, mimetype: wp.mime_type, name, size: data.length },
       }));
-    this.map[wp.id] = { id: doc.id as number, url: doc.url ?? "" };
+    this.map[wp.id] = { id: doc.id as number, url: cleanMediaUrl(doc.url ?? "") };
     if (++this.dirty >= 10) await this.save();
     return doc.id as number;
   }
@@ -193,6 +194,10 @@ export class MediaImporter {
 }
 
 const stripHost = (u: string) => u.replace(/^https?:\/\/(?:www\.)?sancarloslife\.com/, "");
+
+/** Payload file URLs stored in content: relative, no trailing slash after the extension. */
+export const cleanMediaUrl = (u: string) =>
+  u.replace(/^https?:\/\/[^/]+(?=\/api\/media\/)/, "").replace(/(\.[a-z0-9]{2,5})\/$/i, "$1");
 
 /** Full cleanup for a WordPress HTML body: media, links, Divi markup, sanitizing. */
 export async function migrateHtml(html: string, media: MediaImporter) {
