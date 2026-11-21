@@ -1,10 +1,24 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  images: {
+    localPatterns: [{ pathname: "/api/media/file/**" }],
+  },
+  webpack: (webpackConfig) => {
+    webpackConfig.resolve.extensionAlias = {
+      ".cjs": [".cts", ".cjs"],
+      ".js": [".ts", ".tsx", ".js", ".jsx"],
+      ".mjs": [".mts", ".mjs"],
+    };
+    return webpackConfig;
+  },
   turbopack: {
+    root: path.resolve(dirname),
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],
@@ -14,4 +28,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig, { devBundleServerPackages: false });

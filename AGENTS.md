@@ -20,14 +20,19 @@ Plan: docs/PLAN.md (schema, routes, milestones; section 8 is the build roadmap).
 Screens of the old site and mockups: docs/screens/.
 
 ## Commands
-pnpm dev            # http://localhost:3000 (admin at /admin from milestone 2)
+pnpm dev            # http://localhost:3000, admin at /admin
 pnpm build && pnpm start
 pnpm lint
-Added in later milestones:
+pnpm generate:types && pnpm generate:importmap   # after changing collections or admin components
 pnpm payload migrate:create   # after changing a collection (ask before running against prod)
 pnpm test           # vitest
 pnpm test:e2e       # playwright against BASE_URL
 pnpm migrate:wp     # scripts/migrate (needs WP_APP_PASSWORD, SUPABASE_SERVICE_ROLE_KEY)
+
+## Local database
+Development runs against a local Postgres (port 54322, database `scl`) with PAYLOAD_DB_PUSH=true,
+so Payload creates the `web` schema tables itself. Against Supabase, push stays off and schema
+changes go only through migrations in src/migrations.
 
 ## Where things are
 - Design tokens: src/app/globals.css (`@theme` block). Use the token utilities
@@ -71,6 +76,11 @@ pnpm migrate:wp     # scripts/migrate (needs WP_APP_PASSWORD, SUPABASE_SERVICE_R
   sancarloslife-web project. Payload uses `schemaName: "web"` in the Postgres adapter so its
   tables and migrations stay apart from the ops desk tables. City Projects will read the ops desk
   data instead of copying it (exact link decided after mapping the ops desk tables).
+- 2026-11-21 Cache Components and Partial Prefetching are off: the Payload 3 admin is built for the
+  standard Next.js rendering model. Revisit when Payload supports them.
+- 2026-11-21 React 19.3.1: Payload 3.94 excludes React 19.3.0.
+- 2026-11-21 Roles: the first account becomes admin; only admins change roles or manage users.
+  API keys are enabled on users so editors (and Claude) can publish through the REST API.
 - 2026-11-21 Supabase Pro and Vercel Pro must be active before launch (the free Supabase plan
   pauses idle projects; Vercel Hobby is for non-commercial use).
 
