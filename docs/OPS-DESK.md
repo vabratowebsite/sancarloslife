@@ -1,15 +1,27 @@
 # Operations Desk inside the website
 
-Owner's decision (2026-11-21): the San Carlos Life Operations Desk moves out of Claude and into the
-website's admin, so it
+Owner's decision (2026-11-21, revised 22:11): **the middle path.** The desk's data and approval
+queue move into the website's admin; Claude keeps doing the heavy research runs through the
+website connector while the Claude account exists; API-based runs on the website are built as a
+backup that takes over only when Claude isn't available. Goals: the desk
 
 - opens from any device and any Claude account (or none),
 - keeps running around the clock, and
 - survives losing the Claude account: code in GitHub, hosting on Vercel, data in Supabase, AI
   through an API key, all in accounts Vabrato owns.
 
-Claude stays useful but optional: through the website connector it can read and edit drafts and
-publish approved items, like any other editor.
+## Connections
+
+- **Website connector (inbound, for any AI tool).** An MCP endpoint on the website (works with
+  Claude, ChatGPT and other MCP clients) with desk tools: list and read drafts, pages, posts, events
+  and places; create and edit drafts; submit for review; publish approved items; upload images;
+  write run logs. Secured with a sign-in (OAuth) and per-user permissions. Payload's built-in REST
+  API with per-user API keys stays available for scripts and automation tools.
+- **AI connections (outbound, for backup runs).** Settings for Anthropic, OpenAI, Gemini,
+  OpenRouter or any OpenAI-compatible API; keys encrypted server-side. Used by "Generate draft" and
+  by the backup runs.
+- **Failover.** Each scheduled job records a heartbeat when Claude's run finishes. If no Claude run
+  has reported by the job's deadline, the website runs the API version of that job.
 
 ## What the current desk has (artifact "San Carlos Life Operations Desk")
 
@@ -40,13 +52,13 @@ About 300 files: the desk page, 45 blog drafts, 102 event drafts, 10 page drafts
    neighborhood, newsletter, city project, page) with structure, SEO/AEO/GEO rules, brand voice and
    compliance notes, versioned. Connections to any provider (Anthropic, OpenAI, Gemini, OpenRouter,
    any OpenAI-compatible API); keys encrypted server-side. "Generate draft" in the admin.
-3. **Scheduled runs on the website.** Vercel Cron jobs scan sources (news sites, City pages,
+3. **Backup scheduled runs on the website** (only run when Claude's run hasn't reported). Vercel Cron jobs scan sources (news sites, City pages,
    calendars, RSS) and draft with the stored prompts through the chosen AI. Run log and scan reports
    in the desk. Email-based scans need the website's own Google sign-in (Claude's Gmail connector
    won't be there).
 4. **Move the existing desk content** (drafts, images, saved edits, leads, run history) into it.
-5. **Website connector for Claude** (MCP): list, read, edit, create drafts, publish approved items.
-   Then retire the Claude scheduled tasks that the website runs replace.
+5. **Website connector** (MCP, see Connections): Claude's research runs switch from writing into the
+   artifact to writing into the website; the artifact desk is retired once the website desk is in use.
 
 ## Backups
 
