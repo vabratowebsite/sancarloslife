@@ -123,10 +123,12 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     settings: Setting;
+    'home-page': HomePage;
     'videos-page': VideosPage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'videos-page': VideosPageSelect<false> | VideosPageSelect<true>;
   };
   locale: null;
@@ -1920,6 +1922,31 @@ export interface Setting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  heroEyebrow?: string | null;
+  heroTitle: string;
+  heroIntro?: string | null;
+  /**
+   * Shown first and on phones; also the still frame when motion is reduced. Landscape, at least 1600px wide.
+   */
+  heroPoster?: (number | null) | Media;
+  /**
+   * Optional background video: the number at the end of the Vimeo link. Plays muted on larger screens, with a pause button.
+   */
+  heroVimeoId?: string | null;
+  agentHeading?: string | null;
+  agentText?: string | null;
+  agentPhoto?: (number | null) | Media;
+  subscribeHeading?: string | null;
+  subscribeText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "videos-page".
  */
 export interface VideosPage {
@@ -1991,6 +2018,25 @@ export interface SettingsSelect<T extends boolean = true> {
         id?: T;
       };
   footerNote?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  heroEyebrow?: T;
+  heroTitle?: T;
+  heroIntro?: T;
+  heroPoster?: T;
+  heroVimeoId?: T;
+  agentHeading?: T;
+  agentText?: T;
+  agentPhoto?: T;
+  subscribeHeading?: T;
+  subscribeText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

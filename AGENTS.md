@@ -121,3 +121,6 @@ changes go only through migrations in src/migrations.
   neighborhood polygons; recreate them as Buying Buddy hotsheet filters and store bb_filter_id.
 - Events: 106 recurring series; use lib/events/recurrence.ts, never expand at build time beyond 24 months.
 - Posts carry raw HTML bodies from WordPress; always render through the sanitizer.
+- 2026-11-21 Search engines: one switch, `ALLOW_INDEXING=true`, on production only at cutover. Until then robots.txt disallows all and every page is noindex (src/lib/indexing.ts).
+- 2026-11-21 Social images: `/og/?title=` (not under /api, which Payload owns).
+- 2026-11-21 Home page copy, poster and Vimeo background id live in the "Home page" global. The Vimeo loop mounts after load on screens 768px+, never with reduced motion, stays invisible until Vimeo reports playback, and has a pause button. A future CSP must allow frame-src https://player.vimeo.com.

@@ -18,9 +18,10 @@
     "migrate:places": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/40-places.ts",
     "migrate:misc": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/50-misc.ts",
     "migrate:redirects": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/60-redirects.ts",
-    "migrate:all": "pnpm migrate:export && pnpm migrate:seo && pnpm migrate:posts && pnpm migrate:events && pnpm migrate:places && pnpm migrate:misc && pnpm migrate:parks && pnpm migrate:redirects",
+    "migrate:all": "pnpm migrate:export && pnpm migrate:seo && pnpm migrate:posts && pnpm migrate:events && pnpm migrate:places && pnpm migrate:misc && pnpm migrate:parks && pnpm migrate:home && pnpm migrate:redirects",
     "migrate:verify": "cross-env NODE_NO_WARNINGS=1 tsx scripts/migrate/verify.ts",
-    "migrate:parks": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/55-parks.ts"
+    "migrate:parks": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/55-parks.ts",
+    "migrate:home": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/65-home.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.94.1",

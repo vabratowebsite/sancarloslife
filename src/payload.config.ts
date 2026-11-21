@@ -17,6 +17,7 @@ import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
 import { richTextEditor } from "./fields/richText";
 import { Settings } from "./globals/Settings";
+import { HomePage } from "./globals/HomePage";
 import { VideosPage } from "./globals/VideosPage";
 
 const filename = fileURLToPath(import.meta.url);
@@ -58,7 +59,7 @@ export default buildConfig({
     Redirects,
     Users,
   ],
-  globals: [Settings, VideosPage],
+  globals: [Settings, HomePage, VideosPage],
   editor: richTextEditor,
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
