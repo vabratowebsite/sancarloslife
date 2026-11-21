@@ -8,7 +8,7 @@ export function FormPage({
   aside,
   children,
 }: {
-  title: string;
+  title: React.ReactNode;
   intro: React.ReactNode;
   crumbs: Crumb[];
   aside?: React.ReactNode;
