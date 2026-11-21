@@ -38,3 +38,36 @@ export function textToLexical(text: string) {
   flush();
   return { root: { type: "root", format: "", indent: 0, version: 1, direction: "ltr", children } };
 }
+
+/** Rich text back to plain text in the same notation (for AI re-editing). */
+export function lexicalToText(doc: unknown): string {
+  const out: string[] = [];
+  const text = (n: unknown): string => {
+    const node = n as { text?: string; children?: unknown[]; fields?: { html?: string } };
+    if (typeof node?.text === "string") return node.text;
+    if (node?.fields?.html) return node.fields.html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    return (node?.children ?? []).map(text).join("");
+  };
+  const walk = (n: unknown) => {
+    const node = n as { type?: string; tag?: string; children?: unknown[] };
+    switch (node?.type) {
+      case "heading":
+        out.push(`${node.tag === "h3" ? "###" : "##"} ${text(node)}`);
+        return;
+      case "paragraph":
+      case "quote":
+        if (text(node).trim()) out.push(text(node).trim());
+        return;
+      case "list":
+        out.push((node.children ?? []).map((li) => `- ${text(li).trim()}`).join("\n"));
+        return;
+      case "block":
+        out.push(text(node));
+        return;
+      default:
+        (node?.children ?? []).forEach(walk);
+    }
+  };
+  walk((doc as { root?: unknown })?.root);
+  return out.join("\n\n");
+}
