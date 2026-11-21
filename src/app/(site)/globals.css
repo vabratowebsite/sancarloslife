@@ -14,6 +14,8 @@
   --scl-ink-500: #5b6b6b;
   --scl-white: #ffffff;
   --scl-coral-500: #e0735a;
+  /* Coral for small text on white (Coral 500 is below AA contrast at small sizes). */
+  --scl-coral-700: #b4503a;
 }
 
 @theme inline {
@@ -25,6 +27,7 @@
   --color-ink-900: var(--scl-ink-900);
   --color-ink-500: var(--scl-ink-500);
   --color-coral-500: var(--scl-coral-500);
+  --color-coral-700: var(--scl-coral-700);
   --color-background: var(--scl-white);
   --color-foreground: var(--scl-ink-900);
 
@@ -81,6 +84,12 @@
 
   a {
     color: var(--color-teal-700);
+  }
+
+  /* Links inside running text are underlined so they don't rely on color alone. */
+  p a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   :focus-visible {
