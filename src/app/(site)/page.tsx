@@ -13,10 +13,7 @@ const swatches = [
 
 export default function Home() {
   return (
-    <main className="flex-1">
-      <div className="bg-teal-700 py-2 text-small text-white">
-        <p className="container-site eyebrow">San Carlos, California</p>
-      </div>
+    <>
 
       <section className="bg-teal-50 py-20">
         <div className="container-site">
@@ -30,13 +27,13 @@ export default function Home() {
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
-              href="https://sancarloslife.com/events"
+              href="/events/"
               className="eyebrow rounded-button border-2 border-teal-700 bg-teal-700 px-6 py-3 text-white transition-colors hover:border-teal-500 hover:bg-teal-500"
             >
               See this week&rsquo;s events
             </a>
             <a
-              href="https://sancarloslife.com/subscribe"
+              href="/subscribe/"
               className="eyebrow rounded-button border-2 border-teal-700 px-6 py-3 text-teal-700 transition-colors hover:bg-white"
             >
               Subscribe
@@ -75,6 +72,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

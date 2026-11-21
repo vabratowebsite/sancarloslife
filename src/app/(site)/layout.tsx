@@ -1,29 +1,14 @@
 import type { Metadata } from "next";
-import { Lato, Oswald, Playfair_Display } from "next/font/google";
+
+import { Footer } from "@/components/layout/Footer";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { fontVariables } from "@/lib/fonts";
+import { getSettings } from "@/lib/queries/settings";
+
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const lato = Lato({
-  variable: "--font-lato",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const oswald = Oswald({
-  variable: "--font-oswald",
-  subsets: ["latin"],
-  weight: ["500"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sancarloslife.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://sancarloslife.com"),
   title: {
     default: "San Carlos Life | Events, Food, Homes and Life in San Carlos, CA",
     template: "%s | San Carlos Life",
@@ -34,13 +19,17 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function SiteLayout({ children }: LayoutProps<"/">) {
+  const settings = await getSettings();
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${lato.variable} ${oswald.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html lang="en" className={`${fontVariables} h-full antialiased`}>
+      <body className="flex min-h-full flex-col">
+        <SiteHeader settings={settings} />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer settings={settings} />
+      </body>
     </html>
   );
 }

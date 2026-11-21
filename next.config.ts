@@ -6,6 +6,14 @@ import { fileURLToPath } from "url";
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  // WordPress-style trailing slashes on public pages; src/proxy.ts adds them, so the
+  // built-in redirect is skipped and the admin/API keep their own URLs.
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  experimental: {
+    // One 404 page for URLs that match no route (the site and admin have separate layouts).
+    globalNotFound: true,
+  },
   images: {
     localPatterns: [{ pathname: "/api/media/file/**" }],
   },

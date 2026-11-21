@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Events calendar page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Lato,Arial,sans-serif;color:#1C2B2B;background:#fff}
+a{color:#1F7A7A;text-decoration:none}a:hover{color:#165E5E}
+.lbl{font-family:Oswald,"Arial Narrow",sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.ph{background:linear-gradient(135deg,#B9D9D9,#7FB8B8);display:flex;align-items:flex-end;padding:10px;color:#0F3B3B;font-size:12px;font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em}
+.serif{font-family:"Playfair Display",Georgia,serif}
+</style>
+</helmet>
+<div style="width:100%;box-sizing:border-box;display:flex;flex-direction:column">
+<div style="background:#1F7A7A;color:#fff;font-size:13px;display:flex;justify-content:space-between;padding:8px 40px" class="lbl"><div style="display:flex;gap:22px"><span>+1 650 291 7241</span><span>Message us</span><span>Subscribe</span></div><div style="display:flex;gap:14px"><span>Facebook</span><span>Instagram</span></div></div>
+<header style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:22px 40px 16px;border-bottom:1px solid #E6F4F4">
+  <div class="serif" style="font-size:34px;font-weight:700;color:#1F7A7A">SanCarlos<span style="color:#2E9C9C">Life</span><span style="font-size:14px;color:#5B6B6B">.com</span></div>
+  <nav class="lbl" style="display:flex;gap:28px;font-size:14px;flex-wrap:wrap;justify-content:center"><a href="#">About San Carlos</a><a href="#" style="color:#1C2B2B;border-bottom:2px solid #1F7A7A">Events</a><a href="BlogPost.dc.html">Blog</a><a href="Neighborhood.dc.html">Neighborhoods</a><a href="#">Real Estate</a><a href="#">Media</a><a href="#">Viv &amp; Mark</a></nav>
+</header>
+
+<div style="background:#E6F4F4;padding:40px 40px 28px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h1 class="serif" style="font-size:44px;margin:0 0 6px">Events in San Carlos</h1>
+    <p style="margin:0 0 20px;font-size:17px;color:#5B6B6B">Everything happening in town, from farmers markets to council meetings. Have an event? <a href="#">Submit it</a> and we'll list it.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <label style="flex:1;min-width:260px"><span style="position:absolute;left:-9999px">Search events</span><input type="search" placeholder="Search events" style="width:100%;box-sizing:border-box;border:1px solid #CFE0E0;border-radius:8px;padding:12px 14px;font:inherit;font-size:15px;background:#fff"></label>
+      <span class="lbl" style="font-size:12px;background:#1F7A7A;color:#fff;padding:9px 14px;border-radius:999px">All</span>
+      <span class="lbl" style="font-size:12px;border:1px solid #9CC2C2;padding:8px 14px;border-radius:999px;background:#fff">Food &amp; drink</span>
+      <span class="lbl" style="font-size:12px;border:1px solid #9CC2C2;padding:8px 14px;border-radius:999px;background:#fff">Family</span>
+      <span class="lbl" style="font-size:12px;border:1px solid #9CC2C2;padding:8px 14px;border-radius:999px;background:#fff">Music &amp; arts</span>
+      <span class="lbl" style="font-size:12px;border:1px solid #9CC2C2;padding:8px 14px;border-radius:999px;background:#fff">City &amp; civic</span>
+      <span class="lbl" style="font-size:12px;border:1px solid #9CC2C2;padding:8px 14px;border-radius:999px;background:#fff">Open houses</span>
+      <div style="margin-left:auto;display:flex;border:1px solid #9CC2C2;border-radius:8px;overflow:hidden;background:#fff"><span class="lbl" style="font-size:12px;padding:9px 14px;background:#1F7A7A;color:#fff">List</span><span class="lbl" style="font-size:12px;padding:9px 14px">Month</span></div>
+    </div>
+  </div>
+</div>
+
+<section style="max-width:1200px;width:100%;margin:0 auto;padding:36px 40px 48px;box-sizing:border-box;display:grid;grid-template-columns:8fr 4fr;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <div>
+      <div class="lbl" style="font-size:14px;color:#2E9C9C;border-bottom:2px solid #E6F4F4;padding-bottom:8px;margin-bottom:14px">This weekend · Sat Nov 7 – Sun Nov 8</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <article style="display:grid;grid-template-columns:84px 1fr 200px;gap:18px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:14px">
+          <div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:10px 0"><div class="lbl" style="font-size:12px;color:#5B6B6B">Sat</div><div class="serif" style="font-size:30px;font-weight:700;color:#1F7A7A;line-height:1">7</div><div class="lbl" style="font-size:11px;color:#5B6B6B">Nov</div></div>
+          <div><div class="lbl" style="font-size:12px;color:#E0735A">9:00 AM – 1:00 PM · Food &amp; drink</div><h3 class="serif" style="font-size:21px;margin:4px 0;line-height:1.25"><a href="#" style="color:#1C2B2B">San Carlos Farmers' Market</a></h3><div style="font-size:14px;color:#5B6B6B">Laurel Street between Olive and Cherry · Free</div></div>
+          <div class="ph" style="height:100px;border-radius:8px">Photo</div>
+        </article>
+        <article style="display:grid;grid-template-columns:84px 1fr 200px;gap:18px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:14px">
+          <div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:10px 0"><div class="lbl" style="font-size:12px;color:#5B6B6B">Sun</div><div class="serif" style="font-size:30px;font-weight:700;color:#1F7A7A;line-height:1">8</div><div class="lbl" style="font-size:11px;color:#5B6B6B">Nov</div></div>
+          <div><div class="lbl" style="font-size:12px;color:#E0735A">11:00 AM – 5:00 PM · Food &amp; drink</div><h3 class="serif" style="font-size:21px;margin:4px 0;line-height:1.25"><a href="#" style="color:#1C2B2B">Wine &amp; Food Tasting Experience at 3P Wine Co</a></h3><div style="font-size:14px;color:#5B6B6B">663 Laurel Street · Tickets</div></div>
+          <div class="ph" style="height:100px;border-radius:8px">Photo</div>
+        </article>
+        <article style="display:grid;grid-template-columns:84px 1fr 200px;gap:18px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:14px">
+          <div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:10px 0"><div class="lbl" style="font-size:12px;color:#5B6B6B">Sun</div><div class="serif" style="font-size:30px;font-weight:700;color:#1F7A7A;line-height:1">8</div><div class="lbl" style="font-size:11px;color:#5B6B6B">Nov</div></div>
+          <div><div class="lbl" style="font-size:12px;color:#E0735A">8:30 PM – 10:00 PM · Music &amp; arts</div><h3 class="serif" style="font-size:21px;margin:4px 0;line-height:1.25"><a href="#" style="color:#1C2B2B">Laughter &amp; Spirits: Stand-Up Comedy Night</a></h3><div style="font-size:14px;color:#5B6B6B">Spice Trade Comedy, 765 Laurel Street · $25</div></div>
+          <div class="ph" style="height:100px;border-radius:8px">Photo</div>
+        </article>
+      </div>
+    </div>
+    <div>
+      <div class="lbl" style="font-size:14px;color:#2E9C9C;border-bottom:2px solid #E6F4F4;padding-bottom:8px;margin-bottom:14px">Next week · Nov 9 – 15</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <article style="display:grid;grid-template-columns:84px 1fr 200px;gap:18px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:14px">
+          <div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:10px 0"><div class="lbl" style="font-size:12px;color:#5B6B6B">Thu</div><div class="serif" style="font-size:30px;font-weight:700;color:#1F7A7A;line-height:1">12</div><div class="lbl" style="font-size:11px;color:#5B6B6B">Nov</div></div>
+          <div><div class="lbl" style="font-size:12px;color:#E0735A">10:00 AM – 11:00 AM · City &amp; civic</div><h3 class="serif" style="font-size:21px;margin:4px 0;line-height:1.25"><a href="#" style="color:#1C2B2B">Active 101 Infrastructure Ride: Belmont to San Carlos</a></h3><div style="font-size:14px;color:#5B6B6B">Silicon Valley Bicycle Coalition · 900 Chestnut Street · Free</div></div>
+          <div class="ph" style="height:100px;border-radius:8px">Photo</div>
+        </article>
+        <article style="display:grid;grid-template-columns:84px 1fr 200px;gap:18px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:14px">
+          <div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:10px 0"><div class="lbl" style="font-size:12px;color:#5B6B6B">Fri</div><div class="serif" style="font-size:30px;font-weight:700;color:#1F7A7A;line-height:1">13</div><div class="lbl" style="font-size:11px;color:#5B6B6B">Nov</div></div>
+          <div><div class="lbl" style="font-size:12px;color:#E0735A">4:00 PM – 9:00 PM · Family</div><h3 class="serif" style="font-size:21px;margin:4px 0;line-height:1.25"><a href="#" style="color:#1C2B2B">Friday the 13th Witch Market: Mystical Shopping and Local Artisans</a></h3><div style="font-size:14px;color:#5B6B6B">Downtown San Carlos · Free</div></div>
+          <div class="ph" style="height:100px;border-radius:8px">Photo</div>
+        </article>
+      </div>
+    </div>
+    <a href="#" class="lbl" style="align-self:center;border:2px solid #1F7A7A;padding:12px 28px;border-radius:8px;font-size:14px">Load more events</a>
+  </div>
+  <aside style="display:flex;flex-direction:column;gap:16px;align-self:start">
+    <div style="border:1px solid #CFE0E0;border-radius:12px;padding:18px">
+      <div class="lbl" style="font-size:13px;color:#2E9C9C;margin-bottom:10px">November 2026</div>
+      <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;font-size:13px">
+        <span class="lbl" style="font-size:11px;color:#5B6B6B">S</span><span class="lbl" style="font-size:11px;color:#5B6B6B">M</span><span class="lbl" style="font-size:11px;color:#5B6B6B">T</span><span class="lbl" style="font-size:11px;color:#5B6B6B">W</span><span class="lbl" style="font-size:11px;color:#5B6B6B">T</span><span class="lbl" style="font-size:11px;color:#5B6B6B">F</span><span class="lbl" style="font-size:11px;color:#5B6B6B">S</span>
+        <span style="padding:6px 0">1</span><span style="padding:6px 0">2</span><span style="padding:6px 0">3</span><span style="padding:6px 0">4</span><span style="padding:6px 0">5</span><span style="padding:6px 0">6</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">7</span>
+        <span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">8</span><span style="padding:6px 0">9</span><span style="padding:6px 0">10</span><span style="padding:6px 0;background:#1F7A7A;color:#fff;border-radius:6px">11</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">12</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">13</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">14</span>
+        <span style="padding:6px 0">15</span><span style="padding:6px 0">16</span><span style="padding:6px 0">17</span><span style="padding:6px 0">18</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">19</span><span style="padding:6px 0">20</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">21</span>
+        <span style="padding:6px 0">22</span><span style="padding:6px 0">23</span><span style="padding:6px 0">24</span><span style="padding:6px 0">25</span><span style="padding:6px 0;background:#E6F4F4;border-radius:6px;font-weight:700">26</span><span style="padding:6px 0">27</span><span style="padding:6px 0">28</span>
+        <span style="padding:6px 0">29</span><span style="padding:6px 0">30</span>
+      </div>
+      <div style="font-size:12px;color:#5B6B6B;margin-top:10px">Shaded days have events. Today is highlighted.</div>
+    </div>
+    <div style="background:#1F7A7A;color:#fff;border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:10px">
+      <h3 class="serif" style="font-size:20px;margin:0">Hosting something?</h3>
+      <p style="margin:0;font-size:14px;line-height:1.5;opacity:.95">Submit your event in two minutes. We review and publish within a day.</p>
+      <a href="#" class="lbl" style="background:#fff;color:#1F7A7A;text-align:center;padding:11px;border-radius:8px;font-size:14px">Submit an event</a>
+    </div>
+    <div style="border:1px solid #CFE0E0;border-radius:12px;padding:18px">
+      <div class="lbl" style="font-size:13px;color:#2E9C9C;margin-bottom:8px">Yearly events</div>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.9"><li><a href="#">Hometown Days (May)</a></li><li><a href="#">Art &amp; Wine Faire (Oct)</a></li><li><a href="#">Night of Holiday Lights (Dec)</a></li><li><a href="#">Fourth of July at Burton Park</a></li></ul>
+    </div>
+  </aside>
+</section>
+<footer style="background:#E6F4F4;border-top:4px solid #1F7A7A;padding:28px 40px;text-align:center;font-size:13px;color:#5B6B6B">© 2026 Vabrato Real Estate · Privacy · Terms · Accessibility</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F7A7A"},"$preview":{"width":1280,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() { return { accent: this.props.accent ?? '#1F7A7A' }; }
+}
+</script>
+</body>
+</html>

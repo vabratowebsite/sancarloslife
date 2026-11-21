@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home page on a phone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Lato,Arial,sans-serif;color:#1C2B2B;background:#fff}
+a{color:#1F7A7A;text-decoration:none}a:hover{color:#165E5E}
+.lbl{font-family:Oswald,"Arial Narrow",sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.ph{background:linear-gradient(135deg,#B9D9D9,#7FB8B8);display:flex;align-items:flex-end;padding:8px;color:#0F3B3B;font-size:11px;font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em}
+.serif{font-family:"Playfair Display",Georgia,serif}
+</style>
+</helmet>
+<div style="width:390px;height:1700px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff">
+  <header style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #E6F4F4">
+    <div class="serif" style="font-size:22px;font-weight:700;color:#1F7A7A">SanCarlos<span style="color:#2E9C9C">Life</span></div>
+    <div style="display:flex;gap:8px"><a href="#" aria-label="Search" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#E6F4F4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F7A7A" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a><a href="#" aria-label="Menu" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#1F7A7A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></a></div>
+  </header>
+  <section class="ph" style="height:300px;position:relative;align-items:center;justify-content:center;padding:0">
+    <div style="position:absolute;inset:0;background:rgba(15,59,59,.4)"></div>
+    <div style="position:relative;text-align:center;color:#fff;padding:0 20px;text-transform:none;letter-spacing:0;font-family:Lato,sans-serif">
+      <h1 class="serif" style="font-size:32px;line-height:1.15;margin:0 0 10px;font-weight:700">This is San Carlos Life</h1>
+      <p style="font-size:15px;margin:0 0 16px;line-height:1.5">Events, restaurants, neighborhoods and homes for sale in 94070.</p>
+      <a href="#" class="lbl" style="display:inline-block;background:#fff;color:#1F7A7A;padding:12px 20px;border-radius:8px;font-size:13px">What's on this week</a>
+    </div>
+  </section>
+  <section style="padding:22px 16px 6px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><h2 class="serif" style="font-size:22px;margin:0">This week</h2><a href="#" class="lbl" style="font-size:12px">Calendar</a></div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+      <article style="display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:10px"><div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:6px 0"><div class="lbl" style="font-size:10px;color:#5B6B6B">Sun</div><div class="serif" style="font-size:22px;font-weight:700;color:#1F7A7A;line-height:1">8</div></div><div><div class="lbl" style="font-size:11px;color:#E0735A">11:00 AM</div><div class="serif" style="font-size:16px;line-height:1.25">Wine &amp; Food Tasting at 3P Wine Co</div></div></article>
+      <article style="display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:10px"><div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:6px 0"><div class="lbl" style="font-size:10px;color:#5B6B6B">Sun</div><div class="serif" style="font-size:22px;font-weight:700;color:#1F7A7A;line-height:1">8</div></div><div><div class="lbl" style="font-size:11px;color:#E0735A">8:30 PM</div><div class="serif" style="font-size:16px;line-height:1.25">Laughter &amp; Spirits Comedy Night</div></div></article>
+      <article style="display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;border:1px solid #E6F4F4;border-radius:12px;padding:10px"><div style="text-align:center;background:#E6F4F4;border-radius:8px;padding:6px 0"><div class="lbl" style="font-size:10px;color:#5B6B6B">Thu</div><div class="serif" style="font-size:22px;font-weight:700;color:#1F7A7A;line-height:1">12</div></div><div><div class="lbl" style="font-size:11px;color:#E0735A">10:00 AM</div><div class="serif" style="font-size:16px;line-height:1.25">Active 101 Guided Cycling Tour</div></div></article>
+    </div>
+  </section>
+  <section style="background:#E6F4F4;padding:22px 16px;margin-top:18px">
+    <h2 class="serif" style="font-size:22px;margin:0 0 6px">Homes for sale</h2>
+    <p style="margin:0 0 12px;font-size:14px;color:#5B6B6B">Live MLS listings. Save a search for email alerts.</p>
+    <form style="display:flex;gap:8px" aria-label="Quick search"><label style="flex:1"><span style="position:absolute;left:-9999px">Location</span><input type="text" value="San Carlos, CA 94070" style="width:100%;box-sizing:border-box;border:1px solid #CFE0E0;border-radius:8px;padding:12px;font:inherit;font-size:14px;background:#fff"></label><button type="button" class="lbl" style="background:#1F7A7A;color:#fff;border:0;border-radius:8px;padding:12px 16px;font-size:13px;min-height:44px">Search</button></form>
+    <div style="display:flex;gap:10px;overflow:hidden;margin-top:14px">
+      <div style="min-width:200px;background:#fff;border-radius:12px;overflow:hidden"><div class="ph" style="height:110px">Listing photo</div><div style="padding:10px"><div class="serif" style="font-size:17px;font-weight:700">$3,498,888</div><div style="font-size:12px;color:#5B6B6B">772 Knoll Dr · 4 bd · 3 ba</div><div class="lbl" style="font-size:10px;color:#E0735A;margin-top:3px">Open Sun 2–4</div></div></div>
+      <div style="min-width:200px;background:#fff;border-radius:12px;overflow:hidden"><div class="ph" style="height:110px">Listing photo</div><div style="padding:10px"><div class="serif" style="font-size:17px;font-weight:700">$3,199,000</div><div style="font-size:12px;color:#5B6B6B">1257 Magnolia · 4 bd · 3 ba</div></div></div>
+    </div>
+  </section>
+  <section style="padding:22px 16px 6px">
+    <h2 class="serif" style="font-size:22px;margin:0 0 12px">Neighborhoods</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+      <a href="#" style="display:block;border-radius:12px;overflow:hidden;position:relative;height:110px"><div class="ph" style="height:100%">Photo</div><span class="serif" style="position:absolute;left:0;right:0;bottom:0;background:rgba(15,59,59,.72);color:#fff;padding:8px;font-size:14px;text-align:center">Alder Manor</span></a>
+      <a href="#" style="display:block;border-radius:12px;overflow:hidden;position:relative;height:110px"><div class="ph" style="height:100%">Photo</div><span class="serif" style="position:absolute;left:0;right:0;bottom:0;background:rgba(15,59,59,.72);color:#fff;padding:8px;font-size:14px;text-align:center">Beverly Terrace</span></a>
+      <a href="#" style="display:block;border-radius:12px;overflow:hidden;position:relative;height:110px"><div class="ph" style="height:100%">Photo</div><span class="serif" style="position:absolute;left:0;right:0;bottom:0;background:rgba(15,59,59,.72);color:#fff;padding:8px;font-size:14px;text-align:center">Clearfield Park</span></a>
+      <a href="#" style="display:block;border-radius:12px;overflow:hidden;position:relative;height:110px"><div class="ph" style="height:100%">Photo</div><span class="serif" style="position:absolute;left:0;right:0;bottom:0;background:rgba(15,59,59,.72);color:#fff;padding:8px;font-size:14px;text-align:center">Howard Park</span></a>
+    </div>
+  </section>
+  <section style="padding:22px 16px 6px">
+    <h2 class="serif" style="font-size:22px;margin:0 0 12px">Latest stories</h2>
+    <article style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin-bottom:12px"><div class="ph" style="height:80px;border-radius:10px">Photo</div><div><div class="lbl" style="font-size:10px;color:#5B6B6B">Real estate · Oct 31</div><div class="serif" style="font-size:15px;line-height:1.3">Highest and Lowest Priced Homes Sold in September 2026</div></div></article>
+    <article style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center"><div class="ph" style="height:80px;border-radius:10px">Photo</div><div><div class="lbl" style="font-size:10px;color:#5B6B6B">Community · Sep 7</div><div class="serif" style="font-size:15px;line-height:1.3">Boots, Blue Jeans &amp; BBQ Returns to San Carlos</div></div></article>
+  </section>
+  <section style="margin:18px 16px 0;background:#1F7A7A;color:#fff;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px">
+    <h3 class="serif" style="font-size:18px;margin:0;line-height:1.25">Thinking of buying or selling?</h3>
+    <p style="margin:0;font-size:13px;line-height:1.5;opacity:.95">Viv &amp; Mark, Vabrato Real Estate. 30+ years in San Carlos.</p>
+    <a href="#" class="lbl" style="background:#fff;color:#1F7A7A;text-align:center;padding:12px;border-radius:8px;font-size:13px">Call Viv &amp; Mark</a>
+  </section>
+  <footer style="background:#E6F4F4;border-top:4px solid #1F7A7A;padding:20px 16px;margin-top:20px;font-size:12px;color:#5B6B6B;text-align:center">© 2026 Vabrato Real Estate · Privacy · Terms</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

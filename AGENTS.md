@@ -17,7 +17,7 @@ Copilot, Gemini CLI and others). CLAUDE.md only points here. Edit this file, not
 Community guide + real-estate lead site for San Carlos, CA, replacing a WordPress/Divi site.
 Owners: Vabrato Real Estate (Viv Kelvin, Mark Martinho). Editor: Rachanee.
 Plan: docs/PLAN.md (schema, routes, milestones; section 8 is the build roadmap).
-Screens of the old site and mockups: docs/screens/.
+Approved mockups (Design artifact export, *.dc.html) and screenshots: docs/screens/.
 
 ## Commands
 pnpm dev            # http://localhost:3000, admin at /admin
@@ -90,6 +90,11 @@ changes go only through migrations in src/migrations.
   drafts, so public submissions can wait as "pending". Archived events stay readable (old URLs).
 - 2026-11-21 The `web` schema is not exposed through Supabase's public REST API; the app reaches it
   only through Payload's own connection. Migrations start with CREATE SCHEMA IF NOT EXISTS "web".
+- 2026-11-21 Trailing slashes: public pages always end in / (WordPress parity). next.config sets
+  trailingSlash with skipTrailingSlashRedirect, and src/proxy.ts adds the slash for pages only, so
+  /admin and /api requests are never redirected. Build URLs with the slash (e.g. /events/).
+- 2026-11-21 Main menu mirrors the live site's menu (src/lib/navigation.ts); footer columns and
+  contact details come from the Settings global with the live site's values as fallbacks.
 - 2026-11-21 Supabase Pro and Vercel Pro must be active before launch (the free Supabase plan
   pauses idle projects; Vercel Hobby is for non-commercial use).
 
