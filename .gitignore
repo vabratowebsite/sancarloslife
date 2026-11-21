@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Payload local uploads (production uses Supabase Storage)
 /media
+
+# WordPress export (public data, but large and regenerated)
+/scripts/migrate/data/

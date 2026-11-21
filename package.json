@@ -9,7 +9,17 @@
     "lint": "eslint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
-    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap"
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "migrate:export": "cross-env NODE_USE_ENV_PROXY=1 tsx scripts/migrate/00-export-wp.ts",
+    "migrate:seo": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 tsx scripts/migrate/05-scrape-seo.ts",
+    "test": "vitest run",
+    "migrate:posts": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/20-posts.ts",
+    "migrate:events": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/30-events.ts",
+    "migrate:places": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/40-places.ts",
+    "migrate:misc": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/50-misc.ts",
+    "migrate:redirects": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/60-redirects.ts",
+    "migrate:all": "pnpm migrate:export && pnpm migrate:seo && pnpm migrate:posts && pnpm migrate:events && pnpm migrate:places && pnpm migrate:misc && pnpm migrate:redirects",
+    "migrate:verify": "cross-env NODE_NO_WARNINGS=1 tsx scripts/migrate/verify.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.94.1",
@@ -17,26 +27,32 @@
     "@payloadcms/richtext-lexical": "3.94.1",
     "@payloadcms/storage-s3": "3.94.1",
     "@payloadcms/ui": "3.94.1",
+    "entities": "^9.0.0",
     "graphql": "^16.8.1",
     "next": "16.4.6",
     "payload": "3.94.1",
+    "pg": "^8.23.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
+    "sanitize-html": "^2.18.2",
     "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.2",
     "axe-core": "^4.14.1",
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^5.1.1"
   },
   "packageManager": "pnpm@9.15.9",
   "type": "module"

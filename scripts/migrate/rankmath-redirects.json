@@ -1,0 +1,309 @@
+{
+ "source": "wp_rank_math_redirections via WPVibe (read-only), 2026-11-21",
+ "rows": [
+  {
+   "id": 1,
+   "pattern": "viv-and-mark",
+   "to": "/best-realtors-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 235,
+   "code": 301
+  },
+  {
+   "id": 2,
+   "pattern": "real-estate",
+   "to": "/real-estate-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 121,
+   "code": 301
+  },
+  {
+   "id": 3,
+   "pattern": "blog",
+   "to": "/san-carlos-life-blog/",
+   "status": "active",
+   "hits": 1632,
+   "code": 301
+  },
+  {
+   "id": 4,
+   "pattern": "real-estate/the-neighborhood/alder-manor",
+   "to": "/alder-manor/",
+   "status": "active",
+   "hits": 154,
+   "code": 301
+  },
+  {
+   "id": 5,
+   "pattern": "video-shorts",
+   "to": "/videos-of-san-carlos-ca/",
+   "status": "active",
+   "hits": 246,
+   "code": 301
+  },
+  {
+   "id": 6,
+   "pattern": "real-estate/the-neighborhood/beverly-terrace",
+   "to": "/beverly-terrace/",
+   "status": "active",
+   "hits": 208,
+   "code": 301
+  },
+  {
+   "id": 7,
+   "pattern": "real-estate/the-neighborhood/clearfield-park",
+   "to": "/clearfield-park/",
+   "status": "active",
+   "hits": 141,
+   "code": 301
+  },
+  {
+   "id": 8,
+   "pattern": "real-estate/the-neighborhood/cordes",
+   "to": "/cordes/",
+   "status": "active",
+   "hits": 222,
+   "code": 301
+  },
+  {
+   "id": 9,
+   "pattern": "real-estate/the-neighborhood/el-sereno",
+   "to": "/el-sereno/",
+   "status": "active",
+   "hits": 215,
+   "code": 301
+  },
+  {
+   "id": 10,
+   "pattern": "real-estate/the-neighborhood/howard-park",
+   "to": "/howard-park/",
+   "status": "active",
+   "hits": 205,
+   "code": 301
+  },
+  {
+   "id": 11,
+   "pattern": "real-estate/homes-for-sale-in-san-carlos-ca",
+   "to": "/homes-for-sale-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 0,
+   "code": 301
+  },
+  {
+   "id": 12,
+   "pattern": "real-estate/homes-for-sale-in-san-carlos",
+   "to": "/homes-for-sale-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 62,
+   "code": 301
+  },
+  {
+   "id": 13,
+   "pattern": "real-estate/search-and-visit-open-homes",
+   "to": "/open-houses-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 150,
+   "code": 301
+  },
+  {
+   "id": 14,
+   "pattern": "real-estate/how-much-is-my-house-worth",
+   "to": "/sell-my-house/",
+   "status": "active",
+   "hits": 142,
+   "code": 301
+  },
+  {
+   "id": 15,
+   "pattern": "real-estate/market-overview",
+   "to": "/real-estate-market-for-san-carlos-ca/",
+   "status": "active",
+   "hits": 49,
+   "code": 301
+  },
+  {
+   "id": 16,
+   "pattern": "explore-the-city/parks-of-san-carlos/",
+   "to": "/parks-of-san-carlos/",
+   "status": "active",
+   "hits": 148,
+   "code": 301
+  },
+  {
+   "id": 17,
+   "pattern": "explore-the-city/attractions/",
+   "to": "/attractions/",
+   "status": "active",
+   "hits": 571,
+   "code": 301
+  },
+  {
+   "id": 18,
+   "pattern": "explore-the-city/restaurants-and-services/",
+   "to": "/restaurants-and-services/",
+   "status": "active",
+   "hits": 521,
+   "code": 301
+  },
+  {
+   "id": 19,
+   "pattern": "explore-the-city/parks-and-trails",
+   "to": "/parks-of-san-carlos/",
+   "status": "active",
+   "hits": 82,
+   "code": 301
+  },
+  {
+   "id": 20,
+   "pattern": "real-estate/market-overview-and-updates",
+   "to": "/real-estate-market-for-san-carlos-ca/",
+   "status": "active",
+   "hits": 86,
+   "code": 301
+  },
+  {
+   "id": 21,
+   "pattern": "event/goblin-walk",
+   "to": "/event/goblin-walk-san-carlos/",
+   "status": "active",
+   "hits": 322,
+   "code": 301
+  },
+  {
+   "id": 22,
+   "pattern": "real-estate/search-homes-for-sale",
+   "to": "/homes-for-sale-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 111,
+   "code": 301
+  },
+  {
+   "id": 23,
+   "pattern": "event/art-and-wine-faire/",
+   "to": "/event/art-and-wine-faire/2023-10-07/",
+   "status": "active",
+   "hits": 964,
+   "code": 301
+  },
+  {
+   "id": 24,
+   "pattern": "https://sancarloslife.com/events/category/",
+   "to": "/",
+   "status": "inactive",
+   "hits": 0,
+   "code": 301
+  },
+  {
+   "id": 25,
+   "pattern": "acc-crabfeed-fundraiser-2024/",
+   "to": "/acc-crab-feed-fundraiser-2024/",
+   "status": "active",
+   "hits": 33,
+   "code": 301
+  },
+  {
+   "id": 26,
+   "pattern": "sc-noodle-house-where-the-best-pho-and-the-fun-are/",
+   "to": "/interview-sc-noodle-house-owner-christian-conte/",
+   "status": "active",
+   "hits": 28,
+   "code": 301
+  },
+  {
+   "id": 27,
+   "pattern": "event/hometown-days/",
+   "to": "/event/san-carlos-hometown-days/",
+   "status": "active",
+   "hits": 887,
+   "code": 301
+  },
+  {
+   "id": 28,
+   "pattern": "sticky-streets-due-to-stressed-out-trees",
+   "to": "/sticky-sidewalks-due-to-stressed-out-trees/",
+   "status": "active",
+   "hits": 216,
+   "code": 301
+  },
+  {
+   "id": 29,
+   "pattern": "lights-eucalyptus-ave-san-carlos/",
+   "to": "/christmas-tree-lane-in-eucalyptus-ave-san-carlos/",
+   "status": "active",
+   "hits": 633,
+   "code": 301
+  },
+  {
+   "id": 30,
+   "pattern": "storm-ready-san-carlos-guide/",
+   "to": "/storm-san-carlos-guide/",
+   "status": "active",
+   "hits": 605,
+   "code": 301
+  },
+  {
+   "id": 31,
+   "pattern": "event/san-carlos-week-of-the-family-2024/",
+   "to": "/event/san-carlos-week-of-the-family/",
+   "status": "active",
+   "hits": 234,
+   "code": 301
+  },
+  {
+   "id": 32,
+   "pattern": "hometown-days-2025/",
+   "to": "/hometown-days/",
+   "status": "active",
+   "hits": 870,
+   "code": 301
+  },
+  {
+   "id": 33,
+   "pattern": "event/san-carlos-hometown-days/",
+   "to": "/hometown-days/",
+   "status": "active",
+   "hits": 1373,
+   "code": 301
+  },
+  {
+   "id": 34,
+   "pattern": "a-family-legacy-ed-krampton-county-restaurant-supply",
+   "to": "/a-family-legacy-ed-krampert-county-restaurant-supply/",
+   "status": "trashed",
+   "hits": 6,
+   "code": 301
+  },
+  {
+   "id": 35,
+   "pattern": "a-win-for-lark-best-gift-shop-in-san-mateo/",
+   "to": "/lark-voted-best-gift-shop-san-mateo-area/",
+   "status": "active",
+   "hits": 20,
+   "code": 301
+  },
+  {
+   "id": 36,
+   "pattern": "a-family-legacy-ed-krampert-county-restaurant-supply/",
+   "to": "/ed-krampert-county-restaurant-supply/",
+   "status": "active",
+   "hits": 16,
+   "code": 301
+  },
+  {
+   "id": 37,
+   "pattern": "best-realtors-in-san-carlos-ca/",
+   "to": "/one-of-the-best-realtor-teams-in-san-carlos-ca/",
+   "status": "active",
+   "hits": 3331,
+   "code": 301
+  },
+  {
+   "id": 38,
+   "pattern": "eucalyptus-avenue-christmas-lights-san-carlos/",
+   "to": "/christmas-tree-lane-in-eucalyptus-ave-san-carlos/",
+   "status": "active",
+   "hits": 854,
+   "code": 301
+  }
+ ]
+}

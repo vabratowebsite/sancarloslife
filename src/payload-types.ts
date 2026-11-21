@@ -593,16 +593,36 @@ export interface Place {
   phone?: string | null;
   website?: string | null;
   priceRange?: ('$' | '$$' | '$$$' | '$$$$') | null;
+  email?: string | null;
+  mapsUrl?: string | null;
   /**
    * One line per day, e.g. Mon–Fri 11am–9pm
    */
   hours?: string | null;
+  /**
+   * Menu, ordering, reservations, reviews and social links.
+   */
+  links?:
+    | {
+        label: string;
+        url: string;
+        kind?: ('web' | 'order' | 'reserve' | 'reviews') | null;
+        id?: string | null;
+      }[]
+    | null;
+  highlights?: string[] | null;
+  nearby?: string[] | null;
   cuisines?: string[] | null;
   meals?: string[] | null;
   features?: string[] | null;
   specialDiets?: string[] | null;
   cover?: (number | null) | Media;
+  logo?: (number | null) | Media;
   gallery?: (number | Media)[] | null;
+  /**
+   * YouTube links
+   */
+  videos?: string[] | null;
   body?: {
     root: {
       type: string;
@@ -1443,13 +1463,27 @@ export interface PlacesSelect<T extends boolean = true> {
   phone?: T;
   website?: T;
   priceRange?: T;
+  email?: T;
+  mapsUrl?: T;
   hours?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        kind?: T;
+        id?: T;
+      };
+  highlights?: T;
+  nearby?: T;
   cuisines?: T;
   meals?: T;
   features?: T;
   specialDiets?: T;
   cover?: T;
+  logo?: T;
   gallery?: T;
+  videos?: T;
   body?: T;
   seo?:
     | T

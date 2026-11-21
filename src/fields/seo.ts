@@ -12,8 +12,9 @@ export const seoFields: Field = {
       type: "text",
       admin: { description: "Under 60 characters. Leave empty to use the page title." },
       validate: (value: unknown) =>
-        typeof value === "string" && value.length > 70
-          ? "Keep the SEO title under 60 characters (70 at most)."
+        // Migrated titles keep their length (live pages rank with them); new ones should be short.
+        typeof value === "string" && value.length > 200
+          ? "SEO titles over 200 characters are cut off by every search engine."
           : true,
     },
     {
@@ -21,8 +22,8 @@ export const seoFields: Field = {
       type: "textarea",
       admin: { description: "Under 155 characters." },
       validate: (value: unknown) =>
-        typeof value === "string" && value.length > 170
-          ? "Keep the description under 155 characters (170 at most)."
+        typeof value === "string" && value.length > 400
+          ? "Descriptions over 400 characters are cut off by every search engine."
           : true,
     },
     { name: "focusKeyword", type: "text" },

@@ -27,7 +27,7 @@ pnpm generate:types && pnpm generate:importmap   # after changing collections or
 pnpm payload migrate:create   # after changing a collection (ask before running against prod)
 pnpm test           # vitest
 pnpm test:e2e       # playwright against BASE_URL
-pnpm migrate:wp     # scripts/migrate (needs WP_APP_PASSWORD, SUPABASE_SERVICE_ROLE_KEY)
+pnpm migrate:all    # WordPress → database (docs/MIGRATION.md); pnpm migrate:verify checks old URLs
 
 ## Local database
 Development runs against a local Postgres (port 54322, database `scl`) with PAYLOAD_DB_PUSH=true,
@@ -95,6 +95,15 @@ changes go only through migrations in src/migrations.
   /admin and /api requests are never redirected. Build URLs with the slash (e.g. /events/).
 - 2026-11-21 Main menu mirrors the live site's menu (src/lib/navigation.ts); footer columns and
   contact details come from the Settings global with the live site's values as fallbacks.
+- 2026-11-21 URL parity facts from the live site: events live at /event/<slug>/ (singular, not
+  /events/<slug>/), restaurants at /restaurant/<slug>/, stores at /store/<slug>/, blog posts at
+  /<slug>/. The events list stays at /events/ and categories at /events/category/<slug>/.
+- 2026-11-21 WordPress events are single dated posts (no recurrence rules in the public API), so
+  each becomes one event; past events are "archived" and keep their page.
+- 2026-11-21 Redirects are served by src/proxy.ts from web.redirects (plain SQL, 5-minute cache),
+  one hop, keeping utm/fbclid parameters. Migration details: docs/MIGRATION.md.
+- 2026-11-21 Migrated SEO titles/descriptions keep their length (validation caps are 200/400);
+  automatic Rank Math descriptions over 300 characters were trimmed to ~155.
 - 2026-11-21 Supabase Pro and Vercel Pro must be active before launch (the free Supabase plan
   pauses idle projects; Vercel Hobby is for non-commercial use).
 
