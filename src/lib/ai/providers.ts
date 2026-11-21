@@ -61,7 +61,7 @@ export async function callAI(conn: Connection, system: string, user: string): Pr
   const maxTokens = conn.maxOutputTokens || 8000;
   if (conn.provider === "mock") {
     if (!mockAllowed()) throw new Error("The test AI is turned off in production.");
-    const format = system.includes('"excerpt"') ? "blog" : "desk-page";
+    const format = (system.match(/^FORMAT: ([\w-]+)$/m)?.[1] ?? "blog") as Parameters<typeof mockAnswer>[0];
     return { text: mockReply ? mockReply(system, user) : mockAnswer(format, user) };
   }
   if (conn.provider === "anthropic") {

@@ -11058,7 +11058,7 @@
         },
         "status": {
           "name": "status",
-          "type": "enum_city_projects_status",
+          "type": "enum_city_projects_project_status",
           "typeSchema": "web",
           "primaryKey": false,
           "notNull": false
@@ -11565,7 +11565,7 @@
         },
         "version_status": {
           "name": "version_status",
-          "type": "enum__city_projects_v_version_status",
+          "type": "enum_city_projects_project_status",
           "typeSchema": "web",
           "primaryKey": false,
           "notNull": false
@@ -15243,7 +15243,10 @@
       "schema": "web",
       "values": [
         "blog",
-        "desk-page"
+        "desk-page",
+        "event",
+        "place",
+        "city-project"
       ]
     },
     "web.enum__ai_prompts_v_version_format": {
@@ -15251,7 +15254,10 @@
       "schema": "web",
       "values": [
         "blog",
-        "desk-page"
+        "desk-page",
+        "event",
+        "place",
+        "city-project"
       ]
     },
     "web.enum_ai_connections_provider": {
@@ -15579,6 +15585,18 @@
         "public"
       ]
     },
+    "web.enum_city_projects_project_status": {
+      "name": "enum_city_projects_project_status",
+      "schema": "web",
+      "values": [
+        "proposed",
+        "planning",
+        "approved",
+        "construction",
+        "completed",
+        "on_hold"
+      ]
+    },
     "web.enum_city_projects_status": {
       "name": "enum_city_projects_status",
       "schema": "web",
@@ -15682,6 +15700,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "4b8ab2c4-86fd-4d5f-9422-8fe83db32edb",
+  "id": "ae957cde-e942-4e03-a867-f3a264709d79",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

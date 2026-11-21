@@ -145,6 +145,8 @@ export const CityProjects: CollectionConfig = {
         {
           name: "status",
           type: "select",
+          // Own enum name: the default (enum_city_projects_status) collides with the drafts `_status` enum.
+          enumName: "enum_city_projects_project_status",
           options: [
             { label: "Proposed", value: "proposed" },
             { label: "Planning", value: "planning" },

@@ -662,7 +662,7 @@ export interface AiPrompt {
   /**
    * Which template the result fills
    */
-  format: 'blog' | 'desk-page';
+  format: 'blog' | 'desk-page' | 'event' | 'place' | 'city-project';
   /**
    * Offered in Generate draft
    */

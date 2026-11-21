@@ -1,5 +1,7 @@
 import { expect, test, type APIRequestContext } from "@playwright/test";
 
+import { FORMATS, type FormatKey } from "../../src/lib/ai/formats";
+
 /**
  * The Operations Desk backup runner (/cron/desk/). The refusal checks always
  * run. The full round trip needs a local site with the Test AI as the default
@@ -10,6 +12,10 @@ import { expect, test, type APIRequestContext } from "@playwright/test";
 const secret = process.env.E2E_CRON_SECRET;
 const email = process.env.E2E_ADMIN_EMAIL;
 const password = process.env.E2E_ADMIN_PASSWORD;
+const FORMAT_KEYS = Object.keys(FORMATS) as FormatKey[];
+
+// Every cron call runs all due jobs, so these tests must not overlap.
+test.describe.configure({ mode: "serial" });
 
 test("refuses calls without the cron secret", async ({ request }) => {
   test.skip(test.info().project.name !== "desktop", "Runs once");
@@ -81,5 +87,58 @@ test("runs a job only when Claude's run is missing, once, and keeps sources publ
     const runs = await (await request.get(`/api/desk-runs?where[job][contains]=${tag}&limit=50&depth=0`, { headers })).json();
     for (const r of runs.docs ?? []) await request.delete(`/api/desk-runs/${r.id}`, { headers });
     for (const c of created.reverse()) await request.delete(`/api/${c.collection}/${c.id}`, { headers });
+  }
+});
+
+test("the website's backup AI drafts every format", async ({ request, baseURL }) => {
+  test.skip(test.info().project.name !== "desktop", "Runs once");
+  test.skip(!secret || !email || !password, "Set E2E_CRON_SECRET, E2E_ADMIN_EMAIL and E2E_ADMIN_PASSWORD (local site only)");
+  test.setTimeout(120_000);
+  const login = await (await request.post("/api/users/login", { data: { email, password }, headers: { Origin: baseURL! } })).json();
+  const headers = { Authorization: `JWT ${login.token}`, Origin: baseURL! };
+  const tag = Date.now().toString(36);
+  const made: { collection: string; id: number | string }[] = [];
+  const make = async (collection: string, data: object) => {
+    const res = await request.post(`/api/${collection}`, { headers, data });
+    const body = await res.json();
+    expect(res.ok(), JSON.stringify(body.errors ?? body)).toBe(true);
+    made.push({ collection, id: body.doc.id });
+    return body.doc;
+  };
+  try {
+    const conn = await make("ai-connections", { name: `e2e test ai ${tag}`, provider: "mock", model: "test", enabled: true, isDefault: false });
+    const hour = Number(new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hourCycle: "h23" }).format(new Date(Date.now() - 2 * 3600e3)));
+    const jobs: Record<string, FormatKey> = {};
+    for (const format of FORMAT_KEYS) {
+      const prompts = await (await request.get(`/api/ai-prompts?where[format][equals]=${format}&limit=1&depth=0`, { headers })).json();
+      const prompt = prompts.docs[0]?.id;
+      expect(prompt, `seeded prompt for ${format} (pnpm migrate:prompts)`).toBeTruthy();
+      const job = await make("desk-jobs", {
+        name: `e2e-${format}-${tag}`,
+        cadence: "daily",
+        hour,
+        graceHours: 1,
+        backup: true,
+        prompt,
+        connection: conn.id,
+        instructions: `Write about the San Carlos holiday tree lighting (${format}).`,
+      });
+      jobs[job.name] = format;
+    }
+    const results = (await (await request.get("/cron/desk", { headers: { Authorization: `Bearer ${secret}` } })).json()).results as { job: string; action: string; reason: string; draft?: { collection: string; id: number } }[];
+    for (const [name, format] of Object.entries(jobs)) {
+      const r = results.find((x) => x.job === name);
+      expect(r?.action, `${format}: ${r?.reason}`).toBe("ran");
+      expect(r!.draft!.collection).toBe(FORMATS[format].collection);
+      made.push({ collection: r!.draft!.collection, id: r!.draft!.id });
+    }
+  } finally {
+    const runs = await (await request.get(`/api/desk-runs?where[job][contains]=${tag}&limit=50&depth=0`, { headers })).json();
+    for (const r of runs.docs ?? []) await request.delete(`/api/desk-runs/${r.id}`, { headers });
+    for (const m of made.reverse()) await request.delete(`/api/${m.collection}/${m.id}`, { headers });
+    for (const c of ["venues", "organizers"]) {
+      const res = await (await request.get(`/api/${c}?where[name][contains]=(test)&limit=20&depth=0`, { headers })).json();
+      for (const d of res.docs ?? []) await request.delete(`/api/${c}/${d.id}`, { headers });
+    }
   }
 });

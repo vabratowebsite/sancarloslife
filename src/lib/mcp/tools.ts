@@ -6,7 +6,8 @@ import { z } from "zod";
 import { isStaffUser } from "@/access/roles";
 import { STATIC_PAGES, staticPage } from "@/content/pages";
 import { loadPageHtml } from "@/content/pages/load";
-import { FORMATS, toDraftData, type FormatKey } from "@/lib/ai/formats";
+import { buildDraft } from "@/lib/ai/draft";
+import { FORMATS, type FormatKey } from "@/lib/ai/formats";
 import { lexicalToText } from "@/lib/ai/lexical";
 import { siteSearch } from "@/lib/queries/search";
 
@@ -34,7 +35,7 @@ const COLLECTIONS = ["posts", "desk-pages", "events", "places", "city-projects"]
 type Coll = (typeof COLLECTIONS)[number];
 const TITLE: Record<Coll, string> = { posts: "title", "desk-pages": "title", events: "title", places: "name", "city-projects": "title" };
 const DRAFTS: Record<Coll, boolean> = { posts: true, "desk-pages": true, events: false, places: true, "city-projects": true };
-const FORMAT_OF: Partial<Record<Coll, FormatKey>> = { posts: "blog", "desk-pages": "desk-page" };
+const FORMAT_OF: Record<Coll, FormatKey> = { posts: "blog", "desk-pages": "desk-page", events: "event", places: "place", "city-projects": "city-project" };
 
 const collEnum = { type: "string", enum: [...COLLECTIONS], description: "posts = blog posts; desk-pages = guide pages made through the desk" };
 const parse = <T extends z.ZodTypeAny>(schema: T, args: unknown): z.infer<T> => {
@@ -132,7 +133,7 @@ export const TOOLS: Tool[] = [
     name: "get_prompt",
     title: "Get a writing prompt",
     description:
-      "Get the site's current prompt for a format (blog or desk-page): instructions, rules, example and the exact JSON shape submit_draft expects. Use it before writing, so every AI writes the same way.",
+      "Get the site's current prompt for a format (blog, desk-page = guide page, event, place = restaurant or business profile, city-project): instructions, rules, example and the exact JSON shape submit_draft expects. Use it before writing, so every AI writes the same way.",
     inputSchema: { type: "object", properties: { format: { type: "string", enum: Object.keys(FORMATS) } }, required: ["format"] },
     annotations: { readOnlyHint: true },
     run: async (args, { payload, user }) => {
@@ -145,7 +146,7 @@ export const TOOLS: Tool[] = [
     name: "submit_draft",
     title: "Submit a draft for approval",
     description:
-      "Create a new blog post or desk page as a DRAFT and send it to the Approval queue. 'data' must match the shape from get_prompt. Returns the draft's id and any format problems to fix with update_draft. Never publishes.",
+      "Create a new blog post, guide page, event, restaurant/business profile or city project as a DRAFT and send it to the Approval queue. 'data' must match the shape from get_prompt. Events get their venue and organizer matched by name (created if new). Returns the draft's id and any format problems to fix with update_draft (a missing photo is expected; an editor adds it). Never publishes.",
     inputSchema: {
       type: "object",
       properties: {
@@ -161,13 +162,7 @@ export const TOOLS: Tool[] = [
       const a = parse(z.object({ format: z.enum(Object.keys(FORMATS) as [FormatKey, ...FormatKey[]]), data: z.record(z.string(), z.unknown()), note: z.string().max(2000).optional() }), args);
       const out = FORMATS[a.format].schema.safeParse(a.data);
       if (!out.success) throw new ToolError(`The draft doesn't match the ${FORMATS[a.format].label} shape: ${out.error.issues.slice(0, 8).map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`);
-      let categoryId: number | null = null;
-      if (a.format === "blog" && "category" in out.data && out.data.category) {
-        categoryId = ((await payload.find({ collection: "categories", where: { name: { equals: out.data.category } }, limit: 1, depth: 0 })).docs[0]?.id as number) ?? null;
-      }
-      const data = toDraftData(a.format, out.data, { categoryId }) as Record<string, unknown>;
-      (data.review as Record<string, unknown>).source = "claude";
-      if (a.note) (data.review as Record<string, unknown>).note = a.note;
+      const { data } = await buildDraft(payload, user, a.format, out.data, { source: "claude", note: a.note });
       const doc = (await payload.create({ collection: FORMATS[a.format].collection, data: data as never, draft: true, user, overrideAccess: false })) as unknown as {
         id: number | string;
         review?: { check?: { ok?: boolean; problems?: string[] } };
@@ -179,28 +174,32 @@ export const TOOLS: Tool[] = [
     name: "update_draft",
     title: "Revise a draft",
     description:
-      "Revise an existing blog post or desk page as a new DRAFT version and send it back to the Approval queue (for re-editing published items too; the live version stays until a person approves). 'data' is the full draft in the get_prompt shape.",
+      "Revise an existing item as a new DRAFT version and send it back to the Approval queue. For posts, guide pages, places and city projects this works on published items too (the live version stays until a person approves). Events have no draft versions, so only unpublished (draft or pending) events can be revised. 'data' is the full item in the get_prompt shape.",
     inputSchema: {
       type: "object",
-      properties: { collection: { type: "string", enum: ["posts", "desk-pages"] }, id: { type: ["string", "number"] }, data: { type: "object" }, note: { type: "string" } },
+      properties: { collection: collEnum, id: { type: ["string", "number"] }, data: { type: "object" }, note: { type: "string" } },
       required: ["collection", "id", "data"],
     },
     annotations: { readOnlyHint: false, destructiveHint: false },
     run: async (args, { payload, user }) => {
       needStaff(user);
-      const a = parse(z.object({ collection: z.enum(["posts", "desk-pages"]), id: z.union([z.string(), z.number()]), data: z.record(z.string(), z.unknown()), note: z.string().max(2000).optional() }), args);
-      const format = FORMAT_OF[a.collection]!;
+      const a = parse(z.object({ collection: z.enum(COLLECTIONS), id: z.union([z.string(), z.number()]), data: z.record(z.string(), z.unknown()), note: z.string().max(2000).optional() }), args);
+      const format = FORMAT_OF[a.collection];
       const out = FORMATS[format].schema.safeParse(a.data);
       if (!out.success) throw new ToolError(`The draft doesn't match the ${FORMATS[format].label} shape: ${out.error.issues.slice(0, 8).map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`);
-      const existing = await payload.findByID({ collection: a.collection, id: a.id, draft: true, depth: 0, user, overrideAccess: false }).catch(() => null);
+      const existing = (await payload.findByID({ collection: a.collection, id: a.id, draft: DRAFTS[a.collection], depth: 0, user, overrideAccess: false }).catch(() => null)) as { status?: string } | null;
       if (!existing) throw new ToolError("Not found, or this account can't edit it.");
-      const data = toDraftData(format, out.data, { categoryId: null }) as Record<string, unknown>;
-      // Keep what the AI doesn't manage (photos, categories, address of a published item).
+      if (a.collection === "events" && !["draft", "pending"].includes(String(existing.status))) {
+        throw new ToolError("This event is already on the calendar. Events have no draft versions, so the connector can't revise it; describe the change in a note for an editor instead.");
+      }
+      const { data } = await buildDraft(payload, user, format, out.data, { source: "claude", note: a.note });
+      // Keep what the AI doesn't manage (photos, categories, the address of a published item, the event's status).
       delete data.categories;
       delete data.slug;
       delete data.generateSlug;
-      data.review = { state: "in-review", source: "claude", ...(a.note ? { note: a.note } : {}) };
-      const doc = (await payload.update({ collection: a.collection, id: a.id, data: data as never, draft: true, user, overrideAccess: false })) as unknown as {
+      delete data.status;
+      if (a.collection === "city-projects") data.status = (out.data as { status?: string }).status;
+      const doc = (await payload.update({ collection: a.collection, id: a.id, data: data as never, draft: DRAFTS[a.collection], user, overrideAccess: false })) as unknown as {
         id: number | string;
         review?: { check?: { ok?: boolean; problems?: string[] } };
       };

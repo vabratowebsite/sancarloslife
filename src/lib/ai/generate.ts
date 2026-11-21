@@ -3,7 +3,8 @@ import "server-only";
 import type { Payload, TypedUser } from "payload";
 
 import { decryptSecret } from "./crypto";
-import { extractJson, FORMATS, toDraftData, type FormatKey } from "./formats";
+import { buildDraft, formatContext } from "./draft";
+import { extractJson, FORMATS, type FormatKey } from "./formats";
 import { callAI, type Connection, type Provider } from "./providers";
 
 export type GenerateResult =
@@ -18,6 +19,7 @@ export function buildSystem(prompt: { instructions: string; rules?: string | nul
     prompt.instructions.trim(),
     prompt.rules?.trim() && `RULES\n${prompt.rules.trim()}`,
     prompt.example?.trim() && `EXAMPLE TO FOLLOW\n${prompt.example.trim()}`,
+    `FORMAT: ${format}`,
     `Today is ${today()} in San Carlos, California.`,
     `OUTPUT\nReply with one JSON object and nothing else, shaped exactly like this:\n${FORMATS[format].shape}\nIf a fact can't be verified from the notes or sources given, leave it out rather than guess.`,
   ]
@@ -88,11 +90,8 @@ export async function generateDraft(
     const notes = input.notes.trim().slice(0, 20_000);
     if (notes.length < 20) return { ok: false, message: "Add notes or source links (at least a sentence) for the AI to work from." };
     let system = buildSystem(prompt, format);
-    if (format === "blog") {
-      // The category must be one the site has.
-      const cats = await payload.find({ collection: "categories", limit: 100, depth: 0, pagination: false });
-      system += `\n\nBLOG CATEGORIES (choose one, spelled exactly): ${cats.docs.map((c) => c.name).join(", ")}`;
-    }
+    const context = await formatContext(payload, format);
+    if (context) system += `\n\n${context}`;
     const reply = await callAI(conn, system, `NOTES AND SOURCES FROM THE EDITOR\n${notes}`);
     const parsed = FORMATS[format].schema.safeParse(extractJson(reply.text));
     if (!parsed.success) {
@@ -101,13 +100,7 @@ export async function generateDraft(
       return { ok: false, message: `The AI's answer didn't match the format (${why}). Try again or adjust the prompt.` };
     }
     const out = parsed.data;
-    const collection = FORMATS[format].collection;
-    let categoryId: number | null = null;
-    if (format === "blog" && "category" in out && out.category) {
-      const cat = await payload.find({ collection: "categories", where: { name: { equals: out.category } }, limit: 1, depth: 0 });
-      categoryId = (cat.docs[0]?.id as number | undefined) ?? null;
-    }
-    const data = toDraftData(format, out, { categoryId }) as Record<string, unknown>;
+    const { data, collection, title } = await buildDraft(payload, user, format, out, { source: "website-ai" });
     type Saved = { id: number | string; review?: { check?: { problems?: string[] } } };
     let doc: Saved | undefined;
     // If the address is taken, try once with a numbered address.
@@ -126,8 +119,8 @@ export async function generateDraft(
       }
     }
     if (!doc) throw new Error("Couldn't save the draft.");
-    await log("ok", `${FORMATS[format].label} drafted: ${out.title}`, 1);
-    return { ok: true, collection, id: doc.id, title: out.title, problems: doc.review?.check?.problems ?? [] };
+    await log("ok", `${FORMATS[format].label} drafted: ${title}`, 1);
+    return { ok: true, collection, id: doc.id, title, problems: doc.review?.check?.problems ?? [] };
   } catch (e) {
     const message = e instanceof Error ? e.message : "Something went wrong.";
     await log("failed", message).catch(() => {});

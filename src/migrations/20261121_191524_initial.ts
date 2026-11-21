@@ -21,8 +21,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum_desk_jobs_weekday" AS ENUM('0', '1', '2', '3', '4', '5', '6');
   CREATE TYPE "web"."enum_desk_runs_runner" AS ENUM('claude', 'website-ai', 'editor');
   CREATE TYPE "web"."enum_desk_runs_status" AS ENUM('ok', 'partial', 'failed');
-  CREATE TYPE "web"."enum_ai_prompts_format" AS ENUM('blog', 'desk-page');
-  CREATE TYPE "web"."enum__ai_prompts_v_version_format" AS ENUM('blog', 'desk-page');
+  CREATE TYPE "web"."enum_ai_prompts_format" AS ENUM('blog', 'desk-page', 'event', 'place', 'city-project');
+  CREATE TYPE "web"."enum__ai_prompts_v_version_format" AS ENUM('blog', 'desk-page', 'event', 'place', 'city-project');
   CREATE TYPE "web"."enum_ai_connections_provider" AS ENUM('anthropic', 'openai', 'gemini', 'openrouter', 'openai-compatible', 'mock');
   CREATE TYPE "web"."enum_oauth_clients_auth_method" AS ENUM('none', 'client_secret_post', 'client_secret_basic');
   CREATE TYPE "web"."enum_oauth_tokens_kind" AS ENUM('code', 'access', 'refresh');
@@ -57,6 +57,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum_gallery_photos_status" AS ENUM('pending', 'approved', 'rejected');
   CREATE TYPE "web"."enum_city_projects_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
   CREATE TYPE "web"."enum_city_projects_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
+  CREATE TYPE "web"."enum_city_projects_project_status" AS ENUM('proposed', 'planning', 'approved', 'construction', 'completed', 'on_hold');
   CREATE TYPE "web"."enum_city_projects_status" AS ENUM('draft', 'published');
   CREATE TYPE "web"."enum__city_projects_v_version_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
   CREATE TYPE "web"."enum__city_projects_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
@@ -990,7 +991,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"generate_slug" boolean DEFAULT true,
   	"slug" varchar,
   	"area" varchar,
-  	"status" "web"."enum_city_projects_status",
+  	"status" "web"."enum_city_projects_project_status",
   	"latest_update_at" timestamp(3) with time zone,
   	"summary" varchar,
   	"cover_id" integer,
@@ -1032,7 +1033,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_generate_slug" boolean DEFAULT true,
   	"version_slug" varchar,
   	"version_area" varchar,
-  	"version_status" "web"."enum__city_projects_v_version_status",
+  	"version_status" "web"."enum_city_projects_project_status",
   	"version_latest_update_at" timestamp(3) with time zone,
   	"version_summary" varchar,
   	"version_cover_id" integer,
@@ -1946,6 +1947,7 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "web"."enum_gallery_photos_status";
   DROP TYPE "web"."enum_city_projects_review_state";
   DROP TYPE "web"."enum_city_projects_review_source";
+  DROP TYPE "web"."enum_city_projects_project_status";
   DROP TYPE "web"."enum_city_projects_status";
   DROP TYPE "web"."enum__city_projects_v_version_review_state";
   DROP TYPE "web"."enum__city_projects_v_version_review_source";

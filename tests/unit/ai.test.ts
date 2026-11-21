@@ -31,9 +31,37 @@ describe("AI answers", () => {
     expect(FORMATS.blog.schema.safeParse(JSON.parse(mockAnswer("blog", "Farmers market\nnotes"))).success).toBe(true);
     expect(FORMATS["desk-page"].schema.safeParse(JSON.parse(mockAnswer("desk-page", "Parking\nnotes"))).success).toBe(true);
   });
+  it("the test AI's answers match every format", () => {
+    for (const f of Object.keys(FORMATS) as (keyof typeof FORMATS)[]) {
+      const r = FORMATS[f].schema.safeParse(JSON.parse(mockAnswer(f, "Holiday tree lighting\nnotes")));
+      expect(r.success, `${f}: ${r.success ? "" : JSON.stringify(r.error.issues)}`).toBe(true);
+    }
+  });
+  it("turns an event answer into a staff-only draft with its venue and sources for the reviewer", () => {
+    const out = FORMATS.event.schema.parse(JSON.parse(mockAnswer("event", "Tree lighting")));
+    const d = toDraftData("event", out, { venueId: 4, organizerId: 9, eventCategoryId: 2 }) as unknown as Record<string, unknown> & { review: { note: string } };
+    expect(d).toMatchObject({ status: "draft", venue: 4, organizer: 9, categories: [2], timezone: "America/Los_Angeles" });
+    expect(d.review.note).toContain("https://www.cityofsancarlos.org/");
+    expect(Number.isNaN(Date.parse(String(d.startsAt)))).toBe(false);
+  });
+  it("rejects events without a time zone and places with unknown types", () => {
+    const ev = JSON.parse(mockAnswer("event", "x"));
+    expect(FORMATS.event.schema.safeParse({ ...ev, startsAt: "2026-12-05 17:00" }).success).toBe(false);
+    const pl = JSON.parse(mockAnswer("place", "x"));
+    expect(FORMATS.place.schema.safeParse({ ...pl, type: "casino" }).success).toBe(false);
+    expect(FORMATS.place.schema.safeParse({ ...pl, website: "javascript:alert(1)" }).success).toBe(false);
+  });
+  it("keeps a city project's sources on the page with their dates", () => {
+    const out = FORMATS["city-project"].schema.parse(JSON.parse(mockAnswer("city-project", "Library expansion")));
+    const d = toDraftData("city-project", out) as unknown as { sources: { title: string; url: string; publishedAt?: string }[]; status: string; _status: string };
+    expect(d._status).toBe("draft");
+    expect(d.status).toBe("planning");
+    expect(d.sources[0]).toMatchObject({ url: "https://www.cityofsancarlos.org/" });
+    expect(d.sources[0].publishedAt).toMatch(/^2026-11-01/);
+  });
   it("turns a blog answer into a draft in review with rich text", () => {
     const out = FORMATS.blog.schema.parse(JSON.parse(mockAnswer("blog", "Farmers market")));
-    const d = toDraftData("blog", out, { categoryId: 3 }) as { _status: string; review: { state: string; source: string }; categories: number[] };
+    const d = toDraftData("blog", out, { categoryId: 3 }) as unknown as { _status: string; review: { state: string; source: string }; categories: number[] };
     expect(d).toMatchObject({ _status: "draft", review: { state: "in-review", source: "website-ai" }, categories: [3] });
   });
 });

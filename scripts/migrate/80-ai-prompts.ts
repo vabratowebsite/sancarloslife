@@ -67,6 +67,51 @@ From the editor's notes and sources, write:
 - a call to action that fits the topic: Subscribe (/subscribe/) for events and local news, the events calendar (/events/), or Contact Viv & Mark (/contact-us/) and Sell My House (/sell-my-house/) for real estate topics.`,
     rules: VOICE,
   },
+  {
+    name: "Event listing (San Carlos Life)",
+    format: "event",
+    instructions: `You write event listings for the San Carlos Life events calendar (sancarloslife.com/events/).
+
+From the editor's notes and sources, fill in one event:
+- Use the organizer's own name for the event. Dates and times come only from an official source (organizer, venue, City of San Carlos calendar). Give startsAt (and endsAt when known) in ISO 8601 with the Pacific offset (-08:00 in winter, -07:00 in summer). Use allDay only when no time is given.
+- venue: the place's usual name and its street address. Use the same venue name the site already uses when it's obviously the same place (for example "Burton Park", "Laurel Street", "San Carlos Library").
+- description: 150 to 600 words. Open with what it is, when and where in one or two sentences. Then what to expect, who it's for (families, kids' ages, adults), cost and tickets or RSVP, accessibility and parking if the sources say so, and what's nearby if useful. Practical details first, no hype.
+- cost: "Free", or the price range as published.
+- category: choose the closest existing event category.
+- If the event repeats (weekly market, monthly meetup), describe the pattern in the description and list the next date as startsAt; an editor sets the repeat.
+- Never list an event whose date has passed or that the sources don't confirm for this year.`,
+    rules: VOICE,
+  },
+  {
+    name: "Restaurant or business profile (San Carlos Life)",
+    format: "place",
+    instructions: `You write restaurant, shop and service profiles for the San Carlos Life directory (restaurants at /restaurant/<slug>/, stores at /store/<slug>/).
+
+From the editor's notes and sources, fill in one profile:
+- name: the short name people use; headline: one specific line on why to go (a dish, a specialty, the owner's story), not generic praise.
+- type and street: pick from the allowed values; "laurel" for Laurel Street downtown, "el-camino" for El Camino Real, "san-carlos-ave" for San Carlos Avenue, "industrial" for Industrial Road, otherwise "other".
+- address, phone, website, hours and price range only from the business's own site, its Google or Yelp listing, or the notes. Leave out anything you can't confirm; hours change often, so only give them from a recent source.
+- sections (2 to 4): "The story" (who runs it, how long it has been in San Carlos), "What to expect" or "What to order" (specific items, prices only if published), and "Good to know" (reservations, parking, kids, dietary options) when the sources support it.
+- highlights: 2 to 6 short specifics; cuisines for restaurants.
+- FAQs (optional, up to 4): practical questions people ask (parking, reservations, vegetarian options).
+- Never invent reviews, quotes, awards or owner details. Describe the business, never the kind of customer.`,
+    rules: VOICE,
+  },
+  {
+    name: "City project page (San Carlos Life)",
+    format: "city-project",
+    instructions: `You write city project pages for San Carlos Life (civic projects tracked by the San Carlos Civic Watch desk: construction, capital projects, land use, parks, mobility and budget items).
+
+From the editor's notes and official sources, fill in one project page:
+- title: the project's name as the City uses it; area: the street, park or neighborhood.
+- status: proposed, planning, approved, construction, completed or on_hold, as the latest official record shows.
+- summary: what it is, where, the stage it's at, and the next decision with its date if known.
+- sections (2 to 5), for example "What's planned", "Cost and funding", "Timeline", "What residents can do" (meetings, comment deadlines, contacts).
+- Label where facts come from: City records and staff reports as such, things said at a meeting as said at a meeting, community comments as community views. Don't present estimates as final costs or proposals as decisions.
+- Stay neutral: explain trade-offs and who is affected; no advocacy for or against the project.
+- sources: official documents first (staff reports, agendas, minutes, the City project page), each with its date (publishedAt). Every number needs a source.`,
+    rules: VOICE,
+  },
 ];
 
 await run("ai-prompts", async () => {
