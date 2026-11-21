@@ -2,7 +2,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE SCHEMA IF NOT EXISTS "web";
+   DO $do$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = 'web') THEN CREATE SCHEMA "web"; END IF; END $do$;
    CREATE TYPE "web"."enum_posts_review_state" AS ENUM('none', 'in-review', 'approved', 'rejected');
   CREATE TYPE "web"."enum_posts_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum_posts_status" AS ENUM('draft', 'published');

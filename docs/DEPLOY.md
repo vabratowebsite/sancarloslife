@@ -93,6 +93,22 @@ Then:
    (or **Edit this page** on the site).
 3. Check the preview against the launch checklist (section 7).
 
+## 4b. When the database can't be reached from your computer (how the demo was set up)
+
+1. In Supabase (SQL editor, as `postgres`): create a login role that owns only the website schema:
+   `create role scl_web login password '<random>'; grant scl_web to postgres;`
+   `create schema if not exists web authorization scl_web; alter role scl_web set search_path = web;`
+   `DATABASE_URL` is then the transaction pooler URL with user `scl_web.<project ref>`.
+2. In Vercel, set `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SITE_URL`, and a temporary
+   `SETUP_SECRET` (32+ random characters). For the first build only, set the build command to
+   `pnpm payload migrate && pnpm build` (static pages read the database while building).
+3. Push the content from a computer that has it locally:
+   `SETUP_URL=https://<deployment>/cron/setup SETUP_SECRET=… VERCEL_BYPASS=<protection bypass> node scripts/setup/push-content.mjs`
+   It copies everything except accounts, sessions, form submissions, OAuth apps and tokens, AI
+   keys, saved page edits, desk run logs and jobs, and items made by the automated tests.
+4. Remove `SETUP_SECRET` and the custom build command, then redeploy so static pages rebuild
+   with the content. Open `/admin` and create the first user (it becomes the admin).
+
 ## 5. Every change after that
 
 1. Work on a `feature/*` branch, open a pull request. Vercel builds a preview.
