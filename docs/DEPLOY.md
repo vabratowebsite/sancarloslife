@@ -19,6 +19,7 @@ new project.
 | Newsletter | MailerLite | Sign-ups only; we don't store addresses |
 | Bot check | Cloudflare Turnstile | Forms refuse submissions in production without the secret key |
 | Listings | Buying Buddy (package installed; needs the activation key) | See section 6 |
+| Ops desk backup runner | Vercel Cron → `/cron/desk` (vercel.json) | Daily at 20:17 UTC on Hobby (Hobby allows one run a day); change to hourly (`17 * * * *`) once the team is on Pro |
 
 ## 2. One-time setup
 
@@ -60,6 +61,8 @@ All names are in `.env.example`. Production vs Preview:
 | `TURNSTILE_SECRET_KEY`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Real keys | Real keys (the widget covers `*.vercel.app`) |
 | `MAILERLITE_*` | Real values | Leave empty |
 | `NEXT_PUBLIC_GA_ID` | Optional | Leave empty |
+| `CRON_SECRET` | 16+ random characters (`openssl rand -hex 24`); Vercel Cron sends it automatically | Leave empty (the runner is off without it) |
+| `NEXT_PUBLIC_BUYINGBUDDY_KEY` | Buying Buddy activation key | Same key (authorize the preview domain in Buying Buddy) |
 
 Warning: previews and production share one database, so content edited in a preview admin is live
 content. That's fine for this site's size; a separate preview database is a paid Supabase feature.

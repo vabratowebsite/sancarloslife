@@ -14,6 +14,7 @@ import { Neighborhoods } from "./collections/Neighborhoods";
 import { AiConnections } from "./collections/AiConnections";
 import { AiPrompts } from "./collections/AiPrompts";
 import { DeskPages } from "./collections/DeskPages";
+import { DeskJobs } from "./collections/DeskJobs";
 import { DeskRuns } from "./collections/DeskRuns";
 import { PageEdits } from "./collections/PageEdits";
 import { Pages } from "./collections/Pages";
@@ -65,7 +66,7 @@ export default buildConfig({
   collections: [
     Posts,
     Categories,
-    Pages, PageEdits, DeskPages, DeskRuns, AiPrompts, AiConnections,
+    Pages, PageEdits, DeskPages, DeskJobs, DeskRuns, AiPrompts, AiConnections,
     Events,
     Venues,
     Organizers,

@@ -3,7 +3,9 @@ import { Gutter } from "@payloadcms/ui";
 import Link from "next/link";
 import type { AdminViewServerProps } from "payload";
 
-import { approveItem, generateAction, rejectItem } from "./actions";
+import { isAdminUser } from "@/access/roles";
+
+import { approveItem, generateAction, rejectItem, runJobNow } from "./actions";
 
 const KINDS = [
   { collection: "posts", label: "Blog post", title: "title", drafts: true, path: (d: Doc) => `/${d.slug}/` },
@@ -49,6 +51,11 @@ export async function DeskQueue({ initPageResult, params, searchParams }: AdminV
   const sp = (await searchParams) ?? {};
   const one = (v: unknown) => (Array.isArray(v) ? String(v[0]) : v ? String(v) : "");
   const runs = await payload.find({ collection: "desk-runs", sort: "-startedAt", limit: 8, depth: 0, user, overrideAccess: false });
+  const jobs = await payload.find({ collection: "desk-jobs", sort: "name", limit: 50, depth: 0, user, overrideAccess: false });
+  const lastRuns = await Promise.all(
+    jobs.docs.map(async (j) => (await payload.find({ collection: "desk-runs", where: { job: { equals: j.name } }, sort: "-startedAt", limit: 1, depth: 0, user, overrideAccess: false })).docs[0]),
+  );
+  const admin = isAdminUser(user);
 
   const box: React.CSSProperties = { border: "1px solid var(--theme-elevation-150)", borderRadius: 8, padding: 16, marginBottom: 12 };
   return (
@@ -191,6 +198,53 @@ export async function DeskQueue({ initPageResult, params, searchParams }: AdminV
           ) : null,
         )}
         {total === 0 && <p style={box as React.CSSProperties}>Nothing is waiting. New drafts from the research runs show up here.</p>}
+
+        <h2 style={{ marginTop: 32 }}>Scheduled jobs</h2>
+        <p style={{ maxWidth: 720 }}>
+          Claude runs these and logs each run. If a run is missing once its grace period has passed, the website runs the job with the backup AI
+          (checked {process.env.CRON_SECRET ? "by the daily cron" : "never: CRON_SECRET isn't set"}). Manage jobs under Operations Desk → Desk jobs.
+        </p>
+        {jobs.docs.length ? (
+          <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: 12 }}>
+            <thead>
+              <tr>
+                <th align="left">Job</th>
+                <th align="left">Schedule</th>
+                <th align="left">Last run</th>
+                <th align="left">Backup</th>
+                {admin && <th align="left" />}
+              </tr>
+            </thead>
+            <tbody>
+              {jobs.docs.map((j, i) => {
+                const last = lastRuns[i];
+                const day = j.cadence === "weekly" ? ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][Number(j.weekday ?? 1)] : j.cadence === "weekdays" ? "Weekdays" : "Daily";
+                return (
+                  <tr key={j.id}>
+                    <td>{j.name}</td>
+                    <td>
+                      {day} {String(j.hour).padStart(2, "0")}:00, wait {j.graceHours}h
+                    </td>
+                    <td>{last ? `${when(last.startedAt)} · ${last.runner === "claude" ? "Claude" : last.runner === "website-ai" ? "Website AI" : "Editor"} · ${last.status}` : "never"}</td>
+                    <td>{j.backup ? "on" : "off"}</td>
+                    {admin && (
+                      <td>
+                        <form action={runJobNow}>
+                          <input type="hidden" name="job" value={String(j.id)} />
+                          <button type="submit" className="btn btn--style-secondary btn--size-small" style={{ margin: 0 }}>
+                            Run backup now
+                          </button>
+                        </form>
+                      </td>
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <p>No jobs yet.</p>
+        )}
 
         <h2 style={{ marginTop: 32 }}>Recent runs</h2>
         {runs.docs.length ? (

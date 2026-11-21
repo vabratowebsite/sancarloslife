@@ -3410,6 +3410,299 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "web.desk_jobs_sources": {
+      "name": "desk_jobs_sources",
+      "schema": "web",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "desk_jobs_sources_order_idx": {
+          "name": "desk_jobs_sources_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_jobs_sources_parent_id_idx": {
+          "name": "desk_jobs_sources_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "desk_jobs_sources_parent_id_fk": {
+          "name": "desk_jobs_sources_parent_id_fk",
+          "tableFrom": "desk_jobs_sources",
+          "tableTo": "desk_jobs",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "web.desk_jobs": {
+      "name": "desk_jobs",
+      "schema": "web",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cadence": {
+          "name": "cadence",
+          "type": "enum_desk_jobs_cadence",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'daily'"
+        },
+        "weekday": {
+          "name": "weekday",
+          "type": "enum_desk_jobs_weekday",
+          "typeSchema": "web",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hour": {
+          "name": "hour",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 6
+        },
+        "grace_hours": {
+          "name": "grace_hours",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 3
+        },
+        "backup": {
+          "name": "backup",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "prompt_id": {
+          "name": "prompt_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "connection_id": {
+          "name": "connection_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "instructions": {
+          "name": "instructions",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "desk_jobs_name_idx": {
+          "name": "desk_jobs_name_idx",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_jobs_prompt_idx": {
+          "name": "desk_jobs_prompt_idx",
+          "columns": [
+            {
+              "expression": "prompt_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_jobs_connection_idx": {
+          "name": "desk_jobs_connection_idx",
+          "columns": [
+            {
+              "expression": "connection_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_jobs_updated_at_idx": {
+          "name": "desk_jobs_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "desk_jobs_created_at_idx": {
+          "name": "desk_jobs_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "desk_jobs_prompt_id_ai_prompts_id_fk": {
+          "name": "desk_jobs_prompt_id_ai_prompts_id_fk",
+          "tableFrom": "desk_jobs",
+          "tableTo": "ai_prompts",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "prompt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "desk_jobs_connection_id_ai_connections_id_fk": {
+          "name": "desk_jobs_connection_id_ai_connections_id_fk",
+          "tableFrom": "desk_jobs",
+          "tableTo": "ai_connections",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "connection_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "web.desk_runs": {
       "name": "desk_runs",
       "schema": "web",
@@ -12727,6 +13020,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "desk_jobs_id": {
+          "name": "desk_jobs_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "desk_runs_id": {
           "name": "desk_runs_id",
           "type": "integer",
@@ -12947,6 +13246,21 @@
           "columns": [
             {
               "expression": "desk_pages_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_desk_jobs_id_idx": {
+          "name": "payload_locked_documents_rels_desk_jobs_id_idx",
+          "columns": [
+            {
+              "expression": "desk_jobs_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -13306,6 +13620,20 @@
           "schemaTo": "web",
           "columnsFrom": [
             "desk_pages_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_desk_jobs_fk": {
+          "name": "payload_locked_documents_rels_desk_jobs_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "desk_jobs",
+          "schemaTo": "web",
+          "columnsFrom": [
+            "desk_jobs_id"
           ],
           "columnsTo": [
             "id"
@@ -14442,6 +14770,28 @@
         "published"
       ]
     },
+    "web.enum_desk_jobs_cadence": {
+      "name": "enum_desk_jobs_cadence",
+      "schema": "web",
+      "values": [
+        "daily",
+        "weekdays",
+        "weekly"
+      ]
+    },
+    "web.enum_desk_jobs_weekday": {
+      "name": "enum_desk_jobs_weekday",
+      "schema": "web",
+      "values": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
     "web.enum_desk_runs_runner": {
       "name": "enum_desk_runs_runner",
       "schema": "web",
@@ -14886,6 +15236,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "bd8f5b12-2b7d-49fd-bea3-faa916050b09",
+  "id": "2fcd3c0c-4785-41a2-9df7-81ce3f3cbd58",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

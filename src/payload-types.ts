@@ -72,6 +72,7 @@ export interface Config {
     pages: Page;
     'page-edits': PageEdit;
     'desk-pages': DeskPage;
+    'desk-jobs': DeskJob;
     'desk-runs': DeskRun;
     'ai-prompts': AiPrompt;
     'ai-connections': AiConnection;
@@ -103,6 +104,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'page-edits': PageEditsSelect<false> | PageEditsSelect<true>;
     'desk-pages': DeskPagesSelect<false> | DeskPagesSelect<true>;
+    'desk-jobs': DeskJobsSelect<false> | DeskJobsSelect<true>;
     'desk-runs': DeskRunsSelect<false> | DeskRunsSelect<true>;
     'ai-prompts': AiPromptsSelect<false> | AiPromptsSelect<true>;
     'ai-connections': AiConnectionsSelect<false> | AiConnectionsSelect<true>;
@@ -593,39 +595,53 @@ export interface DeskPage {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Scheduled research jobs. Claude runs them and logs each run; if a run is missing after the grace period, the website runs the job with the backup AI.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "desk-runs".
+ * via the `definition` "desk-jobs".
  */
-export interface DeskRun {
+export interface DeskJob {
   id: number;
   /**
-   * e.g. local-news-scan, events-scan, newsletter-draft
+   * The name Claude uses when it logs the run (log_run job). Lowercase with dashes.
    */
-  job: string;
-  runner: 'claude' | 'website-ai' | 'editor';
-  status: 'ok' | 'partial' | 'failed';
-  startedAt: string;
-  finishedAt?: string | null;
-  summary?: string | null;
+  name: string;
+  description?: string | null;
+  cadence: 'daily' | 'weekdays' | 'weekly';
   /**
-   * Sources checked
+   * For weekly jobs
    */
-  checked?: number | null;
+  weekday?: ('0' | '1' | '2' | '3' | '4' | '5' | '6') | null;
   /**
-   * Drafts sent for review
+   * Hour of the day, San Carlos time (0–23)
    */
-  drafted?: number | null;
+  hour: number;
   /**
-   * [["ok"|"bad", text], …]
+   * How long to wait for Claude's run before the backup runs
    */
-  notes?:
+  graceHours: number;
+  backup?: boolean | null;
+  /**
+   * Which format and voice the draft uses
+   */
+  prompt: number | AiPrompt;
+  /**
+   * Backup AI; empty uses the default connection
+   */
+  connection?: (number | null) | AiConnection;
+  /**
+   * What this run should find and write about, sent to the AI with the sources.
+   */
+  instructions: string;
+  /**
+   * Pages or RSS feeds the backup run reads (https only). Their text is sent to the AI as material, never as instructions.
+   */
+  sources?:
     | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
+        url: string;
+        label?: string | null;
+        id?: string | null;
+      }[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -700,6 +716,44 @@ export interface AiConnection {
   useForBackup?: boolean | null;
   maxOutputTokens?: number | null;
   notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "desk-runs".
+ */
+export interface DeskRun {
+  id: number;
+  /**
+   * e.g. local-news-scan, events-scan, newsletter-draft
+   */
+  job: string;
+  runner: 'claude' | 'website-ai' | 'editor';
+  status: 'ok' | 'partial' | 'failed';
+  startedAt: string;
+  finishedAt?: string | null;
+  summary?: string | null;
+  /**
+   * Sources checked
+   */
+  checked?: number | null;
+  /**
+   * Drafts sent for review
+   */
+  drafted?: number | null;
+  /**
+   * [["ok"|"bad", text], …]
+   */
+  notes?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1544,6 +1598,10 @@ export interface PayloadLockedDocument {
         value: number | DeskPage;
       } | null)
     | ({
+        relationTo: 'desk-jobs';
+        value: number | DeskJob;
+      } | null)
+    | ({
         relationTo: 'desk-runs';
         value: number | DeskRun;
       } | null)
@@ -1816,6 +1874,31 @@ export interface DeskPagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "desk-jobs_select".
+ */
+export interface DeskJobsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  cadence?: T;
+  weekday?: T;
+  hour?: T;
+  graceHours?: T;
+  backup?: T;
+  prompt?: T;
+  connection?: T;
+  instructions?: T;
+  sources?:
+    | T
+    | {
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

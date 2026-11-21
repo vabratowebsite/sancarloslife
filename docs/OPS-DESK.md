@@ -53,7 +53,7 @@ About 300 files: the desk page, 45 blog drafts, 102 event drafts, 10 page drafts
    neighborhood, newsletter, city project, page) with structure, SEO/AEO/GEO rules, brand voice and
    compliance notes, versioned. Connections to any provider (Anthropic, OpenAI, Gemini, OpenRouter,
    any OpenAI-compatible API); keys encrypted server-side. "Generate draft" in the admin.
-3. **Backup scheduled runs on the website** (only run when Claude's run hasn't reported). Vercel Cron jobs scan sources (news sites, City pages,
+3. **Backup scheduled runs on the website** ✅ Built 2026-11-22 (Desk jobs collection, /cron/desk/ runner, page and RSS sources; email scans not yet) (only run when Claude's run hasn't reported). Vercel Cron jobs scan sources (news sites, City pages,
    calendars, RSS) and draft with the stored prompts through the chosen AI. Run log and scan reports
    in the desk. Email-based scans need the website's own Google sign-in (Claude's Gmail connector
    won't be there).

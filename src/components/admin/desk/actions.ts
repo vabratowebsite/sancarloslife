@@ -4,8 +4,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
-import { isStaffUser } from "@/access/roles";
+import { isAdminUser, isStaffUser } from "@/access/roles";
 import { generateDraft } from "@/lib/ai/generate";
+import { runDueJobs } from "@/lib/desk/runner";
 import { getPayloadClient } from "@/lib/payload";
 
 const COLLECTIONS = ["posts", "events", "places", "city-projects", "desk-pages"] as const;
@@ -74,6 +75,20 @@ export async function generateAction(form: FormData) {
     res.ok
       ? { gen: "ok", title: res.title, problems: String(res.problems.length) }
       : { gen: "error", message: res.message.slice(0, 300) },
+  );
+  redirect(`/admin/desk?${q}`);
+}
+
+/** Run one desk job's backup now (admins), whatever its schedule. Uses the job's AI connection. */
+export async function runJobNow(form: FormData) {
+  const { payload, user } = await staff();
+  if (!isAdminUser(user)) throw new Error("Only admins can start a backup run.");
+  const id = String(form.get("job") ?? "");
+  if (!/^\w{1,40}$/.test(id)) throw new Error("Unknown job");
+  const [r] = await runDueJobs(payload, { force: id });
+  revalidatePath("/admin/desk");
+  const q = new URLSearchParams(
+    r?.action === "ran" ? { gen: "ok", title: r.draft?.title ?? r.job, problems: "0" } : { gen: "error", message: (r?.reason ?? "Job not found").slice(0, 300) },
   );
   redirect(`/admin/desk?${q}`);
 }

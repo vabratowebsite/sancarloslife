@@ -34,7 +34,15 @@ export function buildSystem(prompt: { instructions: string; rules?: string | nul
 export async function generateDraft(
   payload: Payload,
   user: TypedUser,
-  input: { promptId: number | string; connectionId?: number | string | null; notes: string; job?: string },
+  input: {
+    promptId: number | string;
+    connectionId?: number | string | null;
+    notes: string;
+    job?: string;
+    /** Backup runs: sources read and what happened with each, for the run log. */
+    checked?: number;
+    runNotes?: [string, string][];
+  },
 ): Promise<GenerateResult> {
   const started = new Date().toISOString();
   const prompt = await payload.findByID({ collection: "ai-prompts", id: input.promptId, depth: 0, user, overrideAccess: false }).catch(() => null);
@@ -62,7 +70,17 @@ export async function generateDraft(
   const log = async (status: "ok" | "failed", summary: string, drafted = 0) =>
     payload.create({
       collection: "desk-runs",
-      data: { job: input.job ?? `generate:${format}`, runner: "website-ai", status, startedAt: started, finishedAt: new Date().toISOString(), summary: summary.slice(0, 250), drafted },
+      data: {
+        job: input.job ?? `generate:${format}`,
+        runner: "website-ai",
+        status,
+        startedAt: started,
+        finishedAt: new Date().toISOString(),
+        summary: summary.slice(0, 250),
+        drafted,
+        checked: input.checked,
+        notes: input.runNotes,
+      },
       overrideAccess: true,
     });
 

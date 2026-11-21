@@ -17,6 +17,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "web"."enum__desk_pages_v_version_review_source" AS ENUM('editor', 'claude', 'website-ai', 'public');
   CREATE TYPE "web"."enum__desk_pages_v_version_template" AS ENUM('guide');
   CREATE TYPE "web"."enum__desk_pages_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "web"."enum_desk_jobs_cadence" AS ENUM('daily', 'weekdays', 'weekly');
+  CREATE TYPE "web"."enum_desk_jobs_weekday" AS ENUM('0', '1', '2', '3', '4', '5', '6');
   CREATE TYPE "web"."enum_desk_runs_runner" AS ENUM('claude', 'website-ai', 'editor');
   CREATE TYPE "web"."enum_desk_runs_status" AS ENUM('ok', 'partial', 'failed');
   CREATE TYPE "web"."enum_ai_prompts_format" AS ENUM('blog', 'desk-page');
@@ -333,6 +335,30 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"latest" boolean
+  );
+  
+  CREATE TABLE "web"."desk_jobs_sources" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"url" varchar NOT NULL,
+  	"label" varchar
+  );
+  
+  CREATE TABLE "web"."desk_jobs" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar NOT NULL,
+  	"description" varchar,
+  	"cadence" "web"."enum_desk_jobs_cadence" DEFAULT 'daily' NOT NULL,
+  	"weekday" "web"."enum_desk_jobs_weekday",
+  	"hour" numeric DEFAULT 6 NOT NULL,
+  	"grace_hours" numeric DEFAULT 3 NOT NULL,
+  	"backup" boolean DEFAULT true,
+  	"prompt_id" integer NOT NULL,
+  	"connection_id" integer,
+  	"instructions" varchar NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
   CREATE TABLE "web"."desk_runs" (
@@ -1136,6 +1162,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"pages_id" integer,
   	"page_edits_id" integer,
   	"desk_pages_id" integer,
+  	"desk_jobs_id" integer,
   	"desk_runs_id" integer,
   	"ai_prompts_id" integer,
   	"ai_connections_id" integer,
@@ -1255,6 +1282,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("version_review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_hero_id_media_id_fk" FOREIGN KEY ("version_hero_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_desk_pages_v" ADD CONSTRAINT "_desk_pages_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "web"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."desk_jobs_sources" ADD CONSTRAINT "desk_jobs_sources_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."desk_jobs"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."desk_jobs" ADD CONSTRAINT "desk_jobs_prompt_id_ai_prompts_id_fk" FOREIGN KEY ("prompt_id") REFERENCES "web"."ai_prompts"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "web"."desk_jobs" ADD CONSTRAINT "desk_jobs_connection_id_ai_connections_id_fk" FOREIGN KEY ("connection_id") REFERENCES "web"."ai_connections"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."_ai_prompts_v" ADD CONSTRAINT "_ai_prompts_v_parent_id_ai_prompts_id_fk" FOREIGN KEY ("parent_id") REFERENCES "web"."ai_prompts"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "web"."events_exdates" ADD CONSTRAINT "events_exdates_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "web"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."events" ADD CONSTRAINT "events_review_reviewed_by_id_users_id_fk" FOREIGN KEY ("review_reviewed_by_id") REFERENCES "web"."users"("id") ON DELETE set null ON UPDATE no action;
@@ -1330,6 +1360,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "web"."pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_page_edits_fk" FOREIGN KEY ("page_edits_id") REFERENCES "web"."page_edits"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_pages_fk" FOREIGN KEY ("desk_pages_id") REFERENCES "web"."desk_pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_jobs_fk" FOREIGN KEY ("desk_jobs_id") REFERENCES "web"."desk_jobs"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_desk_runs_fk" FOREIGN KEY ("desk_runs_id") REFERENCES "web"."desk_runs"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_ai_prompts_fk" FOREIGN KEY ("ai_prompts_id") REFERENCES "web"."ai_prompts"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "web"."payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_ai_connections_fk" FOREIGN KEY ("ai_connections_id") REFERENCES "web"."ai_connections"("id") ON DELETE cascade ON UPDATE no action;
@@ -1443,6 +1474,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_desk_pages_v_created_at_idx" ON "web"."_desk_pages_v" USING btree ("created_at");
   CREATE INDEX "_desk_pages_v_updated_at_idx" ON "web"."_desk_pages_v" USING btree ("updated_at");
   CREATE INDEX "_desk_pages_v_latest_idx" ON "web"."_desk_pages_v" USING btree ("latest");
+  CREATE INDEX "desk_jobs_sources_order_idx" ON "web"."desk_jobs_sources" USING btree ("_order");
+  CREATE INDEX "desk_jobs_sources_parent_id_idx" ON "web"."desk_jobs_sources" USING btree ("_parent_id");
+  CREATE UNIQUE INDEX "desk_jobs_name_idx" ON "web"."desk_jobs" USING btree ("name");
+  CREATE INDEX "desk_jobs_prompt_idx" ON "web"."desk_jobs" USING btree ("prompt_id");
+  CREATE INDEX "desk_jobs_connection_idx" ON "web"."desk_jobs" USING btree ("connection_id");
+  CREATE INDEX "desk_jobs_updated_at_idx" ON "web"."desk_jobs" USING btree ("updated_at");
+  CREATE INDEX "desk_jobs_created_at_idx" ON "web"."desk_jobs" USING btree ("created_at");
   CREATE INDEX "desk_runs_job_idx" ON "web"."desk_runs" USING btree ("job");
   CREATE INDEX "desk_runs_started_at_idx" ON "web"."desk_runs" USING btree ("started_at");
   CREATE INDEX "desk_runs_updated_at_idx" ON "web"."desk_runs" USING btree ("updated_at");
@@ -1685,6 +1723,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_pages_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("pages_id");
   CREATE INDEX "payload_locked_documents_rels_page_edits_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("page_edits_id");
   CREATE INDEX "payload_locked_documents_rels_desk_pages_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_pages_id");
+  CREATE INDEX "payload_locked_documents_rels_desk_jobs_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_jobs_id");
   CREATE INDEX "payload_locked_documents_rels_desk_runs_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("desk_runs_id");
   CREATE INDEX "payload_locked_documents_rels_ai_prompts_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("ai_prompts_id");
   CREATE INDEX "payload_locked_documents_rels_ai_connections_id_idx" ON "web"."payload_locked_documents_rels" USING btree ("ai_connections_id");
@@ -1742,6 +1781,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "web"."_desk_pages_v_version_faq" CASCADE;
   DROP TABLE "web"."_desk_pages_v_version_sources" CASCADE;
   DROP TABLE "web"."_desk_pages_v" CASCADE;
+  DROP TABLE "web"."desk_jobs_sources" CASCADE;
+  DROP TABLE "web"."desk_jobs" CASCADE;
   DROP TABLE "web"."desk_runs" CASCADE;
   DROP TABLE "web"."ai_prompts" CASCADE;
   DROP TABLE "web"."_ai_prompts_v" CASCADE;
@@ -1813,6 +1854,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "web"."enum__desk_pages_v_version_review_source";
   DROP TYPE "web"."enum__desk_pages_v_version_template";
   DROP TYPE "web"."enum__desk_pages_v_version_status";
+  DROP TYPE "web"."enum_desk_jobs_cadence";
+  DROP TYPE "web"."enum_desk_jobs_weekday";
   DROP TYPE "web"."enum_desk_runs_runner";
   DROP TYPE "web"."enum_desk_runs_status";
   DROP TYPE "web"."enum_ai_prompts_format";
