@@ -47,7 +47,7 @@ export function DeskPageView({ page }: { page: DeskPage }) {
         <Section id="sources" heading="Sources" band>
           <ul className="grid max-w-3xl gap-2">
             {sources.map((s, i) => (
-              <li key={s.id ?? i}>
+              <li key={s.id ?? i} id={`fn-${i + 1}`}>
                 <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-6 items-center">
                   {s.label}
                 </a>

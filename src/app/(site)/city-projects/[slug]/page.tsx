@@ -44,8 +44,9 @@ export default async function CityProjectPage({ params }: Props) {
               Sources
             </h2>
             <ol className="mt-3 list-decimal pl-6 text-small">
-              {(p.sources ?? []).map((s) => (
-                <li key={s.id}>
+              {(p.sources ?? []).map((s, i) => (
+                // id="fn-N" so numbered source markers in the text ([1], [2]…) jump here.
+                <li key={s.id} id={`fn-${i + 1}`}>
                   <a href={s.url} target="_blank" rel="noopener noreferrer">
                     {s.title}
                   </a>

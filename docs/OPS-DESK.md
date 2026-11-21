@@ -73,7 +73,7 @@ the GitHub repo.
 - An AI provider API key for phase 2–3 (each run is billed by that provider)
 - Google sign-in setup if email scans move to the website
 
-## Phase 4 plan: moving the artifact desk's content in (survey only, nothing imported yet)
+## Phase 4: moving the artifact desk's content in
 
 Read-only survey on 2026-11-22 of the "San Carlos Life Operations Desk" artifact (version
 `1795226294-9e51`, 469 files). The artifact also ships `src/bundle.json`: the desk's own
@@ -95,14 +95,34 @@ HTML previews (those were built for Divi code modules).
 | Desk code and runbook | `RUNBOOK.md`, `*_patch.py`, build scripts, `news/source_directory.txt` | | Reference | The runbook's jobs, schedules and source lists become `desk-jobs` entries. |
 | Saved text edits, leads, run history | in the artifact's own storage, not its files | | | Needs an export from the artifact page itself (owner); leads hold personal data. |
 
-How the import will run: one script (`scripts/migrate/90-desk-import.ts`) reads a local copy of the
-artifact files, runs a dry run first (a report of what would be created or updated and what is
-skipped), then writes everything as drafts in review, never published, matched by slug so it can be
-re-run safely.
+How the import runs: `scripts/migrate/90-desk-import.ts` reads a local copy of the artifact files in
+`scripts/migrate/data/desk/` (gitignored: `bundle.json`, `manifest.json` and the `blogs/`, `news/`,
+`drafts/`, `re/` folders, copied from the artifact). `pnpm migrate:desk` is a dry run that writes
+`data/desk/report.json`; `DESK_IMPORT_APPLY=1 pnpm migrate:desk` writes, and refuses unless
+DATABASE_URL points at this computer. Everything lands as drafts in review (source claude, review
+note starting with `[desk import]`), never published. Items are matched by slug and the script only
+overwrites items it created itself, so it can be re-run after the artifact changes.
+
+What the cleaner does to the desk HTML: drops photo placeholders (listed in the review note as
+photos still needed), the desk's "verify" boxes (listed in the review note), scripts, styles, forms,
+chrome, kicker labels, NEW tags and progress trackers; turns `<time>` into a bold date label, chip
+rows into lists, `<details>` into a heading and answer, key/value rows into paragraphs; relativizes
+links to sancarloslife.com. Footnote markers keep working: source lists get `id="fn-N"`.
+
+Local result (2026-11-22, dev database only): 45 blogs and 22 news briefs as posts (categories
+mapped from the SEO META, default News Blog), 4 real estate guides as desk pages (ADU/SB 9, buying,
+selling, market report; sections split at each H2), 9 city projects (status mapped from the desk's
+stage; the hub page is skipped), 46 events (18 recurring, rrule + exdates; 3 past events skipped;
+venues and organizers matched by WordPress id or name, created if missing). Places (17 profiles) are
+surveyed only: they wait for the design B place template. The pending Civic Watch rows are counted,
+not inserted.
+
+Production: run against Supabase only after the owner's go-ahead and after the migrations are
+applied there (the script's localhost guard has to be lifted deliberately for that run).
 
 Questions for the owner before importing:
-1. Which Soko Soko profile variant (a, b or c) to keep.
+1. ~~Which Soko Soko profile variant to keep~~: design B (2026-11-22).
 2. Whether to insert the 145 pending rows into the Civic Watch tables.
 3. Whether to add a newsletter archive page.
 4. Rights and credits for photos that aren't Vabrato's own.
-5. Real estate pages: import as guide pages, or fold the wording into the existing code routes.
+5. Real estate pages: the four without a code route are imported as guide pages; the other four stay code routes.
