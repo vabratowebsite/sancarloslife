@@ -105,6 +105,13 @@ changes go only through migrations in src/migrations.
   one hop, keeping utm/fbclid parameters. Migration details: docs/MIGRATION.md.
 - 2026-11-21 Migrated SEO titles/descriptions keep their length (validation caps are 200/400);
   automatic Rank Math descriptions over 300 characters were trimmed to ~155.
+- 2026-11-21 Forms: one Zod schema per form (src/lib/forms/schemas.ts) used by the client form and
+  the server action (src/app/(site)/_actions/forms.ts). Every action runs guard(): honeypot, per-IP
+  rate limit, Turnstile. Submissions are stored in form-submissions with a hashed IP. Event and
+  photo submissions create pending records that only staff can see. Newsletter addresses go to
+  MailerLite only. Photos are re-encoded with sharp (EXIF and location removed).
+- 2026-11-21 Without RESEND_API_KEY / MAILERLITE_API_KEY the site logs instead of sending, so
+  forms can be tested locally; Turnstile uses Cloudflare's test keys outside production.
 - 2026-11-21 Supabase Pro and Vercel Pro must be active before launch (the free Supabase plan
   pauses idle projects; Vercel Hobby is for non-commercial use).
 
