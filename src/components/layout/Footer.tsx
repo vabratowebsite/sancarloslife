@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CookieSettingsButton } from "@/components/layout/CookieConsent";
 import { legalLinks } from "@/lib/navigation";
 import { telHref, type SiteSettings } from "@/lib/queries/settings";
 
@@ -46,6 +47,12 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               </Link>
             </span>
           ))}
+          {process.env.NEXT_PUBLIC_GA_ID && (
+            <>
+              {" · "}
+              <CookieSettingsButton className="text-ink-500 hover:text-teal-700" />
+            </>
+          )}
         </p>
         {settings.footerNote && <p className="mt-2 whitespace-pre-line">{settings.footerNote}</p>}
       </div>

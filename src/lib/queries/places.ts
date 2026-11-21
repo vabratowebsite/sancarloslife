@@ -1,3 +1,4 @@
+import { sql } from "@payloadcms/db-postgres";
 import { unstable_cache } from "next/cache";
 import type { Where } from "payload";
 
@@ -23,12 +24,34 @@ export const STREETS: Record<string, string> = {
 
 export type PlaceFilters = { q?: string; cuisine?: string; street?: string; price?: string; meal?: string; sort?: "featured" | "az" };
 
+/**
+ * Ids of places whose cuisines contain every word of `q`. Payload's `like`
+ * doesn't reach hasMany text fields (stored in web.places_texts), so this
+ * matches them directly.
+ */
+export async function placeIdsByCuisine(q: string): Promise<number[]> {
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean).slice(0, 6);
+  if (!words.length) return [];
+  const payload = await getPayloadClient();
+  const escape = (w: string) => `%${w.replace(/[%_\\]/g, "\\$&")}%`;
+  const res = (await payload.db.drizzle.execute(
+    sql`select distinct parent_id as id from web.places_texts where path = 'cuisines' and ${sql.join(
+      words.map((w) => sql`text ilike ${escape(w)}`),
+      sql` and `,
+    )}`,
+  )) as unknown as { rows: { id: number }[] };
+  return res.rows.map((r) => Number(r.id));
+}
+
 export const listPlaces = (kind: PlaceKind, f: PlaceFilters = {}) =>
   unstable_cache(
     async (): Promise<Place[]> => {
       const payload = await getPayloadClient();
       const and: Where[] = [{ _status: { equals: "published" } }, { type: { in: KIND_TYPES[kind] } }, { businessStatus: { not_equals: "closed" } }];
-      if (f.q) and.push({ or: [{ name: { like: f.q } }, { headline: { like: f.q } }, { cuisines: { like: f.q } }] });
+      if (f.q) {
+        const ids = await placeIdsByCuisine(f.q);
+        and.push({ or: [{ name: { like: f.q } }, { headline: { like: f.q } }, ...(ids.length ? [{ id: { in: ids } }] : [])] });
+      }
       if (f.cuisine) and.push({ cuisines: { contains: f.cuisine } });
       if (f.meal) and.push({ meals: { contains: f.meal } });
       if (f.street && STREETS[f.street]) and.push({ street: { equals: f.street } });
@@ -48,7 +71,7 @@ export const listPlaces = (kind: PlaceKind, f: PlaceFilters = {}) =>
       });
       return res.docs as Place[];
     },
-    ["places", kind, JSON.stringify(f)],
+    ["places-v2", kind, JSON.stringify(f)],
     { tags: ["places"], revalidate: 3600 },
   )();
 

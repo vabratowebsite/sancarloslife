@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { CookieConsent } from "@/components/layout/CookieConsent";
 import { Footer } from "@/components/layout/Footer";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { fontVariables } from "@/lib/fonts";
@@ -31,6 +32,7 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer settings={settings} />
+        <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID || undefined} />
       </body>
     </html>
   );
