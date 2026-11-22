@@ -23,6 +23,7 @@
     "migrate:parks": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/55-parks.ts",
     "test:e2e": "playwright test",
     "migrate:desk": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/90-desk-import.ts",
+    "migrate:desk-places": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/91-desk-places.ts",
     "migrate:prompts": "cross-env NODE_USE_ENV_PROXY=1 NODE_NO_WARNINGS=1 NODE_OPTIONS=--no-deprecation payload run scripts/migrate/80-ai-prompts.ts"
   },
   "dependencies": {

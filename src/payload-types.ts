@@ -1044,9 +1044,35 @@ export interface Place {
   email?: string | null;
   mapsUrl?: string | null;
   /**
-   * One line per day, e.g. Mon–Fri 11am–9pm
+   * Old free-text hours (from WordPress). Used only when Opening hours below is empty.
    */
   hours?: string | null;
+  /**
+   * Structured hours, San Carlos time. Drives the Open now / Closed label and the hours table. Days not listed show as Closed.
+   */
+  openingHours?:
+    | {
+        /**
+         * Label shown, e.g. Tue–Wed
+         */
+        days: string;
+        dow: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday')[];
+        slots?:
+          | {
+              /**
+               * 24-hour, e.g. 11:00
+               */
+              opens: string;
+              /**
+               * e.g. 21:30 (00:00 = midnight)
+               */
+              closes: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   /**
    * Menu, ordering, reservations, reviews and social links.
    */
@@ -1071,6 +1097,107 @@ export interface Place {
    * YouTube links
    */
   videos?: string[] | null;
+  /**
+   * The restaurant/shop page layout (design B): photo mosaic, In short, tabs for Overview, Menu or Shop, Photos, Hours & map, Reviews and FAQ, and the action card. Empty parts are simply left out.
+   */
+  guide?: {
+    /**
+     * One line under the name.
+     */
+    tagline?: string | null;
+    /**
+     * Two or three sentences answering what it is, where and why go. Also the page description.
+     */
+    summary?: string | null;
+    /**
+     * e.g. Laurel Street, downtown San Carlos
+     */
+    area?: string | null;
+    /**
+     * schema.org type, e.g. Restaurant, BookStore, Store
+     */
+    schemaType?: string | null;
+    /**
+     * Shown under the name, e.g. Bookstore, Kids & family.
+     */
+    categories?: string[] | null;
+    goodFor?: string[] | null;
+    /**
+     * Optional first button on the action card, e.g. Reserve a table or Order online.
+     */
+    primaryAction?: {
+      label?: string | null;
+      url?: string | null;
+    };
+    story?:
+      | {
+          heading: string;
+          /**
+           * Leave a blank line between paragraphs.
+           */
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Defaults to Menu highlights (restaurants) or What you'll find (shops).
+     */
+    itemsTitle?: string | null;
+    items?:
+      | {
+          name: string;
+          description?: string | null;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+    alsoTry?: string[] | null;
+    /**
+     * Short facts, e.g. Parking: free lot behind the shop.
+     */
+    know?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * A summary in our own words, never copied review text.
+     */
+    reviews?: {
+      praise?: string[] | null;
+      notes?: string[] | null;
+      /**
+       * e.g. Based on Google and Yelp reviews, October 2026
+       */
+      source?: string | null;
+    };
+    faq?:
+      | {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+    related?:
+      | {
+          label: string;
+          url: string;
+          note?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * e.g. Closed Mondays
+     */
+    hoursNote?: string | null;
+    /**
+     * Where the hours come from, e.g. Shop website, checked Oct 8, 2026
+     */
+    hoursSource?: string | null;
+    checkedAt?: string | null;
+  };
   body?: {
     root: {
       type: string;
@@ -2190,6 +2317,20 @@ export interface PlacesSelect<T extends boolean = true> {
   email?: T;
   mapsUrl?: T;
   hours?: T;
+  openingHours?:
+    | T
+    | {
+        days?: T;
+        dow?: T;
+        slots?:
+          | T
+          | {
+              opens?: T;
+              closes?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   links?:
     | T
     | {
@@ -2208,6 +2349,71 @@ export interface PlacesSelect<T extends boolean = true> {
   logo?: T;
   gallery?: T;
   videos?: T;
+  guide?:
+    | T
+    | {
+        tagline?: T;
+        summary?: T;
+        area?: T;
+        schemaType?: T;
+        categories?: T;
+        goodFor?: T;
+        primaryAction?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+        story?:
+          | T
+          | {
+              heading?: T;
+              text?: T;
+              id?: T;
+            };
+        itemsTitle?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+            };
+        alsoTry?: T;
+        know?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        reviews?:
+          | T
+          | {
+              praise?: T;
+              notes?: T;
+              source?: T;
+            };
+        faq?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+        related?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              note?: T;
+              id?: T;
+            };
+        hoursNote?: T;
+        hoursSource?: T;
+        checkedAt?: T;
+      };
   body?: T;
   seo?:
     | T

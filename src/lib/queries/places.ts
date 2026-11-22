@@ -1,7 +1,9 @@
 import { sql } from "@payloadcms/db-postgres";
 import { unstable_cache } from "next/cache";
+import { headers } from "next/headers";
 import type { Where } from "payload";
 
+import { isStaffUser } from "@/access/roles";
 import { getPayloadClient } from "@/lib/payload";
 import type { Place } from "@/payload-types";
 
@@ -112,3 +114,21 @@ export const getPlace = (slug: string, kind: PlaceKind) =>
     ["place", kind, slug],
     { tags: ["places", `places:${slug}`], revalidate: 3600 },
   )();
+
+/**
+ * The latest draft of a place, for staff previewing in edit mode (/edit/?path=/store/<slug>/).
+ * Never cached; the sign-in is checked again here, not only when edit mode was turned on.
+ */
+export async function getPlaceDraft(slug: string, kind: PlaceKind): Promise<Place | null> {
+  const payload = await getPayloadClient();
+  const { user } = await payload.auth({ headers: await headers() });
+  if (!isStaffUser(user)) return null;
+  const res = await payload.find({
+    collection: "places",
+    where: { slug: { equals: slug }, type: { in: KIND_TYPES[kind] } },
+    limit: 1,
+    depth: 1,
+    draft: true,
+  });
+  return res.docs[0] ?? null;
+}

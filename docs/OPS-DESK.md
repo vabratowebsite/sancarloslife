@@ -114,7 +114,7 @@ mapped from the SEO META, default News Blog), 4 real estate guides as desk pages
 selling, market report; sections split at each H2), 9 city projects (status mapped from the desk's
 stage; the hub page is skipped), 46 events (18 recurring, rrule + exdates; 3 past events skipped;
 venues and organizers matched by WordPress id or name, created if missing). Places (17 profiles) are
-surveyed only: they wait for the design B place template. The pending Civic Watch rows are counted,
+imported by `pnpm migrate:desk-places` (scripts/migrate/91-desk-places.ts) into the design B fields as draft versions in review. The pending Civic Watch rows are counted,
 not inserted.
 
 Production: run against Supabase only after the owner's go-ahead and after the migrations are
