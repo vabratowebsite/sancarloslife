@@ -107,3 +107,25 @@ export function cleanWordPressHtml(html: string): string {
   out = out.replace(/<\/?div>/g, "").replace(/<span>([\s\S]*?)<\/span>/g, "$1");
   return out.replace(/\n{3,}/g, "\n\n").trim();
 }
+
+/**
+ * HTML of pages rebuilt from the WordPress layouts (src/content/divi). Same rules as
+ * posts, plus what those layouts need to look like the live site: h1, details/summary
+ * (FAQ blocks), and only two inline styles, text alignment and a plain color.
+ */
+const layoutOptions: sanitizeHtml.IOptions = {
+  ...options,
+  allowedTags: [...(options.allowedTags as string[]), "h1", "details", "summary"],
+  allowedAttributes: { ...(options.allowedAttributes as Record<string, string[]>), "*": ["id", "class", "style"] },
+  allowedStyles: {
+    "*": {
+      "text-align": [/^(left|right|center|justify)$/],
+      color: [/^#[0-9a-f]{3,8}$/i, /^rgba?\([\d\s.,%]+\)$/i],
+    },
+  },
+  allowedClasses: { "*": [...((options.allowedClasses as Record<string, string[]>)["*"] ?? []), "blue", "navy", "teal"] },
+};
+
+export function sanitizeLayout(html: string): string {
+  return sanitizeHtml(html, layoutOptions);
+}

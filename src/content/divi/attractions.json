@@ -1,0 +1,1183 @@
+{
+ "slug": "attractions",
+ "title": "Exciting Attractions and Things to Do in San Carlos CA",
+ "wpId": 6460,
+ "modified": "2026-07-08T13:44:55",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Attractions</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "hide": [
+    "desktop"
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/902037926?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-attractions-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Attractions",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<h3 style=\"text-align: left;\"><span class=\"blue\">Tourist</span> Attractions</h3>",
+             "look": {
+              "h3": {
+               "ta": "left"
+              }
+             }
+            },
+            {
+             "t": "divider"
+            },
+            {
+             "t": "text",
+             "html": "<h2>San Carlos is a city rich in culture and history-</h2>",
+             "look": {
+              "b": {
+               "f": "heading",
+               "w": "400",
+               "c": "ink-500",
+               "s": 35,
+               "ps": 35
+              },
+              "h2": {
+               "f": "heading",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>- with a name that dates back to the 1770s when a ship named \"San Carlos\" from Spain first landed in the bay. Moving forward a few hundred years, from the founding of California, the Gold Rush, the arrival of the railroad, and now to the 21st century, San Carlos is now most reputed as part of \"Silicon Valley\" in America - a global center for high technology and innovation. Today, it continues to attract brilliant inventors and tech entrepreneurs who want to bring their ideas to life.</p>\n<p>Despite the passing of centuries - the Spanish Era, the Industrial Age, World Wars I and II - remnants of the times remain intact in certain areas of California, including those within or nearby San Carlos. These, plus other attractions in San Carlos such as wineries, gardens, bay area tours, museums, and amusement parks, are places definitely worth visiting.</p>\n<p> </p>",
+             "look": {
+              "b": {
+               "c": "ink-500",
+               "s": 16
+              },
+              "h4": {
+               "w": "700",
+               "s": 16
+              }
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/san-carlos-museum-with-gayle-collins-mark-martinho-viv-kelvin.jpg",
+         "alt": "brown and black wooden house",
+         "href": ""
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "start"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">Museum of </span> San Carlos History</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>An interview with Gayle Collins, President of the Board</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>San Carlos is a town with a history as old as America itself. And the story could never have been told without the faithful workers at the Museum of San Carlos History.</p>\n<p>Did you know? The museum has been with us since 1983, at the time the firehouse was rebuilt and reassigned to it. Since then, a group of people called The Villagers have taken great care in collecting and restoring memorabilia even from centuries past, which you can now explore with just one visit. By the way, the museum is open every Saturday 1:00 PM - 4:00 PM. Admission is free, and donations are always welcome.</p>"
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/11/mark-martinho-and-viv-kelvin-at-the-museum-of-san-carlos-history-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/11/mark-martinho-and-viv-kelvin-at-the-museum-of-san-carlos-history-san-carlos-ca-photo-by-vabrato-real-estate-services-c.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p>We were fortunate to be welcomed into the museum by none other than Gayle Collins, President of the Board, who showed us interesting exhibits such as the restored firetruck and the flag that was brought into space by one of our San Carlos residents.</p>\n<p>Truly, every piece of history in the museum is a piece of all our lives. A shout-out to all: Mrs. Collins is looking for a photo of Nathaniel Brittan - whom Brittan Ave. was named after. If by any chance you find a photo of him tucked away in your albums, please send it in! See you at the museum! 🙂</p>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://sancarloshistorymuseum.org/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">HILLER AVIATION</span> MUSEUM</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "2/3",
+       "items": [
+        {
+         "t": "videos",
+         "ids": [
+          "_n4gxzqohY8",
+          "HEWK0BWC6fw",
+          "EfeXdAHBQ0s",
+          "3X1PaP2gut0"
+         ]
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>The Hiller Aviation Museum was opened to the public in 1998 by helicopter designer and inventor Stanley Hiller Jr. and features more than 50 aircraft from more than a century of aviation history.</p>\n<p>The museum is visited by over 108,000 people each year, including over 10,000 children from regional K-12 schools. Since opening, the museum has served over 1.7 million visitors.</p>\n<p>A unique cultural asset and lifelong learning resource for diverse communities in the San Francisco Bay Area, the Museum celebrates the spirit of discovery and innovation of aviation pioneers whose creativity made the dream of flight a reality.</p>\n<p>Core museum programs for youth are based on state and national academic standards in history and science, technology, engineering, and math (STEM), including interactive, hands-on programs developed in partnership with NASA.*</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://www.hiller.org/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">The Mid-Peninsula</span> Wine Trail</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>All located within a one-block radius along Industrial Road, you will find a collection of family-owned boutique and artisan wineries that craft their wines from American Viticulture Areas and other premier vineyards across California. This, called the Mid-Peninsula Wine Trail, is unique to the city of San Carlos. Below is a list of all the wineries in the city -</p>\n<p> </p>"
+        },
+        {
+         "t": "accordion",
+         "items": [
+          {
+           "t": "toggle",
+           "title": "Domenico Winery",
+           "html": "<p>Domenico Winery is a family-owned winery that has been making award-winning wine for more than 20 years. With Italian varietals as its specialty, Domenico has more than 20 on its roster. <span>As of 2016, their wines have won 350 Medals in the California Region. Their shop in San Carlos also serves as an event venue that can house more than 300 guests.</span></p>\n<p><a href=\"https://www.domenicowinery.com/\" rel=\"noopener\" target=\"_blank\">Website</a></p>",
+           "open": true
+          },
+          {
+           "t": "toggle",
+           "title": "Flying Suitcase Winery",
+           "html": "<p>Flying Suitcase Wines are the creations of Danish biochemist Anders Vinther, who also has a passion for good wines. What began as an experiment with a colleague and fellow winemaker, became the winery’s first release, a 2012 Sauvignon Blanc from Lodi, which would launch Flying Suitcase Wines.</p>\n<p><a href=\"https://flyingsuitcasewines.com/\" rel=\"noopener\" target=\"_blank\">Website</a></p>",
+           "open": false
+          },
+          {
+           "t": "toggle",
+           "title": "Russian Ridge Winery",
+           "html": "<p>Russian Ridge is a small family owned winery producing less than 1,000 cases of wine annually.</p>\n<p><a href=\"https://russianridgewinery.com/\" rel=\"noopener\" target=\"_blank\">Website</a></p>",
+           "open": false
+          },
+          {
+           "t": "toggle",
+           "title": "Old County Cellars",
+           "html": "<p><span>Old County Cellars makes wine in small lots, </span><span>which allows them to personally monitor each bottle for the highest quality and perfect consistency. </span></p>\n<p><a href=\"http://www.oldcountycellars.com/\" rel=\"noopener\" target=\"_blank\">Website</a></p>",
+           "open": false
+          },
+          {
+           "t": "toggle",
+           "title": "Cuvee Wine Cellars",
+           "html": "<p>Cuvee Wine Cellars is an artisan winery producing limited releases of Bordeaux-inspired wines.</p>\n<p><a href=\"http://www.cuveewinecellars.com/\" rel=\"noopener\" target=\"_blank\">Website</a></p>",
+           "open": false
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "w": "2/3",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/domenico-winery-at-the-mid-peninsula-wine-trail-in-san-carlos-ca-f.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/flying-suitcase-at-the-mid-peninsula-wine-trail-in-san-carlos-ca.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/cuvee-wine-cellars-at-the-mid-peninsula-wine-trail-in-san-carlos-ca.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/russian-ridge-at-the-mid-peninsula-wine-trail-in-san-carlos-ca-h.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">FILOLI</span> GARDENS</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "2/3",
+       "items": [
+        {
+         "t": "videos",
+         "ids": [
+          "JC7sCf_5SpY",
+          "n0QNNc2DZ-s",
+          "EdPbzkd_PHY",
+          "cmtmSN4O_1U"
+         ]
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Filoli is a vibrant landscape of the Bay Area, situated on the unceded ancestral lands of the Ramaytush Ohlone, in Woodside, California. The estate boasts 654 acres of beauty nestled along the slopes of California’s coastal range. Originally built as a private residence in 1917, Filoli was opened to the public in 1977 as a nonprofit organization and site of the National Trust for Historic Preservation.</p>\n<p>The property is considered one of the finest remaining country estates of the 20th century, featuring a 54,000+ square-foot Georgian revival-style mansion, 16 acres of exquisite English Renaissance gardens, a 6.8-acre Gentleman’s Orchard, and hundreds of acres of Natural Lands with 5 distinct ecosystems and a 1-mile Estate Trail.</p>\n<p>Filoli is dedicated to connecting our rich history with a vibrant future through beauty, nature and shared stories, so that one day all people will honor nature, value unique experiences, and appreciate beauty in everyday life.*</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://filoli.org/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">HISTORIC GARDENS</span> AND NATURE PRESERVES</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>If you love gardens, here are others, which are a few minutes' drive from San Carlos -</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "cards",
+         "items": [
+          {
+           "title": "Filoli Gardens near San Carlos CA",
+           "href": "",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/filoli-gardens-near-san-carlos-ca.jpg",
+           "alt": "Filoli Gardens near San Carlos CA",
+           "tags": [],
+           "more": false,
+           "html": "18 mins drive from San Carlos<br/><br/>Filoli Gardens is considered one of the finest remaining country estates of the 20th century, featuring a 54,000+ square-foot Georgian revival-style mansion, 16 acres of exquisite English Renaissance gardens, a 6.8-acre Gentleman’s Orchard, and hundreds of acres of Natural Lands with 5 distinct ecosystems and a 1-mile Estate Trail.<br/><br/>"
+          },
+          {
+           "title": "Bair Island Wildlife Refuge & Trail near San Carlos CA",
+           "href": "",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/bair-island-wildlife-refuge-trail-near-san-carlos-ca.jpg",
+           "alt": "Bair Island Wildlife Refuge & Trail near San Carlos CA",
+           "tags": [],
+           "more": false,
+           "html": "9 mins drive from San Carlos<br/><br/>Bair Island is a marsh area in Redwood City, California, covering 3,000 acres (1,200 ha), and includes three islands: Inner, Middle and Outer islands.  Bair Island is an important ecological wetland, which provides critical habitat for a variety of species, including the endangered California clapper rail and the Salt marsh harvest mouse, and is an important stop for birds on the Pacific Flyway.<br/><br/>Photo from Google Maps<br/><br/>"
+          },
+          {
+           "title": "Arizona Cactus Garden",
+           "href": "",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/arizona-cactus-garden.jpg",
+           "alt": "Arizona Cactus Garden",
+           "tags": [],
+           "more": false,
+           "html": "23 mins drive from San Carlos<br/><br/>The Arizona Garden, also known as the Cactus Garden, was designed for Jane and Leland Stanford by landscape architect Rudolf Ulrich between 1881 and 1883. There are many unusual plants within the garden. Selections from the Cacti family include columnar, barrel and monstrose forms. Selections of succulents include Aloes, Crassulas and rosette-forming Agaves.<br/><br/>Photo from Google Maps<br/><br/>"
+          },
+          {
+           "title": "Allied Arts Guild",
+           "href": "",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/allied-arts-guild.jpg",
+           "alt": "Allied Arts Guild",
+           "tags": [],
+           "more": false,
+           "html": "20 mins drive from San Carlos<br/><br/>Allied Arts Guild is a beautiful and historic garden oasis, home to unique shops, artists' studios, and Café Wisteria. Since 1929, Allied Arts Guild has provided an inspiring environment for working artists, beautiful gardens and shops for visitors, and support for critically ill children at Lucile Packard Children's Hospital Stanford.<br/><br/>Photo from Official Facebook Page<br/><br/>"
+          },
+          {
+           "title": "Edgewood Park & Natural Preserve",
+           "href": "",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/edgewood-park-natural-preserve.jpg",
+           "alt": "Edgewood Park & Natural Preserve",
+           "tags": [],
+           "more": false,
+           "html": "19 mins drive from San Carlos<br/><br/>The serpentine grasslands of Edgewood Park and Natural Preserve are famous for their magnificent displays of wildflowers each spring. The park's location, within easy access to Interstate 280 and Edgewood Road, makes this beautiful display readily accessible to the population centers of the San Francisco Peninsula. The Park's 467 acres of woodlands and grasslands afford wonderful hiking and sightseeing opportunities<br/><br/>Photo from San Mateo Government Website<br/><br/>"
+          },
+          {
+           "title": "Pulgas Water Temple",
+           "href": "",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/pulgas-water-temple.jpg",
+           "alt": "Pulgas Water Temple",
+           "tags": [],
+           "more": false,
+           "html": "17 mins drive from San Carlos<br/><br/>San Francisco built Pulgas Water Temple as a monument to the engineering marvel that brought Hetch Hetchy water more than 160 miles across California from the Sierra Nevada Mountains to the Bay Area. The Hetch Hetchy Project took 24 years to build through the Great Depression at a cost of $102 million. The frieze above the columns expresses the city’s joyful relief: “I give waters in the wilderness and rivers in the desert, to give drink to my people.”<br/><br/>Photo from Wikipedia<br/><br/>"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">THINGS </span>TO DO</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/flyby-tours-in-san-carlos-airport-san-carlos-ca-bay-area-silicon-valley.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Sky Tour of the Bay Area</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>San Carlos Airport. <strong><a href=\"https://goo.gl/maps/KovjLVXp2KFrr5YRA\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>At <strong>Flyby Tours</strong>, get to enjoy breathtaking views of the San Francisco Bay Area from the air; Overfly Alcatraz, the Golden Gate Bridge, or the picturesque coastal town of Half Moon Bay at 1,500 feet; Glide above the stunning Pacific Ocean coastline with it's impressive cliffs and sea shore for an experience you'll never forget. Most tours depart from San Carlos Airport, but booking happens online.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://www.flybayarea.com/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/things-to-do-attractions-in-san-carlos-ca-paragliding.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Sky Diving or Paragliding </span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>40-60 minutes from San Carlos, in San Martin / San Francisco. <strong><a href=\"https://g.page/SkydiveSanJose?share\" rel=\"noopener\" target=\"_blank\">Sky Diving</a> / <a href=\"https://g.page/paraglidingsanfrancisco?share\" rel=\"noopener\" target=\"_blank\">Paragliding</a></strong> Google Maps</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Take the highest tandem skydive in California via <strong>Silicon Valley Skydiving</strong>, with their team of licensed tandem instructors and professional videographers to film your experience. If you're into paragliding, try out <strong>Paragliding San Francisco</strong> - bay area paragliding sites are some of the most beautiful you will find anywhere in the world.</p>"
+        },
+        {
+         "t": "button",
+         "text": "Sky Diving",
+         "href": "https://siliconvalleyskydiving.com/"
+        },
+        {
+         "t": "button",
+         "text": "Paragliding",
+         "href": "https://www.paraglidingsanfrancisco.com/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/ifly-in-union-city-near-san-carlos-ca-bay-area-silicon-valley.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Indoor Sky Diving</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>28 minutes from San Carlos, in Union City. <strong><a href=\"https://goo.gl/maps/ihQCMACLU7JAMbHZA\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>If you can't take the real thing, try indoor skydiving instead. Experience the sensation of flying in iFly's state-of-the-art vertical wind tunnels. Safe for all ages, experience levels and abilities, indoor sky diving at <strong>iFLY</strong> is a family-friendly activity.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://www.iflyworld.com/sfbay/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/things-to-do-attractions-in-san-carlos-ca-combat-shooting.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Learn how to shoot in Combat </span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>827 Cherry Lane, San Carlos. <strong><a href=\"https://g.page/BATacticalGroup?share\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>Bay Area Tactical</strong> offers a wide array of tactical courses integrating usage of our state of the art simulator and practical application in a shoothouse. All instructors come from military or law enforcement training, certified to teach various disciplines from basic firearms safety to personal protection.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://www.battactical.com/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/things-to-do-attractions-in-san-carlos-ca-laser-tag.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\"> Laser Tag with your Buddies</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>1119 Industrial Road, San Carlos. <strong><a href=\"https://goo.gl/maps/zp8oXnMMFEoVK7jz5\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>LaserMaxx San Carlos</strong> features state-of-the-art equipment and the ultimate laser tag experience, played in a HUGE multi-level, fog-filled maze. For all ages 5 to 85 - intense fun and the interaction amongst team mates, and a meal afterwards.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://lasermaxxsancarlos.com/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/things-to-do-attractions-in-san-carlos-axe-throwing.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Urban Axe-throwing</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>32 minutes from San Carlos, in San Jose.<strong> <a href=\"https://goo.gl/maps/ivs1x5oteW9saUog8\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Inspired by Viking warriors and Canadian lumberjacks, indoor axe throwing is the latest viral sensation. At <strong>AxeVentures</strong>, you'll learn basic throwing techniques from our coaches in 15 minutes. Compete against your friends. Have a bite and a drink and enjoy a memorable experience.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://www.axeventures-axethrowing.com/locations/axe-throwing-san-jose/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/things-to-do-attractions-in-san-carlos-ca-trampoline-park.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Play at the Trampoline Park</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>401 Quarry Road, San Carlos. <strong><a href=\"https://goo.gl/maps/c86Ei37QNqcKGDuH8\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>At <strong>Rockin' Jump</strong>, fitness and fun go hand in hand. You get the exercise you need and lots of laughs along the way. Instead of stair-climbers and weight machines, you can soar in open jump arenas, dive into pools of soft foam cubes, play trampoline dodgeball, do flips and somersaults. A fun treat for the whole family!</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://rockinjump.com/sancarlos/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/11/things-to-do-attractions-in-san-carlos-ca-flying-lessons.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Take Flying Lessons</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>795 Skyway Road, San Carlos. <strong><a href=\"https://maps.app.goo.gl/FKqTZcA1agVP3z7S9\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>At the <strong>San Carlos Flight Center</strong>, you'll be working with a Certified Flight Instructor (CFI), who will teach you how to control an aircraft by perfecting aerial maneuvers, practicing takeoffs and landings, and simulating abnormal situations. Once you have successfully completed these, you’ll be able to solo.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://sancarlosflight.com/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/08/things-to-do-attractions-in-san-carlos-ca-wheel-pottery.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">POTTERY &amp; GLASS FUSING</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>733 Laurel St, San Carlos. <strong><a href=\"https://maps.app.goo.gl/23UaJZFKQiCmnRMZ6\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>Laurel Street Arts</strong> is a locally-owned crafts studio offering pottery painting, mosaics, and glass fusing, welcoming walk-ins for creative projects. You can pick your project, get assistance from staff, and pick up your fired art in one week, with a wide selection of materials and designs available for pottery, glass, and mosaic creations.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "http://www.laurelstreetarts.com/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/08/things-to-do-attractions-in-san-carlos-full-body-VR.jpg",
+         "alt": "things to do san carlos ca sandbox vr",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Full Body VR with Friends</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>15 minutes from San Carlos, in San Mateo. <strong><a href=\"https://maps.app.goo.gl/dgBNgvcHdaXhU1UT7\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>Sandbox VR</strong> offers a futuristic VR experience for groups of up to six, where participants can see and physically interact with each other as if they were in the real world. Utilizing advanced technology like Hollywood motion capture cameras and haptic suits, the experience transforms your real body into a virtual one, immersing you fully in the action.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://sandboxvr.com/sanmateo/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/08/things-to-do-attractions-in-san-carlos-bay-mystery-scavenger-hunt.jpg",
+         "alt": "Scavenger hunt things to do san carlos ca",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">Techie Scavenger Hunt</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>24 mins from San Carlos, in Mountain View. <strong><a href=\"https://maps.app.goo.gl/YY9XP6jnYpeud9vD8\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>Bay Mystery</strong> offers scavenger hunts inspired by Silicon Valley's history. Established in 2018, the company was created to provide a fun, tech-themed activity for Bay Area technologists and visitors. Since its inception, it has hosted thousands of engineers and technologists for team-building events and weekend adventures.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://baymystery.com/"
+        }
+       ]
+      },
+      {
+       "w": "1/3",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/08/things-to-do-attractions-in-san-carlos-bay-classic-cars.jpg",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p><span class=\"blue\">SEE CLASSIC CARS</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>1100 Industrial Rd STE 14, San Carlos. <strong><a href=\"https://maps.app.goo.gl/SZitFcNHecE1PGR38\" rel=\"noopener\" target=\"_blank\">Google Maps</a></strong></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "w": "600"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>The Great Highway</strong> in San Carlos, CA, features over 50 restored classic cars and 1950s-1960s memorabilia. The place offers a nostalgic atmosphere with themed decor, retro gaming, and Roz's Diner - it provides an unforgettable backdrop for any celebration.</p>"
+        },
+        {
+         "t": "button",
+         "text": "See Website",
+         "href": "https://www.facebook.com/TheGreatHighway/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">THINGS TO DO <span class=\"navy\">IN SAN CARLOS</span></p>\n<details>\n<summary>What are the top things to do in San Carlos?</summary>\n<p>Walk Laurel Street, hit a coffee shop, eat your way down a few blocks, then spend an hour at Burton Park or on a trail. The Hiller Aviation Museum is the main destination attraction. Add a Caltrain ride if you want to extend the day into Redwood City or San Mateo.</p>\n</details>\n<details>\n<summary>Is San Carlos better for residents or visitors?</summary>\n<p>Honestly, both — but the experiences are different. Residents use it as a small, livable city with a downtown they actually walk to. Visitors get a low-key afternoon: food, coffee, a walk, maybe the Hiller Museum. It's not a destination tourist town, and that's part of the charm.</p>\n</details>\n<details>\n<summary>What can I do without a car?</summary>\n<p>A lot, if you're around downtown or Caltrain. Laurel Street restaurants, coffee shops, services, Burton Park, and a handful of events are all walkable from the train station. Hillside parks and most of the west side will need a car or rideshare.</p>\n</details>\n<details>\n<summary>What are good outdoor activities here?</summary>\n<p>Hiking at Big Canyon, Eaton, or Vista Park. Pickup sports at Highlands. Picnics at Burton or Arguello. Walking the downtown loop. Outdoor concerts and movie nights in summer. For more, the coast at Half Moon Bay is about 30 minutes away.</p>\n</details>\n<details>\n<summary>Is San Carlos close to other Bay Area attractions?</summary>\n<p>Yes. It's central on the Peninsula — San Francisco is about 25 minutes north on Caltrain, Stanford and Palo Alto about 20 minutes south, Half Moon Bay 30 minutes west, and SFO about 15 minutes away. Hard to find a worse-positioned weekend.</p>\n</details>\n<details>\n<summary>How can this page get better?</summary>\n<p>Through resident contributions. Send us your favorite San Carlos spots, photos, family activities, date-night ideas, rainy-day picks — anything we should add. Local input is what makes this a useful guide instead of a generic listing.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/07/Mark-and-Viv-Vabrato-2024-Cropped.jpg",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3>Thinking of buying or <span class=\"blue\"> selling a home?</span></h3>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        },
+        {
+         "t": "text",
+         "html": "<p><span>Seek people who will put their full effort into representing your interests, treat you like a person and not a transaction, and experts who are well-respected in their profession. </span></p>\n<p><span>With over 30 years of combined experience and 95% of their clients coming from referrals, Mark and Viv take great pride and joy in exceeding your expectations.</span></p>",
+         "look": {
+          "b": {
+           "s": 17
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "Contact US",
+         "href": "https://sancarloslife.com/one-of-the-best-realtor-teams-in-san-carlos-ca/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

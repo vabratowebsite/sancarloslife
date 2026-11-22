@@ -10,6 +10,8 @@ import { applyHtmlEdits, editablePage, EditMarker } from "@/lib/pageEdits";
 import { getPageSeo } from "@/lib/queries/pages";
 import { buildMetadata } from "@/lib/seo";
 import type { Park } from "@/payload-types";
+import { DiviPage } from "@/components/divi/DiviPage";
+import { diviLayout } from "@/lib/divi/layouts";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageSeo("parks-of-san-carlos");
@@ -29,6 +31,9 @@ const TYPE_LABEL: Record<Park["type"], string> = {
 };
 
 export default async function ParksPage() {
+  // The live site\'s exact layout (src/content/divi); the code below is the earlier version.
+  const layout = diviLayout("parks-of-san-carlos");
+  if (layout) return <DiviPage layout={layout} />;
   // The parks list comes from the admin; the guide below it is editable on the page.
   const edit = await editablePage(
     "parks-of-san-carlos",

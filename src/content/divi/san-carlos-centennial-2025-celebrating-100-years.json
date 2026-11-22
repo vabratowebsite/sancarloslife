@@ -1,0 +1,1166 @@
+{
+ "slug": "san-carlos-centennial-2025-celebrating-100-years",
+ "title": "San Carlos Centennial 2025: Celebrating 100 Years",
+ "wpId": 18140,
+ "modified": "2026-07-08T13:45:25",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/04/San-Carlos-Centennial-Logo.png",
+         "alt": "San Carlos Centennial Logo",
+         "href": ""
+        },
+        {
+         "t": "heading",
+         "level": 1,
+         "text": "San Carlos Centennial 2025",
+         "look": {
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ta": "center",
+           "ps": 42
+          },
+          "h2": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ta": "center",
+           "ps": 42
+          },
+          "h3": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ta": "center",
+           "ps": 42
+          },
+          "h4": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ta": "center",
+           "ps": 42
+          },
+          "h5": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ta": "center",
+           "ps": 42
+          },
+          "h6": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ta": "center",
+           "ps": 42
+          }
+         }
+        },
+        {
+         "t": "heading",
+         "level": 2,
+         "text": "Celebrating 100 Years in the City of Good Living, 1925 to 2025",
+         "look": {
+          "h1": {
+           "f": "sans",
+           "s": 32,
+           "ta": "center",
+           "ps": 22
+          },
+          "h2": {
+           "f": "sans",
+           "s": 32,
+           "ta": "center",
+           "ps": 22
+          },
+          "h3": {
+           "f": "sans",
+           "s": 32,
+           "ta": "center",
+           "ps": 22
+          },
+          "h4": {
+           "f": "sans",
+           "s": 32,
+           "ta": "center",
+           "ps": 22
+          },
+          "h5": {
+           "f": "sans",
+           "s": 32,
+           "ta": "center",
+           "ps": 22
+          },
+          "h6": {
+           "f": "sans",
+           "s": 32,
+           "ta": "center",
+           "ps": 22
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "bg": "https://sancarloslife.com/wp-content/uploads/Drakes-Building-Old.jpg"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "Happy Birthday San Carlos",
+         "href": "#happybirthday"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "MEMORY WALL",
+         "href": "#memorywall"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "STORYCORPS",
+         "href": "#storycorps"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "DRONE SHOW",
+         "href": "#droneshow"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "CENTENNIAL MURAL",
+         "href": "#centennialmural"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "HISTORY TIMELINE",
+         "href": "#historytimeline"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "HISTORICAL MARKERS",
+         "href": "#historicalmarkers"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "CALENDAR",
+         "href": "#calendar"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "AGENTS OF DISCOVERY",
+         "href": "#agentsofdiscovery"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "MERCHANDISE",
+         "href": "#merchandise"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "CONTACT US",
+         "href": "#contactus"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3><span style=\"color: #008080;\">San Carlos Turns 100</span></h3>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "h3": {
+           "s": 39,
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        },
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">July 8, 2025</h2>\n<p>With only 600 residents, a small schoolhouse, and one incredible man, Ed Wheeler, who served as both the police and fire departments, San Carlos took charge of its own future and officially became a city in July 8, 1925. San Carlos officially celebrates its 100th year birthday this 2025.</p>",
+         "look": {
+          "b": {
+           "s": 16
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">MEMORY WALL</span></h3>",
+         "look": {
+          "h3": {
+           "s": 39
+          }
+         }
+        },
+        {
+         "t": "divider"
+        },
+        {
+         "t": "text",
+         "html": "<p style=\"text-align: center;\">San Carlos is turning 100, and we’re inviting you to help us build a Memory Wall to celebrate! Share a photo, a story, a sweet message to a neighbor, or even a funny moment from around town. It’s a chance to reflect, connect, and show what makes San Carlos feel like home, one memory at a time.</p>",
+         "look": {
+          "b": {
+           "s": 16
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "Share A Story",
+         "href": "#shareamemory"
+        },
+        {
+         "t": "button",
+         "text": "Share A Photo",
+         "href": "#shareaphoto"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "posts"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\"><span style=\"color: #008080;\">SHARE A MESSAGE OR STORY</span></h4>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "h4": {
+           "s": 28,
+           "ta": "center"
+          },
+          "h5": {
+           "s": 21,
+           "ta": "center"
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\"><span style=\"color: #008080;\">SHARE A PHOTO</span></h4>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "h4": {
+           "s": 28,
+           "ta": "center"
+          },
+          "h5": {
+           "s": 21,
+           "ta": "center"
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "memorywall"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3><span class=\"blue\">STORYCORPS</span></h3>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "h3": {
+           "s": 39,
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p style=\"text-align: center;\">In celebration of our centennial anniversary, the City of San Carlos partnered with StoryCorps to document and archive unique stories about the City of Good Living.</p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "SEE UPDATES",
+         "href": "https://sancarloslife.com/art-bias-centennial-mural/"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/07/San-Carlos-Centennial-StoryCorps-Dorothy-Young-and-Nancy-Grandfield.jpg",
+         "alt": "San Carlos Centennial StoryCorps Dorothy Young and Nancy Grandfield",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: left;\"><span style=\"color: #008080;\">SAN CARLOS CENTENNARIANS</span></h4>",
+         "look": {
+          "h4": {
+           "s": 28
+          },
+          "h5": {
+           "s": 21
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: left;\">Dorothy Young and Nancy Grandfield</h4>\n<p>In a heartwarming conversation, San Carlos centenarians Dorothy Young (101) and Nancy Grandfield (100) reflect on a century of life, sharing fond memories of their homes, raising children, and the strong community ties that shaped their experiences. They speak lovingly of their late husbands, the joys of growing old in the same neighborhood, and offer thoughtful advice on longevity and living well.</p>\n<p>With humor and grace, they express deep gratitude to The Sequoia Village, a local volunteer group that has helped them maintain independence in their own homes.</p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "LISTEN TO THE WHOLE INTERVIEW",
+         "href": "https://archive.storycorps.org/interviews/dorothy-young-and-nancy-grandfield/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/07/San-Carlos-Centennial-StoryCorps-Dulcie-Morrison-Findlay-and-Dan-Young.jpg",
+         "alt": "San Carlos Centennial StoryCorps Dulcie Morrison Findlay and Dan Young",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: left;\"><span style=\"color: #008080;\">ORIGINS OF BELOVED SAN CARLOS TRADITIONS</span></h4>",
+         "look": {
+          "h4": {
+           "s": 28
+          },
+          "h5": {
+           "s": 21
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: left;\">Dulcie Morrison-Findlay and Dan Young</h4>\n<p>In a touching reunion after four decades, 94-year-old Dulcie Morrison-Findlay sits down with her former student, Dan Young, to reflect on a lifetime of community service and cherished traditions in San Carlos.</p>\n<p>With warmth and clarity, Dulcie shares the origins of beloved local events she helped found—from The Chicken's Ball and Hometown Days to the city’s Christmas tree lighting, Toy Drive, and “Taste of Italy” celebration. She also speaks about her pivotal role in establishing the Sister Cities program and her continued involvement with the Adult Community Center.</p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "LISTEN TO THE WHOLE INTERVIEW",
+         "href": "https://archive.storycorps.org/interviews/dorothy-young-and-nancy-grandfield/"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "storycorps"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">DRONE SHOW</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p style=\"text-align: center;\">If you missed it—or just want to relive the fun—San Carlos Resident, William Zachry captured the most exciting parts of the Centennial Drone Show during Hometown Days, in close proximity.</p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "-hlO9HpjhAw"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "droneshow"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">CENTENNIAL MURAL</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/06/Art-Bias-Centennial-Mural-San-Carlos-CA.png",
+         "alt": "Art Bias Centennial Mural San Carlos CA",
+         "href": "https://www.bystadium.com/us/en/stores/city-of-san-carlos-centennial-83380/S312168806"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\">The Biggest Mural in the History of the City, by Art Bias</h4>\n<p>This summer, the heart of Laurel Street will come alive with color and stories. As part of the San Carlos Centennial celebrations, Art Bias, San Carlos’ very own nonprofit arts organization, is leading the creation of a 6,000-square-foot pavement mural, the largest in city history. The mural will stretch from Cherry Street to Harrington Park along the pedestrian-only 700 block of Laurel Street.</p>\n<p>The Art Bias team has started scraping the street and applying foundation paint along the 700 block of Laurel Street. Mural painting officially begins in July. For more information, please read updates.</p>\n<p> </p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "SEE UPDATES",
+         "href": "https://sancarloslife.com/art-bias-centennial-mural/"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ],
+   "id": "centennialmural"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">HISTORICAL TIMELINE</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/07/History-of-San-Carlos-Timeline.jpg",
+         "alt": "History of San Carlos Timeline",
+         "href": "https://www.bystadium.com/us/en/stores/city-of-san-carlos-centennial-83380/S312168806"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\">Contribute to the History of San Carlos</h4>\n<p>Got a piece of San Carlos history we missed? If you know of an important milestone or moment that belongs on our timeline, we’d love to hear from you. Use the form below to send us your story, date, or historical gem—big or small. Let’s build this together and make sure no key chapter gets left out!</p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "SEE HISTORY TIMELINE",
+         "href": "https://sancarloslife.com/history-of-san-carlos/"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ],
+   "id": "historytimeline"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #0f806f;\">HISTORICAL SITE MARKERS</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>In Celebration of the City of San Carlos' Centennial year, the SCPR have put out historical markers all throughout San Carlos. Have you had a chance to see any of the 23 spots? All locations can be spotted from the yellow sticker on the ground. Scan the QR code and learn a little bit more about all of the locations in San Carlos. Read the guide below.</p>"
+        },
+        {
+         "t": "button",
+         "text": "READ GUIDE",
+         "href": "https://sancarloslife.com/historical-markers-san-carlos/"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ],
+   "id": "historicalmarkers"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #0f806f;\">CALENDAR</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/07/StoryCorps-Listening-Party-San-Carlos-CA.jpg",
+         "alt": "StoryCorps Listening Party San Carlos CA",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\"><span style=\"color: #008080;\">STORYCORPS LISTENING PARTY</span></h4>",
+         "look": {
+          "h4": {
+           "s": 28
+          },
+          "h5": {
+           "s": 21
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\">July 24, Thursday | 5:30 - 6:30 PM | Adult Community Center</h4>\n<p style=\"text-align: center;\">Join Parks &amp; Recreation and the StoryCorps studio team on Thursday, July 24, for a behind-the-scenes look. You'll learn more about the interview process, hear how StoryCorps creates and stores thousands of memories online and through the Library of Congress, and get a sneak peek at the animated audio cards created using choice clips from five of our San Carlos stories! RSVP online by July 20:</p>\n<p> </p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "RSVP FORM",
+         "href": "https://docs.google.com/forms/d/e/1FAIpQLSdQe9o_9sFeg5Yq4_034A2Y5q8I9jnpGwSi5gei5Dug69DWGQ/viewform"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ],
+   "id": "calendar"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">AGENTS OF DISCOVERY</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "agentsofdiscovery"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/07/San-Carlos-Explorer-Agents-of-Discovery.jpg",
+         "alt": "San Carlos Explorer Agents of Discovery",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<h4 style=\"text-align: center;\"><span style=\"color: #008080;\">OCTOBER CHALLENGE</span></h4>",
+             "look": {
+              "h4": {
+               "s": 28
+              },
+              "h5": {
+               "s": 21
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<h4 style=\"text-align: center;\">Casa De Flores &amp; Downtown</h4>",
+             "look": {
+              "h4": {
+               "s": 28
+              },
+              "h5": {
+               "s": 21
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<h4 style=\"text-align: center;\"><span style=\"color: #008080;\">ABOUT AGENTS OF DISCOVERY</span></h4>",
+             "look": {
+              "h4": {
+               "s": 28
+              },
+              "h5": {
+               "s": 21
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<h4 style=\"text-align: center;\">A Year-Long Augmented Reality Challenge</h4>\n<p>Agents of Discovery is a fun, interactive app that brings the city’s history, parks, and community to life through augmented reality. Created by the San Carlos Youth Advisory Council, this year-long game features <strong>12 unique missions</strong> released every first day of the month, each set in a different park or local destination.</p>\n<p>Players can test their knowledge of San Carlos history, explore their surroundings, and solve custom challenges curated by local organizations. Unlock both <strong>digital and real-world rewards</strong>. Download Agents of Discovery on the App Store or Google Play and start exploring San Carlos in a whole new way.</p>",
+             "look": {
+              "h4": {
+               "s": 28
+              }
+             }
+            },
+            {
+             "t": "button",
+             "text": "Download in Apple Store",
+             "href": "https://www.bystadium.com/us/en/stores/city-of-san-carlos-centennial-83380/S312168806"
+            },
+            {
+             "t": "button",
+             "text": "Download in Google Play",
+             "href": "https://www.bystadium.com/us/en/stores/city-of-san-carlos-centennial-83380/S312168806"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">MECHANDISE</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2025/07/San-Carlos-Centennial-Shop.jpg",
+         "alt": "San Carlos Centennial Shop",
+         "href": "https://www.bystadium.com/us/en/stores/city-of-san-carlos-centennial-83380/S312168806"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\">Centennial Swag Shop</h4>\n<p>For all your centennial-branded needs! Check out all the fun merchandise you can purchase including sweatshirts, totes, hats and more! Do you have a suggestion for other items you’d like to see in the shop? Email <a href=\"mailto:centennial@cityofsancarlos.org\">centennial@cityofsancarlos.org</a></p>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "Go to Centennial Shop",
+         "href": "https://www.bystadium.com/us/en/stores/city-of-san-carlos-centennial-83380/S312168806"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ],
+   "id": "merchandise"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">CONTACT US</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<h4 style=\"text-align: center;\">For questions, please email <a href=\"mailto:centennial@cityofsancarlos.org.%20 \">centennial@cityofsancarlos.org</a></h4>",
+         "look": {
+          "h4": {
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "contactus"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">RESOURCES</span></h3>",
+         "look": {
+          "h3": {
+           "f": "heading"
+          }
+         }
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/city-of-san-carlos-ca-logo.png",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "heading",
+         "level": 4,
+         "text": "All Information on this page was sourced out from the Official Page of the San Carlos Centennial from the City of San Carlos. You may access the page by clicking on the link below.",
+         "look": {
+          "h1": {
+           "s": 23,
+           "ta": "center"
+          },
+          "h2": {
+           "s": 23,
+           "ta": "center"
+          },
+          "h3": {
+           "s": 23,
+           "ta": "center"
+          },
+          "h4": {
+           "s": 23,
+           "ta": "center"
+          },
+          "h5": {
+           "s": 23,
+           "ta": "center"
+          },
+          "h6": {
+           "s": 23,
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "Centennial Official Website",
+         "href": "https://www.cityofsancarlos.org/community/city_centennial_2025/index.php"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "faq"
+  }
+ ]
+}

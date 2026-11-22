@@ -1,0 +1,788 @@
+{
+ "slug": "restaurants-and-services",
+ "title": "The Best Restaurants and Services in San Carlos CA",
+ "wpId": 785,
+ "modified": "2026-07-08T13:44:26",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Restaurants &amp; Services</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "hide": [
+    "desktop"
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/931588150?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-san-carlos-life-home-video (1)"
+        },
+        {
+         "t": "hero",
+         "title": "Restaurants and Services",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<h3 style=\"text-align: left;\"><span class=\"blue\">DOWNTOWN</span> SAN CARLOS</h3>"
+            },
+            {
+             "t": "divider"
+            },
+            {
+             "t": "text",
+             "html": "<p>San Carlos is a small city with a quaint downtown scene of its own, which revolves around Laurel Street and El Camino Real. Boutique restaurants and shops owned by local residents occupy most of the spaces, which is good as these create a wider variety of restaurants aside from the usual fast-food and coffee chains.</p>\n<p>Here in downtown San Carlos, you’ll find cuisines from around the world – from the usual American, Mexican, Italian, Japanese, Chinese, and Greek cuisines; to more exotic tastes such as Indian, Native American, Thai, Vietnamese, Burmese, Georgian, or Lebanese cooking. Basking in the warm sun while having a cool drink, gelato ice cream, or coffee, is a relaxing delight since Laurel Street has been transformed into a pedestrian zone dedicated to alfresco dining.</p>\n<p>Boutique shops and services in downtown San Carlos not only provide for the residents’ essential needs but also a means to support local businesses. Some shops and buildings even date back to the early 1900s, serving as monuments of San Carlos’s rich culture and history. Places like the Reading Bug Bookstore, Diddam’s Toystore, The Clocktower Music, Bow-Wow Meow, Sarrtori Apparel, Footwear Inc., are all locally-owned shops and hold a lot of good memories from the people in San Carlos</p>\n<p> </p>\n<p> </p>",
+             "look": {
+              "b": {
+               "c": "ink-500",
+               "s": 16
+              },
+              "h4": {
+               "w": "700",
+               "s": 16
+              }
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/09/mark-martinho-and-viv-kelvin-at-mama-coco-laurel-street-san-carlos-ca.jpg",
+         "alt": "brown and black wooden house",
+         "href": ""
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "start"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "collage",
+         "ratio": 1.657,
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-diddams-party-and-toy-store-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            1.45,
+            24.62,
+            17.16,
+            28.54
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-at-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            7.69,
+            40.2,
+            17.16,
+            44.34
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-drakes-restaurant-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            26.43,
+            17.86,
+            17.16,
+            46.95
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/11/viv-kelvin-and-mark-martinho-at-town-restaurant-laurel-street-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg",
+           "alt": "",
+           "box": [
+            44.97,
+            22.77,
+            21.24,
+            47.28
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-guys-barbershop-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            30.51,
+            60.57,
+            17.16,
+            28.32
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-at-sarrtori-men-apparel-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            80.8,
+            24.07,
+            18.15,
+            44.44
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/viv-kelvin-at-footwear-inc-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            67.39,
+            28.1,
+            17.16,
+            36.93
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/the-reading-bug-at-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            69.82,
+            61.11,
+            21.24,
+            26.69
+           ]
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-the-orchid-room-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": "",
+           "box": [
+            51.35,
+            72.77,
+            14.14,
+            23.86
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "bg": "https://sancarloslife.com/wp-content/uploads/2022/10/murale-in-laurel-street-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+   "veil": "white"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">FEATURED</span> RESTAURANTS</h3>"
+        },
+        {
+         "t": "cards",
+         "items": [
+          {
+           "title": "Pho Vihn Vietnamese Restaurant",
+           "href": "https://sancarloslife.com/restaurant/pho-vinh/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/02/Pho-Vihn-Vietnamese-San-Carlos-Grid-Photo.png",
+           "alt": "Pho Vinh Vietnamese San Carlos Grid Photo",
+           "tags": [
+            [
+             "Downtown"
+            ],
+            [
+             "Asian",
+             "Vietnamese"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Soko Soko Japanese Cuisine",
+           "href": "https://sancarloslife.com/restaurant/soko-soko-japanese-cuisine-san-carlos/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2025/05/Soko-Soko-Japanese-Cuisine-San-Carlos-Grid-Photo.png",
+           "alt": "Soko Soko Japanese Cuisine San Carlos Grid Photo",
+           "tags": [
+            [
+             "Downtown",
+             "Laurel Street"
+            ],
+            [
+             "Japanese",
+             "Japanese Fusion",
+             "Japanese sweets parlour"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Esnaf",
+           "href": "https://sancarloslife.com/restaurant/esnaf-san-carlos/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2025/05/Esnaf-Turkish-Cuisines-San-Carlos-Grid-Photo.jpg",
+           "alt": "Esnaf Turkish Cuisines San Carlos Grid Photo",
+           "tags": [
+            [
+             "Downtown",
+             "San Carlos Ave"
+            ],
+            [
+             "Mediterranean",
+             "Turkish"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Bistro Mitte",
+           "href": "https://sancarloslife.com/restaurant/bistro-mitte/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2025/05/Bistro-Mitte-Grid.png",
+           "alt": "Bistro Mitte Grid",
+           "tags": [
+            [
+             "Downtown",
+             "Laurel Street"
+            ],
+            [
+             "European",
+             "German"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Kabul Afghan Cuisine",
+           "href": "https://sancarloslife.com/restaurant/kabul-afghan-cuisine-san-carlos/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2025/01/Khabul-Afghan-Cuisine-grid-Photo.png",
+           "alt": "Kabul Afghan Cuisine grid Photo",
+           "tags": [
+            [
+             "El Camino Real"
+            ],
+            [
+             "Afghani",
+             "Middle Eastern"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Paris Baguette San Carlos",
+           "href": "https://sancarloslife.com/restaurant/paris-baguette-san-carlos/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/08/Paris-Baguette-San-Carlos-Grid-Photo.png",
+           "alt": "Paris Baguette San Carlos",
+           "tags": [
+            [
+             "Laurel Street"
+            ],
+            [
+             "Cafe",
+             "Cakes and Pastries"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "My Breakfast House",
+           "href": "https://sancarloslife.com/restaurant/my-breakfast-house/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/08/San-Carlos-Life-Restaurant-Shop-Feature-Image.png",
+           "alt": "My Breakfast House",
+           "tags": [
+            [
+             "Laurel Street"
+            ],
+            [
+             "All Day Breakfast",
+             "American"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Nothing Bundt Cakes",
+           "href": "https://sancarloslife.com/restaurant/nothing-bundt-cakes/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/05/Nothing-Bundt-Cake-San-Carlos-Grid-Photo.png",
+           "alt": "Nothing Bundt Cakes",
+           "tags": [
+            [
+             "Laurel Street"
+            ],
+            [
+             "Cakes and Pastries"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "Browse All Restaurants",
+         "href": "https://sancarloslife.com/restaurants-and-services/all-restaurants/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">BAR </span>RESTAURANTS</h3>"
+        },
+        {
+         "t": "cards",
+         "items": [
+          {
+           "title": "Devil’s Canyon Brewing Co.",
+           "href": "https://sancarloslife.com/restaurant/devils-canyon-brewing-co/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/04/Devils-Canyon-Brewing-Co-Grid.png",
+           "alt": "Devils Canyon",
+           "tags": [
+            [
+             "Downtown"
+            ],
+            [
+             "Bar"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Osteria at Domenico Winery",
+           "href": "https://sancarloslife.com/restaurant/osteria-at-domenico-winery/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/03/osteria-at-domenico-grid.png",
+           "alt": "Osteria at Domenico Winery San Carlos CA",
+           "tags": [
+            [
+             "Downtown"
+            ],
+            [
+             "American",
+             "Bar",
+             "Italian"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Molly O’s",
+           "href": "https://sancarloslife.com/restaurant/molly-os-irish-pub-san-carlos/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/03/molly-o-grid.png",
+           "alt": "Molly O's San Carlos",
+           "tags": [
+            [
+             "San Carlos Ave"
+            ],
+            [
+             "All Day Breakfast",
+             "Bar",
+             "Irish"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Ale Arsenal",
+           "href": "https://sancarloslife.com/restaurant/ale-arsenal/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/10/viv-kelvin-and-mark-martinho-at-ale-arsenal-laurel-street-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg",
+           "alt": "Ale Arsenal",
+           "tags": [
+            [
+             "Laurel Street"
+            ],
+            [
+             "American",
+             "Bar"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Faith & Spirits",
+           "href": "https://sancarloslife.com/restaurant/faith-and-spirits/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/04/faith-spirits-in-laurel-street-san-carlos-ca-photos-by-vabrato-real-estate-v.jpg",
+           "alt": "Faith and Spirits Laurel Street San Carlos CA",
+           "tags": [
+            [
+             "Laurel Street"
+            ],
+            [
+             "Bar"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          },
+          {
+           "title": "Shiki Bistro",
+           "href": "https://sancarloslife.com/restaurant/shiki-bistro/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/11/viv-kelvin-and-mark-martinho-at-shiki-bistro-japanese-fusion-restaurant-laurel-street-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg",
+           "alt": "Shiki Bistro",
+           "tags": [
+            [
+             "Laurel Street"
+            ],
+            [
+             "Asian",
+             "Bar",
+             "Japanese",
+             "Japanese Fusion",
+             "Sushi"
+            ]
+           ],
+           "more": true,
+           "html": ""
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">Ale</span> Arsenal</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>To see their menu, venue, and other information, visit their profile.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "View Profile",
+         "href": "https://sancarloslife.com/restaurant/ale-arsenal/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">FEATURED </span>SHOPS &amp; SERVICES</h3>"
+        },
+        {
+         "t": "cards",
+         "items": [
+          {
+           "title": "Reach and Teach Independent Bookstore",
+           "href": "https://sancarloslife.com/store/reach-and-teach/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/04/Reach-and-Teach-Profile-Grid.png",
+           "alt": "Reach and Teach Independent Bookstore San Carlos Ca",
+           "tags": [
+            [
+             "Bookstore",
+             "Toys"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "Art Bias",
+           "href": "https://sancarloslife.com/store/art-bias/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2024/04/Art-Bias-Profile-Grid.jpg",
+           "alt": "Art Bias San Carlos",
+           "tags": [
+            [
+             "Art",
+             "Art Classes",
+             "Studio Rent"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "Therapy Store",
+           "href": "https://sancarloslife.com/store/therapy-stores/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2023/02/therapy-stores-san-carlos-mark-viv.jpg",
+           "alt": "Therapy Stores San Carlos CA",
+           "tags": [
+            [
+             "Clothing",
+             "Clothing Accessories",
+             "Gifts"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "Laurel Street Arts",
+           "href": "https://sancarloslife.com/store/laurel-street-arts/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2023/02/laurel-street-art-san-carlos-grid-photo.jpg",
+           "alt": "Laurel Street Arts San Carlos",
+           "tags": [
+            [
+             "Art"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "Olive Crush",
+           "href": "https://sancarloslife.com/store/olive-crush/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2023/02/the-olive-crush-san-carlos-grid-photo.png",
+           "alt": "The Olive Crush San Carlos CA",
+           "tags": [
+            [
+             "Food Items"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "Lark",
+           "href": "https://sancarloslife.com/store/lark/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2023/02/Lark-San-Carlos-CA-Grid-Photo.png",
+           "alt": "Lark San Carlos CA Grid Photo",
+           "tags": [
+            [
+             "Art",
+             "Gifts"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "White Sage Boutique",
+           "href": "https://sancarloslife.com/store/white-sage-boutique/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2023/02/white-sage-san-carlos-grid-photo.jpg",
+           "alt": "White Sage San Carlos",
+           "tags": [
+            [
+             "Clothing"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          },
+          {
+           "title": "Clock Tower Music",
+           "href": "https://sancarloslife.com/store/clock-tower-music/",
+           "img": "https://sancarloslife.com/wp-content/uploads/2022/11/viv-kelvin-and-mark-martinho-at-clock-tower-music-laurel-street-san-carlos-ca-photo-by-vabrato-real-estates-services-2.jpg",
+           "alt": "Clock Tower Music San Carlos CA",
+           "tags": [
+            [
+             "Music Instrument Store"
+            ]
+           ],
+           "more": false,
+           "html": ""
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "button",
+         "text": "Browse All Shops & Services",
+         "href": "https://sancarloslife.com/restaurants-and-services/all-shops-services/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">DINING &amp; <span class=\"navy\">LOCAL SERVICES</span></p>\n<details>\n<summary>Where are most San Carlos restaurants?</summary>\n<p>Laurel Street is the heart of it, with El Camino Real picking up the overflow. A few notable spots sit off the main corridors, but if you’re starting from scratch, walk Laurel between San Carlos Avenue and Holly Street — that stretch covers most of what people talk about.</p>\n</details>\n<details>\n<summary>What kinds of restaurants are here?</summary>\n<p>More variety than the city’s size suggests. American, Italian, Mexican, Japanese, Thai, Vietnamese, Indian, Burmese, Georgian, Lebanese, Greek, Chinese — plus solid cafes, bakeries, and a few good cocktail bars. New places open regularly, especially along Laurel.</p>\n</details>\n<details>\n<summary>Is downtown good for outdoor dining?</summary>\n<p>Yes, especially in the warmer months. A number of Laurel Street restaurants have parklets, patios, or sidewalk seating that stays in use most of the year. Availability depends on the restaurant, the season, and what the city has approved at the time.</p>\n</details>\n<details>\n<summary>Are most downtown businesses locally owned?</summary>\n<p>A lot of them are. The mix skews toward local ownership and small operators, which is part of what gives Laurel Street its character. There are a few national chains, but they don’t dominate.</p>\n</details>\n<details>\n<summary>How often are listings updated?</summary>\n<p>We review business pages on a rolling basis. Hours, menus, and ownership change, so call ahead or check the restaurant’s own site before you go. If you notice something out of date, let us know.</p>\n</details>\n<details>\n<summary>Can local businesses be added?</summary>\n<p>Yes — send us your details, photos, and any updates and we’ll review and add or refresh the listing. We want this to be the most useful San Carlos directory on the internet, and that only works if local businesses help keep it current.</p>\n</details>\n<details>\n<summary>How does dining affect San Carlos real estate?</summary>\n<p>It matters more than people think. Walkable proximity to downtown dining is one of the things buyers pay a premium for, especially in neighborhoods like Howard Park. A strong restaurant scene also keeps property values steadier through slower markets.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/07/Mark-and-Viv-Vabrato-2024-Cropped.jpg",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3>Thinking of buying or<span class=\"blue\"> selling a home?</span></h3>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        },
+        {
+         "t": "text",
+         "html": "<p><span>Seek people who will put their full effort into representing your interests, treat you like a person and not a transaction, and experts who are well-respected in their profession. </span></p>\n<p><span>With over 30 years of combined experience and 95% of their clients coming from referrals, Mark and Viv take great pride and joy in exceeding your expectations.</span></p>",
+         "look": {
+          "b": {
+           "s": 17
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "Contact US",
+         "href": "https://sancarloslife.com/one-of-the-best-realtor-teams-in-san-carlos-ca/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

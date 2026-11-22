@@ -1,0 +1,516 @@
+{
+ "slug": "howard-park",
+ "title": "Howard Park, San Carlos: Latest Homes for Sale, Top Schools, Lifestyle",
+ "wpId": 771,
+ "modified": "2026-07-08T13:44:15",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Howard Park</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/933016618?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Howard Park",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">A Prime Location in San Carlos</h2>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "s": 49
+          },
+          "h2": {
+           "f": "heading",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "Bhym6-r4LyQ"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">ABOUT </span>HOWARD PARK</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span>The premier San Carlos neighborhood. Downtown is only a short walk away from its secluded and tree-lined streets. Likewise so are CalTrain and Burton Park (the city’s most popular green space). Homes typically sell-fast, despite being moderately-sized and pricey.</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "s": 21,
+           "ps": 17
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Walking.png",
+         "alt": "",
+         "title": "WALKING DISTANCE",
+         "href": "",
+         "html": "<p><span>Laurel Street is located here and is walkable from the most homes. The Industrial Complex and public transits are also walking distance.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Downtown.png",
+         "alt": "",
+         "title": "DOWNTOWN SAN CARLOS",
+         "href": "",
+         "html": "<p><span>Both Laurel Street and El Camino Real fall within the borders this neighborhood. These streets are well known for their shops and restaurants.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Parks.png",
+         "alt": "",
+         "title": "BURTON PARK",
+         "href": "",
+         "html": "<p><span>Burton Park is the oldest and most popular park in San Carlos where plenty of community events occur – from music festivals to movie nights.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Christmas.png",
+         "alt": "",
+         "title": "CHRISTMAS LIGHTS",
+         "href": "",
+         "html": "<p><span>Eucalyptus Avenue is a popular place for the holidays as each home goes all out to showcase the best Christmas light decorations they can.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-CharmingHomes.png",
+         "alt": "",
+         "title": "CHARMING SUBURBS",
+         "href": "",
+         "html": "<p><span>Quiet suburbs mildly secluded from downtown – lovely tree-lined streets and charming artsy bungalows in flat areas.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Homes2.png",
+         "alt": "",
+         "title": "MODERATE-SIZED HOMES",
+         "href": "",
+         "html": "<p><span>Homes tend to be moderately-sized compared to other neighborhoods. Yet, they are preferred because of their prime location.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Costly.png",
+         "alt": "",
+         "title": "PRICEY AND FAST-SELLING",
+         "href": "",
+         "html": "<p><span>Because of their prime location, homes in Howard Park tend to sell fast and for top dollar in San Carlos.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Schools.png",
+         "alt": "",
+         "title": "PROXIMITY TO SCHOOLS",
+         "href": "",
+         "html": "<p><span>Highly rated schools Brittan Acres, Arroyo Elementary, and Central Middle School are located here.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PHOTO </span>GALLERY</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">MAPS AND </span>PLACES</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "map",
+         "id": "27"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">HOMES </span>FOR SALE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #333333;\">Homes Sold in last 3 months</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "tt": "uppercase",
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "listings"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">OTHER</span> NEIGHBORHOODs</h3>",
+         "look": {
+          "h3": {
+           "s": 39
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">ALDER MANOR</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/alder-manor/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/alder-manor-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">BEVERLEY TERRACE</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/beverly-terrace/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/beverley-terraces-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CLEARFIELD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/clearfield-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/clearfield-park-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CORDES<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/cordes/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/cordes-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">EL SERENO<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/el-sereno/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/el-sereno-corte-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">HOWARD PARK <span class=\"navy\">QUESTIONS</span></p>\n<details>\n<summary>What is Howard Park known for?</summary>\n<p>Walkability and location. Howard Park is one of the easiest neighborhoods to live in without a car — Laurel Street, Caltrain, El Camino, and Burton Park are all within a short walk from most of it. Tree-lined streets, classic San Carlos charm, and steady buyer demand round it out.</p>\n</details>\n<details>\n<summary>Is Howard Park walkable to downtown San Carlos?</summary>\n<p>Yes, for most of it. Many homes are five to ten minutes on foot from Laurel Street restaurants, shops, the train, and Burton Park. The further north or east you go, the more variable it gets — a few blocks can change the experience.</p>\n</details>\n<details>\n<summary>What kinds of homes are in Howard Park?</summary>\n<p>Mostly single-family homes with classic San Carlos character — bungalows, mid-century homes, and updated remodels — plus a handful of condos and townhomes near El Camino. Lots are moderate, and a lot of the original housing stock has been thoughtfully renovated over the past two decades.</p>\n</details>\n<details>\n<summary>Why do buyers like Howard Park?</summary>\n<p>It's the \"I want to walk to dinner\" neighborhood. Buyers who prioritize downtown access, transit, and a tight-knit street feel tend to land here. Well-prepared homes don't usually sit long.</p>\n</details>\n<details>\n<summary>What should sellers know about Howard Park?</summary>\n<p>Lead with the walkability — buyers in this market pay for it. Outdoor space, downtown distance, school assignment, and any recent updates are what people look for. Strong photography and a clean presentation matter because Howard Park homes get compared closely to each other.</p>\n</details>\n<details>\n<summary>Is Howard Park one of the more competitive San Carlos neighborhoods?</summary>\n<p>Often, yes — especially for updated single-family homes within a short walk of Burton Park or Laurel Street. Competition tracks price band, condition, and inventory in any given month.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

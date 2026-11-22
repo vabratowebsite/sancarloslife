@@ -15,6 +15,8 @@ import { EXPLORE_CARDS } from "@/content/explore";
 import { IMAGES } from "@/content/images";
 import { metadataFromPage } from "@/lib/pageMeta";
 import { editablePage, EditMarker, T } from "@/lib/pageEdits";
+import { DiviPage } from "@/components/divi/DiviPage";
+import { diviLayout } from "@/lib/divi/layouts";
 
 const SLUG = "about-san-carlos";
 const TITLE = "What’s Great about San Carlos?";
@@ -67,6 +69,9 @@ const FAQ = [
 ];
 
 export default async function AboutSanCarlosPage() {
+  // The live site\'s exact layout (src/content/divi); the code below is the earlier version.
+  const layout = diviLayout("about-san-carlos");
+  if (layout) return <DiviPage layout={layout} />;
   await editablePage(SLUG, `/${SLUG}/`);
   return (
     <>

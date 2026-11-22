@@ -1,0 +1,511 @@
+{
+ "slug": "clearfield-park",
+ "title": "Clearfield Park, San Carlos: Latest Homes for Sale, Top Schools, Lifestyle",
+ "wpId": 769,
+ "modified": "2026-07-08T13:44:10",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Clearfield Park</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/902037960?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Clearfield Park",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">Great Value Homes at an Affordable Price</h2>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "s": 49
+          },
+          "h2": {
+           "f": "heading",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "lGujkxLr3wM"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">ABOUT </span>CLEARFIELD PARK</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Residents here enjoy short walks to downtown San Carlos, as well as easy access to the Airport, Caltrain, and Highway 101. The neighborhood is filled with attractive modern homes and has a friendly sense of community.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "s": 21,
+           "ps": 17
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Bargain.png",
+         "alt": "",
+         "title": "GREAT VALUE, LOW PRICE",
+         "href": "",
+         "html": "<p>Over the years, homes in this neighborhood have been modernized to match the style of those in pricier nearby cities, yet still sell for less.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Train.png",
+         "alt": "",
+         "title": "EASE OF TRANSPORTATION",
+         "href": "",
+         "html": "<p>Residents enjoy easy access the Airport, Caltrain, and Highway 101.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Downtown.png",
+         "alt": "",
+         "title": "NEAR DOWNTOWN",
+         "href": "",
+         "html": "<p>The shops and restaurants on the El Camino Real and Laurel Street are a short walk away.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-MixedZoning.png",
+         "alt": "",
+         "title": "MIXED ZONING",
+         "href": "",
+         "html": "<p>Clearfield Park has a mix of residential and commercial (industrial) zoning. It houses various service shops, corporate offices, labs and other businesses.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Traffic.png",
+         "alt": "",
+         "title": "TRAFFIC AND NOISE",
+         "href": "",
+         "html": "<p>Because of its proximity to the Downtown as well as industrial zones, Clearfield Park can feel congested and a bit noisy at times.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-TitghtHouses.png",
+         "alt": "",
+         "title": "TIGHT NEIGHBORHOOD",
+         "href": "",
+         "html": "<p>Homes and lots in Clearfield Park tend to be smaller than average for San Carlos and many structures are of cinderblock construction.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Schools.png",
+         "alt": "",
+         "title": "SCHOOLS",
+         "href": "",
+         "html": "<p>Children living in this neighborhood go to Arundel or Brittan Acres Elementary – top schools in CA.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-HistoricalData.png",
+         "alt": "",
+         "title": "HISTORICAL VALUE",
+         "href": "",
+         "html": "<p>Clearfield Park has been the birthplace of several companies involved in radio and electronics, which eventually gave birth to Silicon Valley.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PHOTO </span>GALLERY</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">MAP AND </span>PLACES</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "map",
+         "id": "25"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">HOMES </span>FOR SALE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #333333;\">Homes Sold in last 3 months</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "tt": "uppercase",
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "listings"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">CLEARFIELD PARK <span class=\"navy\">QUESTIONS</span></p>\n<details>\n<summary>What is Clearfield Park known for?</summary>\n<p>Relative value and access. Clearfield Park sits close to Caltrain, 101, and the airport, with mixed residential and light commercial nearby. For buyers who want into San Carlos at a more accessible price point — and who prioritize commute convenience — it's often the entry point.</p>\n</details>\n<details>\n<summary>Is Clearfield Park close to downtown San Carlos?</summary>\n<p>Yes. Laurel Street and El Camino are a short drive or bike ride away, and parts of the neighborhood are walkable to it. The east side of Clearfield Park sits closer to commercial corridors; the west side is quieter and more residential.</p>\n</details>\n<details>\n<summary>What kinds of homes are in Clearfield Park?</summary>\n<p>A wide mix — older originals, modernized homes, smaller lots, and some properties closer to commercial uses. Condition and price range vary widely, which is part of the appeal but also why street-level due diligence matters here.</p>\n</details>\n<details>\n<summary>Why do buyers consider Clearfield Park?</summary>\n<p>Two main reasons: price and commute. You can usually get into San Carlos for less here than in the more sought-after pockets, and commuters who use 101 or Caltrain love the location. Buyers willing to update an older home often find good value.</p>\n</details>\n<details>\n<summary>What should buyers watch for here?</summary>\n<p>Traffic and noise vary block by block — some streets back up to commercial or industrial uses. Walk the area at rush hour and on weekend nights. Check lot orientation, parking, and how close the home is to El Camino or 101 sound-wise.</p>\n</details>\n<details>\n<summary>What should sellers highlight in Clearfield Park?</summary>\n<p>Convenience is the headline — transit, downtown, freeway access. Any updates you've made matter. Buyers here are often pricing the neighborhood against other San Carlos options, so good prep and honest disclosures help close the gap.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">OTHER </span>neighborhoodS</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">ALDER MANOR</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/alder-manor/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/alder-manor-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">BEVERLEY TERRACE</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/beverly-terrace/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/beverley-terraces-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CORDES<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/cordes/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/cordes-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">EL SERENO<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/el-sereno/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/el-sereno-corte-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">HOWARD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/howard-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/howard-park-san-carlos-ca-v.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

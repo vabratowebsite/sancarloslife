@@ -1,0 +1,948 @@
+{
+ "slug": "about-san-carlos",
+ "title": "What’s Great about San Carlos?",
+ "wpId": 777,
+ "modified": "2026-07-08T13:44:22",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">About</span> San Carlos, CALIFORNIA</h3>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Welcome to the City of Good Living! Find out more about San Carlos, CA, 94070 - top schools, beautiful homes, a downtown scene of its own, the parks and trails, and rich history which dates back to the 1700s.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "counter",
+         "title": "POPULATION",
+         "number": "30,722",
+         "sep": "",
+         "suffix": "",
+         "look": {
+          "m": {
+           "bg": "white",
+           "bl": 1,
+           "blc": "teal-700"
+          },
+          "h3": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h1": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h2": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h4": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h5": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h6": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "c": "ink-500",
+           "s": 50,
+           "ta": "left"
+          }
+         },
+         "prefix": ""
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "counter",
+         "title": "MEDIAN HOUSEHOLD INCOME",
+         "number": "189,739",
+         "sep": "",
+         "suffix": "",
+         "look": {
+          "m": {
+           "bg": "white",
+           "bl": 1,
+           "blc": "teal-700"
+          },
+          "h3": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h1": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h2": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h4": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h5": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h6": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "c": "ink-500",
+           "s": 50,
+           "ta": "left"
+          }
+         },
+         "prefix": "$ "
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "counter",
+         "title": "RESIDENTIAL HOMES",
+         "number": "11,894",
+         "sep": "",
+         "suffix": "",
+         "look": {
+          "m": {
+           "bg": "white",
+           "bl": 1,
+           "blc": "teal-700"
+          },
+          "h3": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h1": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h2": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h4": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h5": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h6": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "c": "ink-500",
+           "s": 50,
+           "ta": "left"
+          }
+         },
+         "prefix": ""
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "counter",
+         "title": "TOTAL AREA in Sq. Miles",
+         "number": "5.41",
+         "sep": "",
+         "suffix": "",
+         "look": {
+          "m": {
+           "bg": "white",
+           "bl": 1,
+           "blc": "teal-700"
+          },
+          "h3": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h1": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h2": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h4": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h5": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "h6": {
+           "f": "label",
+           "c": "teal-700",
+           "s": 26,
+           "ta": "left"
+          },
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "c": "ink-500",
+           "s": 50,
+           "ta": "left"
+          }
+         },
+         "prefix": ""
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>30,722</p>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "s": 50
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #217a86;\">POPULATION</span></p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "teal-700",
+           "s": 26
+          },
+          "h1": {
+           "c": "teal-700"
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>$ 189,739</p>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "s": 50
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #217a86;\">MEDIAN HOUSEHOLD INCOME</span></p>",
+         "look": {
+          "h1": {
+           "c": "teal-700"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "white",
+           "s": 26
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>11,894</p>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "s": 50
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #217a86;\">RESIDENTIAL HOMES</span></p>",
+         "look": {
+          "h1": {
+           "c": "teal-700"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "white",
+           "s": 26
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>5.41</p>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "700",
+           "s": 50
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #217a86;\">TOTAL AREA IN SQ. MILES</span></p>",
+         "look": {
+          "h1": {
+           "c": "teal-700"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "white",
+           "s": 26
+          }
+         }
+        }
+       ]
+      }
+     ],
+     "hide": [
+      "desktop"
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<h2><span style=\"color: #217a86;\">SCHOOLS IN SAN CARLOS</span></h2>",
+             "look": {
+              "h1": {
+               "c": "teal-700"
+              },
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "white",
+               "s": 26
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<h2>Top Schools in California</h2>",
+             "look": {
+              "b": {
+               "f": "heading",
+               "w": "400",
+               "c": "ink-500",
+               "s": 50,
+               "ps": 35
+              },
+              "h2": {
+               "f": "heading",
+               "s": 42
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>Public schools overseen by the San Carlos School District rank among the highest in the all of United States. Elementary and Middle Schools in San Carlos place within the top 5% in the state of California.</p>\n<p>On January 2023 the California Department of Education (CDE) came out with its list of distinguished elementary schools and every elementary school in San Carlos CA made the list. Of the 5,872 elementary schools in California, only 356 were selected (roughly 6%). Leading the group is White Oaks Elementary School which ranks at about #5 of all Californian Elementary Schools, while Central Middle School ranks #100 out of all Californian Middle Schools.</p>\n<p>The municipal public education system in San Carlos serves students from kindergarten through eighth grade across nine schools within our city.</p>\n<p>Older students travel to nearby Carlmont High School in Belmont or Sequoia High School in Redwood City to complete their secondary education, both of which are part of the Sequoia Union High School District.</p>"
+            },
+            {
+             "t": "accordion",
+             "items": [
+              {
+               "t": "toggle",
+               "title": "Based on my address, what schools will my children go to?",
+               "html": "<p>Click here to find out!  <strong><a href=\"https://locator.decisioninsite.com/?studyId=199008\" rel=\"noopener\" target=\"_blank\">San Carlos School Locator</a></strong></p>",
+               "open": true
+              },
+              {
+               "t": "toggle",
+               "title": "Who can I contact for more information?",
+               "html": "<p>You may contact the <strong><a href=\"https://www.scsdk8.org/\" rel=\"noopener\" target=\"_blank\">San Carlos School District</a></strong></p>\n<p><strong>San Carlos School District</strong><br/>1200 Industrial Road, Unit 9<br/>San Carlos, CA 94070<br/>Phone: (650) 508-7333, Fax: (650) 508-7340</p>\n<p>To contact individual departments within the district office, you may refer to the <strong><a href=\"https://www.scsdk8.org/apps/pages/index.jsp?uREC_ID=1136262&amp;type=d&amp;pREC_ID=1394035\" rel=\"noopener\" target=\"_blank\">District Staff</a></strong> page.</p>",
+               "open": false
+              },
+              {
+               "t": "toggle",
+               "title": "Where can I read the whole guide?",
+               "html": "<p>Click here. <a href=\"https://www.scsdk8.org/apps/pages/School-Boundaries\" rel=\"noopener\" target=\"_blank\"><strong>San Carlos School Boundaries</strong></a></p>",
+               "open": false
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/08/central-middle-school-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "highrankingschools"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<h2><span style=\"color: #217a86;\">LIVING IN SAN CARLOS CA</span></h2>",
+             "look": {
+              "h1": {
+               "c": "teal-700"
+              },
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "white",
+               "s": 26
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>The City of Good Living</p>",
+             "look": {
+              "b": {
+               "f": "heading",
+               "w": "400",
+               "c": "ink-500",
+               "s": 50,
+               "ps": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>Here are some quick facts on why San Carlos is rightly coined the \"City of Good Living\" - some reasons to choose to live in San Carlos -</p>"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p><span>Beautiful Homes</span></p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>Homes in San Carlos are usually adorned with scenic views of the bay from the hillside. A mix of modern and historical architecture, they are among the most profitable and expensive in the country.</p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          },
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>STRATEGIC LOCATION</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>Conveniently located between San Francisco and Silicon Valley, residents in San Carlos have a convenient commute to work and for trips to the greater city area.</p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>DOWNTOWN</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>San Carlos has its own quaint downtown area with cafes, restaurants, and boutique shops. All necessary services can easily be found within proximity and walkable distance in some neighborhoods.  </p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          },
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>PARKS &amp; HIKING TRAILS</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>San Carlos has 16 parks evenly distributed amongst the neighborhoods, with varying facilities from playgrounds to tennis courts. Hiking trails can be found in the nearby forests and hills. </p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>LOW CRIME RATE</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>San Carlos is given a crime rate of B+, which is above the country average. The Sheriff's department constantly receives good feedback from the citizens.</p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          },
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>GOOD WEATHER</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>San Carlos enjoys a Meditteranean kind of weather all throughout the year, sunny with scattered rainfalls, and no snow. </p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/viv-kelvin-and-mark-martinho-at-drakes-restaurant-at-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "quickfacts"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2><span style=\"color: #217a86;\">THINGS TO DO IN SAN CARLOS CA</span></h2>",
+         "look": {
+          "h1": {
+           "c": "teal-700"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "white",
+           "s": 26
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Explore the City</p>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "c": "ink-500",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Browse through the restaurants, shops, tourist attractions, activities, events, recreational parks and trails in San Carlos CA.  </p>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">RESTAURANTS &amp; SERVICES</p>",
+         "button": {
+          "text": "Browse All",
+          "href": "https://sancarloslife.com/restaurants-and-services/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/mark-martinho-and-viv-kelvin-at-restaurants-in-san-carlos-ca.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">ATTRACTIONS </p>",
+         "button": {
+          "text": "Browse All",
+          "href": "https://sancarloslife.com/attractions/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/mark-martinho-and-viv-kelvin-at-the-museum-of-san-carlos-history-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">EVENTS &amp; ACTIVITIES</p>",
+         "button": {
+          "text": "Browse All",
+          "href": "https://sancarloslife.com/events-and-activities/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/mark-martinho-and-viv-kelvin-at-the-annual-hometown-days-2022-on-may-in-san-carlos-ca-photo-by-vabrato-real-estate-serviceslt-13.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">PARKS &amp; TRAILS </p>",
+         "button": {
+          "text": "Browse All",
+          "href": "https://sancarloslife.com/parks-of-san-carlos/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/viv-kelvin-and-mark-martinho-at-frank-harrington-park-at-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2><span style=\"color: #217a86;\">MAP OF SAN CARLOS CA</span></h2>",
+         "look": {
+          "h1": {
+           "c": "teal-700"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "white",
+           "s": 26
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>The Neighborhood</p>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "c": "ink-500",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        },
+        {
+         "t": "map",
+         "id": "18"
+        },
+        {
+         "t": "map",
+         "id": "29",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "map"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">ABOUT <span class=\"navy\">SAN CARLOS</span></p>\n<details>\n<summary>What is San Carlos, California known for?</summary>\n<p>The walkable downtown on Laurel Street, the schools, the parks, and the Caltrain stop. Locals call it the City of Good Living. It sits midway down the Peninsula in San Mateo County, between Belmont and Redwood City, with quick freeway access in both directions.</p>\n</details>\n<details>\n<summary>Is San Carlos a good place to live?</summary>\n<p>For people who want a smaller-town feel with full Bay Area access, yes — it consistently lands on \"best places to live\" lists for a reason. The trade-off is cost. Homes are expensive and inventory is tight. Whether it's the right fit comes down to budget, commute, and what you want your weekends to look like.</p>\n</details>\n<details>\n<summary>Where is San Carlos located?</summary>\n<p>On the San Francisco Peninsula in San Mateo County, between Belmont to the north and Redwood City to the south. Highway 101, Interstate 280, El Camino Real, and Caltrain all run through or alongside the city.</p>\n</details>\n<details>\n<summary>What's the lifestyle like?</summary>\n<p>Quieter residential streets, a downtown people actually walk to, a heavy rotation of community events, and the kind of park access that makes weekends easy. Plenty of families, plenty of dogs, and a Caltrain ride that gets you to San Francisco or Silicon Valley without driving.</p>\n</details>\n<details>\n<summary>Is San Carlos walkable?</summary>\n<p>Parts of it. Around Laurel Street, El Camino, Burton Park, and the Caltrain station, walking is the norm. Hillside neighborhoods on the west side are more car-dependent, mostly because of slope and street layout.</p>\n</details>\n<details>\n<summary>How are the parks and trails?</summary>\n<p>Strong for a city of this size. Burton Park is the community hub. Highlands Park has athletic facilities. Big Canyon, Vista Park, and Eaton Park give you actual hiking. There's a dog exercise area at Heather Park and playgrounds in nearly every neighborhood.</p>\n</details>\n<details>\n<summary>What should people know before moving here?</summary>\n<p>Compare neighborhoods before settling on one — they're more different than they look on a map. Drive the commute. Verify school assignment for the exact address you're considering. And budget realistically for hillside conditions if you're looking west — driveways, parking, and landscaping cost more on a slope.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "banner": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-bay-area.png"
+}

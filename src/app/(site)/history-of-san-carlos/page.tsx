@@ -7,6 +7,8 @@ import { mediaSrc } from "@/lib/media";
 import { listTimeline } from "@/lib/queries/community";
 import { getPageSeo } from "@/lib/queries/pages";
 import { buildMetadata } from "@/lib/seo";
+import { DiviPage } from "@/components/divi/DiviPage";
+import { diviLayout } from "@/lib/divi/layouts";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageSeo("history-of-san-carlos");
@@ -19,6 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HistoryPage() {
+  // The live site\'s exact layout (src/content/divi); the code below is the earlier version.
+  const layout = diviLayout("history-of-san-carlos");
+  if (layout) return <DiviPage layout={layout} />;
   const entries = await listTimeline();
   const decades = [...new Set(entries.map((e) => Math.floor(e.year / 100) * 100))];
   return (

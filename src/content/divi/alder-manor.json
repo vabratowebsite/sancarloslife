@@ -1,0 +1,496 @@
+{
+ "slug": "alder-manor",
+ "title": "Alder Manor, San Carlos: Latest Homes for Sale, Top Schools, Lifestyle",
+ "wpId": 768,
+ "modified": "2026-07-08T13:44:05",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Alder Manor</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/965346637?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Alder Manor",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">Enjoy Majestic Views of the Bay and Canyons</h2>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "s": 49,
+           "ps": 49
+          },
+          "h2": {
+           "f": "heading",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "6zia0i59WlA"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">ABOUT </span>ALDER MANOR</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p style=\"text-align: center;\">Located in the southwest corner of San Carlos, this peaceful neighborhood nestled in a landscape of level and hilly terrains, where majestic canyon and Bay views can be enjoyed by residents living in multi-story homes.</p>",
+         "look": {
+          "b": {
+           "s": 21,
+           "ps": 17
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIconHillsLevel.png",
+         "alt": "",
+         "title": "FLAT AND HILLY TERRAINS",
+         "href": "",
+         "html": "<p>Alder Manor sits on a landscape of both flat and hilly landscapes enabling residents to enjoy both canyon and Bay views.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-LargerHomes1.png",
+         "alt": "",
+         "title": "LARGER PROPERTY LOTS",
+         "href": "",
+         "html": "<p>This neighborhood has larger lots compared to others, which is ideal for those looking to expand or build new larger homes.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Homes2.png",
+         "alt": "",
+         "title": "DIVERSE ARCHITECTURE",
+         "href": "",
+         "html": "<p>Alder Manor has wide mix of architectural styles; including ranch homes, multistory houses, Tudors, and apartments. Homes prices vary widely here.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Bay2.png",
+         "alt": "",
+         "title": "BAY AND CANYON VIEWS",
+         "href": "",
+         "html": "<p>In the hilly areas, you’ll find multistory homes and apartments adorned with views of the City, Bay, or it lush green canyons.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-SecludedAreas.png",
+         "alt": "",
+         "title": "QUIET AND PRIVATE",
+         "href": "",
+         "html": "<p>Secluded from large-scale developments, this neighborhood is distant from the Downtown hustle-and-bustle.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Hiking2.png",
+         "alt": "",
+         "title": "HIKING TRAILS",
+         "href": "",
+         "html": "<p>This neighborhood has great hiking trails in places like Eaton Park and Big Canyon Park.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Schools.png",
+         "alt": "",
+         "title": "SCHOOLS",
+         "href": "",
+         "html": "<p>Homes in Alder Manor are assigned to either Heather Elementary in Beverly Terrace or to Clifford School in Redwood City.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Downtown.png",
+         "alt": "",
+         "title": "A DRIVE TO DOWNTOWN",
+         "href": "",
+         "html": "<p>Being mostly a residential area, you’ll need to drive to access most of the City’s shops and cafes from the east side of downtown.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PHOTO </span>GALLERY</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">MAP AND </span>PLACES</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "map",
+         "id": "21"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">HOMES </span>FOR SALE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #333333;\">Homes Sold in last 3 months</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "tt": "uppercase",
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "listings"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">ALDER MANOR <span class=\"navy\">QUESTIONS</span></p>\n<details>\n<summary>What is Alder Manor known for?</summary>\n<p>Larger lots, larger homes, and Bay and canyon views. Alder Manor sits in the southwest corner of San Carlos on hilly terrain just below Alameda de las Pulgas, and it's quieter and more secluded than the rest of the city. It's where you go when you want elbow room, trees, and a view — not walkability to downtown.</p>\n</details>\n<details>\n<summary>Are Alder Manor homes assigned to San Carlos schools?</summary>\n<p>This catches a lot of buyers off guard: a portion of Alder Manor has San Carlos mailing addresses but is zoned into the <strong>Redwood City School District</strong>, not San Carlos. Homes near Eaton Park and Crestview Drive are typically assigned to San Carlos schools, while others may be assigned to Clifford School in Redwood City. Always verify school assignment for the exact address with the appropriate district before making housing decisions.</p>\n</details>\n<details>\n<summary>What kinds of homes are in Alder Manor?</summary>\n<p>A mix of ranch homes, multi-story homes, Tudors, Mediterraneans, and modern custom builds. Most of the neighborhood was developed in the last 50 years, so the housing stock is generally newer than the rest of San Carlos. Lot sizes run larger than in flatter parts of town, and some properties exceed 10,000 square feet of lot. The most architecturally striking homes tend to sit along the stretch adjacent to Eaton Avenue.</p>\n</details>\n<details>\n<summary>How are home prices in Alder Manor?</summary>\n<p>They run higher than the city median, reflecting the larger homes, larger lots, and views. Recent data shows median sale prices in Alder Manor around the $2.5 million range, with custom and view properties going significantly higher. Check our <a href=\"/real-estate-market-trends/\">market trends page</a> for current numbers — Alder Manor specifically can swing month to month because there aren't a lot of sales.</p>\n</details>\n<details>\n<summary>Is Alder Manor walkable to downtown?</summary>\n<p>Not really. It's about a short drive down Brittan Avenue to Laurel Street and downtown San Carlos — close enough to be convenient, but you're not walking it. Most residents trade walkability for the privacy and views the neighborhood offers.</p>\n</details>\n<details>\n<summary>What outdoor amenities are nearby?</summary>\n<p>Eaton Park is essentially in the neighborhood — 57 undeveloped acres with hiking trails and Bay views from the top. Big Canyon Park is close. Pulgas Ridge Open Space Preserve is just over the hill. If you're an Alder Manor resident, you probably hike more than the average San Carlos resident.</p>\n</details>\n<details>\n<summary>What should buyers watch for in Alder Manor?</summary>\n<p>Three things: school district assignment (verify the exact address with both San Carlos and Redwood City districts), hillside-specific issues like drainage, slope stability, and foundation age, and access — some streets are narrow and steep, which affects parking, deliveries, and the daily commute in and out. The views and lot sizes are real, but so are the practical considerations.</p>\n</details>\n<details>\n<summary>What should sellers know about Alder Manor?</summary>\n<p>Buyers here are usually deliberate. They want the lot, the view, the privacy — they're not in a frantic rush like buyers competing for walkable downtown homes. Strong presentation, clear disclosures, and accurate school district information matter. Hillside drainage and foundation reports done in advance can prevent buyers from getting cold feet during the contingency period.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">OTHER </span>neighborhoodS</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">BEVERLEY TERRACE</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/beverly-terrace/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/beverley-terraces-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CLEARFIELD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/clearfield-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/clearfield-park-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CORDES<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/cordes/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/cordes-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">EL SERENO<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/el-sereno/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/el-sereno-corte-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">HOWARD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/howard-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/howard-park-san-carlos-ca-v.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

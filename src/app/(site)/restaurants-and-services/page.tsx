@@ -5,6 +5,8 @@ import { Breadcrumbs } from "@/components/content/Breadcrumbs";
 import { PlaceCard } from "@/components/places/PlaceCard";
 import { listPlaces, STREETS } from "@/lib/queries/places";
 import { buildMetadata } from "@/lib/seo";
+import { DiviPage } from "@/components/divi/DiviPage";
+import { diviLayout } from "@/lib/divi/layouts";
 
 export const metadata: Metadata = buildMetadata({
   path: "/restaurants-and-services/",
@@ -13,6 +15,9 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function RestaurantsAndServices() {
+  // The live site\'s exact layout (src/content/divi); the code below is the earlier version.
+  const layout = diviLayout("restaurants-and-services");
+  if (layout) return <DiviPage layout={layout} />;
   const [restaurants, shops] = await Promise.all([listPlaces("restaurants"), listPlaces("shops")]);
   const laurel = restaurants.filter((p) => p.street === "laurel").slice(0, 6);
   const featured = (restaurants.some((p) => p.featured) ? restaurants.filter((p) => p.featured) : restaurants).slice(0, 3);

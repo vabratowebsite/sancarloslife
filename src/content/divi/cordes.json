@@ -1,0 +1,516 @@
+{
+ "slug": "cordes",
+ "title": "Cordes, San Carlos: Latest Homes for Sale, Top Schools, Lifestyle",
+ "wpId": 770,
+ "modified": "2026-07-08T13:44:13",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Cordes</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/989203096?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Cordes",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">The Original San Carlos - Where you can have it All!</h2>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "s": 49
+          },
+          "h2": {
+           "f": "heading",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "wE-Mocsj7N0"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">ABOUT </span>CORDES</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Cordes has all the best of San Carlos: high-end homes on the hills, entry-level homes in flat areas near downtown, plus top schools and three recreation parks within proximity. Known as the “original” San Carlos, some homes date back to the 1800s.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "s": 21,
+           "ps": 17
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-OldHouse.png",
+         "alt": "",
+         "title": "OLDEST NEIGHBORHOOD",
+         "href": "",
+         "html": "<p>The oldest home ever built in San Carlos, the Arguello Adobe, is located in this area. Many homes in this neighborhood were built in the 1930s.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Homes3.png",
+         "alt": "",
+         "title": "AFFORDABLE HOMES",
+         "href": "",
+         "html": "<p>Homes near Downtown tend to be pricey, but in this neighborhood they are more affordable than the houses in Howard Park and El Sereno.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Homes2.png",
+         "alt": "",
+         "title": "HIGH-END HOMES",
+         "href": "",
+         "html": "<p>Cordes hosts a mix of both high-end and entry-level houses. The more expensive homes tend to be located in the hills.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIconHillsLevel.png",
+         "alt": "",
+         "title": "HILLY AND FLAT AREAS",
+         "href": "",
+         "html": "<p>The neighborhood has a mix of hilly and flat terrains with the flat areas being near Downtown.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Downtown.png",
+         "alt": "",
+         "title": "NEAR DOWNTOWN",
+         "href": "",
+         "html": "<p>Homes in Lower Cordes are walking distance to Downtown San Carlos and public transportation.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Schools.png",
+         "alt": "",
+         "title": "TOP SCHOOLS",
+         "href": "",
+         "html": "<p>San Carlos generally has high-ranking schools. Arundel and Mariposa Elementary plus Tierra Linda Middle School apply to this neighborhood.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-ParksKids2.png",
+         "alt": "",
+         "title": "LOTS OF PARKS",
+         "href": "",
+         "html": "<p><span>Arguello, Cedar Street, and Hillcrest Circle Parks – with playgrounds, baseball, and/or soccer fields – are located here.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-HistoricalData.png",
+         "alt": "",
+         "title": "RICH IN HISTORY",
+         "href": "",
+         "html": "<p>Cordes was once called the “Poverty Hill” due to the failed attempt to turn it into a “Hillsborough-like” region during the Great Depression.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PHOTO </span>GALLERY</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">MAPS AND </span>PLACES</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "map",
+         "id": "24"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">HOMES </span>FOR SALE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #333333;\">Homes Sold in last 3 months</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "tt": "uppercase",
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "listings"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">CORDES <span class=\"navy\">QUESTIONS</span></p>\n<details>\n<summary>What is Cordes known for?</summary>\n<p>History, variety, and the Carlmont High School zone. Cordes sits in the northern part of San Carlos and is the city's oldest developed neighborhood — some homes date to the late 1800s, and the original Arguello Adobe (the oldest home ever built in San Carlos) was located here. Today it's a mix of older character homes, mid-century traditionals, and newer custom builds, sometimes side by side on the same block.</p>\n</details>\n<details>\n<summary>Why is Cordes the only neighborhood zoned for Carlmont High?</summary>\n<p>Most of San Carlos feeds into Sequoia High School, but Cordes is one of the few areas zoned for <strong>Carlmont High School</strong>, which carries strong academic ratings and a competitive Biotechnology Institute program. That single school assignment is a major driver of buyer interest in Cordes, especially among families. Always verify current school assignment with the district before assuming.</p>\n</details>\n<details>\n<summary>What elementary and middle schools serve Cordes?</summary>\n<p>Most Cordes homes are assigned to Arundel Elementary (K–3), then Mariposa Upper Elementary (4–5), then Tierra Linda Middle School (6–8). All three are within the San Carlos School District. Arundel Elementary sits right next to Arguello Park, which makes the school-to-playground transition pretty seamless.</p>\n</details>\n<details>\n<summary>What kinds of homes are in Cordes?</summary>\n<p>The variety is unusual. You'll find Victorian-era homes near downtown, 1930s and pre-war character homes, 1970s and 80s builds, and modern custom homes. Lower Cordes (near downtown) tends to have smaller flat lots and is walkable. Upper Cordes (in the hills) has larger lots, more trees, and Bay or canyon views. Prices range widely — entry-level condos around $900K to $1.2M, and hillside homes up to $3.9M.</p>\n</details>\n<details>\n<summary>Is Cordes walkable to downtown?</summary>\n<p>Parts of it, yes — and this is one of Cordes' underrated features. The lower section is closer to the north end of Laurel Street and some of San Carlos's most popular restaurants than many residents realize. Upper Cordes is in the hills and not walkable. The split between \"walkable Cordes\" and \"hillside Cordes\" matters a lot when comparing homes.</p>\n</details>\n<details>\n<summary>What parks are in Cordes?</summary>\n<p>Three: Arguello Park (the largest park in San Carlos at over 23 acres, with playgrounds, baseball fields, and tennis courts), Cedar Street Park, and Hillcrest Circle Park. That's a lot of green space for one neighborhood, and it's part of why families with kids tend to gravitate here.</p>\n</details>\n<details>\n<summary>What should buyers watch for in Cordes?</summary>\n<p>The biggest one is condition variance — Cordes has some of the oldest housing stock in the city, so you can have a beautifully updated 1920s home next door to one that needs major work. Older homes mean older systems: foundation, electrical, plumbing, roof. Inspections matter more here than in newer neighborhoods. Also: hillside homes in upper Cordes need slope and drainage inspections, and some streets lack sidewalks.</p>\n</details>\n<details>\n<summary>What should sellers know about Cordes?</summary>\n<p>The Carlmont zoning is your headline if you're family-targeting. Beyond that, lean into Cordes' character — historic charm, mature trees, walkability for the lower section, views for the upper. Older homes benefit a lot from pre-listing inspections and disclosure packages that get ahead of buyer concerns about foundation, electrical, and roof.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">OTHER </span>NEIGHBORHOODS</h3>",
+         "look": {
+          "h3": {
+           "s": 39
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">ALDER MANOR</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/alder-manor/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/alder-manor-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">BEVERLEY TERRACE</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/beverly-terrace/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/beverley-terraces-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CLEARFIELD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/clearfield-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/clearfield-park-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">EL SERENO<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/el-sereno/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/el-sereno-corte-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">HOWARD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/howard-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/howard-park-san-carlos-ca-v.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

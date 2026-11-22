@@ -1,0 +1,493 @@
+{
+ "slug": "el-sereno",
+ "title": "El Sereno & White Oaks, San Carlos: Latest Homes for Sale, Top Schools, Lifestyle",
+ "wpId": 772,
+ "modified": "2026-07-08T13:44:17",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">El Sereno &amp; White Oaks</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "hide": [
+    "desktop"
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/989203043?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "El Sereno & White Oaks",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">The Most Popular Neighborhood in San Carlos</h2>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "s": 49
+          },
+          "h2": {
+           "f": "heading",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "FqNvlYvCFrA"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">ABOUT </span>EL SERENO</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>El Sereno is a neighborhood composed of two residential areas: Oak Park and White Oaks. The terrain is generally flat, with charming suburbs holding both modern and traditional-style homes. Homes on the west side are walking distance to Downtown. Hiking trails and recreation facilities are also easily accessible via Edgewood and Burton Park.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "s": 21,
+           "ps": 17
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-HillsnPlains.png",
+         "alt": "",
+         "title": "FLATS OF SAN CARLOS",
+         "href": "",
+         "html": "<p>Unlike other neighborhoods with both hilly and level topography, El Sereno lies on fully flat terrain.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Homes2.png",
+         "alt": "",
+         "title": "CHARMING BUNGALOWS",
+         "href": "",
+         "html": "<p>Architectural styles vary from modern to early 1900s – bungalows framed by green front lawns and tall trees lining the streets are very common here.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Costly.png",
+         "alt": "",
+         "title": "FAST RESELL RATE",
+         "href": "",
+         "html": "<p>El Sereno has the second-highest housing resell rate among the San Carlos neighborhoods, with the first being Howard Park.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Homes3.png",
+         "alt": "",
+         "title": "SMALL AND EXPENSIVE",
+         "href": "",
+         "html": "<p><span>Homes are usually the most expensive in San Carlos per square foot. Lot sizes tend to be the smallest in San Carlos.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-TitghtHouses.png",
+         "alt": "",
+         "title": "TIGHT NEIGHBORHOOD",
+         "href": "",
+         "html": "<p><span>Since lots tend to be smaller in this neighborhood, houses tend to be closer to each other.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Walking.png",
+         "alt": "",
+         "title": "WALKABLE DOWNTOWN",
+         "href": "",
+         "html": "<p><span>Laurel Street and the Industrial Area are just a short walk away. Enjoy charming restaurants and shops without needing to drive.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Hiking2.png",
+         "alt": "",
+         "title": "NATURE & RECREATION",
+         "href": "",
+         "html": "<p><span>Burton and Edgewood Park are walking distance. Burton Park has many fields and sports facilities while Edgewood Park offers plenty of hiking trails.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Train.png",
+         "alt": "",
+         "title": "EASE OF TRANSPORTATION",
+         "href": "",
+         "html": "<p><span>Highways and public transit are very accessible. The CalTrain station is within walking distance from this neighborhood.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PHOTO </span>GALLERY</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">MAP AND </span>PLACES</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "map",
+         "id": "28"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">HOMES </span>FOR SALE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #333333;\">Homes Sold in last 3 months</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "tt": "uppercase",
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "listings"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">WHITE OAKS <span class=\"navy\">QUESTIONS</span></p>\n<details>\n<summary>What is White Oaks known for?</summary>\n<p>One word: school. White Oaks Elementary School is one of the highest-rated public elementary schools in California, and the neighborhood is centered around it. That school assignment is the single biggest driver of buyer demand here. White Oaks also has tree-lined residential streets, well-maintained homes, and a tight-knit family-oriented community feel.</p>\n</details>\n<details>\n<summary>What is White Oaks Elementary School?</summary>\n<p>White Oaks Elementary serves grades K–3 within the San Carlos School District. It consistently earns top ratings — an A from Niche and a 10/10 GreatSchools rating — and is one of the most sought-after public elementary schools in the Bay Area. The school sits at 1901 White Oak Way. Note: White Oaks serves the southern portion of the neighborhood (south of Belmont Avenue). The northern portion is assigned to Brittan Acres Elementary, which is also strong but a different school. Always verify school assignment for the exact address with the district.</p>\n</details>\n<details>\n<summary>What middle school and high school serve White Oaks?</summary>\n<p>Middle school is typically Central Middle School. High school is typically Sequoia High School. As with elementary, verify the specific address assignment with the San Carlos School District (K–8) and Sequoia Union High School District (9–12) before relying on this.</p>\n</details>\n<details>\n<summary>What kinds of homes are in White Oaks?</summary>\n<p>Mostly single-family homes on smaller, flatter lots — typically 4,500–5,500 square feet. The housing stock leans toward small bungalows and ranch-style homes, with some larger remodels and newer traditional-style builds added by local builders. Lot sizes here tend to be among the smallest in San Carlos, and homes tend toward the lowest median square footage in town.</p>\n</details>\n<details>\n<summary>How are home prices in White Oaks?</summary>\n<p>Among the highest price-per-square-foot in San Carlos, driven by the school assignment. Small bungalows can start around $1.5M and go up to $2.5M, with larger or newly built homes sometimes exceeding $3M. You're paying for the school zone and the location more than for raw square footage — that's the calculation buyers are making here.</p>\n</details>\n<details>\n<summary>Is White Oaks walkable?</summary>\n<p>Somewhat. The neighborhood itself is flat and pleasant to walk, but it's not as close to Laurel Street and downtown as Howard Park. You can walk to downtown from much of White Oaks, but it's a longer walk — bike or short drive is more typical. Highway 280 and 101 are both close, which makes commuting straightforward.</p>\n</details>\n<details>\n<summary>What should buyers watch for in White Oaks?</summary>\n<p>The premium is real, and so are the trade-offs. Homes are smaller, lots are smaller, and you'll get less house here than in other San Carlos neighborhoods at the same price. The school assignment is the value driver — but boundaries can change, and a home in the Brittan Acres zone within \"White Oaks\" isn't the same as a home in the White Oaks Elementary zone. Verify the exact assignment.</p>\n</details>\n<details>\n<summary>What should sellers know about White Oaks?</summary>\n<p>The school zone is your headline if your home is in the White Oaks Elementary boundary — confirm it and document it clearly. Smaller homes here outperform when staged well; they're not competing on square footage, they're competing on light, layout, and finish. Family buyers do most of the shopping here, so a clean, kid-friendly presentation matters.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">ALDER MANOR</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/alder-manor/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/alder-manor-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">BEVERLEY TERRACE</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/beverly-terrace/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/beverley-terraces-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CLEARFIELD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/clearfield-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/clearfield-park-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CORDES<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/cordes/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/cordes-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">HOWARD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/howard-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/howard-park-san-carlos-ca-v.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

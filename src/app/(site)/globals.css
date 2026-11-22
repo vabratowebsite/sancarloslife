@@ -181,3 +181,33 @@
     cursor: pointer;
   }
 }
+
+/* Pages rebuilt from the WordPress layouts (src/components/divi). */
+.divi-text { color: var(--color-ink-900); }
+.divi-text > * + * { margin-top: 0.9em; }
+.divi-text h1, .divi-text h2, .divi-text h3, .divi-text h4, .divi-text h5, .divi-text h6 { line-height: 1.2; }
+.divi-text h1 { font-family: var(--h1-f, var(--font-heading)); font-size: var(--h1-s, var(--text-h1)); font-weight: var(--h1-w, 400); color: var(--h1-c, var(--color-ink-900)); text-transform: var(--h1-tt, none); letter-spacing: var(--h1-ls, normal); }
+.divi-text h2 { font-family: var(--h2-f, var(--font-heading)); font-size: var(--h2-s, var(--text-h2)); font-weight: var(--h2-w, 400); color: var(--h2-c, var(--color-ink-900)); text-transform: var(--h2-tt, none); letter-spacing: var(--h2-ls, normal); }
+.divi-text h3 { font-family: var(--h3-f, var(--font-heading)); font-size: var(--h3-s, var(--text-h2)); font-weight: var(--h3-w, 400); color: var(--h3-c, var(--color-ink-900)); text-transform: var(--h3-tt, uppercase); letter-spacing: var(--h3-ls, 0.01em); }
+.divi-text h4 { font-family: var(--h4-f, var(--font-heading)); font-size: var(--h4-s, var(--text-h3)); font-weight: var(--h4-w, 400); color: var(--h4-c, var(--color-ink-900)); text-transform: var(--h4-tt, none); letter-spacing: var(--h4-ls, normal); }
+.divi-text h5, .divi-text h6 { font-family: var(--h5-f, var(--font-heading)); font-size: var(--h5-s, var(--text-h4)); color: var(--h5-c, var(--color-ink-900)); }
+.divi-look { font-family: var(--b-f, inherit); font-size: var(--b-s, inherit); font-weight: var(--b-w, inherit); color: var(--b-c, var(--color-ink-900)); text-transform: var(--b-tt, none); letter-spacing: var(--b-ls, normal); }
+.divi-look[style*="--b-s"] { line-height: 1.25; }
+.divi-text a { color: var(--color-teal-700); text-decoration: underline; text-underline-offset: 2px; }
+/* Links that stand alone on a line get a 24px target (WCAG 2.5.8); links inside sentences are exempt. */
+.divi-text p > a:only-child, .divi-text li > a:only-child { display: inline-block; min-height: 24px; }
+.divi-text ul { list-style: disc; padding-left: 1.4em; }
+.divi-text ol { list-style: decimal; padding-left: 1.4em; }
+.divi-text li + li { margin-top: 0.35em; }
+.divi-text img { max-width: 100%; height: auto; border-radius: var(--radius-card); }
+.divi-text iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: var(--radius-card); }
+.divi-text blockquote { border-left: 4px solid var(--color-teal-500); padding-left: 1em; font-style: italic; }
+.divi-text table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
+.divi-text th, .divi-text td { border: 1px solid color-mix(in srgb, var(--color-ink-500) 25%, transparent); padding: 0.5em 0.75em; text-align: left; }
+.divi-text .blue, .divi-text .teal { color: var(--color-teal-700); }
+.divi-text .navy { color: var(--color-ink-900); }
+.divi-text [style*="color: #12aa9b"], .divi-text [style*="color:#12aa9b"] { color: var(--color-teal-700) !important; }
+.divi-text .scl-label { font-family: var(--font-heading); font-size: var(--text-h3); text-align: center; text-transform: uppercase; }
+.divi-text details, .divi-toggle { border: 1px solid color-mix(in srgb, var(--color-ink-500) 25%, transparent); border-radius: var(--radius-card); padding: 0.85em 1.1em; background: white; }
+.divi-text summary, .divi-toggle > summary { cursor: pointer; font-weight: 700; color: var(--color-ink-900); min-height: 24px; }
+.divi-text details[open] > summary, .divi-toggle[open] > summary { margin-bottom: 0.6em; }

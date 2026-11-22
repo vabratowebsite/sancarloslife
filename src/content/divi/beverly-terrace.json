@@ -1,0 +1,519 @@
+{
+ "slug": "beverly-terrace",
+ "title": "Beverly Terrace, San Carlos: Latest Homes for Sale, Top Schools, Lifestyle",
+ "wpId": 767,
+ "modified": "2026-07-08T13:44:08",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Beverly Terrace</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "hide": [
+    "desktop"
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/965346686?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Beverly Terrace",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": []
+      },
+      {
+       "w": "3/5",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h2 style=\"text-align: center;\">Large Homes and Serenity on Hilltops</h2>",
+         "look": {
+          "b": {
+           "f": "heading",
+           "w": "400",
+           "s": 49
+          },
+          "h2": {
+           "f": "heading",
+           "s": 50,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "video",
+         "id": "vXk8D_W4D-w"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">ABOUT </span>BEVERLY TERRACE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p>The biggest neighborhood in San Carlos. It sits on top of the hills where many homes have spectacular views of the Bay. Residents can also enjoy nearby nature parks &amp; sports facilities.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "s": 21,
+           "ps": 17
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Suburbs2.png",
+         "alt": "",
+         "title": "LARGEST NEIGHBORHOOD",
+         "href": "",
+         "html": "<p> Being the largest neighborhood in San Carlos, property lots and houses are larger here compared to the other neighborhoods.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Hills2.png",
+         "alt": "",
+         "title": "MOSTLY HILLY AREAS",
+         "href": "",
+         "html": "<p><span>Rightly coined the “neighborhood on top of the hills”, with great views of the City and Bay; although hilltop homes can have technical challenges</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Bay2.png",
+         "alt": "",
+         "title": "SPECTACULAR VIEWS",
+         "href": "",
+         "html": "<p><span>Residents can enjoy spectacular views of the Bay, canyons, and the whole of San Carlos, whether from home or its parks.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Tennis.png",
+         "alt": "",
+         "title": "SPORTS FACILITIES",
+         "href": "",
+         "html": "<p><span>At the center is Highland Park, which houses a tennis court, a baseball/soccer field with synthetic grass, and various playgrounds.</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-Parks.png",
+         "alt": "",
+         "title": "NATURE PARKS",
+         "href": "",
+         "html": "<p>At the tip of the neighborhood is Vista Park – a great place for picnics, hiking, and enjoying one of the most spectacular views of the Bay.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-SecludedAreas.png",
+         "alt": "",
+         "title": "PRIVATE AND SECLUDED",
+         "href": "",
+         "html": "<p>Beverly Terrace is away from Downtown, which tends to make the neighborhood more peaceful, secluded and quiet.</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-LargerHomes2.png",
+         "alt": "",
+         "title": "LARGER PROPERTY LOTS",
+         "href": "",
+         "html": "<p><span>Children living in this neighborhood go to Heather Elementary, Mariposa Upper Elementary, and Tierra Linda Middle School</span></p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      },
+      {
+       "w": "1/4",
+       "items": [
+        {
+         "t": "blurb",
+         "img": "https://sancarloslife.com/wp-content/uploads/2022/08/BlueIcon-OldHouse.png",
+         "alt": "",
+         "title": "DIVERSE HOMES",
+         "href": "",
+         "html": "<p>Housing in the neighborhood includes apartments and single-family homes with an interesting mix of architecture styles; cabins, ranch homes, Tudors, and modern mansions</p>",
+         "look": {
+          "t": {
+           "f": "label",
+           "s": 28
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PHOTO </span>GALLERY</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">MAP AND </span>PLACES</h3>"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "map",
+         "id": "22"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">HOMES </span>FOR SALE</h3>"
+        },
+        {
+         "t": "text",
+         "html": "<p><span style=\"color: #333333;\">Homes Sold in last 3 months</span></p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          },
+          "b": {
+           "f": "label",
+           "w": "400",
+           "tt": "uppercase",
+           "s": 28
+          }
+         }
+        },
+        {
+         "t": "listings"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">BEVERLY TERRACE <span class=\"navy\">QUESTIONS</span></p>\n<details>\n<summary>What is Beverly Terrace known for?</summary>\n<p>It's the largest neighborhood in the \"San Carlos Hills\" — the area people are usually talking about when they say that. Hillside terrain, larger lots, more trees, and serious Bay and canyon views. Beverly Terrace residents trade downtown walkability for serenity, privacy, and space. Highlands Park, Big Canyon Park, and part of Pulgas Ridge Open Space Preserve are all within the neighborhood's boundaries.</p>\n</details>\n<details>\n<summary>What schools serve Beverly Terrace?</summary>\n<p>Children typically attend Heather Elementary, Mariposa Upper Elementary, and Tierra Linda Middle School, all within the San Carlos School District. Part of Beverly Terrace falls within the Carlmont High School boundary, which is well-regarded by local families. Always verify current school assignment for the specific address — boundaries can change.</p>\n</details>\n<details>\n<summary>What kinds of homes are in Beverly Terrace?</summary>\n<p>A wide range — that's part of the appeal. You'll find century-old cabins, pre-war ranch homes, mid-1960s traditionals, and new-construction mini-mansions, sometimes within a few blocks of each other. Prices range from around $1 million for a two-bedroom condo up to $5 million-plus for a large hillside home on a half-acre lot, with most properties falling in the mid-$2 million range.</p>\n</details>\n<details>\n<summary>Is Beverly Terrace walkable to downtown?</summary>\n<p>No. It's roughly two miles from downtown San Carlos, and the hilly terrain makes walking impractical for most residents. Most trips to Laurel Street, Burton Park, or Caltrain are by car. That's the trade-off — you get views and quiet, not walk-to-coffee.</p>\n</details>\n<details>\n<summary>What outdoor amenities does Beverly Terrace have?</summary>\n<p>Four city parks fall within Beverly Terrace, plus access to Pulgas Ridge Open Space Preserve and Highlands Park (the neighborhood's main recreation hub). Big Canyon Park is also right there. If you like trails and open space without driving across town, this is probably the strongest neighborhood for it.</p>\n</details>\n<details>\n<summary>What's commute access like?</summary>\n<p>Highway 280 is close by, which is the main draw for commuters heading south to Silicon Valley or north to San Francisco. Highway 101 and Caltrain are further away, accessed by driving down to El Camino. If you commute by car on 280, Beverly Terrace works well. If you rely on Caltrain, neighborhoods closer to downtown are easier.</p>\n</details>\n<details>\n<summary>What should buyers watch for in Beverly Terrace?</summary>\n<p>The terrain is the main one. Many homes are on hillsides, which can bring drainage, foundation, retaining wall, and slope stability concerns. Get hillside-specific inspections. Also watch for usable yard space — large lots aren't always flat or buildable. Street access varies — some streets are narrow with limited parking.</p>\n</details>\n<details>\n<summary>What should sellers know about Beverly Terrace?</summary>\n<p>Lead with the views, the lot, the privacy, and the outdoor access. Beverly Terrace buyers self-select — they're not the same buyers fighting for walkable Howard Park homes — so emphasize what makes this lifestyle unique. Pre-listing inspections on hillside issues build buyer confidence and reduce surprises during contingencies.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span class=\"blue\">OTHER</span> NEIGHBORHOODs</h3>",
+         "look": {
+          "h3": {
+           "s": 39
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cols": [
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">ALDER MANOR</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/alder-manor/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/alder-manor-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CLEARFIELD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/clearfield-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/clearfield-park-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">CORDES<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/cordes/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/cordes-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">EL SERENO<br/> </p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/el-sereno/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/el-sereno-corte-in-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg"
+        }
+       ]
+      },
+      {
+       "w": "1/5",
+       "items": [
+        {
+         "t": "cta",
+         "title": "",
+         "html": "<p style=\"text-align: center;\">HOWARD PARK</p>",
+         "button": {
+          "text": "Browse Neighborhood",
+          "href": "https://sancarloslife.com/howard-park/"
+         },
+         "bg": "https://sancarloslife.com/wp-content/uploads/howard-park-san-carlos-ca-v.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

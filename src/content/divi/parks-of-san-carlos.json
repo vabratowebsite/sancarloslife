@@ -1,0 +1,2095 @@
+{
+ "slug": "parks-of-san-carlos",
+ "title": "The Beautiful Parks of San Carlos",
+ "wpId": 5204,
+ "modified": "2026-07-08T13:44:53",
+ "sections": [
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h1 style=\"text-align: center;\"><span style=\"color: #0c0c0c;\">Parks &amp; Trails</span></h1>",
+         "look": {
+          "h2": {
+           "f": "label",
+           "tt": "uppercase",
+           "s": 36
+          },
+          "b": {
+           "f": "sans",
+           "w": "400",
+           "c": "white",
+           "s": 77,
+           "ps": 80
+          },
+          "h1": {
+           "f": "sans",
+           "c": "ink-900",
+           "s": 77,
+           "ps": 35
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "hide": [
+    "desktop"
+   ]
+  },
+  {
+   "full": true,
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/1",
+       "items": [
+        {
+         "t": "embed",
+         "src": "https://player.vimeo.com/video/902037960?muted=1&autoplay=1&loop=1&autopause=1&controls=0&dnt=1",
+         "title": "reduced-size-parks-and-trails-cover-video"
+        },
+        {
+         "t": "hero",
+         "title": "Parks and Trails",
+         "subtitle": "",
+         "html": "",
+         "buttons": [],
+         "poster": "https://sancarloslife.com/wp-content/uploads/san-carlos-ca-background-bay-area-view.jpg"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/frank-d-harrington-park-in-howard-park-san-carlos-ca-with-mark-martinho-and-viv-kelvin-photo-by-vabrato-real-estate.png",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<h2>Parks, Scenic Trails, and Floral Gardens</h2>",
+             "look": {
+              "b": {
+               "f": "heading",
+               "w": "400",
+               "c": "ink-500",
+               "s": 35,
+               "ps": 35
+              },
+              "h2": {
+               "f": "heading",
+               "s": 35
+              }
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>If you're an athletic person and you love the outdoors, or if you're simply looking for a nearby place to have your daily exercise routines, San Carlos has dozens of recreational facilities and fun hiking trails to explore.   </p>",
+             "look": {
+              "b": {
+               "s": 17
+              }
+             }
+            }
+           ]
+          },
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>Recreational Parks</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "ink-900",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>San Carlos has a total of nine parks with different sports facilities distributed evenly among neighborhoods. These include playgrounds for all ages, waterplay areas, baseball fields, soccer fields, tennis courts, basketball courts, and more. </p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>Hiking Trails and Nature Preserves</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "ink-900",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>Most hiking trails can be found in Big Canyon, Eaton, North Crestview, and Vista Parks. Shorter trails can be found in Arguello Park and Heather Dog Park. Most trails are well-maintained and equipped with maps, signs, benches, and sometimes descriptions of wildlife and flora nearby.</p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          },
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>Historic Floral Gardens</p>",
+             "look": {
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "ink-500",
+               "s": 35
+              }
+             }
+            },
+            {
+             "t": "text",
+             "html": "<p>There are a couple of historic gardens a few minutes' drive away from San Carlos. These gardens date back to the early or mid-1900s, and often display unusual flora. The gardens are Filoli Garden, Arizona Cactus Garden, Allied Arts Guild. Filoli by far is the best.</p>",
+             "look": {
+              "m": {
+               "bl": 1,
+               "blc": "teal-700"
+              }
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "start"
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3 style=\"text-align: center;\"><span style=\"color: #12aa9b;\">PARKS OF </span>SAN CARLOS</h3>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Use the map below to find facilities in each park. Click on the icons to read descriptions, and to find directions to the place via Google Maps.</p>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "map",
+         "id": "32"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Arguello Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>260 Wellington Dr, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/VdXSB6LghnQ8JyJ46\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Arguello Park is a 21-acre recreational facility located in the quiet suburbs of Cordes. Amenities include a fenced-in playground, baseball diamond, soccer field, tennis courts, picnic tables and BBQs, plus a snack shack, and restrooms.</p>\n<p>On the side, the park also has interesting hiking trails along the hillside where small boulders and trees with low-hanging branches can be found - perfect for rock and tree-climbing for families. Sometimes wild deer can be seen loitering nearby.</p>\n<p>Facilities are available for <a href=\"#scprd\">reservation</a>.</p>\n<p> </p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Baseball Diamond (1)<br/>\nTennis Courts (4)<br/>\nSoccer Fields (2)<br/>\nPlaygrounds<br/>\nPicnic Tables and BBQ<br/>\nSnack Shack<br/>\nRestrooms<br/>\nHiking Trails</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/arguello-park-at-cordes-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": "Arguello Park Cordes San Carlos Ca 94070"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/arguello-park-in-cordes-san-carlos-ca-photo-from-city-of-san-carlos-official-website.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/arguello-park-playground-in-cordes-san-carlos-ca-photo-by-vabrato-real-estate-s.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/arguello-park-tennis-court-at-cordes-san-carlos-ca-photo-from-city-of-san-carlos-official-facebook-page.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/arguello-park-in-cordes-san-carlos-ca-photo-from-city-of-san-carlos-official-website.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Big Canyon Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>3190 Brittan Ave, San Carlos, CA 94070, USA. <a href=\"https://goo.gl/maps/aVUcwsAkEobcdruPA\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Big Canyon Park is a nature preserve located within the suburbs of Beverly Terrace. It has one rugged, narrow hiking trail that loops around the park and passes through both flat and inclined terrains, taking you through some wooden bridges, shady forest areas, and amazing views of the bay area up top. Different species of wildflowers can be found as you walk along.</p>\n<p>The trail at Big Canyon Park is generally an easy hike of about 3 miles which could be perfect for a daily walking routine. Free parking space is available, as well as convenient street parking on all sides. Paths and bridges are well maintained, and there is a map displayed at the entrance, signs, and benches along the path. There are no bathrooms and water fountains so be prepared, although you'll find those in Crestview Park just a short walk away from the entrance at Crestview Drive.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Hiking Trails<br/>Clear and Narrow Paths<br/>Wooden Bridges<br/>Amazing Views<br/>Wildflowers<br/>Street Parking<br/>Signs and Maps<br/>Benches</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-at-beverley-terrace-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-at-beverley-terrace-at-san-carlos-ca-photo-by-vabrato-real-estate-a.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-at-beverley-terrace-at-san-carlos-ca-photo-by-vabrato-real-estate-b.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-at-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-and-eaton-park-map-a-beverley-terrace-and-alder-manor-san-carlos-ca.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-1.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": "San Carlos Explorers Eaton Park"
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/big-canyon-park-at-beverley-terrace-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Burton Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>900 Chestnut St, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/DEsRQwXp4iKzqoZx6\" rel=\"noopener\" target=\"_blank\">Google Maps</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Burton Park is the oldest park in San Carlos. Conveniently located near downtown, it's where most community activities occur - from parades to festivals, movie nights, music concerts, camp-outs, and more.</p>\n<p>Burton Park also has the most facilities of any area, which includes the usual soccer fields, tennis courts, softball and baseball diamonds, basketball courts, playgrounds with sand pits, picnic tables with BBQs, restrooms; and in addition, horseshoe pits, an amphitheater, bocce ball courts. All these facilities are surrounded by well-maintained grass lawns, scattered with shady mature trees.</p>\n<p>The Youth Center is also found within Burton Park, and restaurants at Laurel Street are just a short walk away. Various facilities are available for <a href=\"#scprd\">reservation</a>. </p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Basketball Courts (2)<br/>\nTennis Courts (3)<br/>\nBocce Ball Courts (3)<br/>\nSoccer Fields (2)<br/>\nBaseball Diamond<br/>\nSoftball Diamond<br/>\nStadium Bleachers<br/>\nPicnic Tables and BBQ<br/>\nHorseshoe Pits<br/>\nPlaygrounds<br/>\nWater Splashpad<br/>\nSand Bars</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-playground-in-howard-park-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page-g.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-totlot-in-howard-park-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-in-howard-park-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-soccer-field-at-howard-park-in-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-basketball-court-at-howard-park-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-tennis-court-at-howard-park-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-bocce-ball-at-howard-park-in-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-flanagan-field-in-howard-park-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page-f.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": "Summer Camp Fair"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-1.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/burton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-3.jpg",
+           "alt": "Yoga for Every Body"
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/11/movies-in-the-park-at-burton-park-san-carlos-ca-photo-by-san-carlos-parks-and-recreation-dept.jpg",
+         "alt": "Movies In The Park",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Chilton Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>48 Bay Vw Dr, San Carlos, CA 94070, USA. <a href=\"https://goo.gl/maps/EbhKpLDj5ZMESYXJ6\" rel=\"noopener\" target=\"_blank\">Google Maps</a>.</p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Chilton Park is an open space along Bay View Drive - a grassy area with scattered trees, bushes, and rock formations.  Located in the Cordes Neighborhood, the park is surrounded by homes on every side and can be accessed via Bay View Drive, Sequoia Ct, and Chilton Ave.</p>\n<p>Amenities in Chilton Park include seated boulders, a trash receptacle with bag dispenser, a water fountain, and a couple of wooden play structures - up and over net, stilts, and a parkour - all for kids ages 5-12.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Grasslands<br/>\nBoulder Landscapes<br/>\nA Few Trees<br/>\nSeated Boulders<br/>\nWooden Play Structures<br/>\nWater Fountain</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-in-san-carlos-ca-photo-from-google-maps-b.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-in-san-carlos-ca-photo-from-google-maps-a.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-1.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/chilton-park-photo-from-google-maps.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>City Hall Dog Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>1401 San Carlos Ave, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/fbeYEB5T3HzEcTFv9\" rel=\"noopener\" target=\"_blank\">Google Maps</a>.</p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>The City Hall Dog park is located just beside the San Carlos City Hall and the San Carlos Adult Community Center. Surrounded by commercial space and residential complexes, the City Hall Park its a breath of fresh air within downtown. The location provides easy access for dog owners to give their pets some play time.</p>\n<p>The whole park is fully fenced and covered in granite and soil. <span>Mature trees, from pines to oaks and other flowering trees, even a towering palm tree in the middle, provide shade a create beautiful scenery. Benches are scattered all over the park to provide resting space for exhausted owners. On its perimeter, outside the dog fence, the park is surrounded by bright green grass, clean and well-mowed. </span>You'll be sure that your dog will enjoy this park together with other dogs.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Dog Play Structures<br/>\nFully-fenced<br/>\nPicnic Tables<br/>\nDirt Ground<br/>\nBenches<br/>\nUnique Trees</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/city-hall-dog-park-photo-from-city-of-san-carlos-official-website.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/city-hall-dog-park-in-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/city-hall-dog-park-photo-from-google-maps.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/city-hall-dog-park-photo-from-city-of-san-carlos-official-website.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Crestview park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>1000 Crestview Dr, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/bPwpkCqDBgwkR7AD6\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Crestview Park is a small green space located within the quiet vicinities of Beverley Terrace, just beside Big Canyon and Eaton Parks where the hiking trails are.</p>\n<p>Facilities in the park include two semi-fenced playgrounds for toddlers and older children, picnic tables with BBQs, restrooms, a drinking fountain, a basketball court, and a soccer field encircled by a rubber track. The parking space, which accommodates up to 12 vehicles, is usually full during the weekends. The playgrounds are equipped with sand pits, a small trampoline, slides and swings for different ages.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Soccer Field<br/>\nBasketball Court<br/>\nRubber Track<br/>\nPlaygrounds for All Ages<br/>\nPicnic Tables and BBQs<br/>\nRestrooms</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/crestview-park-in-beverley-terraces-san-carlos-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/crestview-park-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/crestview-park-in-beverley-terraces-san-carlos-photo-from-google-maps-1.jpg",
+           "alt": "Star Gazing"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/crestview-park-in-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/crestview-park-photo-from-google-maps.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/crestview-park-in-san-carlos-ca-photo-from-google-maps.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Eaton Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>3000 Eaton Ave, San Carlos, CA 94070, USA. <a href=\"https://goo.gl/maps/yaoQGRijygK2rNb26\" rel=\"noopener\" target=\"_blank\">Google Maps</a>.</p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Eaton Park is a small nature preserve connected to Big Canyon Park on the eastside. Located within Alder Manor, this park provides short hiking trails that run through a mix of flat and mildly rugged terrain - great for daily exercise routines or fun nature treks with family. Note that some paths run along steep hillsides and may not be suitable for very young children.</p>\n<p>The wooden bridges, steps, the trees along the paths with sometimes low-hanging branches, and the unusual flora you'll find if you are observant enough, all make for an interesting adventure. Upon reaching the summit, you'll find a labyrinth and gorgeous views of the San Carlos residences, bay and canyons.</p>\n<p>The trails are equipped with trail heads, directional signs and entrance kiosks with trail maps. Parking space is available all around the park, in dedicated areas and on the side of the streets. There are no water fountains and restrooms, so be prepared ahead of your hike.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Hiking Trails<br/>\nClear Paths<br/>\nWooden Bridges<br/>\nWild Flora<br/>\nAmazing Views<br/>\nLabyrinth<br/>\nTrail Maps and Signs<br/>\nStreet Parking</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-in-alder-manor-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-in-alder-manor-san-carlos-ca-photo-from-google-maps-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-in-alder-manor-san-carlos-ca-photo-from-google-maps-by-steve-hsu.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/eaton-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page-1.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Frank D Harrington Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>3000 Eaton Ave, San Carlos, CA 94070, USA. <a href=\"https://goo.gl/maps/ba8wBvcc2Zj1NFcU6\" rel=\"noopener\" target=\"_blank\">Google Maps</a>.</p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Formerly known as Laurel Street Park, Frank D. Harrington Park was renamed 2015 as it is now after the passing of Frank Harrington, a 40-year resident and longtime volunteer in San Carlos. In his lifetime, he served in the military, worked as a postal carrier, Reserve Deputy for the Sheriff's Office of San Mateo, and Reserve Officer for the San Carlos Police Department. He spent 19 years as a Community Service Officer in San Carlos. Known in San Carlos as \"Frank\", he greeted everyone by name.</p>\n<p>Probably the smallest park in San Carlos, Frank D. Harrington Park has but a few small benches, a small stage, and some trees to provide shade. Its purpose is to be a resting place for shoppers on Laurel Street. At night, the park is lit up by sparkling lights wrapped around the trees.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Small Stage<br/>\nPicnic Tables<br/>\nBenches<br/>\nConcrete Paths<br/>\nGrass Patches<br/>\nSmall Monument<br/>\nNight Lights<br/>\nCity Guide</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-frank-d-harrington-park-in-howard-park-san-carlos-ca-photo-from-vabrato-real-estates.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/frank-d-harrington-park-in-howard-park-san-carlos-ca-photo-from-vabrato-real-estates.jpg",
+           "alt": "Harringtunes"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/frank-d-harrington-park-in-howard-park-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/mark-martinho-and-viv-kelvin-at-frank-d-harrington-park-in-howard-park-san-carlos-ca-photo-from-vabrato-real-estates.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>HEATHER DOG EXERCISE AREA</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>2757 Melendy Dr, San Carlos, CA 94070, USA. <a href=\"https://goo.gl/maps/ksgNvUB1GrMDP91i9\" rel=\"noopener\" target=\"_blank\">Google Maps</a>.</p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Heather Dog Exercise Park is located west of Heather School on Melendy Drive. Parking is available at Heather School. The area is only partially fenced, and owners are generally advised to put their dogs on leashes unless they can come on command.</p>\n<p>The two-acre area has a couple of hiking trails lined with bushes and trees, running along a hillside. There is a flat area covered in dirt and sand which is perfect for dogs to play in.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>With Parking<br/>\nPartially Fenced<br/>\nHiking Trails<br/>\nFlat Area for Dogs</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/heather-dog-exercise-park-at-beverley-terrace-at-san-carlos-ca-photo-from-city-of-san-carlos-official-website.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/heather-dog-exercise-park-at-beverley-terrace-at-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/heather-dog-exercise-area-photo-from-google-maps.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/heather-dog-exercise-park-at-beverley-terrace-at-san-carlos-ca-photo-from-city-of-san-carlos-official-website.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Highlands Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>3000 Eaton Ave, San Carlos, CA 94070, USA. <a href=\"https://goo.gl/maps/KYmtCWEqCo9K6WzE9\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Highlands Park is found at the corner of Melendy and Aberdeen drives, in the neighborhood of Beverly Terrace. It houses several sports facilities - most of which are lighted, which makes it perfect for evening athletics. The park has two lighted softball diamonds, two full-size soccer field, five lighted tennis courts and a jogging path. Picnic tables, fully-fenced playgrounds and restrooms are also scattered around the park.</p>\n<p>On a highlight, the soccer field is made of \"almost real\" artificial grass that is crisp and clean all year round. Facilities are available for <a href=\"#scprd\">reservation</a>.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Softball Diamonds (2)<br/>\nTennis Courts (5)<br/>\nSoccer Fields (2)<br/>\nPicnic Tables<br/>\nFully-Fenced Playgrounds<br/>\nJogging Paths<br/>\nRestrooms<br/>\nWater Fountains</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-at-beverley-terrace-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-stadium-in-beverley-terrace-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-tennis-court-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-soccer-field-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate-a.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-restrooms-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-baseball-field-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-soccer-field-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/highlands-park-at-beverley-terrace-san-carlos-ca-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+         "alt": "",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Hillcrest Circle Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>280 Hillcrest Rd, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/oiExXxYT1eXJGP528\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Hillcrest Circle park is a small green \"island\" encircled by Hillcrest Road and Highland Avenue, located within Cordes neighborhood. It is a fully-fenced area with a single playground, basketball court, cemented paths for skating, as well as a couple of picnic tables under the shade of a few trees. This park is perfect for residences looking for a near enough park for their kids to play in.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Basketball - Halfcourt<br/>\nPlayground<br/>\nFully-fenced Park<br/>\nConcrete Paths<br/>\nPicnic Tables</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/11/viv-kelvin-and-mark-martinho-at-hillcrest-circle-park-at-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg",
+           "alt": "Viv Kelvin and Mark Martinho at Hillcrest Circle Park at San Carlos CA. Photo by Vabrato Real Estates Services"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/hillcrest-circle-park-in-cordes-san-carlos-ca-photo-from-google-maps-4.jpg",
+           "alt": "Hillcrest Circle Park Cordes San Carlos CA 94070"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/hillcrest-circle-park-in-cordes-san-carlos-ca-photo-from-google-maps-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/hillcrest-circle-park-in-cordes-san-carlos-ca-photo-from-google-maps-3.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/hillcrest-circle-park-in-cordes-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/11/viv-kelvin-and-mark-martinho-at-hillcrest-circle-park-at-san-carlos-ca-photo-by-vabrato-real-estates-services.jpg",
+         "alt": "Viv Kelvin and Mark Martinho at Hillcrest Circle Park at San Carlos CA. Photo by Vabrato Real Estates Services",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Laureola Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p><span>503 Old County Rd, San Carlos, CA 94070, United States</span>. <a href=\"https://goo.gl/maps/jpyEFXfzXvTqTi1r6\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Laureola Park is a 2.6-acre park which used to be the site of Laureola School.</p>\n<p>Located in Clearfield Park, Laureola is just two blocks away from San Carlos Downtown and is the only park eastside of El Camino Real. Surrounded and hidden by lines of houses and commercial buildings on almost every side, the only street that borders this park is Bayport Ave, where there is parking space available (two other narrow entrances are from Old County Road and Holly Street).</p>\n<p>Amenities in the park include a baseball diamond with bleachers on the side, two soccer fields, a basketball court, two fully-fenced playgrounds (one for toddlers and one for older kids), a splash pad, murale, and scattered tree-lined picnic areas with BBQs. Since Burton Park has more draw than Laureola, the park is generally more peaceful and quiet; although the field is frequented by annual school soccer tournaments and little league games.</p>\n<p>Facilities are available for <a href=\"#scprd\">reservation</a>.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Baseball Diamond<br/>\nBleachers<br/>\nBasketball Court<br/>\nSoccer Fields(2)<br/>\nPlayground for Toddlers<br/>\nPlayground for Kids<br/>\nWater Splashpad<br/>\nPicnic Tables and BBQs</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-sign-clearfield-park-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-parking-clearfield-park-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-murale-clearfield-park-at-san-carlos-ca-photo-by-vabrato-real-estate-a.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-murale-clearfield-park-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-playground-clearfield-park-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-ball-diamond-clearfield-park-at-san-carlos-ca-photo-by-vabrato-real-estate.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-at-clearfield-park-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/laureola-park-photo-from-san-carlos-parks-and-recreation-department-facebook-page.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/09/laureola-park-car-parking-space-at-clearfield-park-san-carlos-ca-photo-by-vabrato-real-estate-services.jpg",
+         "alt": "Laureola Park",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>North Crestview Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>400 Crestview Dr, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/ccdTgfcE8nnBSd8B9\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>North Crestview Park is 4.3 acres (about three football fields) of wildlife and natural preserve with walking trail leading to Vista park - San Carlos’ highest summit at around 860 feet, and housing the San Francisco Watershed on the west.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Grasslands<br/>\nScattered Trees<br/>\nWild Flora and Fauna<br/>\nHiking Trails<br/>\nBeside Vista Park<br/>\nSpectacular Views</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/north-crestview-park-beverley-terraces-san-carlos-ca-photo-from-google-maps.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/north-crestview-park-in-beverley-terrace-san-carlos-ca-photo-from-city-of-san-carlos-official-website-b.jpg",
+           "alt": "North Crestview Park Beverly Terrace San Carlos CA 94070"
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/north-crestview-park-in-beverley-terrace-san-carlos-ca-photo-from-city-of-san-carlos-official-website-b.jpg",
+         "alt": "North Crestview Park Beverly Terrace San Carlos CA 94070",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Vista Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>400 Crestview Dr, San Carlos, CA 94070, United States. <a href=\"https://goo.gl/maps/1Nt7hUJhyDxqh4JQ8\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Vista Park is a 3.8 acre nature preserve on the highest summit in San Carlos. As the name suggests, the park offers one of the most spectacular views of the SF Peninsula and the bay. Benches and picnic tables are available for those who want sit around, relax and enjoy the view. On the side of the park, you will find a trail that runs along the hillside where flowering trees and native flora abound. These bushes are labeled with names and descriptions, making your walk a fun learning experience.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Spectacular Views<br/>\nHiking Trails<br/>\nWild Flora<br/>\nPicnic Tables<br/>\nBenches</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-from-city-of-san-carlos-official-website.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate-1.jpg",
+           "alt": "Vista Park, in Beverley Terrace, San Carlos CA. Photo by Vabrato Real Estate 1"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-from-google-maps-from-richie-hawkesworth-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-by-vabrato-real-estates-3.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-by-vabrato-real-estates-4.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-from-google-maps-from-richie-hawkesworth.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-from-google-maps-1.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-by-vabrato-real-estates-1.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-beverley-terraces-san-carlos-ca-photo-by-vabrato-real-estates-2.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/vista-park-in-beverley-terrace-san-carlos-ca-photo-by-vabrato-real-estate-1.jpg",
+         "alt": "Vista Park, in Beverley Terrace, San Carlos CA. Photo by Vabrato Real Estate 1",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Pulgas Ridge</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Redwood City, CA 94062. <a href=\"https://goo.gl/maps/pZAeJbfGdDxjn4cz5\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>Pulgas Ridge Open Space Preserve is a 366-acre site near the City of San Carlos with trails for hiking and walking one’s dog, including an off-leash area. The preserve’s six miles of trails offers access to cool canyons and a ridge top with views toward the bay and surrounding hillsides.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Spectacular Views<br/>\nHiking Trails<br/>\nWild Flora<br/>\nPicnic Tables<br/>\nRestrooms</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/pulas-ridge-near-san-carlos-ca-photo-from-the-official-website-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/pulas-ridge-near-san-carlos-ca-photo-from-the-official-website-1.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/pulas-ridge-near-san-carlos-ca-photo-from-the-official-website-4.jpg",
+           "alt": "Pulas Ridge near San Carlos CA. Photo from the Official Website 4"
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/pulas-ridge-near-san-carlos-ca-photo-from-the-official-website-3.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/10/pulas-ridge-near-san-carlos-ca-photo-from-the-official-website-b.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/pulas-ridge-near-san-carlos-ca-photo-from-the-official-website-4.jpg",
+         "alt": "Pulas Ridge near San Carlos CA. Photo from the Official Website 4",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "divider"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<p>Edgewood Park</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>10 Old Stage Coach Rd, Redwood City, CA 94062, United States. <a href=\"https://goo.gl/maps/M2xbGzpfgkSHMLbs7\" rel=\"noopener\" target=\"_blank\">Google Maps.</a></p>",
+         "look": {
+          "m": {
+           "bl": 1,
+           "blc": "teal-700"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>The serpentine grasslands of Edgewood Park and Natural Preserve are famous for their magnificent displays of wildflowers each spring. The park's location, within easy access to Interstate 280 and Edgewood Road, makes this beautiful display readily accessible to the population centers of the San Francisco Peninsula. The Park's 467 acres of woodlands and grasslands afford wonderful hiking and sightseeing opportunities.</p>\n<p>Edgewood Park and Natural Preserve contain ten miles of trails that explore its varied habitats. Most are open for equestrian use. Sylvan Trail, a non-equestrian-use trail, is popular for joggers and hikers.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p>Spectacular Views<br/>Hiking Trails<br/>Equestrian Trails<br/>Wild Flora<br/>Picnic Tables<br/>Restrooms</p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "gallery",
+         "images": [
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/04/edgewood-park-and-natural-preserve-near-san-carlos-ca-photo-from-govt-of-san-mateo-website-4.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/04/edgewood-park-and-natural-preserve-near-san-carlos-ca-photo-from-govt-of-san-mateo-website-3.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/04/edgewood-park-and-natural-preserve-near-san-carlos-ca-photo-from-govt-of-san-mateo-website-2.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/04/edgewood-park-and-natural-preserve-near-san-carlos-ca-photo-from-govt-of-san-mateo-website-c.jpg",
+           "alt": ""
+          },
+          {
+           "src": "https://sancarloslife.com/wp-content/uploads/2022/04/edgewood-park-and-natural-preserve-near-san-carlos-ca-photo-from-govt-of-san-mateo-website.jpg",
+           "alt": ""
+          }
+         ],
+         "slider": true
+        },
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/edgewood-park-nature-preserve-photo-from-san-mateo-official-website-e.jpg",
+         "alt": "Edgewood Park Nature Preserve. Photo from San Mateo Official Website e",
+         "href": "",
+         "hide": [
+          "desktop"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2024/07/Mark-and-Viv-Vabrato-2024-Cropped.jpg",
+         "alt": "",
+         "href": ""
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "text",
+         "html": "<h3>Thinking of buying or<span class=\"blue\"> selling a home?</span></h3>",
+         "look": {
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "divider"
+        },
+        {
+         "t": "text",
+         "html": "<p><span>Seek people who will put their full effort into representing your interests, treat you like a person and not a transaction, and experts who are well-respected in their profession. </span></p>\n<p><span>With over 30 years of combined experience and 95% of their clients coming from referrals, Mark and Viv take great pride and joy in exceeding your expectations.</span></p>",
+         "look": {
+          "b": {
+           "s": 17
+          }
+         }
+        },
+        {
+         "t": "button",
+         "text": "Contact US",
+         "href": "https://sancarloslife.com/one-of-the-best-realtor-teams-in-san-carlos-ca/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "4/4",
+       "items": [
+        {
+         "t": "text",
+         "html": "<section class=\"scl-faq\">\n<p class=\"scl-label\">PARKS &amp; <span class=\"navy\">TRAILS</span></p>\n<details>\n<summary>What are the best parks in San Carlos?</summary>\n<p>It depends on what you want to do. Burton Park is the city's community hub — events, fields, playground. Arguello and Laureola are good for picnics and casual hangs. Highlands has athletic facilities. Big Canyon and Vista Park are where you go when you actually want to hike.</p>\n</details>\n<details>\n<summary>Which San Carlos park is best for families?</summary>\n<p>Burton Park is the default — big playground, room to run, restrooms, regular events. Arguello, Laureola, and Highlands also have strong playgrounds and family setups. Check current amenities and reservation rules before planning a birthday party there.</p>\n</details>\n<details>\n<summary>Are there hiking trails in San Carlos?</summary>\n<p>Yes. Big Canyon Park, North Crestview, Vista Park, and Eaton Park all have trails with varying difficulty. Hillside neighborhoods give you direct trailhead access. For longer hikes, Edgewood and Pulgas Ridge are a short drive away.</p>\n</details>\n<details>\n<summary>Are there dog-friendly parks?</summary>\n<p>Heather Dog Exercise Area is the dedicated off-leash spot most locals know. Most other parks are on-leash. Check current rules and conditions before going — fencing, parking, and posted hours can change.</p>\n</details>\n<details>\n<summary>Can I reserve park facilities?</summary>\n<p>Some facilities can be reserved through the City of San Carlos. Availability, fees, and permit rules change, so confirm with the city before locking in a date for an event.</p>\n</details>\n<details>\n<summary>Which neighborhoods are closest to parks?</summary>\n<p>Howard Park is essentially next to Burton Park. Clearfield Park is close to Laureola. Hillside neighborhoods on the west side put you closer to trailheads at Big Canyon and Eaton. Most San Carlos neighborhoods have a park within easy walking distance — it's part of the city's design.</p>\n</details>\n<details>\n<summary>Why do parks matter when buying a home here?</summary>\n<p>Daily life. The park you walk to most weeks shapes your routine more than the one you visit twice a year. Proximity affects how often you actually use it, and that affects how you'll feel about the neighborhood after a couple of years.</p>\n</details>\n</section>"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "cols": [
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "image",
+         "src": "https://sancarloslife.com/wp-content/uploads/2022/10/city-of-san-carlos-ca-logo.png",
+         "alt": "",
+         "href": ""
+        },
+        {
+         "t": "text",
+         "html": "<p>San Carlos Parks and Recreation Department</p>",
+         "look": {
+          "b": {
+           "f": "label",
+           "w": "400",
+           "c": "ink-900",
+           "s": 35
+          },
+          "m": {
+           "ta": "center"
+          }
+         }
+        },
+        {
+         "t": "text",
+         "html": "<p>The San Carlos Parks &amp; Recreation promotes well-being and enhances the quality of life for local residents through a range of parks, facilities, and educational and entertainment programs and services.  We are focused on creating recreational opportunities that bring friends and families together to have fun and build lasting memories in the City of Good Living.</p>"
+        },
+        {
+         "t": "text",
+         "html": "<p><strong>Visit</strong> | <a href=\"https://goo.gl/maps/WVoUAQeXrdHWxFXW7\" rel=\"noopener\" target=\"_blank\"><span class=\"dsm_icon_list_text\">600 Elm St, San Carlos, CA, United States, California</span></a><br/><strong>Call</strong> | <a href=\"tel:+16508024382\" rel=\"noopener\" target=\"_blank\"><span class=\"dsm_icon_list_text\">+1 650-802-4382</span></a><br/><strong>Email</strong> | <a href=\"mailto:recreation@cityofsancarlos.org\"><span class=\"dsm_icon_list_text\">recreation@cityofsancarlos.org</span></a></p>"
+        }
+       ]
+      },
+      {
+       "w": "1/2",
+       "items": [
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>CONTACT</p>",
+             "look": {
+              "m": {
+               "ta": "center"
+              },
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "white",
+               "s": 26
+              },
+              "h1": {
+               "c": "teal-700"
+              }
+             }
+            },
+            {
+             "t": "button",
+             "text": "Picnic and Facility Rentals",
+             "href": "https://anc.apm.activecommunities.com/sancarlos/reservation/search"
+            },
+            {
+             "t": "button",
+             "text": "Recreation Fee Assistance",
+             "href": "https://www.cityofsancarlos.org/city_hall/departments_and_divisions/parks_and_recreation/registration/recreation_fee_assistance_program.php"
+            },
+            {
+             "t": "button",
+             "text": "Monthly Newsletter",
+             "href": "https://lp.constantcontactpages.com/su/4Kt8rJT/News"
+            },
+            {
+             "t": "button",
+             "text": "Other Links",
+             "href": "https://linktr.ee/scparksandrec"
+            }
+           ]
+          },
+          {
+           "w": "1/4",
+           "items": [
+            {
+             "t": "text",
+             "html": "<p>ACTIVITIES</p>",
+             "look": {
+              "m": {
+               "ta": "center"
+              },
+              "b": {
+               "f": "label",
+               "w": "400",
+               "c": "white",
+               "s": 26
+              },
+              "h1": {
+               "c": "teal-700"
+              }
+             }
+            },
+            {
+             "t": "button",
+             "text": "Activity Guide",
+             "href": "https://www.cityofsancarlos.org/city_hall/departments_and_divisions/parks_and_recreation/registration/index.php"
+            },
+            {
+             "t": "button",
+             "text": "Adult Community Center",
+             "href": "https://www.cityofsancarlos.org/government/departments/active-adults-new"
+            },
+            {
+             "t": "button",
+             "text": "Youth Community Center",
+             "href": "https://www.cityofsancarlos.org/government/departments/youth-new"
+            },
+            {
+             "t": "button",
+             "text": "Sports Activities",
+             "href": "https://www.cityofsancarlos.org/government/departments/sports-new"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "t": "row",
+         "cols": [
+          {
+           "w": "4/4",
+           "items": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "id": "scprd",
+   "bg": "https://sancarloslife.com/wp-content/uploads/filoli-gardens-6.jpg"
+  }
+ ]
+}

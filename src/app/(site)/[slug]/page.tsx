@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { DeskPageView } from "@/components/content/DeskPageView";
+import { DiviPage } from "@/components/divi/DiviPage";
+import { diviLayout } from "@/lib/divi/layouts";
 import { PostView } from "@/components/content/PostView";
 import { StaticPageView } from "@/components/content/StaticPageView";
 import { NeighborhoodView } from "@/components/realestate/NeighborhoodView";
@@ -19,11 +21,15 @@ import { JsonLd } from "@/components/seo/JsonLd";
 /**
  * Root-level URLs, exactly as on WordPress: blog posts (/<post-slug>/), code
  * pages (src/content/pages), desk pages and the six neighborhood pages share
- * one namespace. Lookup order: post, code page, desk page, neighborhood.
+ * one namespace. Lookup order: WordPress layout page (src/content/divi), post, code page,
+ * desk page, neighborhood.
  */
 type Props = { params: Promise<{ slug: string }> };
 
 async function resolve(slug: string) {
+  // Pages kept exactly as laid out on WordPress (sections, order, photos).
+  const layout = diviLayout(slug);
+  if (layout) return { kind: "divi" as const, layout };
   const post = await getPostBySlug(slug);
   if (post) return { kind: "post" as const, post };
   const page = staticPage(slug);
@@ -40,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const hit = await resolve(slug);
   if (!hit) return {};
   const path = `/${slug}/`;
+  if (hit.kind === "divi") return metadataFromPage(slug, { title: hit.layout.title });
   if (hit.kind === "post")
     return buildMetadata({
       path,
@@ -71,6 +78,16 @@ export default async function RootSlugPage({ params }: Props) {
   const { slug } = await params;
   const hit = await resolve(slug);
   if (!hit) notFound();
+  if (hit.kind === "divi") {
+    // Neighborhood pages keep their Buying Buddy filter from the admin.
+    const [seo, hood] = await Promise.all([getPageSeo(slug), getNeighborhoodBySlug(slug)]);
+    return (
+      <>
+        <DiviPage layout={hit.layout} filterId={hood?.bbFilterId ?? null} />
+        {seo?.jsonLd ? <JsonLd data={seo.jsonLd} /> : null}
+      </>
+    );
+  }
   if (hit.kind === "post") return <PostView post={hit.post} />;
   if (hit.kind === "desk") return <DeskPageView page={hit.desk} />;
   if (hit.kind === "page") {
