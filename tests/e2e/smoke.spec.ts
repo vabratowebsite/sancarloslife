@@ -21,6 +21,12 @@ const PAGES = [
   "/restaurants-and-services/all-restaurants/",
   "/parks-of-san-carlos/",
   "/history-of-san-carlos/",
+  // The other pages rebuilt from their WordPress layouts.
+  "/living-in-san-carlos-ca-the-complete-guide/",
+  "/restaurants-and-services/",
+  "/attractions/",
+  "/events-and-activities/",
+  "/alder-manor/",
   "/videos-of-san-carlos-ca/",
   "/contact-us/",
   "/subscribe/",
@@ -33,6 +39,7 @@ const PAGES = [
   "/boots-blue-jeans-bbq-returns-to-san-carlos/",
   "/event/poinsettia-in-pastels-holiday/",
   "/restaurant/888-ristorante-italiano/",
+  "/store/the-reading-bug/",
 ];
 
 for (const path of PAGES) {

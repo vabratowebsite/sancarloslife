@@ -77,7 +77,20 @@ export function SiteMap({ polygons, markers = [], height = 560, label }: { polyg
     const nz = Math.min(18, Math.max(11, z + d));
     setOffset((o) => ({ x: o.x * 2 ** (nz - z), y: o.y * 2 ** (nz - z) }));
     setZoom(nz);
+    setOpen(null);
   };
+
+  // Pins closer than 34px are grouped into one numbered button (opens a list), so every
+  // target keeps the 24px size and spacing WCAG 2.5.8 asks for; none sit under the zoom buttons.
+  const clusters: { x: number; y: number; items: MapMarker[] }[] = [];
+  for (const m of markers) {
+    const [x, y] = px(m.lat, m.lng);
+    if (x < 14 || y < 30 || x > width - 14 || y > height - 4) continue;
+    if (x > width - 64 && y < 112) continue; // behind the zoom buttons
+    const near = clusters.find((c) => Math.hypot(c.x - x, c.y - y) < 34);
+    if (near) near.items.push(m);
+    else clusters.push({ x, y, items: [m] });
+  }
 
   return (
     <div className="not-prose">
@@ -145,29 +158,31 @@ export function SiteMap({ polygons, markers = [], height = 560, label }: { polyg
               );
             })}
         </svg>
-        {markers.map((m, i) => {
-          const [x, y] = px(m.lat, m.lng);
-          if (x < -20 || y < -20 || x > width + 20 || y > height + 20) return null;
-          return (
-            <div key={i} className="absolute" style={{ left: x, top: y, transform: "translate(-50%, -100%)" }}>
-              <button
-                type="button"
-                className="grid h-6 w-6 place-items-center rounded-full border-2 border-white bg-teal-700 text-[10px] font-bold text-white shadow-card focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-900"
-                aria-label={m.title}
-                aria-expanded={open === i}
-                onClick={() => setOpen(open === i ? null : i)}
-              >
-                •
-              </button>
-              {open === i && (
-                <div className="absolute bottom-8 left-1/2 z-10 w-56 -translate-x-1/2 rounded-card bg-white p-3 text-left text-sm shadow-card">
-                  <p className="font-bold text-ink-900">{m.title}</p>
-                  {m.address && <p className="text-ink-500">{m.address}</p>}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {clusters.map((c, i) => (
+          <div key={i} className="absolute" style={{ left: c.x, top: c.y, transform: "translate(-50%, -100%)" }}>
+            <button
+              type="button"
+              className="grid h-6 min-w-6 place-items-center rounded-full border-2 border-white bg-teal-700 px-1 text-[11px] font-bold leading-none text-white shadow-card focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-900"
+              aria-label={c.items.length === 1 ? c.items[0].title : `${c.items.length} places: ${c.items.map((m) => m.title).join(", ")}`}
+              aria-expanded={open === i}
+              onClick={() => setOpen(open === i ? null : i)}
+            >
+              {c.items.length === 1 ? "•" : c.items.length}
+            </button>
+            {open === i && (
+              <div className="absolute bottom-8 left-1/2 z-10 max-h-64 w-60 -translate-x-1/2 overflow-y-auto rounded-card bg-white p-3 text-left text-sm shadow-card">
+                <ul className="space-y-2">
+                  {c.items.map((m) => (
+                    <li key={m.title}>
+                      <p className="font-bold text-ink-900">{m.href ? <a href={m.href} className="text-teal-700 underline">{m.title}</a> : m.title}</p>
+                      {m.address && <p className="text-ink-500">{m.address}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))}
         <div className="absolute right-3 top-3 flex flex-col overflow-hidden rounded-md bg-white shadow-card">
           <button type="button" className="h-9 w-9 text-lg text-ink-900 hover:bg-teal-50" onClick={() => zoomBy(1)} aria-label="Zoom in">
             +

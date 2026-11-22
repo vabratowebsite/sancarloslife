@@ -40,8 +40,28 @@ const NEIGHBORHOODS: Record<string, string> = {
 const vis = (hide?: string[]) =>
   hide?.includes("desktop") && hide.includes("phone") ? "hidden" : hide?.includes("desktop") ? "md:hidden" : hide?.includes("phone") ? "hidden md:block" : "";
 
+/** Contrast of a text color against white (WCAG relative luminance). */
+function contrastOnWhite(hex: string): number {
+  const h = hex.length === 3 ? [...hex].map((c) => c + c).join("") : hex;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 1.05 / (0.2126 * r + 0.7152 * g + 0.0722 * b + 0.05);
+}
+
+/**
+ * WordPress text sometimes carries light inline colors (#888 grey, #66b2b2 teal) that are fine
+ * at the old site's large desktop sizes but fail WCAG AA once text shrinks on phones. Those
+ * become the nearest token that passes: teal-ish → Teal 700, anything else → Ink 500.
+ */
+const fixColors = (html: string) =>
+  html.replace(/color:\s*#([0-9a-f]{6}|[0-9a-f]{3})\b/gi, (m, hex: string) => {
+    if (contrastOnWhite(hex) >= 4.5) return m;
+    const h = hex.length === 3 ? [...hex].map((c) => c + c).join("") : hex;
+    const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+    return `color: var(--color-${g > r + 20 && b > r ? "teal-700" : "ink-500"})`;
+  });
+
 // Links to the old site become site-relative; WordPress photo addresses keep their host.
-const clean = (html: unknown) => sanitizeLayout(wpImagesInHtml(String(html ?? "")).replace(/https?:\/\/(?:www\.)?sancarloslife\.com(?=\/(?!wp-content\/))/g, ""));
+const clean = (html: unknown) => fixColors(sanitizeLayout(wpImagesInHtml(String(html ?? "")).replace(/https?:\/\/(?:www\.)?sancarloslife\.com(?=\/(?!wp-content\/))/g, "")));
 const ENTITIES: Record<string, string> = { amp: "&", nbsp: " ", quot: '"', "#39": "'", rsquo: "’", lsquo: "‘", ndash: "–", mdash: "—" };
 const plain = (html: unknown) =>
   String(html ?? "")
@@ -134,8 +154,16 @@ function YouTube({ id, title }: { id: string; title?: string }) {
 function Module({ it, ctx, k }: { it: Item; ctx: Ctx; k: string }): ReactNode {
   switch (it.t) {
     case "heading": {
-      const L = `h${Math.min(6, Math.max(2, Number(it.level) || 2))}` as "h2";
-      return <L className="text-center font-heading text-h3 text-ink-900"><Tx k={`${k}.text`}>{it.text}</Tx></L>;
+      // A level-1 heading is the page title unless a banner or video hero already gave one.
+      const level = Math.min(6, Math.max(ctx.hasH1 ? 2 : 1, Number(it.level) || 2));
+      const L = `h${level}` as "h2";
+      const look = it.look as Look | undefined;
+      const l = lookStyle(look ? { b: look[`h${Number(it.level) || 2}`] ?? {} } : undefined);
+      return (
+        <L className={`text-center font-heading text-h3 text-ink-900 ${l.className}`} style={l.style}>
+          <Tx k={`${k}.text`}>{it.text}</Tx>
+        </L>
+      );
     }
     case "text":
       return <Html html={it.html} k={k} ctx={ctx} look={it.look as Look | undefined} />;
@@ -168,7 +196,7 @@ function Module({ it, ctx, k }: { it: Item; ctx: Ctx; k: string }): ReactNode {
       const imgs = (it.images as { src: string; alt: string }[]) ?? [];
       if (!imgs.length) return null;
       return it.slider ? (
-        <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2" tabIndex={0} aria-label="Photo gallery, scroll sideways">
+        <div role="region" className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2" tabIndex={0} aria-label="Photo gallery, scroll sideways">
           {imgs.map((g, i) => (
             <Photo key={i} ctx={ctx} k={`${k}.p${i}`} src={g.src} alt={g.alt} className="h-72 w-auto max-w-none snap-start rounded-card object-cover md:h-96" />
           ))}
@@ -389,7 +417,7 @@ function Module({ it, ctx, k }: { it: Item; ctx: Ctx; k: string }): ReactNode {
   }
 }
 
-type Ctx = { title: string; maps: Set<string>; filterId?: string | null; edits: PageEditData; editing: boolean };
+type Ctx = { title: string; maps: Set<string>; filterId?: string | null; edits: PageEditData; editing: boolean; hasH1: boolean };
 
 const frac = (w: string) => {
   const [a, b] = w.split("/").map(Number);
@@ -466,7 +494,7 @@ export async function DiviPage({ layout, filterId = null }: { layout: DiviLayout
   const s0 = await editablePage(layout.slug, `/${layout.slug}/`);
   // Short name for labels: the banner title ("Alder Manor"), not the long SEO page title.
   const heroTitle = layout.sections.flatMap((s) => s.rows.flatMap((r) => r.cols.flatMap((c) => c.items))).find((x) => x.t === "hero")?.title;
-  const ctx: Ctx = { title: heroTitle ? String(heroTitle) : layout.title, maps: new Set(), filterId, edits: s0.edits, editing: s0.editing };
+  const ctx: Ctx = { title: heroTitle ? String(heroTitle) : layout.title, maps: new Set(), filterId, edits: s0.edits, editing: s0.editing, hasH1: Boolean(heroTitle || layout.banner) };
   const secs = layout.sections;
   const heroAt = secs.findIndex((s) => s.rows.some((r) => r.cols.some((c) => c.items.some((i) => i.t === "hero"))));
   return (
@@ -497,7 +525,7 @@ export async function DiviPage({ layout, filterId = null }: { layout: DiviLayout
             className={`relative isolate py-10 md:py-14 ${s.bg ? "bg-cover bg-center" : ""} ${vis(s.hide)}`}
             style={s.bg ? { backgroundImage: `linear-gradient(${veil(s.veil)}, ${veil(s.veil)}), url(${wpImage(s.bg)})` } : undefined}
           >
-            <div className={s.rows.some((r) => r.cols.some((c) => c.items.some((x) => x.t === "collage"))) ? "space-y-8 px-2" : "container-site space-y-8"}>
+            <div className={s.rows.some((r) => r.cols.some((c) => c.items.some((x) => x.t === "collage"))) ? "space-y-8 px-4" : "container-site space-y-8"}>
               {s.rows.map((r, j) => (
                 <div key={j} className={vis(r.hide)}>
                   <Columns cols={r.cols} ctx={ctx} k={`s${i}-r${j}`} />
