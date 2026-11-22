@@ -8,6 +8,7 @@ import { sanitizeLayout } from "@/lib/sanitize";
 
 import { SiteMap, type MapMarker, type MapPolygon } from "./SiteMap";
 import { MAPS } from "./maps";
+import { VideoSlider } from "./VideoSlider";
 import { YouTubeLite } from "./YouTubeLite";
 
 /**
@@ -316,13 +317,7 @@ function Module({ it, ctx, k }: { it: Item; ctx: Ctx; k: string }): ReactNode {
     case "video":
       return <YouTube id={String(it.id)} />;
     case "videos":
-      return (
-        <div className="grid gap-4 md:grid-cols-2">
-          {(it.ids as string[]).map((id) => (
-            <YouTube key={id} id={id} />
-          ))}
-        </div>
-      );
+      return <VideoSlider ids={it.ids as string[]} label={`${ctx.title} videos`} />;
     case "toggle":
       return (
         <details className="divi-toggle" open={Boolean(it.open)}>
