@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { HeroVideo } from "@/components/home/HeroVideo";
 import { IdxEmbed } from "@/components/realestate/IdxEmbed";
 import { localHref, wpImage, wpImagesInHtml } from "@/lib/divi/media";
+import { applyHtmlEdits, editablePage, EditMarker, type PageEditData, T } from "@/lib/pageEdits";
 import { sanitizeLayout } from "@/lib/sanitize";
 
 import { SiteMap, type MapMarker, type MapPolygon } from "./SiteMap";
@@ -13,6 +14,11 @@ import { YouTubeLite } from "./YouTubeLite";
  * Renders a page from its WordPress (Divi) layout file (src/content/divi/<slug>.json,
  * made by scripts/migrate/95-divi-layouts.py): the live site's sections, rows, columns and
  * modules in their original order, with our design tokens. Text is sanitized again here.
+ *
+ * "Edit this page" works here like on the other code pages: every module has a key from its
+ * place in the layout (s<section>-r<row>-c<column>-i<item>, nested rows add -c-i), HTML text
+ * is numbered inside it (…​.h<n>, photos …​.p<n>) and plain strings use <T k="….title">.
+ * Re-running the converter can move modules; text edits fall back to matching their old words.
  */
 type Btn = { text: string; href: string };
 type Item = { t: string; hide?: string[]; [k: string]: unknown };
@@ -81,19 +87,42 @@ function lookStyle(look?: Look): { style?: Record<string, string>; className: st
   return { style: v, className };
 }
 
-function Html({ html, className = "", look }: { html: unknown; className?: string; look?: Look }) {
+function Html({ html, k, ctx, className = "", look }: { html: unknown; k: string; ctx: Ctx; className?: string; look?: Look }) {
   const l = lookStyle(look);
-  return <div className={`divi-text ${l.className} ${className}`} style={l.style} dangerouslySetInnerHTML={{ __html: clean(html) }} />;
+  const out = applyHtmlEdits(clean(html), ctx.edits, ctx.editing, `${k}.`);
+  return <div className={`divi-text ${l.className} ${className}`} style={l.style} dangerouslySetInnerHTML={{ __html: out }} />;
 }
 
-function Button({ b }: { b: Btn }) {
+/** Editable plain words: the saved change, or the layout's own text. */
+function Tx({ k, children }: { k: string; children: unknown }) {
+  const text = String(children ?? "");
+  return text ? <T k={k}>{text}</T> : null;
+}
+
+/** A photo the editor can swap: the saved swap if there is one, else the WordPress photo. */
+function photo(ctx: Ctx, k: string, src: string, alt: string) {
+  const swap = ctx.edits.images[k];
+  const out = { src: swap?.src ?? wpImage(src), alt: swap?.alt ?? alt };
+  const attrs = ctx.editing
+    ? { "data-edit-img": k, "data-edit-src": out.src, "data-edit-orig": wpImage(src), "data-edit-alt": out.alt }
+    : {};
+  return { ...out, attrs };
+}
+
+function Photo({ ctx, k, src, alt, className, style }: { ctx: Ctx; k: string; src: string; alt: string; className?: string; style?: CSSProperties }) {
+  const p = photo(ctx, k, src, alt);
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={p.src} alt={p.alt} loading="lazy" className={className} style={style} {...p.attrs} />;
+}
+
+function Button({ b, k }: { b: Btn; k?: string }) {
   if (!b?.text) return null;
   return (
     <a
       href={localHref(b.href)}
       className="inline-flex min-h-11 items-center justify-center rounded-button border-2 border-teal-700 bg-teal-700 px-7 py-2 font-label text-base uppercase tracking-wide text-white transition hover:bg-white hover:text-teal-700"
     >
-      {b.text}
+      {k ? <T k={k}>{b.text}</T> : b.text}
     </a>
   );
 }
@@ -102,40 +131,35 @@ function YouTube({ id, title }: { id: string; title?: string }) {
   return <YouTubeLite id={id} title={title} />;
 }
 
-function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
+function Module({ it, ctx, k }: { it: Item; ctx: Ctx; k: string }): ReactNode {
   switch (it.t) {
     case "heading": {
       const L = `h${Math.min(6, Math.max(2, Number(it.level) || 2))}` as "h2";
-      return <L className="text-center font-heading text-h3 text-ink-900">{String(it.text)}</L>;
+      return <L className="text-center font-heading text-h3 text-ink-900"><Tx k={`${k}.text`}>{it.text}</Tx></L>;
     }
     case "text":
-      return <Html html={it.html} look={it.look as Look | undefined} />;
+      return <Html html={it.html} k={k} ctx={ctx} look={it.look as Look | undefined} />;
     case "image": {
-      const src = wpImage(String(it.src));
-      if (!src) return null;
-      // eslint-disable-next-line @next/next/no-img-element
-      const img = <img src={src} alt={String(it.alt ?? "")} loading="lazy" className="h-auto w-full rounded-card" />;
+      if (!it.src) return null;
+      const img = <Photo ctx={ctx} k={`${k}.p0`} src={String(it.src)} alt={String(it.alt ?? "")} className="h-auto w-full rounded-card" />;
       return it.href ? <a href={localHref(String(it.href))}>{img}</a> : img;
     }
     case "button":
       return (
         <div className="text-center">
-          <Button b={it as unknown as Btn} />
+          <Button b={it as unknown as Btn} k={`${k}.text`} />
         </div>
       );
     case "blurb": {
       const body = (
         <>
-          {it.img ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={wpImage(String(it.img))} alt="" loading="lazy" className="mx-auto mb-3 h-16 w-16 object-contain" />
-          ) : null}
+          {it.img ? <Photo ctx={ctx} k={`${k}.p0`} src={String(it.img)} alt="" className="mx-auto mb-3 h-16 w-16 object-contain" /> : null}
           {it.title ? (
             <h4 className="divi-look mb-2 font-heading text-h4 uppercase text-ink-900" style={lookStyle({ b: (it.look as Look | undefined)?.t ?? (it.look as Look | undefined)?.h4 ?? {} }).style}>
-              {String(it.title)}
+              <Tx k={`${k}.title`}>{it.title}</Tx>
             </h4>
           ) : null}
-          <Html html={it.html} className="text-small" look={it.look ? { b: (it.look as Look).b ?? {} } : undefined} />
+          <Html html={it.html} k={`${k}.body`} ctx={ctx} className="text-small" look={it.look ? { b: (it.look as Look).b ?? {} } : undefined} />
         </>
       );
       return <div className="text-center">{it.href ? <a href={localHref(String(it.href))}>{body}</a> : body}</div>;
@@ -146,15 +170,13 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
       return it.slider ? (
         <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2" tabIndex={0} aria-label="Photo gallery, scroll sideways">
           {imgs.map((g, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} src={wpImage(g.src)} alt={g.alt} loading="lazy" className="h-72 w-auto max-w-none snap-start rounded-card object-cover md:h-96" />
+            <Photo key={i} ctx={ctx} k={`${k}.p${i}`} src={g.src} alt={g.alt} className="h-72 w-auto max-w-none snap-start rounded-card object-cover md:h-96" />
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
           {imgs.map((g, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} src={wpImage(g.src)} alt={g.alt} loading="lazy" className="aspect-[4/3] w-full rounded-card object-cover" />
+            <Photo key={i} ctx={ctx} k={`${k}.p${i}`} src={g.src} alt={g.alt} className="aspect-[4/3] w-full rounded-card object-cover" />
           ))}
         </div>
       );
@@ -168,16 +190,13 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
           <ol className="flex snap-x snap-mandatory gap-5 overflow-x-auto border-t-2 border-teal-500 pb-4 pt-6" tabIndex={0} aria-label="Annual timeline, scroll sideways">
             {stories.map((st, i) => (
               <li key={i} className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-0.7rem)] lg:w-[calc(33.333%-0.85rem)]">
-                <p className="font-label text-2xl uppercase leading-none text-teal-700">{st.year}</p>
-                {st.when ? <p className="mb-3 mt-1 text-small text-ink-500">{st.when}</p> : null}
+                <p className="font-label text-2xl uppercase leading-none text-teal-700"><Tx k={`${k}-x${i}.year`}>{st.year}</Tx></p>
+                {st.when ? <p className="mb-3 mt-1 text-small text-ink-500"><Tx k={`${k}-x${i}.when`}>{st.when}</Tx></p> : null}
                 <div className="overflow-hidden rounded-card bg-white shadow-card">
-                  {st.img ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={wpImage(st.img)} alt={st.alt} loading="lazy" className="aspect-[16/11] w-full object-cover" />
-                  ) : null}
+                  {st.img ? <Photo ctx={ctx} k={`${k}-x${i}.p0`} src={st.img} alt={st.alt} className="aspect-[16/11] w-full object-cover" /> : null}
                   <div className="space-y-2 p-4">
-                    {st.title ? <h3 className="font-sans text-lg font-bold text-ink-900">{st.title}</h3> : null}
-                    <Html html={st.html} className="text-small" />
+                    {st.title ? <h3 className="font-sans text-lg font-bold text-ink-900"><Tx k={`${k}-x${i}.title`}>{st.title}</Tx></h3> : null}
+                    <Html html={st.html} k={`${k}-x${i}`} ctx={ctx} className="text-small" />
                   </div>
                 </div>
               </li>
@@ -185,27 +204,26 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
           </ol>
         );
       }
-      const card = (st: Story, i: number) => (
+      const card = ({ st, i }: { st: Story; i: number }) => (
         <li key={i} className="overflow-hidden rounded-card bg-white shadow-card">
-          <p className="bg-teal-700 px-4 py-2 font-label text-2xl text-white">{st.year}</p>
-          {st.img ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={wpImage(st.img)} alt={st.alt} loading="lazy" className="w-full" />
-          ) : null}
+          <p className="bg-teal-700 px-4 py-2 font-label text-2xl text-white"><Tx k={`${k}-x${i}.year`}>{st.year}</Tx></p>
+          {st.img ? <Photo ctx={ctx} k={`${k}-x${i}.p0`} src={st.img} alt={st.alt} className="w-full" /> : null}
           <div className="space-y-2 p-4">
-            {st.title ? <h3 className="font-sans text-lg font-bold text-ink-900">{st.title}</h3> : null}
-            <Html html={st.html} className="text-small" />
+            {st.title ? <h3 className="font-sans text-lg font-bold text-ink-900"><Tx k={`${k}-x${i}.title`}>{st.title}</Tx></h3> : null}
+            <Html html={st.html} k={`${k}-x${i}`} ctx={ctx} className="text-small" />
           </div>
         </li>
       );
       // The live timeline packs stories into two columns either side of a line (Cool Timeline
-      // "right" stories sit in the left column). Phones read them in order.
-      const left = stories.filter((s) => s.side === "right");
-      const right = stories.filter((s) => s.side !== "right");
+      // "right" stories sit in the left column). Phones read them in order. Each story keeps
+      // its own index for edit keys.
+      const all = stories.map((st, i) => ({ st, i }));
+      const left = all.filter((x) => x.st.side === "right");
+      const right = all.filter((x) => x.st.side !== "right");
       return (
         <div className="rounded-card bg-teal-50 p-4 md:p-6">
-          {it.title ? <h2 className="mb-5 font-heading text-h2 uppercase text-ink-900">{String(it.title)}</h2> : null}
-          <ol className="space-y-5 md:hidden">{stories.map(card)}</ol>
+          {it.title ? <h2 className="mb-5 font-heading text-h2 uppercase text-ink-900"><Tx k={`${k}.title`}>{it.title}</Tx></h2> : null}
+          <ol className="space-y-5 md:hidden">{all.map(card)}</ol>
           <div className="relative hidden gap-10 md:grid md:grid-cols-2">
             <span className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-ink-900" aria-hidden />
             <ol className="space-y-6">{left.map(card)}</ol>
@@ -220,20 +238,17 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c, i) => (
             <li key={`${i}-${c.title}`} className="group relative">
-              {c.img ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={wpImage(c.img)} alt={c.alt} loading="lazy" className="aspect-square w-full object-cover transition group-hover:opacity-90" />
-              ) : null}
+              {c.img ? <Photo ctx={ctx} k={`${k}-x${i}.p0`} src={c.img} alt={c.alt} className="aspect-square w-full object-cover transition group-hover:opacity-90" /> : null}
               <h3 className="mt-3 font-label text-lg uppercase leading-tight text-ink-900">
                 {c.href ? (
                   <a href={localHref(c.href)} className="text-ink-900 after:absolute after:inset-0 hover:text-teal-700">
-                    {c.title}
+                    <Tx k={`${k}-x${i}.title`}>{c.title}</Tx>
                   </a>
                 ) : (
-                  c.title
+                  <Tx k={`${k}-x${i}.title`}>{c.title}</Tx>
                 )}
               </h3>
-              {c.html ? <Html html={c.html} className="mt-1 text-small" /> : null}
+              {c.html ? <Html html={c.html} k={`${k}-x${i}`} ctx={ctx} className="mt-1 text-small" /> : null}
               {c.tags.length ? <p className="mt-1 text-small text-ink-500">{c.tags.map((g) => g.join(", ")).join(" | ")}</p> : null}
               {c.more ? <p className="mt-1 font-label text-sm uppercase text-teal-700">Read more →</p> : null}
             </li>
@@ -248,22 +263,24 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
         <>
           <div className="relative hidden w-full md:block" style={{ aspectRatio: String(it.ratio) }}>
             {imgs.map((g, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Photo
                 key={i}
-                src={wpImage(g.src)}
+                ctx={ctx}
+                k={`${k}.p${i}`}
+                src={g.src}
                 alt={g.alt}
-                loading="lazy"
                 className="absolute border-[6px] border-white object-cover shadow-card"
                 style={{ left: `${g.box[0]}%`, top: `${g.box[1]}%`, width: `${g.box[2]}%`, height: `${g.box[3]}%` }}
               />
             ))}
           </div>
           <div className="grid grid-cols-2 gap-3 md:hidden">
-            {imgs.map((g, i) => (
+            {imgs.map((g, i) => {
+              // Same photo as the desktop collage (swaps show in both); only the desktop copy carries the edit marker.
+              const p = photo(ctx, `${k}.p${i}`, g.src, g.alt);
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={i} src={wpImage(g.src)} alt={g.alt} loading="lazy" className="aspect-[3/4] w-full border-4 border-white object-cover shadow-card" />
-            ))}
+              return <img key={i} src={p.src} alt={p.alt} loading="lazy" className="aspect-[3/4] w-full border-4 border-white object-cover shadow-card" />;
+            })}
           </div>
         </>
       );
@@ -281,15 +298,15 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
     case "toggle":
       return (
         <details className="divi-toggle" open={Boolean(it.open)}>
-          <summary>{String(it.title)}</summary>
-          <Html html={it.html} />
+          <summary><Tx k={`${k}.title`}>{it.title}</Tx></summary>
+          <Html html={it.html} k={k} ctx={ctx} />
         </details>
       );
     case "accordion":
       return (
         <div className="space-y-2">
           {(it.items as Item[]).map((x, i) => (
-            <Module key={i} it={x} ctx={ctx} />
+            <Module key={i} it={x} ctx={ctx} k={`${k}-x${i}`} />
           ))}
         </div>
       );
@@ -305,17 +322,17 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
             style={{ backgroundImage: `url(${wpImage(String(it.bg))})` }}
           >
             <span className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/0 to-ink-900/0 transition group-hover:from-ink-900/80" aria-hidden />
-            <span className="relative mb-6 block bg-white/75 px-3 py-4 font-heading text-[1.35rem] uppercase leading-tight text-ink-900">{plain(it.title || it.html)}</span>
-            <span className="relative mb-5 block font-label text-sm uppercase tracking-wider text-white underline-offset-4 group-hover:underline">{b?.text || "Browse"}</span>
+            <span className="relative mb-6 block bg-white/75 px-3 py-4 font-heading text-[1.35rem] uppercase leading-tight text-ink-900"><Tx k={`${k}.title`}>{plain(it.title || it.html)}</Tx></span>
+            <span className="relative mb-5 block font-label text-sm uppercase tracking-wider text-white underline-offset-4 group-hover:underline"><Tx k={`${k}.button`}>{b?.text || "Browse"}</Tx></span>
           </a>
         );
       }
       const btn = (it.button as Btn | null) ?? (NEIGHBORHOODS[name] ? { text: "", href: NEIGHBORHOODS[name] } : null);
       const box = (
         <div className="flex h-full flex-col items-center justify-center gap-3 rounded-card bg-teal-50 p-5 text-center">
-          {it.title ? <h3 className="font-heading text-h4 uppercase text-ink-900">{String(it.title)}</h3> : null}
-          {it.html ? <Html html={it.html} className="font-heading uppercase tracking-wide" /> : null}
-          {btn?.text ? <Button b={btn} /> : null}
+          {it.title ? <h3 className="font-heading text-h4 uppercase text-ink-900"><Tx k={`${k}.title`}>{it.title}</Tx></h3> : null}
+          {it.html ? <Html html={it.html} k={k} ctx={ctx} className="font-heading uppercase tracking-wide" /> : null}
+          {btn?.text ? <Button b={btn} k={`${k}.button`} /> : null}
         </div>
       );
       return btn && !btn.text ? (
@@ -332,11 +349,9 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
       return (
         <div className="text-center">
           <p className="font-heading text-[clamp(2.2rem,4vw,3.1rem)] font-bold leading-tight text-ink-900">
-            {String(it.prefix ?? "")}
-            {String(it.number)}
-            {String(it.suffix ?? "")}
+            <Tx k={`${k}.number`}>{`${it.prefix ?? ""}${it.number ?? ""}${it.suffix ?? ""}`}</Tx>
           </p>
-          <p className="mx-auto mt-2 w-fit border-t-2 border-teal-500 pt-2 font-label text-[1.5rem] uppercase leading-none text-teal-700">{String(it.title)}</p>
+          <p className="mx-auto mt-2 w-fit border-t-2 border-teal-500 pt-2 font-label text-[1.5rem] uppercase leading-none text-teal-700"><Tx k={`${k}.title`}>{it.title}</Tx></p>
         </div>
       );
     case "map": {
@@ -362,9 +377,9 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
         <div className="grid gap-4 md:grid-cols-2">
           {(it.slides as { title: string; html: string; button: Btn | null }[]).map((s, i) => (
             <div key={i} className="rounded-card bg-teal-50 p-6 text-center">
-              <h3 className="mb-2 font-heading text-h4 text-ink-900">{s.title}</h3>
-              <Html html={s.html} />
-              {s.button ? <Button b={s.button} /> : null}
+              <h3 className="mb-2 font-heading text-h4 text-ink-900"><Tx k={`${k}-x${i}.title`}>{s.title}</Tx></h3>
+              <Html html={s.html} k={`${k}-x${i}`} ctx={ctx} />
+              {s.button ? <Button b={s.button} k={`${k}-x${i}.button`} /> : null}
             </div>
           ))}
         </div>
@@ -374,7 +389,7 @@ function Module({ it, ctx }: { it: Item; ctx: Ctx }): ReactNode {
   }
 }
 
-type Ctx = { title: string; maps: Set<string>; filterId?: string | null };
+type Ctx = { title: string; maps: Set<string>; filterId?: string | null; edits: PageEditData; editing: boolean };
 
 const frac = (w: string) => {
   const [a, b] = w.split("/").map(Number);
@@ -384,12 +399,12 @@ const frac = (w: string) => {
 /** A row of photo link boxes (CTAs with a background) runs edge to edge with no gaps, as on the live site. */
 const isPhotoRow = (cols: Col[]) => cols.length > 1 && cols.every((c) => c.items.length === 1 && c.items[0].t === "cta" && c.items[0].bg);
 
-function Columns({ cols, ctx, parent = "1/1" }: { cols: Col[]; ctx: Ctx; parent?: string }) {
+function Columns({ cols, ctx, k, parent = "1/1" }: { cols: Col[]; ctx: Ctx; k: string; parent?: string }) {
   if (isPhotoRow(cols)) {
     return (
       <div className={`grid grid-cols-2 ${cols.length === 5 ? "md:grid-cols-5" : cols.length === 3 || cols.length === 6 ? "md:grid-cols-3" : "md:grid-cols-4"}`}>
         {cols.map((c, i) => (
-          <Module key={i} it={c.items[0]} ctx={ctx} />
+          <Module key={i} it={c.items[0]} ctx={ctx} k={`${k}-c${i}-i0`} />
         ))}
       </div>
     );
@@ -403,11 +418,11 @@ function Columns({ cols, ctx, parent = "1/1" }: { cols: Col[]; ctx: Ctx; parent?
           {c.items.map((it, j) =>
             it.t === "row" ? (
               <div key={j} className={vis(it.hide)}>
-                <Columns cols={(it as unknown as Row).cols} ctx={ctx} parent={c.w} />
+                <Columns cols={(it as unknown as Row).cols} ctx={ctx} k={`${k}-c${i}-i${j}`} parent={c.w} />
               </div>
             ) : (
               <div key={j} className={vis(it.hide)}>
-                <Module it={it} ctx={ctx} />
+                <Module it={it} ctx={ctx} k={`${k}-c${i}-i${j}`} />
               </div>
             ),
           )}
@@ -419,7 +434,7 @@ function Columns({ cols, ctx, parent = "1/1" }: { cols: Col[]; ctx: Ctx; parent?
 
 const veil = (v?: string) => (v === "white" ? "rgb(255 255 255 / 80%)" : "color-mix(in srgb, var(--color-sand-100) 90%, transparent)");
 
-function Banner({ title, image }: { title: string; image: string }) {
+function Banner({ title, image }: { title: ReactNode; image: string }) {
   return (
     <section
       className="relative isolate flex min-h-[200px] items-center justify-center overflow-hidden bg-sand-100 bg-cover bg-center md:min-h-[220px]"
@@ -430,7 +445,7 @@ function Banner({ title, image }: { title: string; image: string }) {
   );
 }
 
-function Hero({ title, vimeo, poster }: { title: string; vimeo?: string; poster?: string }) {
+function Hero({ title, vimeo, poster }: { title: ReactNode; vimeo?: string; poster?: string }) {
   return (
     <section
       className="relative isolate flex min-h-[260px] items-center justify-center overflow-hidden bg-ink-900 bg-cover bg-center md:min-h-[460px]"
@@ -447,29 +462,31 @@ function Hero({ title, vimeo, poster }: { title: string; vimeo?: string; poster?
   );
 }
 
-export function DiviPage({ layout, filterId = null }: { layout: DiviLayout; filterId?: string | null }) {
+export async function DiviPage({ layout, filterId = null }: { layout: DiviLayout; filterId?: string | null }) {
+  const s0 = await editablePage(layout.slug, `/${layout.slug}/`);
   // Short name for labels: the banner title ("Alder Manor"), not the long SEO page title.
   const heroTitle = layout.sections.flatMap((s) => s.rows.flatMap((r) => r.cols.flatMap((c) => c.items))).find((x) => x.t === "hero")?.title;
-  const ctx: Ctx = { title: heroTitle ? String(heroTitle) : layout.title, maps: new Set(), filterId };
+  const ctx: Ctx = { title: heroTitle ? String(heroTitle) : layout.title, maps: new Set(), filterId, edits: s0.edits, editing: s0.editing };
   const secs = layout.sections;
   const heroAt = secs.findIndex((s) => s.rows.some((r) => r.cols.some((c) => c.items.some((i) => i.t === "hero"))));
   return (
     <article>
-      {layout.banner && heroAt < 0 ? <Banner title={layout.title} image={layout.banner} /> : null}
+      <EditMarker />
+      {layout.banner && heroAt < 0 ? <Banner title={<T k="banner.title">{layout.title}</T>} image={layout.banner} /> : null}
       {secs.map((s, i) => {
         const items = s.rows.flatMap((r) => r.cols.flatMap((c) => c.items));
         const hero = items.find((x) => x.t === "hero");
         if (hero) {
           const embed = items.find((x) => x.t === "embed" && String(x.src).includes("vimeo"));
           const vimeo = embed ? String(embed.src).match(/video\/(\d+)/)?.[1] : undefined;
-          return <Hero key={i} title={String(hero.title)} vimeo={vimeo} poster={hero.poster ? String(hero.poster) : undefined} />;
+          return <Hero key={i} title={<T k="hero.title">{String(hero.title)}</T>} vimeo={vimeo} poster={hero.poster ? String(hero.poster) : undefined} />;
         }
         // The phone-only title above a video banner repeats the banner's title.
         if (heroAt === i + 1 && items.length === 1 && /^<h1/i.test(String(items[0].html ?? "").trim())) return null;
         if (s.rows.length === 1 && isPhotoRow(s.rows[0].cols)) {
           return (
             <section key={i} id={s.id} className={vis(s.hide)}>
-              <Columns cols={s.rows[0].cols} ctx={ctx} />
+              <Columns cols={s.rows[0].cols} ctx={ctx} k={`s${i}-r0`} />
             </section>
           );
         }
@@ -483,7 +500,7 @@ export function DiviPage({ layout, filterId = null }: { layout: DiviLayout; filt
             <div className={s.rows.some((r) => r.cols.some((c) => c.items.some((x) => x.t === "collage"))) ? "space-y-8 px-2" : "container-site space-y-8"}>
               {s.rows.map((r, j) => (
                 <div key={j} className={vis(r.hide)}>
-                  <Columns cols={r.cols} ctx={ctx} />
+                  <Columns cols={r.cols} ctx={ctx} k={`s${i}-r${j}`} />
                 </div>
               ))}
             </div>

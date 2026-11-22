@@ -136,6 +136,8 @@ export function applyHtmlEdits(
   html: string,
   edits: PageEditData,
   editing: boolean,
+  /** Key prefix when one page holds several HTML blocks (rebuilt WordPress pages: "s2-r0-c1-i0."). */
+  prefix = "",
 ): string {
   const dom = new JSDOM(`<!DOCTYPE html><body>${html}</body>`);
   const doc = dom.window.document;
@@ -162,8 +164,10 @@ export function applyHtmlEdits(
     node.nodeValue = `${lead}${to}${trail}`;
   };
   for (const [key, edit] of Object.entries(edits.texts)) {
-    if (!/^h\d+$/.test(key) || !edit?.to) continue;
-    let node: Text | undefined = nodes[Number(key.slice(1))];
+    if (!key.startsWith(prefix)) continue;
+    const local = key.slice(prefix.length);
+    if (!/^h\d+$/.test(local) || !edit?.to) continue;
+    let node: Text | undefined = nodes[Number(local.slice(1))];
     if (
       node &&
       edit.from !== undefined &&
@@ -179,7 +183,7 @@ export function applyHtmlEdits(
   }
   const imgs = [...doc.body.querySelectorAll("img")];
   imgs.forEach((img, i) => {
-    const key = `p${i}`;
+    const key = `${prefix}p${i}`;
     const swap = edits.images[key];
     const orig = img.getAttribute("src") || "";
     if (swap) {
@@ -202,7 +206,7 @@ export function applyHtmlEdits(
   if (editing) {
     nodes.forEach((node, i) => {
       const span = doc.createElement("span");
-      span.setAttribute("data-edit-key", `h${i}`);
+      span.setAttribute("data-edit-key", `${prefix}h${i}`);
       // The file's own words, so Save can tell what changed.
       span.setAttribute("data-orig", originals[i]);
       node.parentNode!.insertBefore(span, node);

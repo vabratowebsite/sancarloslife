@@ -81,3 +81,37 @@ test("tool pages: words are editable, the form is not", async ({ page, browser }
   await expect.poll(async () => (await visitor.reload(), visitor.getByText(marker).count()), { timeout: 20_000 }).toBe(0);
   await page.goto("/edit/?exit=1&path=/");
 });
+
+test("rebuilt WordPress pages: module words and photos are editable", async ({ page, browser }) => {
+  test.skip(!email || !password, "Set E2E_EDITOR_EMAIL and E2E_EDITOR_PASSWORD to run");
+  test.skip(test.info().project.name !== "desktop", "Runs once");
+  await page.request.post("/api/users/login", { data: { email, password } });
+  await page.goto("/edit/?path=/about-san-carlos/");
+  const bar = page.getByRole("region", { name: "Page editor" });
+  await bar.getByRole("button", { name: "Edit text" }).click();
+
+  // Banner title, module text, counters and photos all carry edit markers.
+  await expect(page.locator('[data-edit-key="banner.title"]')).toHaveCount(1);
+  await expect(page.locator('[data-edit-key$=".number"]')).not.toHaveCount(0);
+  await expect(page.locator("[data-edit-img]")).not.toHaveCount(0);
+
+  const piece = page.locator('.divi-text [data-edit-key*=".h"]').first();
+  const marker = `E2E divi ${Date.now()}`;
+  await piece.evaluate((el, text) => {
+    el.textContent = text;
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  }, marker);
+  await bar.getByRole("button", { name: "Save changes" }).click();
+  await expect(bar.getByRole("status")).toContainText("Saved");
+
+  const visitor = await browser.newPage();
+  await expect.poll(async () => (await visitor.goto("/about-san-carlos/"), visitor.getByText(marker).count()), { timeout: 20_000 }).toBe(1);
+  // Visitors never see edit markers.
+  await expect(visitor.locator("[data-edit-key], [data-edit-img]")).toHaveCount(0);
+
+  page.on("dialog", (d) => d.accept());
+  await bar.getByRole("button", { name: "Versions" }).click();
+  await bar.getByRole("button", { name: "Restore original" }).click();
+  await expect(page.getByText(marker)).toHaveCount(0, { timeout: 20_000 });
+  await page.goto("/edit/?exit=1&path=/");
+});
