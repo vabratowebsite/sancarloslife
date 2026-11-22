@@ -98,7 +98,7 @@ Then:
 1. In Supabase (SQL editor, as `postgres`): create a login role that owns only the website schema:
    `create role scl_web login password '<random>'; grant scl_web to postgres;`
    `create schema if not exists web authorization scl_web; alter role scl_web set search_path = web;`
-   `DATABASE_URL` is then the transaction pooler URL with user `scl_web.<project ref>`.
+   `DATABASE_URL` is then `postgresql://scl_web.<project ref>:<password>@aws-0-us-west-1.pooler.supabase.com:6543/postgres?sslmode=no-verify` (for this project the pooler is aws-0; aws-1 answers "tenant/user not found").
 2. In Vercel, set `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SITE_URL`, and a temporary
    `SETUP_SECRET` (32+ random characters). For the first build only, set the build command to
    `pnpm payload migrate && pnpm build` (static pages read the database while building).
