@@ -9,7 +9,9 @@ import { loadPageHtml } from "@/content/pages/load";
 import { buildDraft } from "@/lib/ai/draft";
 import { FORMATS, type FormatKey } from "@/lib/ai/formats";
 import { lexicalToText } from "@/lib/ai/lexical";
+import { attachPhoto, AttachError } from "@/lib/media/attach";
 import { importPhotoFromUrl, PhotoError } from "@/lib/media/fromUrl";
+import { fromPexels, fromSourcePages, searchQuery } from "@/lib/media/suggest";
 import { siteSearch } from "@/lib/queries/search";
 
 /**
@@ -243,8 +245,9 @@ export const TOOLS: Tool[] = [
         args,
       );
       if (a.role === "gallery" && a.collection !== "places") throw new ToolError("Only places have a photo gallery; use role cover.");
+      // Check the item first, so a photo isn't downloaded for something that can't take it.
       const existing = (await payload.findByID({ collection: a.collection, id: a.id, draft: DRAFTS[a.collection], depth: 0, user, overrideAccess: false }).catch(() => null)) as
-        | (Record<string, unknown> & { status?: string; review?: Record<string, unknown>; gallery?: unknown[] })
+        | { status?: string }
         | null;
       if (!existing) throw new ToolError("Not found, or this account can't edit it.");
       if (a.collection === "events" && !["draft", "pending"].includes(String(existing.status))) {
@@ -257,24 +260,55 @@ export const TOOLS: Tool[] = [
         if (e instanceof PhotoError) throw new ToolError(e.message);
         throw e;
       }
-      const field = a.collection === "desk-pages" ? "hero" : a.role === "gallery" ? "gallery" : "cover";
-      const value = field === "gallery" ? [...((existing.gallery ?? []) as unknown[]).map((g) => (g && typeof g === "object" ? (g as { id: unknown }).id : g)), media.id] : media.id;
-      const photoNote = `Photo added through the connector from ${a.imageUrl} (credit: ${a.credit}).${a.note ? ` ${a.note}` : ""}`;
-      const review = { ...existing.review, state: "in-review", note: [existing.review?.note, photoNote].filter(Boolean).join("\n\n") };
-      let data: Record<string, unknown> = { [field]: value, review };
-      if (DRAFTS[a.collection]) {
-        // A new draft version built from the latest draft, so nothing else in it changes.
-        const { id: _i, createdAt: _c, updatedAt: _u, ...content } = existing;
-        void _i;
-        void _c;
-        void _u;
-        data = { ...content, ...data, _status: "draft" };
+      try {
+        const r = await attachPhoto(payload, user, {
+          collection: a.collection,
+          id: a.id,
+          mediaId: media.id,
+          role: a.role,
+          note: `Photo added through the connector from ${a.imageUrl} (credit: ${a.credit}).${a.note ? ` ${a.note}` : ""}`,
+        });
+        return { id: r.id, collection: a.collection, field: r.field, media: { id: media.id, width: media.width, height: media.height }, passesFormatCheck: r.passesFormatCheck, problems: r.problems };
+      } catch (e) {
+        if (e instanceof AttachError) throw new ToolError(e.message);
+        throw e;
       }
-      const doc = (await payload.update({ collection: a.collection, id: a.id, data: data as never, draft: DRAFTS[a.collection], user, overrideAccess: false })) as unknown as {
-        id: number | string;
-        review?: { check?: { ok?: boolean; problems?: string[] } };
+    },
+  },
+  {
+    name: "suggest_photos",
+    title: "Suggest photos for a draft",
+    description:
+      "List candidate photos for an item in review: images found on its own source pages (its website and the sources in its review note; credited to that site and flagged to check rights), and free Pexels stock photos when the site has a Pexels key (credit the photographer). Read-only: nothing is attached. To use one, call attach_photo with its url, an alt text and its credit. Never use a source image unless the site may publish it (the business's or organizer's own photos, City images, the team's own).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        collection: collEnum,
+        id: { type: ["string", "number"] },
+        query: { type: "string", description: "Optional stock photo search words (default: the item's title or categories)" },
+      },
+      required: ["collection", "id"],
+    },
+    annotations: { readOnlyHint: true, openWorldHint: true },
+    run: async (args, { payload, user }) => {
+      needStaff(user);
+      const a = parse(z.object({ collection: z.enum(COLLECTIONS), id: z.union([z.string(), z.number()]), query: z.string().trim().max(100).optional() }), args);
+      const doc = (await payload.findByID({ collection: a.collection, id: a.id, draft: DRAFTS[a.collection], depth: 0, user, overrideAccess: false }).catch(() => null)) as Record<string, unknown> | null;
+      if (!doc) throw new ToolError("Not found, or this account can't see it.");
+      const src = await fromSourcePages(doc);
+      let stock: Awaited<ReturnType<typeof fromPexels>> = [];
+      let stockNote = process.env.PEXELS_API_KEY ? "" : "Stock photos are off: the site has no PEXELS_API_KEY.";
+      try {
+        stock = await fromPexels(a.query || searchQuery(doc));
+      } catch (e) {
+        stockNote = (e as Error).message;
+      }
+      return {
+        sourcePagesChecked: src.checked,
+        fromSources: src.suggestions,
+        stock,
+        notes: [...src.errors, stockNote].filter(Boolean),
       };
-      return { id: doc.id, collection: a.collection, field, media: { id: media.id, width: media.width, height: media.height }, passesFormatCheck: Boolean(doc.review?.check?.ok), problems: doc.review?.check?.problems ?? [] };
     },
   },
   {

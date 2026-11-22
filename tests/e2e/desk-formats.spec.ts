@@ -79,6 +79,12 @@ test("Claude can attach a photo by URL; unsafe addresses are refused", async ({ 
     placeId = sub.data.id as number;
     expect(sub.data.problems as string[]).toContain("Add a cover photo.");
 
+    // Suggestions are read-only: they list candidates and attach nothing.
+    const sug = await mcp(request, "suggest_photos", { collection: "places", id: placeId });
+    expect(sug.isError, sug.text).toBe(false);
+    expect(Array.isArray(sug.data.sourcePagesChecked)).toBe(true);
+    expect(Array.isArray(sug.data.stock)).toBe(true);
+
     const cover = await mcp(request, "attach_photo", { collection: "places", id: placeId, imageUrl: PHOTO_URL, alt: "Edgewood Park trail in spring", credit: "Photo: San Carlos Life" });
     expect(cover.isError, cover.text).toBe(false);
     media.push((cover.data.media as { id: number }).id);

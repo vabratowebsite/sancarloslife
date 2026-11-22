@@ -4,8 +4,10 @@ import Link from "next/link";
 import type { AdminViewServerProps } from "payload";
 
 import { isAdminUser } from "@/access/roles";
+import { mockAllowed } from "@/lib/ai/providers";
 
 import { approveItem, generateAction, rejectItem, runJobNow } from "./actions";
+import { SuggestPhotos } from "./SuggestPhotos";
 
 const KINDS = [
   { collection: "posts", label: "Blog post", title: "title", drafts: true, path: (d: Doc) => `/${d.slug}/` },
@@ -56,6 +58,10 @@ export async function DeskQueue({ initPageResult, params, searchParams }: AdminV
     jobs.docs.map(async (j) => (await payload.find({ collection: "desk-runs", where: { job: { equals: j.name } }, sort: "-startedAt", limit: 1, depth: 0, user, overrideAccess: false })).docs[0]),
   );
   const admin = isAdminUser(user);
+  // Connections that can draw an AI illustration (OpenAI, or the Test AI on a local site).
+  const imageConns = connections.docs
+    .filter((c) => c.provider === "openai" || (c.provider === "mock" && mockAllowed()))
+    .map((c) => ({ id: String(c.id), name: c.name }));
 
   const box: React.CSSProperties = { border: "1px solid var(--theme-elevation-150)", borderRadius: 8, padding: 16, marginBottom: 12 };
   return (
@@ -191,6 +197,7 @@ export async function DeskQueue({ initPageResult, params, searchParams }: AdminV
                       </form>
                       {g.path(d) && g.collection !== "places" && d.review?.state === "approved" && <a href={g.path(d)}>View on site</a>}
                     </div>
+                    <SuggestPhotos collection={g.collection} id={String(d.id)} title={title} aiConnections={imageConns} />
                   </article>
                 );
               })}
